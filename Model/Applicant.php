@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Applicant Model
  *
- * @property Client $Client
+ * @property Client $Client hahahahahah
  * @property Archive $Archive
  * @property Address $Address
  * @property Applicantdocument $Applicantdocument
