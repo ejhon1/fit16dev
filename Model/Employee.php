@@ -3,7 +3,9 @@ App::uses('AppModel', 'Model');
 /**
  * Employee Model
  *
- * @property Paperfileslog $Paperfileslog
+ * @property User $User
+ * @property Role $Role
+ * @property Paperfilelog $Paperfilelog
  */
 class Employee extends AppModel {
 
@@ -13,8 +15,17 @@ class Employee extends AppModel {
  * @var array
  */
 	public $validate = array(
+		'user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'first_name' => array(
-			'rule' => array('maxLength', 26),
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -25,7 +36,6 @@ class Employee extends AppModel {
 			),
 		),
 		'surname' => array(
-			'rule' => array('maxLength', 26),
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -46,7 +56,6 @@ class Employee extends AppModel {
 			),
 		),
 		'email' => array(
-			'rule' => array('maxLength', 30),
 			'email' => array(
 				'rule' => array('email'),
 				//'message' => 'Your custom message here',
@@ -56,7 +65,7 @@ class Employee extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'role' => array(
+		'role_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -71,27 +80,32 @@ class Employee extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * hasMany associations
+ * belongsTo associations
  *
  * @var array
  */
 	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
-			'foreignKey' => 'id',
+			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
 		'Role' => array(
-		'className' => 'Role',
-		'foreignKey' => 'role_id',
-		'conditions' => '',
-		'fields' => '',
-		'order' => '')
+			'className' => 'Role',
+			'foreignKey' => 'role_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
 	);
-	
-	
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
 	public $hasMany = array(
 		'Paperfilelog' => array(
 			'className' => 'Paperfilelog',
@@ -107,6 +121,5 @@ class Employee extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-	
 
 }

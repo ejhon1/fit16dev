@@ -4,8 +4,16 @@ App::uses('AppController', 'Controller');
  * Ancestortypes Controller
  *
  * @property Ancestortype $Ancestortype
+ * @property PaginatorComponent $Paginator
  */
 class AncestortypesController extends AppController {
+
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -14,7 +22,7 @@ class AncestortypesController extends AppController {
  */
 	public function index() {
 		$this->Ancestortype->recursive = 0;
-		$this->set('ancestortypes', $this->paginate());
+		$this->set('ancestortypes', $this->Paginator->paginate());
 	}
 
 /**
@@ -42,7 +50,7 @@ class AncestortypesController extends AppController {
 			$this->Ancestortype->create();
 			if ($this->Ancestortype->save($this->request->data)) {
 				$this->Session->setFlash(__('The ancestortype has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The ancestortype could not be saved. Please, try again.'));
 			}
@@ -63,7 +71,7 @@ class AncestortypesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Ancestortype->save($this->request->data)) {
 				$this->Session->setFlash(__('The ancestortype has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The ancestortype could not be saved. Please, try again.'));
 			}
@@ -88,9 +96,9 @@ class AncestortypesController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Ancestortype->delete()) {
 			$this->Session->setFlash(__('Ancestortype deleted'));
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Ancestortype was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 }

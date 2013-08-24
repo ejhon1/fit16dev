@@ -5,7 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('category');
-		echo $this->Form->input('doc_type');
+		echo $this->Form->input('type');
 		echo $this->Form->input('code');
 	?>
 	</fieldset>
@@ -17,5 +17,7 @@
 
 		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Documenttype.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Documenttype.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List Documenttypes'), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('List Documents'), array('controller' => 'documents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Document'), array('controller' => 'documents', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

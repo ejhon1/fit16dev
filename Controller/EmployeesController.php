@@ -4,8 +4,16 @@ App::uses('AppController', 'Controller');
  * Employees Controller
  *
  * @property Employee $Employee
+ * @property PaginatorComponent $Paginator
  */
 class EmployeesController extends AppController {
+
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -14,8 +22,7 @@ class EmployeesController extends AppController {
  */
 	public function index() {
 		$this->Employee->recursive = 0;
-        $conditions = array('order' => 'surname ASC');
-        $this->set('employees', $this->Employee->find('all', $conditions));
+		$this->set('employees', $this->Paginator->paginate());
 	}
 
 /**
@@ -43,13 +50,14 @@ class EmployeesController extends AppController {
 			$this->Employee->create();
 			if ($this->Employee->save($this->request->data)) {
 				$this->Session->setFlash(__('The employee has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The employee could not be saved. Please, try again.'));
 			}
 		}
 		$users = $this->Employee->User->find('list');
-		$this->set(compact('users'));
+		$roles = $this->Employee->Role->find('list');
+		$this->set(compact('users', 'roles'));
 	}
 
 /**
@@ -66,7 +74,7 @@ class EmployeesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Employee->save($this->request->data)) {
 				$this->Session->setFlash(__('The employee has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The employee could not be saved. Please, try again.'));
 			}
@@ -75,7 +83,8 @@ class EmployeesController extends AppController {
 			$this->request->data = $this->Employee->find('first', $options);
 		}
 		$users = $this->Employee->User->find('list');
-		$this->set(compact('users'));
+		$roles = $this->Employee->Role->find('list');
+		$this->set(compact('users', 'roles'));
 	}
 
 /**
@@ -93,9 +102,9 @@ class EmployeesController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Employee->delete()) {
 			$this->Session->setFlash(__('Employee deleted'));
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Employee was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 }

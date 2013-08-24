@@ -3,8 +3,9 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('client_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('clientcase_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('archive_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('birthdate'); ?></th>
 			<th><?php echo $this->Paginator->sort('title'); ?></th>
 			<th><?php echo $this->Paginator->sort('first_name'); ?></th>
 			<th><?php echo $this->Paginator->sort('middle_name'); ?></th>
@@ -21,11 +22,12 @@
 	<tr>
 		<td><?php echo h($applicant['Applicant']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($applicant['Client']['id'], array('controller' => 'clients', 'action' => 'view', $applicant['Client']['id'])); ?>
+			<?php echo $this->Html->link($applicant['Clientcase']['id'], array('controller' => 'clientcases', 'action' => 'view', $applicant['Clientcase']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($applicant['Archive']['id'], array('controller' => 'archives', 'action' => 'view', $applicant['Archive']['id'])); ?>
 		</td>
+		<td><?php echo h($applicant['Applicant']['birthdate']); ?>&nbsp;</td>
 		<td><?php echo h($applicant['Applicant']['title']); ?>&nbsp;</td>
 		<td><?php echo h($applicant['Applicant']['first_name']); ?>&nbsp;</td>
 		<td><?php echo h($applicant['Applicant']['middle_name']); ?>&nbsp;</td>
@@ -62,13 +64,13 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Applicant'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Clients'), array('controller' => 'clients', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Client'), array('controller' => 'clients', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Clientcases'), array('controller' => 'clientcases', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Clientcase'), array('controller' => 'clientcases', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Archives'), array('controller' => 'archives', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Archive'), array('controller' => 'archives', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Addresses'), array('controller' => 'addresses', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Address'), array('controller' => 'addresses', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Applicantdocuments'), array('controller' => 'applicantdocuments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Applicantdocument'), array('controller' => 'applicantdocuments', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Documents'), array('controller' => 'documents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Document'), array('controller' => 'documents', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

@@ -4,8 +4,16 @@ App::uses('AppController', 'Controller');
  * Addresses Controller
  *
  * @property Address $Address
+ * @property PaginatorComponent $Paginator
  */
 class AddressesController extends AppController {
+
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -14,7 +22,7 @@ class AddressesController extends AppController {
  */
 	public function index() {
 		$this->Address->recursive = 0;
-		$this->set('addresses', $this->paginate());
+		$this->set('addresses', $this->Paginator->paginate());
 	}
 
 /**
@@ -42,7 +50,7 @@ class AddressesController extends AppController {
 			$this->Address->create();
 			if ($this->Address->save($this->request->data)) {
 				$this->Session->setFlash(__('The address has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The address could not be saved. Please, try again.'));
 			}
@@ -66,7 +74,7 @@ class AddressesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Address->save($this->request->data)) {
 				$this->Session->setFlash(__('The address has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The address could not be saved. Please, try again.'));
 			}
@@ -94,9 +102,9 @@ class AddressesController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Address->delete()) {
 			$this->Session->setFlash(__('Address deleted'));
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Address was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 }

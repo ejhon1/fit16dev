@@ -4,7 +4,7 @@
 		<legend><?php echo __('Add Documenttype'); ?></legend>
 	<?php
 		echo $this->Form->input('category');
-		echo $this->Form->input('doc_type');
+		echo $this->Form->input('type');
 		echo $this->Form->input('code');
 	?>
 	</fieldset>
@@ -15,5 +15,7 @@
 	<ul>
 
 		<li><?php echo $this->Html->link(__('List Documenttypes'), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('List Documents'), array('controller' => 'documents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Document'), array('controller' => 'documents', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

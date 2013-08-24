@@ -4,8 +4,16 @@ App::uses('AppController', 'Controller');
  * Applicants Controller
  *
  * @property Applicant $Applicant
+ * @property PaginatorComponent $Paginator
  */
 class ApplicantsController extends AppController {
+
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -14,21 +22,8 @@ class ApplicantsController extends AppController {
  */
 	public function index() {
 		$this->Applicant->recursive = 0;
-        $conditions = array('conditions' => array('Applicant.applicant_type' => 'Main applicant'), 'order' => 'surname ASC');
-        $this->set('applicants', $this->Applicant->find('all', $conditions));
+		$this->set('applicants', $this->Paginator->paginate());
 	}
-
-    public function cases() {
-        $this->Applicant->recursive = 0;
-        $conditions = array('conditions' => array('Applicant.applicant_type' => 'Main applicant'), 'order' => 'surname ASC');
-        $this->set('applicants', $this->Applicant->find('all', $conditions));
-    }
-
-    public function enquiries() {
-        $this->Applicant->recursive = 0;
-        $conditions = array('conditions' => array('Applicant.applicant_type' => 'Main applicant'), 'order' => 'surname ASC');
-        $this->set('applicants', $this->Applicant->find('all', $conditions));
-    }
 
 /**
  * view method
@@ -45,8 +40,6 @@ class ApplicantsController extends AppController {
 		$this->set('applicant', $this->Applicant->find('first', $options));
 	}
 
-   
-
 /**
  * add method
  *
@@ -57,14 +50,14 @@ class ApplicantsController extends AppController {
 			$this->Applicant->create();
 			if ($this->Applicant->save($this->request->data)) {
 				$this->Session->setFlash(__('The applicant has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The applicant could not be saved. Please, try again.'));
 			}
 		}
-		$clients = $this->Applicant->Client->find('list');
+		$clientcases = $this->Applicant->Clientcase->find('list');
 		$archives = $this->Applicant->Archive->find('list');
-		$this->set(compact('clients', 'archives'));
+		$this->set(compact('clientcases', 'archives'));
 	}
 
 /**
@@ -81,7 +74,7 @@ class ApplicantsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Applicant->save($this->request->data)) {
 				$this->Session->setFlash(__('The applicant has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The applicant could not be saved. Please, try again.'));
 			}
@@ -89,9 +82,9 @@ class ApplicantsController extends AppController {
 			$options = array('conditions' => array('Applicant.' . $this->Applicant->primaryKey => $id));
 			$this->request->data = $this->Applicant->find('first', $options);
 		}
-		$clients = $this->Applicant->Client->find('list');
+		$clientcases = $this->Applicant->Clientcase->find('list');
 		$archives = $this->Applicant->Archive->find('list');
-		$this->set(compact('clients', 'archives'));
+		$this->set(compact('clientcases', 'archives'));
 	}
 
 /**
@@ -109,9 +102,9 @@ class ApplicantsController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Applicant->delete()) {
 			$this->Session->setFlash(__('Applicant deleted'));
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Applicant was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 }

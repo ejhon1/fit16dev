@@ -3,10 +3,11 @@ App::uses('AppModel', 'Model');
 /**
  * Applicant Model
  *
- * @property Client $Client hahahahahah
+ * @property Clientcase $Clientcase
  * @property Archive $Archive
  * @property Address $Address
- * @property Applicantdocument $Applicantdocument
+ * @property Clientcase $Clientcase
+ * @property Document $Document
  */
 class Applicant extends AppModel {
 
@@ -16,7 +17,7 @@ class Applicant extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'client_id' => array(
+		'clientcase_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -66,9 +67,9 @@ class Applicant extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Client' => array(
-			'className' => 'Client',
-			'foreignKey' => 'client_id',
+		'Clientcase' => array(
+			'className' => 'Clientcase',
+			'foreignKey' => 'clientcase_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -101,8 +102,21 @@ class Applicant extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Applicantdocument' => array(
-			'className' => 'Applicantdocument',
+		'Clientcase' => array(
+			'className' => 'Clientcase',
+			'foreignKey' => 'applicant_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Document' => array(
+			'className' => 'Document',
 			'foreignKey' => 'applicant_id',
 			'dependent' => false,
 			'conditions' => '',

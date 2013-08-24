@@ -58,10 +58,10 @@ class DATABASE_CONFIG {
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'DBTrialUser',
-		'password' => 'password',
-		'database' => 'DBTrial',
+		'host' => '130.194.7.82',
+		'login' => 'IEMySQL16',
+		'password' => 'chiap9av9a',
+		'database' => 'fitie2013t16dev',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);

@@ -4,7 +4,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('category'); ?></th>
-			<th><?php echo $this->Paginator->sort('doc_type'); ?></th>
+			<th><?php echo $this->Paginator->sort('type'); ?></th>
 			<th><?php echo $this->Paginator->sort('code'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -12,7 +12,7 @@
 	<tr>
 		<td><?php echo h($documenttype['Documenttype']['id']); ?>&nbsp;</td>
 		<td><?php echo h($documenttype['Documenttype']['category']); ?>&nbsp;</td>
-		<td><?php echo h($documenttype['Documenttype']['doc_type']); ?>&nbsp;</td>
+		<td><?php echo h($documenttype['Documenttype']['type']); ?>&nbsp;</td>
 		<td><?php echo h($documenttype['Documenttype']['code']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $documenttype['Documenttype']['id'])); ?>
@@ -40,5 +40,7 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Documenttype'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Documents'), array('controller' => 'documents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Document'), array('controller' => 'documents', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

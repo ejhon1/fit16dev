@@ -3,13 +3,13 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('Ancestor'); ?></th>
+			<th><?php echo $this->Paginator->sort('ancestor_type'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($ancestortypes as $ancestortype): ?>
 	<tr>
 		<td><?php echo h($ancestortype['Ancestortype']['id']); ?>&nbsp;</td>
-		<td><?php echo h($ancestortype['Ancestortype']['Ancestor']); ?>&nbsp;</td>
+		<td><?php echo h($ancestortype['Ancestortype']['ancestor_type']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $ancestortype['Ancestortype']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $ancestortype['Ancestortype']['id'])); ?>
@@ -36,5 +36,7 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Ancestortype'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Documents'), array('controller' => 'documents', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Document'), array('controller' => 'documents', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

@@ -4,8 +4,16 @@ App::uses('AppController', 'Controller');
  * Paperfilelogs Controller
  *
  * @property Paperfilelog $Paperfilelog
+ * @property PaginatorComponent $Paginator
  */
 class PaperfilelogsController extends AppController {
+
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -14,7 +22,7 @@ class PaperfilelogsController extends AppController {
  */
 	public function index() {
 		$this->Paperfilelog->recursive = 0;
-		$this->set('paperfilelogs', $this->paginate());
+		$this->set('paperfilelogs', $this->Paginator->paginate());
 	}
 
 /**
@@ -42,14 +50,14 @@ class PaperfilelogsController extends AppController {
 			$this->Paperfilelog->create();
 			if ($this->Paperfilelog->save($this->request->data)) {
 				$this->Session->setFlash(__('The paperfilelog has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The paperfilelog could not be saved. Please, try again.'));
 			}
 		}
-		$paperfiles = $this->Paperfilelog->Paperfile->find('list');
+		$archives = $this->Paperfilelog->Archive->find('list');
 		$employees = $this->Paperfilelog->Employee->find('list');
-		$this->set(compact('paperfiles', 'employees'));
+		$this->set(compact('archives', 'employees'));
 	}
 
 /**
@@ -66,7 +74,7 @@ class PaperfilelogsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Paperfilelog->save($this->request->data)) {
 				$this->Session->setFlash(__('The paperfilelog has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The paperfilelog could not be saved. Please, try again.'));
 			}
@@ -74,9 +82,9 @@ class PaperfilelogsController extends AppController {
 			$options = array('conditions' => array('Paperfilelog.' . $this->Paperfilelog->primaryKey => $id));
 			$this->request->data = $this->Paperfilelog->find('first', $options);
 		}
-		$paperfiles = $this->Paperfilelog->Paperfile->find('list');
+		$archives = $this->Paperfilelog->Archive->find('list');
 		$employees = $this->Paperfilelog->Employee->find('list');
-		$this->set(compact('paperfiles', 'employees'));
+		$this->set(compact('archives', 'employees'));
 	}
 
 /**
@@ -94,9 +102,9 @@ class PaperfilelogsController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Paperfilelog->delete()) {
 			$this->Session->setFlash(__('Paperfilelog deleted'));
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Paperfilelog was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 }

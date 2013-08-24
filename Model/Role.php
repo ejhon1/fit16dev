@@ -13,7 +13,7 @@ class Role extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'type' => array(
+		'role_name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',

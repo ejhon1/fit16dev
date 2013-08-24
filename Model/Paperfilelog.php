@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Paperfilelog Model
  *
- * @property Paperfile $Paperfile
+ * @property Archive $Archive
  * @property Employee $Employee
  */
 class Paperfilelog extends AppModel {
@@ -14,7 +14,7 @@ class Paperfilelog extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'paperfile_id' => array(
+		'archive_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -44,9 +44,9 @@ class Paperfilelog extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Paperfile' => array(
-			'className' => 'Paperfile',
-			'foreignKey' => 'paperfile_id',
+		'Archive' => array(
+			'className' => 'Archive',
+			'foreignKey' => 'archive_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

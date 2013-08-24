@@ -4,8 +4,16 @@ App::uses('AppController', 'Controller');
  * Roles Controller
  *
  * @property Role $Role
+ * @property PaginatorComponent $Paginator
  */
 class RolesController extends AppController {
+
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
 /**
  * index method
@@ -14,7 +22,7 @@ class RolesController extends AppController {
  */
 	public function index() {
 		$this->Role->recursive = 0;
-		$this->set('roles', $this->paginate());
+		$this->set('roles', $this->Paginator->paginate());
 	}
 
 /**
@@ -42,7 +50,7 @@ class RolesController extends AppController {
 			$this->Role->create();
 			if ($this->Role->save($this->request->data)) {
 				$this->Session->setFlash(__('The role has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The role could not be saved. Please, try again.'));
 			}
@@ -63,7 +71,7 @@ class RolesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Role->save($this->request->data)) {
 				$this->Session->setFlash(__('The role has been saved'));
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The role could not be saved. Please, try again.'));
 			}
@@ -88,9 +96,9 @@ class RolesController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Role->delete()) {
 			$this->Session->setFlash(__('Role deleted'));
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Role was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 }

@@ -3,7 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('paperfile_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('archive_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('employee_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('date_borrowed'); ?></th>
 			<th><?php echo $this->Paginator->sort('date_returned'); ?></th>
@@ -13,7 +13,7 @@
 	<tr>
 		<td><?php echo h($paperfilelog['Paperfilelog']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($paperfilelog['Paperfile']['id'], array('controller' => 'paperfiles', 'action' => 'view', $paperfilelog['Paperfile']['id'])); ?>
+			<?php echo $this->Html->link($paperfilelog['Archive']['id'], array('controller' => 'archives', 'action' => 'view', $paperfilelog['Archive']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($paperfilelog['Employee']['id'], array('controller' => 'employees', 'action' => 'view', $paperfilelog['Employee']['id'])); ?>
@@ -46,8 +46,8 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Paperfilelog'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Paperfiles'), array('controller' => 'paperfiles', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Paperfile'), array('controller' => 'paperfiles', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Archives'), array('controller' => 'archives', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Archive'), array('controller' => 'archives', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Employees'), array('controller' => 'employees', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Employee'), array('controller' => 'employees', 'action' => 'add')); ?> </li>
 	</ul>
