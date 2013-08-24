@@ -8,6 +8,25 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('newclient','newemployee'); // Letting users register themselves
+    }
+
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                $this->redirect($this->Auth->redirect());
+            } else {
+                $this->Session->setFlash(__('Invalid username or password, try again'));
+            }
+        }
+    }
+
+    public function logout() {
+        $this->redirect($this->Auth->logout());
+    }
+
 /**
  * Components
  *
@@ -57,6 +76,59 @@ class UsersController extends AppController {
 		}
 	}
 
+    public function newclient() {
+        $this->loadModel('Archive');
+        $this->loadModel('Applicant');
+        $this->loadModel('ClientCase');
+        if ($this->request->is('post')) {
+            $this->createArchive(); //Leads to the function that creates the Archive entry.
+            $this->request->data['ClientCase']['nationality_of_parents']= implode(',', $this->request->data['ClientCase']['nationality_of_parents']);
+            $this->request->data['ClientCase']['nationality_of_grandparents']= implode(',', $this->request->data['ClientCase']['nationality_of_grandparents']);
+            $this->request->data['ClientCase']['when_left_poland']= implode(',', $this->request->data['ClientCase']['when_left_poland']);
+            $this->request->data['ClientCase']['where_left_poland']= implode(',', $this->request->data['ClientCase']['where_left_poland']);
+            $this->request->data['ClientCase']['possess_documents_types']= implode(',', $this->request->data['ClientCase']['possess_documents_types']);
+            $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
+            $this->request->data['ClientCase']['open_or_closed'] = 'Open';
+            $this->request->data['ClientCase']['status_id'] = 1;
+
+
+            $this->User->create();
+            if ($this->User->saveAll($this->request->data, array('deep' => true))) {
+                $this->request->data['ClientCase']['user_id'] =  $this->User->getLastInsertId();
+                $this->ClientCase->create();
+                $this->ClientCase->save($this->request->data);
+
+                $this->request->data['Applicant']['clientcase_id'] =  $this->ClientCase->getLastInsertId();
+                $this->Applicant->create();
+                $this->Applicant->save($this->request->data);
+
+                $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                $this->request->data['ClientCase']['id'] =  $this->ClientCase->getLastInsertId();
+                $this->ClientCase->save($this->request->data);
+
+                $this->Session->setFlash(__('The user has been saved'));
+                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+            }else {
+                $this->Session->setFlash(__('The user could not be saved. Please try again.'));
+            }
+        }
+    }
+
+    public function newemployee() {
+        $this->loadModel('Role');
+        if ($this->request->is('post')) {
+            $this->User->create();
+            if ($this->User->saveAll($this->request->data, array('deep' => true))) {
+                $this->Session->setFlash(__('The user has been saved'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        $roles = $this->Role->find('list', array('order'=>'role_name ASC'));
+        $this->set(compact('roles'));
+    }
+
 /**
  * edit method
  *
@@ -101,4 +173,33 @@ class UsersController extends AppController {
 		$this->Session->setFlash(__('User was not deleted'));
 		return $this->redirect(array('action' => 'index'));
 	}
+
+    public function createArchive()
+    {
+        $available = false;
+        $i = 1;
+        $name = strtoupper(substr($this->request->data['Applicant']['surname'], 0, 3)).'-';
+        $year = substr(idate('Y', $timestamp = time()), -2);
+        do
+        {
+            $archiveName = $name.$i.'/'.$year;
+            $conditions = array('Archive.archive_name' => $archiveName);
+
+            if($this->Archive->hasAny($conditions))
+            {
+                $i++;
+            }
+            else
+            {
+                $available = true;
+            }
+        }while(!$available);
+
+        $this->request->data['Archive']['archive_name'] = $archiveName;
+        $this->Archive->create();
+        $this->Archive->save($this->request->data);
+
+        $this->request->data['ClientCase']['archive_id'] =  $this->Archive->getLastInsertId();
+        $this->request->data['Applicant']['archive_id'] =  $this->Archive->getLastInsertId();
+    }
 }

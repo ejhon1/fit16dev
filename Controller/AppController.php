@@ -32,4 +32,15 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+    public $helpers = array("Html", "Form", "Session",'Paginator','Js' =>array('prototype', 'scriptaculous', 'Jquery'));
+
+    public $components = array('DebugKit.Toolbar', 'Session', 'DataTable', 'Auth' => array(
+        'loginRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+        'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+    ));
+
+    public function beforeFilter() {
+        $this->Auth->allow('display');
+    }
 }
