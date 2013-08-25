@@ -1,5 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
+
+App::uses('CakeEmail', 'Network/Email');
+
 /**
  * Users Controller
  *
@@ -202,4 +205,10 @@ class UsersController extends AppController {
         $this->request->data['ClientCase']['archive_id'] =  $this->Archive->getLastInsertId();
         $this->request->data['Applicant']['archive_id'] =  $this->Archive->getLastInsertId();
     }
+    
+$Email = new CakeEmail();
+$Email->from(array('jessicagreer18@yahoo.com'=> 'My Site'));
+$Email->to('jwgre2@student.monash.edu');
+$Email->subject('Tester')
+$Email->send('Just wanted to try this out.');
 }
