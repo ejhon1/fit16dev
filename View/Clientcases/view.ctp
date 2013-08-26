@@ -12,6 +12,7 @@
             <li><a href="#tabs-2">Applicants</a></li>
             <li><a href="#tabs-3">Case Status</a></li>
             <li><a href="#tabs-4">Case Notes</a></li>
+            <li><a href="#tabs-5">Case Notes</a></li>
         </ul>
         <div id="tabs-1">
             <p>
@@ -310,27 +311,76 @@
 				</ul>
 			</div>
 	</div>
+	<div id="tabs-4">
+	        <div id="accordion">
+            <h3>Ancestor Documents</h3>
+            <div>
+                <?php if (!empty($ancestordocuments)): ?>
+                    <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th class="heading">Ancestor Type</th>
+                            <th class="heading">Document Type</th>
+                            <th class="heading">File name</th>
+                            <th class="heading">Uploaded</th>
+                            <th class="actions"><?php echo __('View'); ?></th>
+                        </tr>
+                        <?php foreach ($ancestordocuments as $ancestordocument): ?>
+                            <tr class="list">
+                                <td valign="top">
+                                    <?php echo h($ancestordocument['Ancestortype']['ancestor_type']); ?>
+                                </td>
+                                <td valign="top">
+                                    <?php echo h($ancestordocument['Documenttype']['type']); ?>
+                                </td>
+                                <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
+                                <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
+                                <td class="actions">
+                                    <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $ancestordocument['Document']['id'])); ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+
+                <?php
+                endif;
+                ?>
+            </div>
+            <h3>Applicant Documents</h3>
+            <div>
+                <?php if (!empty($applicantdocuments)): ?>
+
+                    <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th class="heading">Applicant</th>
+                            <th class="heading">Document Type</th>
+                            <th class="heading">File Name</th>
+                            <th class="heading">Uploaded</th>
+                            <th class="heading">View</th>
+                        </tr>
+                        <?php foreach ($applicantdocuments as $applicantdocument): ?>
+                            <tr class="list">
+                                <td valign="top">
+                                    <?php echo h($applicantdocument['Applicant']['first_name'].' '.$applicantdocument['Applicant']['surname']); ?>
+                                </td>
+                                <td valign="top">
+                                    <?php echo h($applicantdocument['Documenttype']['type']); ?>
+                                </td>
+                                <td valign="top"><?php echo h($applicantdocument['Document']['filename']); ?>&nbsp;</td>
+                                <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
+                                <td class="actions">
+                                    <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $applicantdocument['Document']['id'])); ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+
+                <?php
+                endif;
+                ?>
+            </div>
+        </div>
+	</div>
 </div>		
 <br/>		
-<div>
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Clientcase'), array('action' => 'edit', $clientcase['Clientcase']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Clientcase'), array('action' => 'delete', $clientcase['Clientcase']['id']), null, __('Are you sure you want to delete # %s?', $clientcase['Clientcase']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Clientcases'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Clientcase'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Archives'), array('controller' => 'archives', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Archive'), array('controller' => 'archives', 'action' => 'add')); ?> </li>
-		<!-- <li><?php echo $this->Html->link(__('List Statuses'), array('controller' => 'statuses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Status'), array('controller' => 'statuses', 'action' => 'add')); ?> </li> -->
-		<li><?php echo $this->Html->link(__('List Applicants'), array('controller' => 'applicants', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Applicant'), array('controller' => 'applicants', 'action' => 'add')); ?> </li>
-		<!-- <li><?php echo $this->Html->link(__('List Casenotes'), array('controller' => 'casenotes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Casenote'), array('controller' => 'casenotes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Casestatuses'), array('controller' => 'casestatuses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Casestatus'), array('controller' => 'casestatuses', 'action' => 'add')); ?> </li> -->
-	</ul>
-</div>
+
 
