@@ -274,7 +274,7 @@
 				<th><?php echo __('Clientcase Id'); ?></th>
 				<th><?php echo __('User Id'); ?></th>
 				<th><?php echo __('Notesubject Id'); ?></th> -->
-				<th><?php echo __('Created'); ?></th>
+				<th><?php echo $this->Time->format('d-m-Y',$casenote['created']); ?></th>
 				<th><?php echo __('Note Type'); ?></th>
 				<th><?php echo __('Note'); ?></th>
 				
@@ -296,8 +296,8 @@
 					<!-- <td><?php echo $casenote['modified']; ?></td> -->
 					<td class="actions">
 						<?php echo $this->Html->link(__('View'), array('controller' => 'casenotes', 'action' => 'view', $casenote['id'])); ?>
-						<?php echo $this->Html->link(__('Edit'), array('controller' => 'casenotes', 'action' => 'edit', $casenote['id'])); ?>
-						<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'casenotes', 'action' => 'delete', $casenote['id']), null, __('Are you sure you want to delete # %s?', $casenote['id'])); ?>
+						<!-- <?php echo $this->Html->link(__('Edit'), array('controller' => 'casenotes', 'action' => 'edit', $casenote['id'])); ?>
+						<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'casenotes', 'action' => 'delete', $casenote['id']), null, __('Are you sure you want to delete # %s?', $casenote['id'])); ?> -->
 					</td>
 					</tr>
 			<?php endforeach; ?>
