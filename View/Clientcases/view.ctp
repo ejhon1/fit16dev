@@ -12,38 +12,29 @@
             <li><a href="#tabs-2">Applicants</a></li>
             <li><a href="#tabs-3">Case Status</a></li>
             <li><a href="#tabs-4">Case Notes</a></li>
-            <li><a href="#tabs-5">Case Notes</a></li>
+            <li><a href="#tabs-5">Documents</a></li>
         </ul>
         <div id="tabs-1">
             <p>
             <h3>Case Information</h3>
             <p>
 			<dl>
-				<!-- <dt><?php echo __('Id'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['id']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('User'); ?></dt>
-				<dd>
-					<?php echo $this->Html->link($clientcase['User']['id'], array('controller' => 'users', 'action' => 'view', $clientcase['User']['id'])); ?>
-					&nbsp;
-				</dd> -->
+				
 				<dt><?php echo __('Archive'); ?></dt>
 				<dd>
-					<?php echo $this->Html->link($clientcase['Archive']['id'], array('controller' => 'archives', 'action' => 'view', $clientcase['Archive']['id'])); ?>
+					<?php echo $this->Html->link($clientcase['Archive']['archive_name'], array('controller' => 'archives', 'action' => 'view', $clientcase['Archive']['id'])); ?>
 					&nbsp;
 				</dd>
 				<dt><?php echo __('Status'); ?></dt>
 				<dd>
-					<?php echo $this->Html->link($clientcase['Status']['id'], array('controller' => 'statuses', 'action' => 'view', $clientcase['Status']['id'])); ?>
+					<?php echo $this->Html->link($clientcase['Status']['status_type'], array('controller' => 'statuses', 'action' => 'view', $clientcase['Status']['id'])); ?>
 					&nbsp;
 				</dd>
-				<!-- <dt><?php echo __('Applicant'); ?></dt>
+				<dt><?php echo __('Applicant'); ?></dt>
 				<dd>
-					<?php echo $this->Html->link($clientcase['Applicant']['title'], array('controller' => 'applicants', 'action' => 'view', $clientcase['Applicant']['id'])); ?>
+					<?php echo $this->Html->link($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname'], array('controller' => 'applicants', 'action' => 'view', $clientcase['Applicant']['id'])); ?>
 					&nbsp;
-				</dd> -->
+				</dd>
 				<dt><?php echo __('Open Or Closed'); ?></dt>
 				<dd>
 					<?php echo h($clientcase['Clientcase']['open_or_closed']); ?>
@@ -51,7 +42,7 @@
 				</dd>
 				<dt><?php echo __('Enquiry Date'); ?></dt>
 				<dd>
-					<?php echo h($clientcase['Clientcase']['enquiry_date']); ?>
+					<?php echo h($clientcase['Clientcase']['created']); ?>
 					&nbsp;
 				</dd>
 				<dt><?php echo __('Appointment Date'); ?></dt>
@@ -175,58 +166,26 @@
 		<div id="tabs-2">
             <p>
             <h3><?php echo __('Applicants'); ?></h3>
-            <?php if (!empty($clientcase['Applicant'])): ?>
+            <?php if (!empty($applicants)): ?>
             <table cellpadding = "0" cellspacing = "0">
-            <tr>
-            	<!-- <th><?php echo __('Id'); ?></th>
-				<th><?php echo __('Clientcase Id'); ?></th>
-				<th><?php echo __('Archive Id'); ?></th>
-				<th><?php echo __('Birthdate'); ?></th>
-				<th><?php echo __('Title'); ?></th> -->
-				<th><?php echo __('First Name'); ?></th>
-				<!-- <th><?php echo __('Middle Name'); ?></th> -->
-				<th><?php echo __('Surname'); ?></th>
-				<th><?php echo __('Email'); ?></th>
-				<th><?php echo __('Landline Number'); ?></th>
-				<th><?php echo __('Mobile Number'); ?></th>
-				<th><?php echo __('Applicant Type'); ?></th>
-				<!-- <th><?php echo __('Created'); ?></th>
-				<th><?php echo __('Modified'); ?></th> -->
-				<th class="actions"><?php echo __('Actions'); ?></th>
-			</tr>
-		<?php
-			$i = 0;
-			foreach ($clientcase['Applicant'] as $applicant): ?>
-			<tr>
-				<!-- <td><?php echo $applicant['id']; ?></td>
-				<td><?php echo $applicant['clientcase_id']; ?></td>
-				<td><?php echo $applicant['archive_id']; ?></td>
-				<td><?php echo $applicant['birthdate']; ?></td>
-				<td><?php echo $applicant['title']; ?></td> -->
-				<td><?php echo $applicant['first_name']; ?></td>
-				<!-- <td><?php echo $applicant['middle_name']; ?></td> -->
-				<td><?php echo $applicant['surname']; ?></td>
-				<td><?php echo $applicant['email']; ?></td>
-				<td><?php echo $applicant['landline_number']; ?></td>
-				<td><?php echo $applicant['mobile_number']; ?></td>
-				<td><?php echo $applicant['applicant_type']; ?></td>
-				<!-- <td><?php echo $applicant['created']; ?></td>
-				<td><?php echo $applicant['modified']; ?></td> -->
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('controller' => 'applicants', 'action' => 'view', $applicant['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('controller' => 'applicants', 'action' => 'edit', $applicant['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'applicants', 'action' => 'delete', $applicant['id']), null, __('Are you sure you want to delete # %s?', $applicant['id'])); ?>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-		</table>
-	<?php endif; ?>
-	
-		<div class="actions">
-			<ul>
-				<li><?php echo $this->Html->link(__('New Applicant'), array('controller' => 'applicants', 'action' => 'add')); ?> </li>
-			</ul>
-		</div>
+                <tr>
+                    <th><?php echo __('Name'); ?></th>
+                    <th><?php echo __('Email'); ?></th>
+                    <th><?php echo __('Type'); ?></th>
+                    <th class="actions"><?php echo __('Actions'); ?></th>
+                </tr>
+                <?php foreach ($applicants as $applicant): ?>
+                    <tr>
+                        <td><?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']); ?></td>
+                        <td><?php echo $applicant['Applicant']['email']; ?></td>
+                        <td><?php echo $applicant['Applicant']['applicant_type']; ?></td>
+                        <td class="actions">
+                            <?php echo $this->Html->link(__('View'), array('controller' => 'applicants', 'action' => 'view', $applicant['Applicant']['id'])); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php endif; ?>
 	</div>
 	
 	<div id="tabs-3">
