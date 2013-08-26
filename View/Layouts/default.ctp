@@ -44,11 +44,12 @@ $loggedUser = $this->Session->read('Auth.User');
 		echo $this->fetch('script');
 
 		echo $this->Html->meta('icon');
+		
 		echo $this->Html->css('default');
 		echo $this->Html->css('cake.generic');
         	echo $this->Html->css('jQuery.dataTables');
+        	
 		echo $this->Html->script('jquery');
-
 		echo $this->Html->script('jquery.smartWizard-2.0.min');
 		echo $this->Html->script('jquery.smartWizard-2.0');
 		echo $this->Html->script('jquery.dataTables');
