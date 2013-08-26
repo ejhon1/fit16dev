@@ -73,7 +73,7 @@ $loggedUser = $this->Session->read('Auth.User');
 					{
 						?>
 						<li><?php echo $this->Html->link('Home', '/'); ?> </li>
-						<li><?php echo $this->Html->link('Cases', array('controller'=>'applicants', 'action'=>'cases'));?> </li>
+						<li><?php echo $this->Html->link('Cases', array('controller'=>'ClientCases', 'action'=>'index'));?> </li>
 						<li><?php echo $this->Html->link('Staff', array('controller'=>'employees', 'action'=>'index'));?> </li>
 						<li><?php echo $this->Html->link('Paper Files', array('controller'=>'paperfiles', 'action'=>'index'));?> </li>
 						<li><?php echo $this->Html->link(__('My Account'), array('controller' => 'users', 'action' => 'myaccount')); ?></li>
