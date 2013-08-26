@@ -108,7 +108,7 @@ class UsersController extends AppController {
                 $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
                 $this->request->data['ClientCase']['id'] =  $this->ClientCase->getLastInsertId();
                 $this->ClientCase->save($this->request->data);
-
+                $this->email();
                 $this->Session->setFlash(__('The user has been saved'));
                 $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
             }else {
@@ -205,10 +205,13 @@ class UsersController extends AppController {
         $this->request->data['ClientCase']['archive_id'] =  $this->Archive->getLastInsertId();
         $this->request->data['Applicant']['archive_id'] =  $this->Archive->getLastInsertId();
     }
-    
-$Email = new CakeEmail();
-$Email->from(array('jessicagreer18@yahoo.com'=> 'My Site'));
-$Email->to('jwgre2@student.monash.edu');
-$Email->subject('Tester')
-$Email->send('Just wanted to try this out.');
+public function email(){    
+	$Email = new CakeEmail();
+	$Email->config('default');
+	$Email->from('polarontest@gmail.com');
+	$Email->to($this->request->data['Applicant']['email']);
+	//$Email->to('jwgre2@student.monash.edu');
+	$Email->subject('Tester');
+	$Email->send('Just wanted to try this out.');
+	}
 }
