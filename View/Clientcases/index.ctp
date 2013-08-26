@@ -1,5 +1,6 @@
 <?php
 	echo $this->HTML->script('JQueryUser');
+?>
 
 <div class="clientcases index">
 	<h2><?php echo __('Clientcases'); ?></h2>
