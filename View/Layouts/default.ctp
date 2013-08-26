@@ -82,9 +82,9 @@ $loggedUser = $this->Session->read('Auth.User');
 					else if(!empty($loggedUser) && $loggedUser['type']=='Client')
 					{
 					?>
-					<li><?php echo $this->Html->link('My Account', array('controller'=>'Users', 'action'=>'myaccount'));?> </li>
-					<li><?php echo $this->Html->link('My Documents', array('controller'=>'Archives', 'action'=>'casedocs'));?> </li>
-					<?php
+						<li><?php echo $this->Html->link('Documents', array('controller'=>'documents', 'action'=>'mydocs'));?> </li>
+						<li><?php echo $this->Html->link('Case notes', array('controller'=>'casenotes', 'action'=>'mynotes'));?> </li>
+						<li><?php echo $this->Html->link('Account', array('controller'=>'clientcases', 'action'=>'myaccount'));?> </li><?php
 					}
 					else
 					{
