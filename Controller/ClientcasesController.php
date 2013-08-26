@@ -33,11 +33,22 @@ class ClientcasesController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+        $this->loadModel('Applicant');
+        $this->loadModel('Document');
 		if (!$this->Clientcase->exists($id)) {
 			throw new NotFoundException(__('Invalid clientcase'));
+
 		}
-		$options = array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id));
-		$this->set('clientcase', $this->Clientcase->find('first', $options));
+        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
+        $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $id), 'order'=>'first_name ASC', 'recursive' => -1));
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => 0));
+        $this->set('ancestordocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
+
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => 0), 'order'=>'applicant_id ASC');
+        $this->set('applicantdocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
+
+
+        $this->set(compact('clientcase', 'applicants'));
 	}
 
 /**
