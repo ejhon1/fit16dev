@@ -6,7 +6,8 @@
 		echo $this->Form->input('clientcase_id');
 		echo $this->Form->input('user_id');
 		echo $this->Form->input('notesubject_id');
-		echo $this->Form->input('note_type');
+		$options = array('Internal' => 'Internal', 'Public' => 'Public');
+		echo $this->Form->radio('note_type', $options);
 		echo $this->Form->input('note');
 	?>
 	</fieldset>
