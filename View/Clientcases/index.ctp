@@ -1,33 +1,46 @@
+<?php
+	echo $this->HTML->script('JQueryUser');
+
 <div class="clientcases index">
 	<h2><?php echo __('Clientcases'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
+	<table cellpadding="0" cellspacing="2" id="data">
+	<thead>
+		<tr>
 			<th><?php echo $this->Paginator->sort('archive_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('status_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('applicant_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('open_or_closed'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th class="actions"><?php echo __('View'); ?></th>
-	</tr>
-	<?php foreach ($clientcases as $clientcase): ?>
-	<tr>
-		<td>
-			<?php echo $this->Html->link($clientcase['Archive']['archive_name'], array('controller' => 'archives', 'action' => 'view', $clientcase['Archive']['id'])); ?>
-		</td>
-		<td>
-			<?php echo h($clientcase['Status']['status_type']); ?>
-		</td>
-		<td>
-			<?php echo $this->Html->link($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname'], array('controller' => 'applicants', 'action' => 'view', $clientcase['Applicant']['id'])); ?>
-		</td>
-		<td><?php echo h($clientcase['Clientcase']['open_or_closed']); ?>&nbsp;</td>
-		<td><?php echo h($clientcase['Clientcase']['enquiry_date']); ?>&nbsp;</td>
-		<td><?php echo h($clientcase['Clientcase']['created']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $clientcase['Clientcase']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
+			
+			<th class="heading">Archive Name</th>
+			<th class="heading">Status</th>
+			<th class="heading">Applicant Name</th>
+			<th class="heading">Open or Cloased</th>
+			<th class="heading">Date Created</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($clientcases as $clientcase): ?>
+		<tr class="list">
+			<td valign="top">
+				<?php echo $this->Html->link($clientcase['Archive']['archive_name'], array('controller' => 'archives', 'action' => 'view', $clientcase['Archive']['id'])); ?>
+			</td>
+			<td valign="top">
+				<?php echo h($clientcase['Status']['status_type']); ?>
+			</td>
+			<td valign="top">
+				<?php echo $this->Html->link($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname'], array('controller' => 'applicants', 'action' => 'view', $clientcase['Applicant']['id'])); ?>
+			</td>
+			<td valign="top"><?php echo h($clientcase['Clientcase']['open_or_closed']); ?>&nbsp;</td>
+			<td valign="top"><?php echo h($clientcase['Clientcase']['enquiry_date']); ?>&nbsp;</td>
+			<td valign="top"><?php echo h($clientcase['Clientcase']['created']); ?>&nbsp;</td>
+			<td class="actions">
+				<?php echo $this->Html->link(__('View'), array('action' => 'view', $clientcase['Clientcase']['id'])); ?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
 	</table>
 	<p>
 	<?php
