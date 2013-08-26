@@ -1,5 +1,6 @@
 <?php
 	echo $this->HTML->script('JQueryUser');
+	echo $this->HTML->css('jquery.dataTables');
 ?>
 
 <div class="clientcases index">
