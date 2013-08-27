@@ -82,14 +82,14 @@
           			<label class="stepNumber">2</label>
           			<span class="stepDesc">
              				Step 2<br />
-                        		<small>Parents and Grandparents</small>
+                        		<small>My Polishness</small>
           			</span>
       			</a></li>
     			<li><a href="#step-3">
           			<label class="stepNumber">3</label>
           			<span class="stepDesc">
              				Step 3<br />
-                        		<small>Ancestors</small>
+                        		<small>Family History</small>
           			</span>                  
        			</a></li>
     			<li><a href="#step-4">
@@ -107,17 +107,18 @@
         echo $this->Form->input('Applicant.title');
             ?>
 
-            <p>Date: <input type="text" id="datepicker" /></p>
+            <p>Date: </p>
+            <p><input type="text" id="datepicker"</p>
 
             <?php
 	        echo $this->Form->input('Applicant.first_name');
 	        echo $this->Form->input('Applicant.surname');
 	        echo $this->Form->input('Applicant.landline_number', array('label' => 'Phone Number'));
 	        echo $this->Form->input('Applicant.email', array('label' => 'E-mail Address'));
-			echo $this->Form->input('username');
+			/** echo $this->Form->input('username');
 			echo $this->Form->input('password');
-	        echo $this->Form->input('password_confirm', array('label' => 'Confirm Password'));
-	        echo $this->Form->input('ClientCase.born_in_poland', array('type' => 'radio', 'options' => array('Yes' => 'Yes', 'No' => 'No'), 'legend' => 'I was born in Poland'));
+	        echo $this->Form->input('password_confirm', array('label' => 'Confirm Password')); */
+	        
             ?>
         </div>
 
@@ -139,9 +140,14 @@
         echo $this->Form->input('ClientCase.nationality_of_others', array('label' => 'Please specify any other family members of Polish decent here')); -->
 	
 	<div id="step-2">
-      	    <h2 class="StepTitle">Parents and Grandparents</h2>    
+      	    <h2 class="StepTitle">My Polishness</h2>    
       	    <?php
-      	    
+      	    	echo $this->Form->input('ClientCase.born_in_poland', array(
+      	    		'type' => 'radio', 
+      	    		'options' => array(
+      	    			'Yes' => 'Yes', 
+      	    			'No' => 'No'), 
+      	    		'legend' => 'I was born in Poland'));
       	    	echo $this->Form->input('ClientCase.nationality_of_parents', array(
 			'type' => 'select',
 			'multiple' => 'checkbox',
@@ -228,7 +234,7 @@
             'One of my ancestors held public office outside of Poland' =>  'One of my ancestors held public office outside of Poland', 'None of the above' =>  'None of the above'),'label' => 'Please select all that apply ')); --> 
         
         <div id="step-3">
-      		<h2 class="StepTitle">Ancestors</h2> 
+      		<h2 class="StepTitle">Family History</h2> 
             <?php
         	echo $this->Form->input('ClientCase.serve_in_army', array(
 			'type' => 'radio', 
