@@ -13,6 +13,11 @@ p {
   width:980px;
 }
 
+.swMain legend {
+	font: bold 12px "Maiandra GD", Candara, Arial, sans-serif;
+	color: #5A5655;
+}
+
 .swMain .stepContainer {
   display:block;
   position: relative;
