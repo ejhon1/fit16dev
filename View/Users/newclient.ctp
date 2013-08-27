@@ -104,7 +104,13 @@
         <div id="step-1">   
       	<h2 class="StepTitle">Your Details</h2>
         <?php
-        echo $this->Form->input('Applicant.title');
+        	echo $this->Form->input('Applicant.title', array(
+			'options' => array(
+				'Mr' => 'Mr',
+				'Mrs' => 'Mrs',
+				'Ms' => 'Ms',
+				'Miss' => 'Miss')
+		)); 
             ?>
 
             <p>Date: </p>
