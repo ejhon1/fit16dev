@@ -62,10 +62,10 @@ class DocumentsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Document->create();
 			if ($this->Document->save($this->request->data)) {
-				$this->Session->setFlash(__('The document has been saved'));
+				$this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The document could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
 			}
 		}
 		$archives = $this->Document->Archive->find('list');
@@ -95,10 +95,10 @@ class DocumentsController extends AppController {
             $ancestortype = $this->AncestorType->find('first', array('conditions' => array('AncestorType.id' => $this->request->data['Document']['ancestortype_id']),'fields' => array('AncestorType.id', 'AncestorType.ancestor_type')));
 
             if ($this->uploadDoc($archive, $doctype['DocumentType']['code'], $ancestortype['AncestorType']['ancestor_type']) && $this->Document->save($this->data)) {
-                $this->Session->setFlash(__('The document was uploaded successfully'));
+                $this->Session->setFlash(__('The document was uploaded successfully'),'default', array('class' => 'alert-success'));
                 $this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
             } else {
-                $this->Session->setFlash(__('The document could not be saved. Please try again.'));
+                $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
             }
         }
         $documentTypes = $this->DocumentType->find('list', array('fields' => array('DocumentType.id', 'DocumentType.type'), 'order'=>'type ASC'));
@@ -127,10 +127,10 @@ class DocumentsController extends AppController {
             $applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $this->request->data['Document']['applicant_id']),'fields' => array('Applicant.id', 'Applicant.first_name'),'recursive' => -1));
 
             if ($this->uploadDoc($archive, $doctype['DocumentType']['code'], $applicant['Applicant']['first_name']) && $this->Document->save($this->data)) {
-                $this->Session->setFlash(__('The document was uploaded successfully'));
+                $this->Session->setFlash(__('The document was uploaded successfully'),'default', array('class' => 'alert-success'));
                 $this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
             } else {
-                $this->Session->setFlash(__('The document could not be saved. Please try again.'));
+                $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
             }
         }
         $documentTypes = $this->DocumentType->find('list', array('fields' => array('DocumentType.id', 'DocumentType.type'), 'order'=>'type ASC'));
@@ -151,10 +151,10 @@ class DocumentsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Document->save($this->request->data)) {
-				$this->Session->setFlash(__('The document has been saved'));
+				$this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The document could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
@@ -181,10 +181,10 @@ class DocumentsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Document->delete()) {
-			$this->Session->setFlash(__('Document deleted'));
+			$this->Session->setFlash(__('Document deleted'),'default', array('class' => 'alert-success'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Document was not deleted'));
+		$this->Session->setFlash(__('Document was not deleted'),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
 
