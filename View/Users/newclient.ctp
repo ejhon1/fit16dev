@@ -242,6 +242,8 @@
         <div id="step-3">
       		<h2 class="StepTitle">Family History</h2> 
             <?php
+		echo $this->Form->input('ClientCase.brief_history', array(
+        	'label'=> 'Please write a brief history of your family here'));
         	echo $this->Form->input('ClientCase.serve_in_army', array(
 			'type' => 'radio', 
 			'options' => array(
