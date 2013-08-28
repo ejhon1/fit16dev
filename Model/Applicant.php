@@ -29,8 +29,9 @@ class Applicant extends AppModel {
 		),
 		'first_name' => array(
 			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'rule' => array(
+					'notempty'),
+				'message' => 'Please enter your first name'
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -39,7 +40,8 @@ class Applicant extends AppModel {
 		),
 		'middle_name' => array(
 			'notempty' => array(
-				'rule' => array('notempty'),
+				'rule' => array(
+					'notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -49,14 +51,45 @@ class Applicant extends AppModel {
 		),
 		'surname' => array(
 			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'rule' => array(
+					'notempty'),
+				'message' => 'Please enter your surname'
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'landline_number' => array(
+			'notempty' => array(
+				'rule' => array(
+					'notempty'),
+				'message' => 'Please enter your phone number'
+			),
+			'phone' => array(
+				'rule' => array(
+					'phone', 'aus')
+			)
+		),
+		'email' => array(
+			'notempty' => array(
+				'rule' => array(
+					'notempty'),
+				'message' => 'Please enter your email address'
+			),
+			'validEmail' => array(
+				'rule' => array(
+					'email'
+				),
+				'message' => 'Invalid email address! Please try again!'
+			),
+			'uniqueEmail' => array(
+				'rule' => array(
+					'isUnique'
+				),
+				'message' => 'This email is already registered'
+			)
+		)
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
