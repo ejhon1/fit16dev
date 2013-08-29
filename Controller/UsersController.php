@@ -214,4 +214,4 @@ class UsersController extends AppController {
 //	$Email->subject('Tester');
 //	$Email->send('Just wanted to try this out.');
 //	}
-//}
+}
