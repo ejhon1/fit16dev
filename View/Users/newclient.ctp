@@ -56,9 +56,15 @@
             $( "#datepicker" ).datepicker();
         });
     </script> --> 
-    <script>
+      <script>
         $(function() {
-            $( "#datepicker" ).datepicker();
+            $( "#datepicker" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0",
+                showAnim: 'slideDown'
+            });
+
         });
     </script>
 
@@ -106,6 +112,7 @@
         <?php
         	echo $this->Form->input('Applicant.title', array(
 			'options' => array(
+                		'' => '',
 				'Mr' => 'Mr',
 				'Mrs' => 'Mrs',
 				'Ms' => 'Ms',
@@ -113,17 +120,19 @@
 		)); 
             ?>
 
-            <p>Date: </p>
-            <p><input type="text" id="datepicker"</p>
+
 
             <?php
 	        echo $this->Form->input('Applicant.first_name');
 	        echo $this->Form->input('Applicant.surname');
 	        echo $this->Form->input('Applicant.landline_number', array('label' => 'Phone Number'));
 	        echo $this->Form->input('Applicant.email', array('label' => 'E-mail Address'));
-			/** echo $this->Form->input('username');
+            echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth', 'id' => 'datepicker', 'type'=>'text', 'class'=>'datepicker'));
+			?>
+            <br>
+            <?php
 			echo $this->Form->input('password');
-	        echo $this->Form->input('password_confirm', array('label' => 'Confirm Password')); */
+	        echo $this->Form->input('password_confirm', array('label' => 'Confirm Password'));
 	        
             ?>
         </div>
