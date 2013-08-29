@@ -66,10 +66,6 @@ class Applicant extends AppModel {
 					'notempty'),
 				'message' => 'Please enter your phone number'
 			),
-			'phone' => array(
-				'rule' => array(
-					'phone', 'aus')
-			)
 		),
 		'email' => array(
 			'notempty' => array(
