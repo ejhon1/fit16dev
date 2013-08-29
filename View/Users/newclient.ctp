@@ -56,13 +56,14 @@
             $( "#datepicker" ).datepicker();
         });
     </script> --> 
-      <script>
+    <script>
         $(function() {
             $( "#datepicker" ).datepicker({
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-100:+0",
-                showAnim: 'slideDown'
+                showAnim: 'slideDown',
+                dateFormat: "dd-mm-yy"
             });
 
         });
@@ -112,7 +113,7 @@
         <?php
         	echo $this->Form->input('Applicant.title', array(
 			'options' => array(
-                		'' => '',
+                '' => '',
 				'Mr' => 'Mr',
 				'Mrs' => 'Mrs',
 				'Ms' => 'Ms',
