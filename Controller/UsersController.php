@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeTime', 'Utility');
 
 //App::uses('CakeEmail', 'Network/Email');
 
@@ -93,6 +94,8 @@ class UsersController extends AppController {
             $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
             $this->request->data['ClientCase']['open_or_closed'] = 'Open';
             $this->request->data['ClientCase']['status_id'] = 1;
+            $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
+            $this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
 
 
             $this->User->create();
@@ -110,7 +113,7 @@ class UsersController extends AppController {
                 $this->ClientCase->save($this->request->data);
                 //$this->email();
                 $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+                //$this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
             }else {
                 $this->Session->setFlash(__('The user could not be saved. Please try again.'));
             }
@@ -205,6 +208,8 @@ class UsersController extends AppController {
         $this->request->data['ClientCase']['archive_id'] =  $this->Archive->getLastInsertId();
         $this->request->data['Applicant']['archive_id'] =  $this->Archive->getLastInsertId();
     }
+
+}
 //public function email(){    
 //	$Email = new CakeEmail();
 //	$Email->config('default');
@@ -214,4 +219,4 @@ class UsersController extends AppController {
 //	$Email->subject('Tester');
 //	$Email->send('Just wanted to try this out.');
 //	}
-}
+//}
