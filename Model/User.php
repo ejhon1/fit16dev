@@ -31,13 +31,11 @@ class User extends AppModel {
             ),
         ),
         'password_confirm' => array(
-            'rule' => array('maxLength', 16),
-            'notempty' => array(
-                'rule' => array('notempty'),
-            ),
-            'match'=>array(
-                'rule' => 'validatePasswdConfirm',
-                'message' => 'Passwords do not match'
+		'required'=>'notEmpty',
+		'match'=>array(
+		'rule' => 'validatePasswdConfirm',
+		'message' => 'Passwords do not match'
+
             )
         )
     );
