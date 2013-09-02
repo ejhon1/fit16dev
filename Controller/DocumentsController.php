@@ -196,8 +196,8 @@ class DocumentsController extends AppController {
         $uploadFolder = APP.'documents' . DS . $archivename;
         $ext = substr(strrchr($file['name'], '.'), 1);
 
-        $filename = $archivename.' '.$ancestortype.' '.$doctype;
-        $fullname = $archivename.' '.$ancestortype.' '.$doctype.'.'. $ext;
+        $filename = $archivename.' '.$ancestortype.' '.$doctype.' '.date('d-m-y');
+        $fullname = $filename.'.'. $ext;
 
         $i = 1;
         $available = false;
