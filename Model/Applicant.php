@@ -37,6 +37,10 @@ class Applicant extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'lettersOnly' => array(
+				'rule' => '/^[a-zA-Z]+$/',
+				'message' => 'Name can only contain letters'
+			)
 		),
 		'middle_name' => array(
 			'notempty' => array(
@@ -59,6 +63,10 @@ class Applicant extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'lettersOnly' => array(
+				'rule' => '/^[a-zA-Z]+$/',
+				'message' => 'Name can only contain letters'
+			)
 		),
 		'landline_number' => array(
 			'notempty' => array(
