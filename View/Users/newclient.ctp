@@ -12,50 +12,127 @@
 ?>
 
     <script type="text/javascript">
-  		$(document).ready(function() {
-      	// Initialize Smart Wizard
-        $('#wizard').smartWizard();
-  		});
-    </script>
+  	$(document).ready(function(){
+    	// Smart Wizard
+		$('#wizard').smartWizard({transitionEffect:'slideleft',onLeaveStep:leaveAStepCallback,onFinish:onFinishCallback,enableFinishButton:true});
+
+		function leaveAStepCallback(obj){
+			var step_num= obj.attr('rel');
+			return validateSteps(step_num);
+		}
+		
+		function onFinishCallback(){
+			if(validateAllSteps()){
+				$('form').submit();
+			}
+		}
+		});
+
+		function validateAllSteps(){
+			var isStepValid = true;
+
+			if(validateStep1() == false){
+				isStepValid = false;
+					$('#wizard').smartWizard('setError',{stepnum:1,iserror:true});         
+			}else{
+				$('#wizard').smartWizard('setError',{stepnum:1,iserror:false});
+       		}
+				return isStepValid;
+    	}
+		
+		function validateSteps(step){
+			var isStepValid = true;
+			// validate step 1
+			if(step == 1){
+				if(validateStep1() == false ){
+				isStepValid = false; 
+					// $('#wizard').smartWizard('showMessage','Please correct the errors in step'+step+ ' and click next.');
+					$('#wizard').smartWizard('setError',{stepnum:step,iserror:true});         
+				}else{
+					$('#wizard').smartWizard('setError',{stepnum:step,iserror:false});
+				}
+			}
+				return isStepValid;
+		}
+		
+		function validateStep1(){
+			var isValid = true; 
+			// Validate First Name
+			var firstname = $('#firstname').val();
+			if(firstname && firstname.length > 0){
+				if(!validateFirstName(firstname)){
+				isValid = false;
+					$('#msg_firstname').html('Name can only contain letters').show();
+				}else{
+					$('#msg_firstname').html('').hide();
+				}
+			}else{
+			isValid = false;
+				$('#msg_firstname').html('Please enter you first name').show();
+		}
+
+		// validate surname
+			var surname = $('#surname').val();
+			if(surname && surname.length > 0){
+				if(!validateSurname(surname)){
+				isValid = false;
+					$('#msg_surname').html('Name can only contain letters').show();
+				}else{
+					$('#msg_surname').html('').hide();
+				}
+			}else{
+			isValid = false;
+				$('#msg_surname').html('Please enter you surname').show();
+			}
+	   
+	   // validate phone number
+	   var phone = $('#phone').val();
+			if(phone && phone.length > 0){
+				if(!validatePhone(phone)){
+				isValid = false;
+					$('#msg_phone').html('Invalid number').show();
+				}else{
+					$('#msg_phone').html('').hide();
+				}
+			}else{
+			isValid = false;
+				$('#msg_phone').html('Please enter you phone number').show();
+			}
+			
+		//validate email	
+		var email = $('#email').val();
+		if(email && email.length > 0){
+			if(!isValidEmailAddress(email)){
+			isValid = false;
+				$('#msg_email').html('Email is invalid').show();           
+			}else{
+				$('#msg_email').html('').hide();
+			}
+		}else{
+		isValid = false;
+			$('#msg_email').html('Please enter email').show();
+		}
+			return isValid;
+    }
 	
-    <!-- <script type="text/javascript">
-        function panels(id)
-        {
-            var e = document.getElementById(id);
-            if(e == panel1)
-            {
-                if(e.style.display != 'none')
-                {
-                    e.style.display = 'none';
-                    panel2.style.display = 'block';
-                }
-                else
-                {
-                    e.style.display = 'block';
-                    panel2.style.display = 'none';
-                }
-
-            }
-            else if(e == panel2)
-            {
-                if(e.style.display != 'none')
-                {
-                    e.style.display = 'none';
-                    panel1.style.display = 'block';
-                }
-                else
-                {
-                    e.style.display = 'block';
-                    panel1.style.display = 'none';
-                }
-            }
-            scroll(0,0);
-        }
-
-        $(function() {
-            $( "#datepicker" ).datepicker();
-        });
-    </script> --> 
+	function validateFirstName(firstname) {
+      var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
+      return pattern.test(firstname);
+    }
+	function validateSurname(surname) {
+      var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
+      return pattern.test(surname);
+    }
+	function validatePhone(phone)
+	{
+		var pattern = new RegExp("^[0-9]*[1-9][0-9]*$")
+		return patern.test(phone);
+	}
+	function isValidEmailAddress(emailAddress) {
+	var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+      return pattern.test(emailAddress);
+    }
+    </script>
     <script>
         $(function() {
             $( "#datepicker" ).datepicker({
