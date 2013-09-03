@@ -21,6 +21,13 @@
             <li><a href="#tabs-3">Case Status</a></li>
             <li><a href="#tabs-4">Case Notes</a></li>
             <li><a href="#tabs-5">Documents</a></li>
+            <?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
+            {
+            ?>
+            <li><a href="#tabs-6">Eligibility check</a></li>
+            <?php
+            }
+            ?>
         </ul>
         <div id="tabs-1">
             <p>
@@ -28,149 +35,56 @@
             <p>
 			<dl>
 				
-				<dt><?php echo __('Archive'); ?></dt>
+				<dt><?php echo __('Archive name'); ?></dt>
 				<dd>
 					<?php echo $this->Html->link($clientcase['Archive']['archive_name'], array('controller' => 'archives', 'action' => 'view', $clientcase['Archive']['id'])); ?>
 					&nbsp;
 				</dd>
-				<dt><?php echo __('Status'); ?></dt>
+				<dt><?php echo __('Current status'); ?></dt>
 				<dd>
-					<?php echo $this->Html->link($clientcase['Status']['status_type'], array('controller' => 'statuses', 'action' => 'view', $clientcase['Status']['id'])); ?>
+					<?php echo h($clientcase['Status']['status_type']); ?>
 					&nbsp;
 				</dd>
-				<dt><?php echo __('Applicant'); ?></dt>
-				<dd>
-					<?php echo $this->Html->link($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname'], array('controller' => 'applicants', 'action' => 'view', $clientcase['Applicant']['id'])); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Open Or Closed'); ?></dt>
+				<dt><?php echo __('Open or closed'); ?></dt>
 				<dd>
 					<?php echo h($clientcase['Clientcase']['open_or_closed']); ?>
 					&nbsp;
 				</dd>
-				<dt><?php echo __('Enquiry Date'); ?></dt>
+				<dt><?php echo __('Date of enquiry'); ?></dt>
 				<dd>
-					<?php echo h($clientcase['Clientcase']['created']); ?>
+					<?php echo h($this->Time->format('d-m-Y', $clientcase['Clientcase']['created'])); ?>
 					&nbsp;
 				</dd>
-				<dt><?php echo __('Appointment Date'); ?></dt>
+				<dt><?php echo __('Appointment date'); ?></dt>
+				<?php if($clientcase['Clientcase']['appointment_date'] != NULL)
+				{
+					?>
+				
 				<dd>
-					<?php echo h($clientcase['Clientcase']['appointment_date']); ?>
+					<?php echo h($this->Time->format('d-m-Y h:i', $clientcase['Clientcase']['appointment_date'])); ?>
 					&nbsp;
 				</dd>
-				<!-- <dt><?php echo __('Born In Poland'); ?></dt>
+				<?php
+				}
+				else
+				{
+				?>
 				<dd>
-					<?php echo h($clientcase['Clientcase']['born_in_poland']); ?>
+					<?php echo __('Add'); ?>
 					&nbsp;
 				</dd>
-				<dt><?php echo __('Nationality Of Parents'); ?></dt>
+				<?php
+				}
+				?>
+				<br>
+				<dt><?php echo __('Main applicant'); ?></dt>
 				<dd>
-					<?php echo h($clientcase['Clientcase']['nationality_of_parents']); ?>
+					<?php echo $this->Html->link($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname'], array('controller' => 'applicants', 'action' => 'view', $clientcase['Applicant']['id'])); ?>
 					&nbsp;
 				</dd>
-				<dt><?php echo __('Mother Name'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['mother_name']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Father Name'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['father_name']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Nationality Of Grandparents'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['nationality_of_grandparents']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Mat Grandmother Name'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['mat_grandmother_name']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Mat Grandfather Name'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['mat_grandfather_name']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Pat Grandmother Name'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['pat_grandmother_name']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Pat Grandfather Name'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['pat_grandfather_name']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Nationality Of Others'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['nationality_of_others']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Serve In Army'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['serve_in_army']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Serve In Army Info'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['serve_in_army_info']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('When Left Poland'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['when_left_poland']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Where Left Poland'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['where_left_poland']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Where Left Poland Other'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['where_left_poland_other']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Have Passport'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['have_passport']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Possess Documents'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['possess_documents']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Possess Documents Types'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['possess_documents_types']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Possess Documents Other'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['possess_documents_other']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Other Factors'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['other_factors']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Created'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['created']); ?>
-					&nbsp;
-				</dd>
-				<dt><?php echo __('Modified'); ?></dt>
-				<dd>
-					<?php echo h($clientcase['Clientcase']['modified']); ?>
-					&nbsp;
-				</dd> -->
 			</dl>
+				
 		</div>
-		
 		<div id="tabs-2">
             <p>
             <h3><?php echo __('Applicants'); ?></h3>
@@ -347,9 +261,135 @@
     ?>
     </div>
 </div>
+</div>
+<?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
+{
+?>
+<div id="tabs-6">
+		<p>
+		<h3>Case Information</h3>
+		<p>
+		<dl>
+				<dt><?php echo __('Born In Poland'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['born_in_poland']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Nationality Of Parents'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['nationality_of_parents']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Mother Name'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['mother_name']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Father Name'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['father_name']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Nationality Of Grandparents'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['nationality_of_grandparents']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Mat Grandmother Name'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['mat_grandmother_name']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Mat Grandfather Name'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['mat_grandfather_name']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Pat Grandmother Name'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['pat_grandmother_name']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Pat Grandfather Name'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['pat_grandfather_name']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Nationality Of Others'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['nationality_of_others']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Serve In Army'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['serve_in_army']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Serve In Army Info'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['serve_in_army_info']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('When Left Poland'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['when_left_poland']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Where Left Poland'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['where_left_poland']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Where Left Poland Other'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['where_left_poland_other']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Have Passport'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['have_passport']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Possess Documents'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['possess_documents']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Possess Documents Types'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['possess_documents_types']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Possess Documents Other'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['possess_documents_other']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Other Factors'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['other_factors']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Created'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['created']); ?>
+					&nbsp;
+				</dd>
+				<dt><?php echo __('Modified'); ?></dt>
+				<dd>
+					<?php echo h($clientcase['Clientcase']['modified']); ?>
+					&nbsp;
+				</dd>
+			</dl>
+	
+            
+            </div>
+            <?php
+}
+?>
 	</div>
 </div>	
-</div>		
+		
 <br/>		
 
 
