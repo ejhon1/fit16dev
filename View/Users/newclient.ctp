@@ -241,6 +241,12 @@
       	    			'Yes' => 'Yes', 
       	    			'No' => 'No'), 
       	    		'legend' => 'I was born in Poland'));
+      	    	echo $this->Form->input('ClientCase.spouse_nationality', array(
+      	    		'type' => 'radio', 
+      	    		'options' => array(
+      	    			'Yes' => 'Yes', 
+      	    			'No' => 'No'), 
+      	    		'legend' => 'My Spouse is Polish'));
       	    	echo $this->Form->input('ClientCase.nationality_of_parents', array(
 			'type' => 'select',
 			'multiple' => 'checkbox',
