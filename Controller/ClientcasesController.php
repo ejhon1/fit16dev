@@ -22,7 +22,7 @@ class ClientcasesController extends AppController {
  */
 	public function index() {
 		$this->Clientcase->recursive = 0;
-		$this->set('clientcases', $this->Paginator->paginate());
+		$this->set('clientcases', $this->Clientcase->find('all'));
 	}
 
 /**
