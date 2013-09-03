@@ -11,7 +11,7 @@
 			<th class="heading">Archive Name</th>
 			<th class="heading">Status</th>
 			<th class="heading">Applicant Name</th>
-			<th class="heading">Open or Cloased</th>
+			<th class="heading">Open or Closed</th>
 			<th class="heading">Date Created</th>
 			<th class="heading">View</th>
 		</tr>
