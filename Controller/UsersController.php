@@ -224,4 +224,28 @@ class UsersController extends AppController {
         $Email->send('Insert message here');
 
     }
+    
+     public function test() {
+        $this->loadModel('Applicant');
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $email_addr = $this->request->data['Applicant']['email'];
+
+            $Email = new CakeEmail();
+            $Email->config('default');
+
+            /*
+            $Email->sender(array('polarontest@gmail.com' => 'Polaron sender'))
+                ->from(array('polarontest@gmail.com' => 'Polaron'))
+                ->to($email_addr)
+                ->subject('New Subscription')
+                ->send('My message');
+            */
+            $Email->sender(array('polarontest@gmail.com' => 'Polaron sender'));
+            $Email->from(array('polarontest@gmail.com' => 'Polaron'));
+            $Email->to($email_addr);
+            $Email->subject('Insert subject here');
+            $Email->send('Insert message here');
+
+        }
+    }
 }
