@@ -46,10 +46,10 @@ class DocumentsController extends AppController {
 
         $clientCase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $userid),'fields' => array('ClientCase.id','archive_id')));
 
-        $options = array('conditions' => array('Document.archive_id' => $clientCase['ClientCase']['archive_id'], 'Document.applicant_id' => 0));
+        $options = array('conditions' => array('Document.archive_id' => $clientCase['ClientCase']['archive_id'], 'Document.applicant_id' => NULL));
         $this->set('ancestordocuments', $this->Document->find('all', $options));
 
-        $options = array('conditions' => array('Document.archive_id' => $clientCase['ClientCase']['archive_id'], 'Document.ancestortype_id' => 0), 'order'=>'applicant_id ASC');
+        $options = array('conditions' => array('Document.archive_id' => $clientCase['ClientCase']['archive_id'], 'Document.ancestortype_id' => NULL), 'order'=>'applicant_id ASC');
         $this->set('applicantdocuments', $this->Document->find('all', $options));
     }
 
