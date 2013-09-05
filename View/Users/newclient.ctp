@@ -213,6 +213,7 @@
 			?>
    	        <td align="left"><span id="msg_surname"></span>&nbsp;</td>
             	<?php
+            		echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth', 'id' => 'datepicker', 'type'=>'text', 'class'=>'datepicker'));
 	        	echo $this->Form->input('Applicant.landline_number', array('label' => 'Phone Number'));
 	        	echo $this->Form->input('Applicant.email', array(
 				'id' => 'email',
@@ -220,10 +221,6 @@
 			);
 			?>
    	        <td align="left"><span id="msg_email"></span>&nbsp;</td>
-            	<?php
-            		echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth', 'id' => 'datepicker', 'type'=>'text', 'class'=>'datepicker'));
-			?>
-            <br>
             <?php
 			echo $this->Form->input('password');
 	        echo $this->Form->input('password_confirm', array('label' => 'Confirm Password', 'type' => 'password'));
