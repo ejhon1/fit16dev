@@ -233,17 +233,17 @@ class UsersController extends AppController {
             $Email = new CakeEmail();
             $Email->config('default');
 
-            /*
-            $Email->sender(array('polarontest@gmail.com' => 'Polaron sender'))
-                ->from(array('polarontest@gmail.com' => 'Polaron'))
-                ->to($email_addr)
-                ->subject('New Subscription')
-                ->send('My message');
-            */
+           
             $Email->sender(array('polarontest@gmail.com' => 'Polaron sender'));
             $Email->from(array('polarontest@gmail.com' => 'Polaron'));
             $Email->to($email_addr);
-            $Email->subject('Insert subject here');
+            $Email->subject('Eligibility Check');
+            $Email->attachments(array(
+                'thumbs_up.jpg' => array(
+                    'file' => APP.'Documents/Email_attachments/thumbs_up.jpg',
+                    'mimetype' => 'image/jpgs'
+                )
+            ));
             $Email->send('Insert message here');
 
         }
