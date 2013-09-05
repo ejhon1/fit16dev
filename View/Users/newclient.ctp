@@ -86,8 +86,8 @@
 			}
 	   
 	   // validate phone number
-	   var phone = $('#phone').val();
-			if(phone && phone.length > 0){
+	   // var phone = $('#phone').val();
+			/** if(phone && phone.length > 0){
 				if(!validatePhone(phone)){
 				isValid = false;
 					$('#msg_phone').html('Invalid number').show();
@@ -97,7 +97,7 @@
 			}else{
 			isValid = false;
 				$('#msg_phone').html('Please enter you phone number').show();
-			}
+			} */
 			
 		//validate email	
 		var email = $('#email').val();
@@ -123,11 +123,11 @@
       var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
       return pattern.test(surname);
     }
-	function validatePhone(phone)
+	/** function validatePhone(phone)
 	{
 		var pattern = new RegExp("^[0-9]*[1-9][0-9]*$")
 		return patern.test(phone);
-	}
+	} */
 	function isValidEmailAddress(emailAddress) {
 	var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
       return pattern.test(emailAddress);
