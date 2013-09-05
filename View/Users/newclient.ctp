@@ -200,12 +200,28 @@
 
 
 
-            <?php
-	        echo $this->Form->input('Applicant.first_name');
-	        echo $this->Form->input('Applicant.surname');
-	        echo $this->Form->input('Applicant.landline_number', array('label' => 'Phone Number'));
-	        echo $this->Form->input('Applicant.email', array('label' => 'E-mail Address'));
-            echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth', 'id' => 'datepicker', 'type'=>'text', 'class'=>'datepicker'));
+            	<?php
+	    		echo $this->Form->input('Applicant.first_name', array(
+	    			'id' => 'firstname')
+			);
+		?>
+   	        <td align="left"><span id="msg_firstname"></span>&nbsp;</td>
+            	<?php
+	        	echo $this->Form->input('Applicant.surname', array(
+				'id' => 'surname')
+			);
+			?>
+   	        <td align="left"><span id="msg_surname"></span>&nbsp;</td>
+            	<?php
+	        	echo $this->Form->input('Applicant.landline_number', array('label' => 'Phone Number'));
+	        	echo $this->Form->input('Applicant.email', array(
+				'id' => 'email',
+				'label' => 'E-mail Address')
+			);
+			?>
+   	        <td align="left"><span id="msg_email"></span>&nbsp;</td>
+            	<?php
+            		echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth', 'id' => 'datepicker', 'type'=>'text', 'class'=>'datepicker'));
 			?>
             <br>
             <?php
