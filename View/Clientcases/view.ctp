@@ -18,16 +18,16 @@
         <ul>
             <li><a href="#tabs-1">Information</a></li>
             <li><a href="#tabs-2">Applicants</a></li>
-            <li><a href="#tabs-3">Case Status</a></li>
-            <li><a href="#tabs-4">Case Notes</a></li>
-            <li><a href="#tabs-5">Documents</a></li>
             <?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
             {
             ?>
-            <li><a href="#tabs-6">Eligibility check</a></li>
+            <li><a href="#tabs-3">Eligibility check</a></li>
             <?php
             }
             ?>
+            <li><a href="#tabs-4">Case Status</a></li>
+            <li><a href="#tabs-5">Case Notes</a></li>
+            <li><a href="#tabs-6">Documents</a></li>
         </ul>
         <div id="tabs-1">
             <p>
@@ -110,162 +110,10 @@
         <?php endif; ?>
 	</div>
 	
-	<div id="tabs-3">
-        <p>
-        <h3><?php echo __('Related Casestatuses'); ?></h3>
-		<?php if (!empty($clientcase['Casestatus'])): ?>
-		<table cellpadding = "0" cellspacing = "0">
-			<tr>
-				<th><?php echo __('Id'); ?></th>
-				<th><?php echo __('Clientcase Id'); ?></th>
-				<th><?php echo __('Status Id'); ?></th>
-				<th class="actions"><?php echo __('Actions'); ?></th>
-			</tr>
-			<?php
-				$i = 0;
-				foreach ($clientcase['Casestatus'] as $casestatus): ?>
-			<tr>
-				<td><?php echo $casestatus['id']; ?></td>
-				<td><?php echo $casestatus['clientcase_id']; ?></td>
-				<td><?php echo $casestatus['status_id']; ?></td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('controller' => 'casestatuses', 'action' => 'view', $casestatus['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('controller' => 'casestatuses', 'action' => 'edit', $casestatus['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'casestatuses', 'action' => 'delete', $casestatus['id']), null, __('Are you sure you want to delete # %s?', $casestatus['id'])); ?>
-				</td>
-			</tr>
-			<?php endforeach; ?>
-		</table>
-		<?php endif; ?>
-
-		<div class="actions">
-			<ul>
-				<li><?php echo $this->Html->link(__('New Casestatus'), array('controller' => 'casestatuses', 'action' => 'add')); ?> </li>
-				</ul>
-		</div>
-	</div>
-
-
-	<div id="tabs-4">
-        <p>
-        <h3><?php echo __('Related Casenotes'); ?></h3>
-		<?php if (!empty($clientcase['Casenote'])): ?>
-		<table cellpadding = "0" cellspacing = "0">
-			<tr>
-				<!-- <th><?php echo __('Id'); ?></th>
-				<th><?php echo __('Clientcase Id'); ?></th>
-				<th><?php echo __('User Id'); ?></th>
-				<th><?php echo __('Notesubject Id'); ?></th> -->
-				
-				<th><?php echo __('Created'); ?></th>
-				<th><?php echo __('Note Type'); ?></th>
-				<th><?php echo __('Note'); ?></th>
-				
-				<!-- <th><?php echo __('Modified'); ?></th> -->
-				<th class="actions"><?php echo __('Actions'); ?></th>
-			</tr>
-			<?php
-				$i = 0;
-				foreach ($clientcase['Casenote'] as $casenote): ?>
-				<tr>
-					<!-- <td><?php echo $casenote['id']; ?></td>
-					<td><?php echo $casenote['clientcase_id']; ?></td>
-					<td><?php echo $casenote['user_id']; ?></td>
-					<td><?php echo $casenote['notesubject_id']; ?></td> -->
-					<th><?php echo $this->Time->format('d-m-Y',$casenote['created']); ?></th>
-					<td><?php echo $casenote['note_type']; ?></td>
-					<td><?php echo $casenote['note']; ?></td>
-					
-					<!-- <td><?php echo $casenote['modified']; ?></td> -->
-					<td class="actions">
-						<?php echo $this->Html->link(__('View'), array('controller' => 'casenotes', 'action' => 'view', $casenote['id'])); ?>
-						<!-- <?php echo $this->Html->link(__('Edit'), array('controller' => 'casenotes', 'action' => 'edit', $casenote['id'])); ?>
-						<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'casenotes', 'action' => 'delete', $casenote['id']), null, __('Are you sure you want to delete # %s?', $casenote['id'])); ?> -->
-					</td>
-					</tr>
-			<?php endforeach; ?>
-		</table>
-			<?php endif; ?>
-
-			<div class="actions">
-				<ul>
-					<li><?php echo $this->Html->link(__('New Casenote'), array('controller' => 'casenotes', 'action' => 'add')); ?> </li>
-				</ul>
-			</div>
-	</div>
-	<div id="tabs-5">
-	        <div id="accordion">
-    <h3>Ancestor Documents</h3>
-    <div>
-    <?php if (!empty($ancestordocuments)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th class="heading">Ancestor Type</th>
-                <th class="heading">Document Type</th>
-                <th class="heading">File name</th>
-                <th class="heading">Uploaded</th>
-                <th class="actions"><?php echo __('View'); ?></th>
-            </tr>
-            <?php foreach ($ancestordocuments as $ancestordocument): ?>
-                <tr class="list">
-                    <td valign="top">
-                        <?php echo h($ancestordocument['Ancestortype']['ancestor_type']); ?>
-                    </td>
-                    <td valign="top">
-                        <?php echo h($ancestordocument['Documenttype']['type']); ?>
-                    </td>
-                    <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
-                    <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $ancestordocument['Document']['id'])); ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-
-    <?php
-    endif;
-    ?>
-    </div>
-    <h3>Applicant Documents</h3>
-    <div>
-    <?php if (!empty($applicantdocuments)): ?>
-
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th class="heading">Applicant</th>
-                <th class="heading">Document Type</th>
-                <th class="heading">File Name</th>
-                <th class="heading">Uploaded</th>
-                <th class="heading">View</th>
-            </tr>
-            <?php foreach ($applicantdocuments as $applicantdocument): ?>
-                <tr class="list">
-                    <td valign="top">
-                        <?php echo h($applicantdocument['Applicant']['first_name'].' '.$applicantdocument['Applicant']['surname']); ?>
-                    </td>
-                    <td valign="top">
-                        <?php echo h($applicantdocument['Documenttype']['type']); ?>
-                    </td>
-                    <td valign="top"><?php echo h($applicantdocument['Document']['filename']); ?>&nbsp;</td>
-                    <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $applicantdocument['Document']['id'])); ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-
-    <?php
-    endif;
-    ?>
-    </div>
-</div>
-</div>
-<?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
+	<?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
 {
 ?>
-<div id="tabs-6">
+<div id="tabs-3">
 		<p>
 		<h3>Case Information</h3>
 		<p>
@@ -387,6 +235,160 @@
             <?php
 }
 ?>
+	
+	<div id="tabs-4">
+        <p>
+        <h3><?php echo __('Related Casestatuses'); ?></h3>
+		<?php if (!empty($clientcase['Casestatus'])): ?>
+		<table cellpadding = "0" cellspacing = "0">
+			<tr>
+				<th><?php echo __('Id'); ?></th>
+				<th><?php echo __('Clientcase Id'); ?></th>
+				<th><?php echo __('Status Id'); ?></th>
+				<th class="actions"><?php echo __('Actions'); ?></th>
+			</tr>
+			<?php
+				$i = 0;
+				foreach ($clientcase['Casestatus'] as $casestatus): ?>
+			<tr>
+				<td><?php echo $casestatus['id']; ?></td>
+				<td><?php echo $casestatus['clientcase_id']; ?></td>
+				<td><?php echo $casestatus['status_id']; ?></td>
+				<td class="actions">
+					<?php echo $this->Html->link(__('View'), array('controller' => 'casestatuses', 'action' => 'view', $casestatus['id'])); ?>
+					<?php echo $this->Html->link(__('Edit'), array('controller' => 'casestatuses', 'action' => 'edit', $casestatus['id'])); ?>
+					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'casestatuses', 'action' => 'delete', $casestatus['id']), null, __('Are you sure you want to delete # %s?', $casestatus['id'])); ?>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
+		<?php endif; ?>
+
+		<div class="actions">
+			<ul>
+				<li><?php echo $this->Html->link(__('New Casestatus'), array('controller' => 'casestatuses', 'action' => 'add')); ?> </li>
+				</ul>
+		</div>
+	</div>
+
+
+	<div id="tabs-5">
+        <p>
+        <h3><?php echo __('Related Casenotes'); ?></h3>
+		<?php if (!empty($clientcase['Casenote'])): ?>
+		<table cellpadding = "0" cellspacing = "0">
+			<tr>
+				<!-- <th><?php echo __('Id'); ?></th>
+				<th><?php echo __('Clientcase Id'); ?></th>
+				<th><?php echo __('User Id'); ?></th>
+				<th><?php echo __('Notesubject Id'); ?></th> -->
+				
+				<th><?php echo __('Created'); ?></th>
+				<th><?php echo __('Note Type'); ?></th>
+				<th><?php echo __('Note'); ?></th>
+				
+				<!-- <th><?php echo __('Modified'); ?></th> -->
+				<th class="actions"><?php echo __('Actions'); ?></th>
+			</tr>
+			<?php
+				$i = 0;
+				foreach ($clientcase['Casenote'] as $casenote): ?>
+				<tr>
+					<!-- <td><?php echo $casenote['id']; ?></td>
+					<td><?php echo $casenote['clientcase_id']; ?></td>
+					<td><?php echo $casenote['user_id']; ?></td>
+					<td><?php echo $casenote['notesubject_id']; ?></td> -->
+					<th><?php echo $this->Time->format('d-m-Y',$casenote['created']); ?></th>
+					<td><?php echo $casenote['note_type']; ?></td>
+					<td><?php echo $casenote['note']; ?></td>
+					
+					<!-- <td><?php echo $casenote['modified']; ?></td> -->
+					<td class="actions">
+						<?php echo $this->Html->link(__('View'), array('controller' => 'casenotes', 'action' => 'view', $casenote['id'])); ?>
+						<!-- <?php echo $this->Html->link(__('Edit'), array('controller' => 'casenotes', 'action' => 'edit', $casenote['id'])); ?>
+						<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'casenotes', 'action' => 'delete', $casenote['id']), null, __('Are you sure you want to delete # %s?', $casenote['id'])); ?> -->
+					</td>
+					</tr>
+			<?php endforeach; ?>
+		</table>
+			<?php endif; ?>
+
+			<div class="actions">
+				<ul>
+					<li><?php echo $this->Html->link(__('New Casenote'), array('controller' => 'casenotes', 'action' => 'add')); ?> </li>
+				</ul>
+			</div>
+	</div>
+	<div id="tabs-6">
+	        <div id="accordion">
+    <h3>Ancestor Documents</h3>
+    <div>
+    <?php if (!empty($ancestordocuments)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th class="heading">Ancestor Type</th>
+                <th class="heading">Document Type</th>
+                <th class="heading">File name</th>
+                <th class="heading">Uploaded</th>
+                <th class="actions"><?php echo __('View'); ?></th>
+            </tr>
+            <?php foreach ($ancestordocuments as $ancestordocument): ?>
+                <tr class="list">
+                    <td valign="top">
+                        <?php echo h($ancestordocument['Ancestortype']['ancestor_type']); ?>
+                    </td>
+                    <td valign="top">
+                        <?php echo h($ancestordocument['Documenttype']['type']); ?>
+                    </td>
+                    <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
+                    <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
+                    <td class="actions">
+                        <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $ancestordocument['Document']['id'])); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
+    <?php
+    endif;
+    ?>
+    </div>
+    <h3>Applicant Documents</h3>
+    <div>
+    <?php if (!empty($applicantdocuments)): ?>
+
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th class="heading">Applicant</th>
+                <th class="heading">Document Type</th>
+                <th class="heading">File Name</th>
+                <th class="heading">Uploaded</th>
+                <th class="heading">View</th>
+            </tr>
+            <?php foreach ($applicantdocuments as $applicantdocument): ?>
+                <tr class="list">
+                    <td valign="top">
+                        <?php echo h($applicantdocument['Applicant']['first_name'].' '.$applicantdocument['Applicant']['surname']); ?>
+                    </td>
+                    <td valign="top">
+                        <?php echo h($applicantdocument['Documenttype']['type']); ?>
+                    </td>
+                    <td valign="top"><?php echo h($applicantdocument['Document']['filename']); ?>&nbsp;</td>
+                    <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
+                    <td class="actions">
+                        <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $applicantdocument['Document']['id'])); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
+    <?php
+    endif;
+    ?>
+    </div>
+</div>
+</div>
+
 	</div>
 </div>	
 		
