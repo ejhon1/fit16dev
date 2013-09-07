@@ -37,6 +37,12 @@
 			}else{
 				$('#wizard').smartWizard('setError',{stepnum:1,iserror:false});
        		}
+       		if(validateStep2() == false){
+				isStepValid = false;
+					$('#wizard').smartWizard('setError',{stepnum:2,iserror:true});         
+			}else{
+				$('#wizard').smartWizard('setError',{stepnum:2,iserror:false});
+       		}
 				return isStepValid;
     	}
 		
