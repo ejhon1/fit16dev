@@ -129,6 +129,19 @@
 		}
 			return isValid;
     	}
+    	
+    	function validateStep2()
+	{
+		var isValid = true;
+		var born_in_poland = $("input[@name='born_in_poland']:checked").val();
+    		if(born_in_poland.length < 0 ){
+			isValid = false;
+			$('#msg_born_in_poland').html('Please select an option').show();       
+		}else{
+			$('#msg_born_in_poland').html('').hide();
+		}
+			return isValid;
+	}
 	
 	function validateFirstName(firstname) {
 		var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
@@ -216,27 +229,33 @@
 
 
             	<?php
-	    		echo $this->Form->input('Applicant.first_name', array(
-	    			'id' => 'firstname')
-			);
+	    	echo $this->Form->input('Applicant.first_name', array(
+	    		'id' => 'firstname')
+		);
 		?>
-   	        <td align="left"><span id="msg_firstname"></span>&nbsp;</td>
+   	        	<td align="left"><span id="msg_firstname"></span>&nbsp;</td>
             	<?php
-	        	echo $this->Form->input('Applicant.surname', array(
-				'id' => 'surname')
-			);
-			?>
-   	        <td align="left"><span id="msg_surname"></span>&nbsp;</td>
+	        echo $this->Form->input('Applicant.surname', array(
+			'id' => 'surname')
+		);
+		?>
+   	        	<td align="left"><span id="msg_surname"></span>&nbsp;</td>
             	<?php
-            		echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth', 'id' => 'datepicker', 'type'=>'text', 'class'=>'datepicker'));
-	        	echo $this->Form->input('Applicant.landline_number', array('label' => 'Phone Number'));
-	        	echo $this->Form->input('Applicant.email', array(
-				'id' => 'email',
-				'label' => 'E-mail Address')
-			);
-			?>
-   	        <td align="left"><span id="msg_email"></span>&nbsp;</td>
-            <?php
+            	echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth', 'id' => 'datepicker', 'type'=>'text', 'class'=>'datepicker'));
+	        echo $this->Form->input('Applicant.landline_number', array(
+			'id' => 'phone',
+			'label' => 'Phone Number')
+		);
+		?>
+   	        	<td align="left"><span id="msg_phone"></span>&nbsp;</td>
+            	<?php
+	        echo $this->Form->input('Applicant.email', array(
+			'id' => 'email',
+			'label' => 'E-mail Address')
+		);
+		?>
+   	        	<td align="left"><span id="msg_email"></span>&nbsp;</td>
+            	<?php
 			echo $this->Form->input('password');
 	        echo $this->Form->input('password_confirm', array('label' => 'Confirm Password', 'type' => 'password'));
 	        
@@ -264,7 +283,9 @@
       	    <h2 class="StepTitle">My Polishness</h2>    
       	    <?php
       	    	echo $this->Form->input('ClientCase.born_in_poland', array(
-      	    		'type' => 'radio', 
+      	    		'id' => 'born_in_poland',
+			'name' => 'born_in_poland',
+			'type' => 'radio', 
       	    		'options' => array(
       	    			'Yes' => 'Yes', 
       	    			'No' => 'No'), 
