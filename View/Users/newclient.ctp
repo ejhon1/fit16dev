@@ -58,6 +58,15 @@
 					$('#wizard').smartWizard('setError',{stepnum:step,iserror:false});
 				}
 			}
+			if(step == 2){
+				if(validateStep2() == false ){
+				isStepValid = false; 
+					// $('#wizard').smartWizard('showMessage','Please correct the errors in step'+step+ ' and click next.');
+					$('#wizard').smartWizard('setError',{stepnum:step,iserror:true});         
+				}else{
+					$('#wizard').smartWizard('setError',{stepnum:step,iserror:false});
+				}
+			}
 				return isStepValid;
 		}
 		
@@ -68,7 +77,7 @@
 			if(firstname && firstname.length > 0){
 				if(!validateFirstName(firstname)){
 				isValid = false;
-					$('#msg_firstname').html('Name can only contain letters').show();
+					$('#msg_firstname').html('First name can only contain letters').show();
 				}else{
 					$('#msg_firstname').html('').hide();
 				}
@@ -82,7 +91,7 @@
 			if(surname && surname.length > 0){
 				if(!validateSurname(surname)){
 				isValid = false;
-					$('#msg_surname').html('Name can only contain letters').show();
+					$('#msg_surname').html('Surname can only contain letters').show();
 				}else{
 					$('#msg_surname').html('').hide();
 				}
@@ -91,19 +100,19 @@
 				$('#msg_surname').html('Please enter you surname').show();
 			}
 	   
-	   // validate phone number
-	   // var phone = $('#phone').val();
-			/** if(phone && phone.length > 0){
+	   	// validate phone number
+	   	var phone = $('#phone').val();
+			if(phone && phone.length > 0){
 				if(!validatePhone(phone)){
 				isValid = false;
-					$('#msg_phone').html('Invalid number').show();
+					$('#msg_phone').html('Phone is invalid. Try again!').show();
 				}else{
 					$('#msg_phone').html('').hide();
 				}
 			}else{
 			isValid = false;
 				$('#msg_phone').html('Please enter you phone number').show();
-			} */
+			}
 			
 		//validate email	
 		var email = $('#email').val();
@@ -119,25 +128,25 @@
 			$('#msg_email').html('Please enter email').show();
 		}
 			return isValid;
-    }
+    	}
 	
 	function validateFirstName(firstname) {
-      var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
-      return pattern.test(firstname);
-    }
+		var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
+		return pattern.test(firstname);
+    	}
 	function validateSurname(surname) {
-      var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
-      return pattern.test(surname);
-    }
-	/** function validatePhone(phone)
+      		var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
+      		return pattern.test(surname);
+    	}
+	function validatePhone(phone)
 	{
-		var pattern = new RegExp("^[0-9]*[1-9][0-9]*$")
-		return patern.test(phone);
-	} */
+		var pattern = new RegExp("^[0-9]{1,20}$");
+		return pattern.test(phone);
+	}
 	function isValidEmailAddress(emailAddress) {
-	var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-      return pattern.test(emailAddress);
-    }
+		var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+      		return pattern.test(emailAddress);
+    	}
     </script>
     <script>
         $(function() {
