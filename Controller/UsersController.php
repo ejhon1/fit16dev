@@ -96,27 +96,41 @@ class UsersController extends AppController {
             $this->request->data['ClientCase']['open_or_closed'] = 'Open';
             $this->request->data['ClientCase']['status_id'] = 1;
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
-            $this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
-
-
-            $this->User->create();
-            if ($this->User->saveAll($this->request->data, array('deep' => true))) {
-                $this->request->data['ClientCase']['user_id'] =  $this->User->getLastInsertId();
-                $this->ClientCase->create();
-                $this->ClientCase->save($this->request->data);
-
-                $this->request->data['Applicant']['clientcase_id'] =  $this->ClientCase->getLastInsertId();
-                $this->Applicant->create();
-                $this->Applicant->save($this->request->data);
-
-                $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
-                $this->request->data['ClientCase']['id'] =  $this->ClientCase->getLastInsertId();
-                $this->ClientCase->save($this->request->data);
-                $this->email($this->request->data['Applicant']['email']);
-                $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
-            }else {
-                $this->Session->setFlash(__('The user could not be saved. Please try again.'));
+            //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
+            
+            if(strpos($this->request->data['ClientCase']['other_factors'],'One of my ancestors served in a foreign army')!== false)
+            {$foreignArmy = true;}
+            if(strpos($this->request->data['ClientCase']['other_factors'],'One of my ancestors held public office outside of Poland')!== false)
+            {$officeOutside = true;}
+            
+            if(!($foreignArmy || $officeOutside))
+            {
+	            $this->User->create();
+	            if ($this->User->saveAll($this->request->data, array('deep' => true))) {
+	                $this->request->data['ClientCase']['user_id'] =  $this->User->getLastInsertId();
+	                $this->ClientCase->create();
+	                $this->ClientCase->save($this->request->data);
+	
+	                $this->request->data['Applicant']['clientcase_id'] =  $this->ClientCase->getLastInsertId();
+	                $this->Applicant->create();
+	                $this->Applicant->save($this->request->data);
+	
+	                $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
+	                $this->request->data['ClientCase']['id'] =  $this->ClientCase->getLastInsertId();
+	                $this->ClientCase->save($this->request->data);
+	                $this->acceptEmail($this->request->data['Applicant']['email']);
+	                $this->Session->setFlash(__('The user has been saved'));
+	                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+	            }else {
+	            	$this->rejectEmail($this->request->data['Applicant']['email']);
+	                $this->Session->setFlash(__('The user could not be saved. Please try again.'));
+	            }
+            }
+            else
+            {
+       		$this->rejectEmail($this->request->data['Applicant']['email']);
+                //Where should this redirect to?
+                //$this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
             }
         }
     }
@@ -211,11 +225,25 @@ class UsersController extends AppController {
     }
 
 
-	public function email($email_addr) {
+	public function acceptEmail($email_addr) {
         $Email = new CakeEmail();
         $Email->config('default');
 
-        $Email->sender(array('polarontest@gmail.com' => 'Polaron sender'));
+        $Email->sender(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->from(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->to($email_addr);
+        $Email->subject('Insert subject here');
+
+
+        $Email->send('Insert message here');
+
+    }
+    
+    public function rejectEmail($email_addr) {
+        $Email = new CakeEmail();
+        $Email->config('default');
+
+        $Email->sender(array('polarontest@gmail.com' => 'Polaron'));
         $Email->from(array('polarontest@gmail.com' => 'Polaron'));
         $Email->to($email_addr);
         $Email->subject('Insert subject here');
