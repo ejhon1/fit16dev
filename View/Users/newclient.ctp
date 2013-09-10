@@ -14,7 +14,7 @@
     <script type="text/javascript">
   	$(document).ready(function(){
     	// Smart Wizard
-		$('#wizard').smartWizard({transitionEffect:'slideleft',onLeaveStep:leaveAStepCallback,onFinish:onFinishCallback,enableFinishButton:true});
+		$('#wizard').smartWizard({transitionEffect:'slideleft',onLeaveStep:leaveAStepCallback,onFinish:onFinishCallback});
 
 		function leaveAStepCallback(obj){
 			var step_num= obj.attr('rel');
