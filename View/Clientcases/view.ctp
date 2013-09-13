@@ -100,6 +100,7 @@
                     <tr>
                         <td><?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']); ?></td>
                         <td><?php echo $applicant['Applicant']['email']; ?></td>
+                        <td><?php echo $applicant['Applicant']['landline_number']; ?></td>
                         <td><?php echo $applicant['Applicant']['applicant_type']; ?></td>
                         <td class="actions">
                             <?php echo $this->Html->link(__('View'), array('controller' => 'applicants', 'action' => 'view', $applicant['Applicant']['id'])); ?>
@@ -108,6 +109,12 @@
                 <?php endforeach; ?>
             </table>
         <?php endif; ?>
+        	<div class="actions">
+			<ul>
+				<li><?php echo $this->Html->link(__('Add Related Applicant'), array('controller' => 'applicants', 'action' => 'add')); ?> </li>
+			</ul>
+		</div>
+        
 	</div>
 	
 	<?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
