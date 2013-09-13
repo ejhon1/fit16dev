@@ -4,7 +4,7 @@
 		<legend><?php echo __('Add Applicant'); ?></legend>
 	<?php
 		echo $this->Form->input('clientcase_id');
-		echo $this->Form->input('archive_id');
+		echo $this->Form->input('archive', array('options' => $archives));
 		echo $this->Form->input('birthdate');
 		echo $this->Form->input('title');
 		echo $this->Form->input('first_name');
