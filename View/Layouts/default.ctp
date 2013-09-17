@@ -75,18 +75,18 @@ $loggedUser = $this->Session->read('UserAuth.User');
 					{
 						?>
 						<li><?php echo $this->Html->link('Home', '/'); ?> </li>
-						<li><?php echo $this->Html->link('Cases', '/clientcases', array('controller'=>'ClientCases', 'action'=>'index'));?> </li>
-                        <li><?php echo $this->Html->link('Archives', '/archives', array('controller'=>'archives', 'action'=>'index'));?> </li>
-                        <li><?php echo $this->Html->link('Staff Dashboard', '/dashboard', array('controller'=>'employees', 'action'=>'index'));?> </li>
-						<li><?php echo $this->Html->link('My Account', '/employees/myaccount', array('controller' => 'employees', 'action' => 'myaccount')); ?></li>
+						<li><?php echo $this->Html->link('Cases', array('plugin' => false, 'controller'=>'clientcases', 'action'=>'index'));?> </li>
+                        <li><?php echo $this->Html->link('Archives', array('plugin' => false, 'controller'=>'archives', 'action'=>'index'));?> </li>
+                        <li><?php echo $this->Html->link('Staff Dashboard', array('plugin' => false, 'controller'=>'employees', 'action'=>'index'));?> </li>
+						<li><?php echo $this->Html->link('My Account', array('plugin' => false, 'controller' => 'employees', 'action' => 'myaccount')); ?></li>
 					<?php
 					}
 					else if(!empty($loggedUser) && $loggedUser['type']=='Client')
 					{
 					?>
-                        <li><?php echo $this->Html->link('Case notes', '/casenotes', array('controller'=>'casenotes', 'action'=>'mynotes'));?> </li>
-						<li><?php echo $this->Html->link('Documents', '/documents', array('controller'=>'documents', 'action'=>'mydocs'));?> </li>
-						<li><?php echo $this->Html->link('Account', '/users', array('controller'=>'clientcases', 'action'=>'myaccount'));?> </li><?php
+                        <li><?php echo $this->Html->link('My Case Notes', array('plugin' => false, 'controller'=>'casenotes', 'action'=>'mynotes'));?> </li>
+						<li><?php echo $this->Html->link('My Documents', array('plugin' => false, 'controller'=>'documents', 'action'=>'mydocs'));?> </li>
+						<li><?php echo $this->Html->link('My Account', array('plugin' => false, 'controller'=>'clientcases', 'action'=>'myaccount'));?> </li><?php
 					}
 					else
 					{
@@ -103,7 +103,7 @@ $loggedUser = $this->Session->read('UserAuth.User');
 					}
 					?>
 					</ul>
-				</div> 
+				</div>  
 </head>
 <body>
     
