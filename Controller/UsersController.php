@@ -270,20 +270,36 @@ class UsersController extends AppController {
     }
 
 
-    public function acceptEmail($email_addr) {
+	public function acceptEmail($email_addr) {
         $Email = new CakeEmail();
         $Email->config('default');
-
         $Email->sender(array('polarontest@gmail.com' => 'Polaron'));
         $Email->from(array('polarontest@gmail.com' => 'Polaron'));
         $Email->to($email_addr);
-        $Email->subject('Insert subject here');
+        $Email->subject('Eligibility Check');
+        $Email->template('welcome');
+        $Email->emailFormat('text');
+        $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name'], 'email' => $this->request->data['Applicant']['email'], 'password' => $this->Auth->user('password')));
+        $Email->attachments(array(
+            'Client details form - 2013.pdf' => array(
+                'file' => APP.'Documents/Email_attachments/Client details form - 2013.pdf',
+                'mimetype' => 'pdf'),
+            'Polaron - PL Passport - Info Pack - 2013.pdf' => array(
+                'file' => APP.'Documents/Email_attachments/Polaron - PL Passport - Info Pack - 2013.pdf',
+                'mimetype' => 'pdf'),
+            'Polaron Family Tree - 2013.pdf' => array(
+                'file' => APP.'Documents/Email_attachments/Polaron Family Tree - 2013.pdf',
+                'mimetype' => 'pdf'),
+            'Polaron Processing Stages - 2013.pdf' => array(
+                'file' => APP.'Documents/Email_attachments/Polaron Processing Stages - 2013.pdf',
+                'mimetype' => 'pdf'),
+        ));
 
 
-        $Email->send('Insert message here');
+        $Email->send();
 
     }
-
+    
     public function rejectEmail($email_addr) {
         $Email = new CakeEmail();
         $Email->config('default');
@@ -291,34 +307,56 @@ class UsersController extends AppController {
         $Email->sender(array('polarontest@gmail.com' => 'Polaron'));
         $Email->from(array('polarontest@gmail.com' => 'Polaron'));
         $Email->to($email_addr);
-        $Email->subject('Insert subject here');
+        $Email->subject('Eligibility Check');
+        $Email->template('denied');
+        $Email->emailFormat('text');
+        $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name']));
 
 
-        $Email->send('Insert message here');
+        $Email->send();
 
     }
 
-    public function test() {
-        $this->loadModel('Applicant');
-        if ($this->request->is('post') || $this->request->is('put')) {
-            $email_addr = $this->request->data['Applicant']['email'];
 
-            $Email = new CakeEmail();
-            $Email->config('default');
+     //public function test() {
+     //   $this->loadModel('Applicant');
+     //   if ($this->request->is('post') || $this->request->is('put')) {
+     //       $email_addr = $this->request->data['Applicant']['email'];
+
+     //       $Email = new CakeEmail();
+     //       $Email->config('default');
+     //       $Email->template('welcome');
+     //       $Email->emailFormat('text');
+     //       $Email->viewVars(array('name' => 'Jessica', 'email' => $this->request->data['Applicant']['email'],'password' => $this->generatePassword()));
 
 
-            $Email->sender(array('polarontest@gmail.com' => 'Polaron sender'));
-            $Email->from(array('polarontest@gmail.com' => 'Polaron'));
-            $Email->to($email_addr);
-            $Email->subject('Eligibility Check');
-            $Email->attachments(array(
-                'thumbs_up.jpg' => array(
-                    'file' => APP.'Documents/Email_attachments/thumbs_up.jpg',
-                    'mimetype' => 'image/jpgs'
-                )
-            ));
-            $Email->send('Insert message here');
+     //       $Email->sender(array('polarontest@gmail.com' => 'Polaron sender'));
+     //       $Email->from(array('polarontest@gmail.com' => 'Polaron'));
+     //       $Email->to($email_addr);
+     //       $Email->subject('Eligibility Check');
+     //       $Email->attachments(array(
+     //           'Client details form - 2013.pdf' => array(
+     //               'file' => APP.'Documents/Email_attachments/Client details form - 2013.pdf',
+     //               'mimetype' => 'pdf'),
+     //           'Polaron - PL Passport - Info Pack - 2013.pdf' => array(
+     //               'file' => APP.'Documents/Email_attachments/Polaron - PL Passport - Info Pack - 2013.pdf',
+     //               'mimetype' => 'pdf'),
+     //           'Polaron Family Tree - 2013.pdf' => array(
+     //               'file' => APP.'Documents/Email_attachments/Polaron Family Tree - 2013.pdf',
+     //               'mimetype' => 'pdf'),
+     //           'Polaron Processing Stages - 2013.pdf' => array(
+     //               'file' => APP.'Documents/Email_attachments/Polaron Processing Stages - 2013.pdf',
+     //               'mimetype' => 'pdf'),
+     //       ));
+     //       $Email->send();
 
-        }
+     //   }
+    //}
+
+
+    public function generatePassword(){
+        $password = substr(str_shuffle( 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' ) , 0 , 10 );
+        return $password;
+
     }
 }
