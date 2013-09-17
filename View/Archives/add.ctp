@@ -1,7 +1,7 @@
 <div class="archives form">
-<?php echo $this->Form->create('Archife'); ?>
+<?php echo $this->Form->create('Archive'); ?>
 	<fieldset>
-		<legend><?php echo __('Add Archife'); ?></legend>
+		<legend><?php echo __('Add Archive'); ?></legend>
 	<?php
 		echo $this->Form->input('archive_name');
 		echo $this->Form->input('family_name');

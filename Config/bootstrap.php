@@ -68,8 +68,14 @@ Cache::config('default', array('engine' => 'File'));
  * advanced ways of loading plugins
  *
  * CakePlugin::loadAll(); // Loads all plugins at once
- */CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
-CakePlugin::load('DataTables');
+ */
+// load Usermgmt plugin and apply plugin routes. Keep all the other plugins you are using here
+CakePlugin::loadAll(array('DebugKit', 'DataTables',
+    'Usermgmt' => array('routes' => true, 'bootstrap' => true),
+));
+
+//CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
+//CakePlugin::load('DataTables');
 
 
 /**

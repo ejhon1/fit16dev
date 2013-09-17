@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 /**
  * Archives Controller
  *
- * @property Archife $Archife
+ * @property Archive $Archive
  * @property PaginatorComponent $Paginator
  */
 class ArchivesController extends AppController {
@@ -21,8 +21,8 @@ class ArchivesController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Archife->recursive = 0;
-		$this->set('archives', $this->Paginator->paginate());
+        $this->loadModel('Archive');
+        $this->set('archives', $this->Archive->find('all'));
 	}
 
 /**
@@ -33,11 +33,11 @@ class ArchivesController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		if (!$this->Archife->exists($id)) {
-			throw new NotFoundException(__('Invalid archife'));
+		if (!$this->Archive->exists($id)) {
+			throw new NotFoundException(__('Invalid archive'));
 		}
-		$options = array('conditions' => array('Archife.' . $this->Archife->primaryKey => $id));
-		$this->set('archife', $this->Archife->find('first', $options));
+		$options = array('conditions' => array('Archive.' . $this->Archive->primaryKey => $id));
+		$this->set('archive', $this->Archive->find('first', $options));
 	}
 
 /**
@@ -47,12 +47,12 @@ class ArchivesController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->Archife->create();
-			if ($this->Archife->save($this->request->data)) {
-				$this->Session->setFlash(__('The archife has been saved'));
+			$this->Archive->create();
+			if ($this->Archive->save($this->request->data)) {
+				$this->Session->setFlash(__('The archive has been saved'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The archife could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The archive could not be saved. Please, try again.'));
 			}
 		}
 	}
@@ -65,19 +65,19 @@ class ArchivesController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		if (!$this->Archife->exists($id)) {
-			throw new NotFoundException(__('Invalid archife'));
+		if (!$this->Archive->exists($id)) {
+			throw new NotFoundException(__('Invalid archive'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Archife->save($this->request->data)) {
-				$this->Session->setFlash(__('The archife has been saved'));
+			if ($this->Archive->save($this->request->data)) {
+				$this->Session->setFlash(__('The archive has been saved'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The archife could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The archive could not be saved. Please, try again.'));
 			}
 		} else {
-			$options = array('conditions' => array('Archife.' . $this->Archife->primaryKey => $id));
-			$this->request->data = $this->Archife->find('first', $options);
+			$options = array('conditions' => array('Archive.' . $this->Archive->primaryKey => $id));
+			$this->request->data = $this->Archive->find('first', $options);
 		}
 	}
 
@@ -89,16 +89,16 @@ class ArchivesController extends AppController {
  * @return void
  */
 	public function delete($id = null) {
-		$this->Archife->id = $id;
-		if (!$this->Archife->exists()) {
-			throw new NotFoundException(__('Invalid archife'));
+		$this->Archive->id = $id;
+		if (!$this->Archive->exists()) {
+			throw new NotFoundException(__('Invalid archive'));
 		}
 		$this->request->onlyAllow('post', 'delete');
-		if ($this->Archife->delete()) {
-			$this->Session->setFlash(__('Archife deleted'));
+		if ($this->Archive->delete()) {
+			$this->Session->setFlash(__('Archive deleted'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Archife was not deleted'));
+		$this->Session->setFlash(__('Archive was not deleted'));
 		return $this->redirect(array('action' => 'index'));
 	}
 }

@@ -31,23 +31,24 @@ class User extends AppModel {
             ),
         ),
         'password_confirm' => array(
-		'required'=>'notEmpty',
-		'match'=>array(
-		'rule' => 'validatePasswdConfirm',
-		'message' => 'Passwords do not match'
+            'required'=>'notEmpty',
+            'match'=>array(
+                'rule' => 'validatePasswdConfirm',
+                'message' => 'Passwords do not match'
 
             )
         )
     );
 
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * hasMany associations
- *
- * @var array
- */
+//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+    /**
+     * hasMany associations
+     *
+     * @var array
+     */
 
     function validatePasswdConfirm($data)
     {
@@ -87,33 +88,33 @@ class User extends AppModel {
     );
 
 
-	public $hasMany = array(
-		'Casenote' => array(
-			'className' => 'Casenote',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Docnote' => array(
-			'className' => 'Docnote',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+    public $hasMany = array(
+        'Casenote' => array(
+            'className' => 'Casenote',
+            'foreignKey' => 'user_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'Docnote' => array(
+            'className' => 'Docnote',
+            'foreignKey' => 'user_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
+    );
 
 }

@@ -33,14 +33,15 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $helpers = array("Html", "Form", "Session",'Paginator','Js' =>array('prototype', 'scriptaculous', 'Jquery'));
+    public $helpers = array('Html', 'Form', 'Session','Paginator','Usermgmt.UserAuth','Js' =>array('prototype', 'scriptaculous', 'Jquery'));
 
-    public $components = array('DebugKit.Toolbar', 'Session', 'DataTable', 'Auth' => array(
-        'loginRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-        'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-    ));
+    public $components = array('DebugKit.Toolbar', 'Session', 'DataTable', 'RequestHandler', 'Usermgmt.UserAuth');
 
     public function beforeFilter() {
-        $this->Auth->allow('display');
+        //$this->Auth->allow('display');
+        $this->userAuth();
+    }
+    private function userAuth(){
+        $this->UserAuth->beforeFilter($this);
     }
 }

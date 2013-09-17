@@ -110,8 +110,8 @@ class Employee extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Paperfilelog' => array(
-			'className' => 'Paperfilelog',
+		'Archiveloan' => array(
+			'className' => 'Archiveloan',
 			'foreignKey' => 'employee_id',
 			'dependent' => false,
 			'conditions' => '',

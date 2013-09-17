@@ -64,8 +64,8 @@ class Archive extends AppModel {
             'finderQuery' => '',
             'counterQuery' => ''
         ),
-        'PaperFileLog' => array(
-            'className' => 'PaperFileLog',
+        'Archiveloan' => array(
+            'className' => 'Archiveloan',
             'foreignKey' => 'archive_id',
             'dependent' => false,
             'conditions' => '',

@@ -22,7 +22,7 @@
  */
  
 $cakeDescription = __d('cake_dev', 'Polaron: European Solutions');
-$loggedUser = $this->Session->read('Auth.User');
+$loggedUser = $this->Session->read('UserAuth.User');
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,8 +47,10 @@ $loggedUser = $this->Session->read('Auth.User');
 		
 		echo $this->Html->css('default');
 		echo $this->Html->css('cake.generic');
-        	echo $this->Html->css('jQuery.dataTables');
-        	
+        echo $this->Html->css('jQuery.dataTables');
+        echo $this->Html->css('/usermgmt/css/umstyle');
+
+
 		echo $this->Html->script('jquery');
 		echo $this->Html->script('jquery.smartWizard-2.0.min');
 		echo $this->Html->script('jquery.smartWizard-2.0');
@@ -73,30 +75,30 @@ $loggedUser = $this->Session->read('Auth.User');
 					{
 						?>
 						<li><?php echo $this->Html->link('Home', '/'); ?> </li>
-						<li><?php echo $this->Html->link('Cases', array('controller'=>'ClientCases', 'action'=>'index'));?> </li>
-						<li><?php echo $this->Html->link('Staff', array('controller'=>'employees', 'action'=>'index'));?> </li>
-						<li><?php echo $this->Html->link('Paper Files', array('controller'=>'paperfiles', 'action'=>'index'));?> </li>
-						<li><?php echo $this->Html->link(__('My Account'), array('controller' => 'users', 'action' => 'myaccount')); ?></li>
+						<li><?php echo $this->Html->link('Cases', '/clientcases', array('controller'=>'ClientCases', 'action'=>'index'));?> </li>
+                        <li><?php echo $this->Html->link('Archives', '/archives', array('controller'=>'archives', 'action'=>'index'));?> </li>
+                        <li><?php echo $this->Html->link('Staff Dashboard', '/dashboard', array('controller'=>'employees', 'action'=>'index'));?> </li>
+						<li><?php echo $this->Html->link('My Account', '/employees/myaccount', array('controller' => 'employees', 'action' => 'myaccount')); ?></li>
 					<?php
 					}
 					else if(!empty($loggedUser) && $loggedUser['type']=='Client')
 					{
 					?>
-						<li><?php echo $this->Html->link('Documents', array('controller'=>'documents', 'action'=>'mydocs'));?> </li>
-						<li><?php echo $this->Html->link('Case notes', array('controller'=>'casenotes', 'action'=>'mynotes'));?> </li>
-						<li><?php echo $this->Html->link('Account', array('controller'=>'clientcases', 'action'=>'myaccount'));?> </li><?php
+                        <li><?php echo $this->Html->link('Case notes', '/casenotes', array('controller'=>'casenotes', 'action'=>'mynotes'));?> </li>
+						<li><?php echo $this->Html->link('Documents', '/documents', array('controller'=>'documents', 'action'=>'mydocs'));?> </li>
+						<li><?php echo $this->Html->link('Account', '/users', array('controller'=>'clientcases', 'action'=>'myaccount'));?> </li><?php
 					}
 					else
 					{
 					?>
-						<li><?php echo $this->Html->link('Login', '../users/login'); ?> </li>
+						<li><?php echo $this->Html->link('Login', '/login'); ?> </li>
 						<li><?php echo $this->Html->link('Register', '../users/newclient'); ?> </li>
 					<?php
 					}
 					if(!empty($loggedUser))
 					{
 					?>
-						<li><?php echo $this->Html->link('Log Out', '../users/logout'); ?> </li>
+						<li><?php echo $this->Html->link(__("Sign Out",true),"/logout") ?> </li>
 					<?php
 					}
 					?>

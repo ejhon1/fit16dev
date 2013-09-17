@@ -8,37 +8,37 @@ App::uses('AppController', 'Controller');
  */
 class DocumentsController extends AppController {
 
-/**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator');
+    /**
+     * Components
+     *
+     * @var array
+     */
+    public $components = array('Paginator');
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Document->recursive = 0;
-		$this->set('documents', $this->Paginator->paginate());
-	}
+    /**
+     * index method
+     *
+     * @return void
+     */
+    public function index() {
+        $this->Document->recursive = 0;
+        $this->set('documents', $this->Paginator->paginate());
+    }
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Document->exists($id)) {
-			throw new NotFoundException(__('Invalid document'));
-		}
-		$options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
-		$this->set('document', $this->Document->find('first', $options));
-	}
+    /**
+     * view method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function view($id = null) {
+        if (!$this->Document->exists($id)) {
+            throw new NotFoundException(__('Invalid document'));
+        }
+        $options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
+        $this->set('document', $this->Document->find('first', $options));
+    }
 
     public function mydocs() {
         $userid = $this->Auth->user('id');
@@ -53,27 +53,27 @@ class DocumentsController extends AppController {
         $this->set('applicantdocuments', $this->Document->find('all', $options));
     }
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Document->create();
-			if ($this->Document->save($this->request->data)) {
-				$this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
-			}
-		}
-		$archives = $this->Document->Archive->find('list');
-		$applicants = $this->Document->Applicant->find('list');
-		$ancestortypes = $this->Document->Ancestortype->find('list');
-		$documenttypes = $this->Document->Documenttype->find('list');
-		$this->set(compact('archives', 'applicants', 'ancestortypes', 'documenttypes'));
-	}
+    /**
+     * add method
+     *
+     * @return void
+     */
+    public function add() {
+        if ($this->request->is('post')) {
+            $this->Document->create();
+            if ($this->Document->save($this->request->data)) {
+                $this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
+            }
+        }
+        $archives = $this->Document->Archive->find('list');
+        $applicants = $this->Document->Applicant->find('list');
+        $ancestortypes = $this->Document->Ancestortype->find('list');
+        $documenttypes = $this->Document->Documenttype->find('list');
+        $this->set(compact('archives', 'applicants', 'ancestortypes', 'documenttypes'));
+    }
 
     public function uploadancestor() {
         $id = $this->Auth->user('id');
@@ -138,55 +138,55 @@ class DocumentsController extends AppController {
         $this->set(compact('documentTypes', 'ancestorTypes', 'applicants'));
     }
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		if (!$this->Document->exists($id)) {
-			throw new NotFoundException(__('Invalid document'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Document->save($this->request->data)) {
-				$this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
-			}
-		} else {
-			$options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
-			$this->request->data = $this->Document->find('first', $options);
-		}
-		$archives = $this->Document->Archive->find('list');
-		$applicants = $this->Document->Applicant->find('list');
-		$ancestortypes = $this->Document->Ancestortype->find('list');
-		$documenttypes = $this->Document->Documenttype->find('list');
-		$this->set(compact('archives', 'applicants', 'ancestortypes', 'documenttypes'));
-	}
+    /**
+     * edit method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function edit($id = null) {
+        if (!$this->Document->exists($id)) {
+            throw new NotFoundException(__('Invalid document'));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Document->save($this->request->data)) {
+                $this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
+            }
+        } else {
+            $options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
+            $this->request->data = $this->Document->find('first', $options);
+        }
+        $archives = $this->Document->Archive->find('list');
+        $applicants = $this->Document->Applicant->find('list');
+        $ancestortypes = $this->Document->Ancestortype->find('list');
+        $documenttypes = $this->Document->Documenttype->find('list');
+        $this->set(compact('archives', 'applicants', 'ancestortypes', 'documenttypes'));
+    }
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Document->id = $id;
-		if (!$this->Document->exists()) {
-			throw new NotFoundException(__('Invalid document'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Document->delete()) {
-			$this->Session->setFlash(__('Document deleted'),'default', array('class' => 'alert-success'));
-			return $this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Document was not deleted'),'default', array('class' => 'alert-danger'));
-		return $this->redirect(array('action' => 'index'));
-	}
+    /**
+     * delete method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function delete($id = null) {
+        $this->Document->id = $id;
+        if (!$this->Document->exists()) {
+            throw new NotFoundException(__('Invalid document'));
+        }
+        $this->request->onlyAllow('post', 'delete');
+        if ($this->Document->delete()) {
+            $this->Session->setFlash(__('Document deleted'),'default', array('class' => 'alert-success'));
+            return $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('Document was not deleted'),'default', array('class' => 'alert-danger'));
+        return $this->redirect(array('action' => 'index'));
+    }
 
     public function uploadDoc($archive, $doctype, $ancestortype) {
         $file = $this->request->data['Document']['file'];

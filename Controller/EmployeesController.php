@@ -40,6 +40,12 @@ class EmployeesController extends AppController {
 		$this->set('employee', $this->Employee->find('first', $options));
 	}
 
+    public function myaccount() {
+        $id=$this->Session->read('UserAuth.User.id');
+        $options = array('conditions' => array('Employee.user_id' => $id));
+        $this->set('employee', $this->Employee->find('first', $options));
+    }
+
 /**
  * add method
  *
@@ -86,6 +92,24 @@ class EmployeesController extends AppController {
 		$roles = $this->Employee->Role->find('list');
 		$this->set(compact('users', 'roles'));
 	}
+
+    public function editaccount() {
+        $id=$this->Session->read('UserAuth.User.id');
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Employee->save($this->request->data)) {
+                $this->Session->setFlash(__('The employee has been saved'));
+                return $this->redirect(array('action' => 'myaccount'));
+            } else {
+                $this->Session->setFlash(__('The employee could not be saved. Please try again.'));
+            }
+        } else {
+            $options = array('conditions' => array('Employee.user_id' => $id));
+            $this->request->data = $this->Employee->find('first', $options);
+        }
+
+        $roles = $this->Employee->Role->find('list');
+        $this->set(compact('roles'));
+    }
 
 /**
  * delete method
