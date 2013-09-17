@@ -41,7 +41,7 @@ class DocumentsController extends AppController {
     }
 
     public function mydocs() {
-        $userid = $this->Auth->user('id');
+        $userid = $this->UserAuth->getUserId();
         $this->loadModel('ClientCase');
 
         $clientCase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $userid),'fields' => array('ClientCase.id','archive_id')));
