@@ -508,6 +508,23 @@ p.error em {
 .success {
 	color: #fff;
 }
+div.alert-danger,
+div.alert-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+	text-align: center;
+}
+div.alert-success {
+    color: #468847;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+	text-align: center;
+}
+
+div.alert-success h4 {
+	color: #468847;
+}
 
 /**  Actions  **/
 .actions ul {
