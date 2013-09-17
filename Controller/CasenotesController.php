@@ -32,12 +32,23 @@ class CasenotesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function view() {
 		if (!$this->Casenote->exists($id)) {
 			throw new NotFoundException(__('Invalid casenote'));
 		}
 		$options = array('conditions' => array('Casenote.' . $this->Casenote->primaryKey => $id));
 		$this->set('casenote', $this->Casenote->find('first', $options));
+	}
+	
+	public function mynotes() {
+        $userid = $this->UserAuth->getUserId();
+		$this->loadModel('ClientCase');
+		$this->loadModel('Casenote');
+
+	$clientCase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $userid),'fields' => array('ClientCase.id','archive_id')));
+
+        $options = array('conditions' => array('Casenote.clientcase_id' => $clientCase['ClientCase']['id'], 'Casenote.note_type' => 'Public'));
+        $this->set('casenotes', $this->Casenote->find('all', $options));
 	}
 
 /**
