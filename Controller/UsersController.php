@@ -76,10 +76,10 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Session->setFlash(__('The user has been saved', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
             }
         }
     }
@@ -125,10 +125,10 @@ class UsersController extends AppController {
                     $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
                     $this->ClientCase->save($this->request->data);
                     $this->emailAccept($this->request->data['Applicant']['email']);
-                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->Session->setFlash(__('The user has been saved', null),'default', array('class' => 'alert-success'));
                     $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
                 }else {
-                    $this->Session->setFlash(__('The user could not be saved. Please try again.'));
+                    $this->Session->setFlash(__('The user could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
                 }
             }
             else
@@ -184,10 +184,10 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->saveAll($this->request->data, array('deep' => true))) {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Session->setFlash(__('The user has been saved', null),'default', array('class' => 'alert-success'));
                 $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
             }
         }
         $roles = $this->Role->find('list', array('order'=>'role_name ASC'));
@@ -207,10 +207,10 @@ class UsersController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Session->setFlash(__('The user has been saved', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please try again.'));
+                $this->Session->setFlash(__('The user could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
             }
         } else {
             $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -233,10 +233,10 @@ class UsersController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->User->delete()) {
-            $this->Session->setFlash(__('User deleted'));
+            $this->Session->setFlash(__('User deleted', null),'default', array('class' => 'alert-success'));
             return $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('User was not deleted'));
+        $this->Session->setFlash(__('User was not deleted', null),'default', array('class' => 'alert-danger'));
         return $this->redirect(array('action' => 'index'));
     }
 
