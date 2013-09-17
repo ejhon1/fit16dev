@@ -92,7 +92,7 @@ $loggedUser = $this->Session->read('UserAuth.User');
 					{
 					?>
 						<li><?php echo $this->Html->link('Login', '/login'); ?> </li>
-						<li><?php echo $this->Html->link('Register', '../users/newclient'); ?> </li>
+						<li><?php echo $this->Html->link('Register', '/register'); ?> </li>
 					<?php
 					}
 					if(!empty($loggedUser))

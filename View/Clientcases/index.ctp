@@ -5,6 +5,11 @@ echo $this->HTML->css('jquery.dataTables');
 
 <div class="clientcases index">
     <h2><?php echo __('Cases'); ?></h2>
+    <?php
+    echo $this->Form->create('Clientcases');
+    echo $this->Form->input('status_id', array('empty' => 'All', 'options' => $statuses, 'label' => 'Status Filter'));
+    echo $this->Form->end(__('Filter'));
+    ?>
     <table cellpadding="0" cellspacing="2" id="data">
         <thead>
         <tr>
@@ -18,6 +23,8 @@ echo $this->HTML->css('jquery.dataTables');
         </thead>
         <tbody>
         <?php foreach ($clientcases as $clientcase): ?>
+            <?php if(empty($status) || $clientcase['Clientcase']['status_id'] == $status){
+                ?>
             <tr class="list">
                 <td valign="top">
                     <?php echo $this->Html->link($clientcase['Archive']['archive_name'], array('controller' => 'archives', 'action' => 'view', $clientcase['Archive']['id'])); ?>
@@ -34,6 +41,9 @@ echo $this->HTML->css('jquery.dataTables');
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $clientcase['Clientcase']['id'])); ?>
                 </td>
             </tr>
+        <?php
+            }
+        ?>
         <?php endforeach; ?>
         </tbody>
     </table>

@@ -8,6 +8,7 @@ App::uses('AppModel', 'Model');
  */
 class Status extends AppModel {
 
+    public $displayField = 'status_type';
 /**
  * Validation rules
  *

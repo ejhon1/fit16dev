@@ -40,7 +40,7 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 					<table cellspacing="0" cellpadding="0" width="100%" border="0">
 						<thead>
 							<tr>
-								<th> <?php echo __("Controller");?> </th>
+								<th> <?php echo __("Page");?> </th>
 								<th> <?php echo __("Action");?> </th>
 								<th> <?php echo __("Permission");?> </th>
 								<th> <?php echo __("Operation");?> </th>
@@ -59,9 +59,17 @@ echo $this->Html->script('/usermgmt/js/umupdate');
 									echo $this->Form->hidden('action',array('id'=>'action'.$k,'value'=>$action));
 									echo "<tr>";
 									echo "<td>".$key."</td>";
+                                    if($action == 'index')
+                                    {
+                                        echo "<td>list</td>";
+                                    }
+                                    else
+                                    {
 									echo "<td>".$action."</td>";
+                                    }
 									echo "<td>";
 									foreach ($user_groups as $user_group) {
+
 										$ugname=$user_group['name'];
 										$ugname_alias=$user_group['alias_name'];
 										if (isset($value[$action][$ugname_alias]) && $value[$action][$ugname_alias]==1) {
