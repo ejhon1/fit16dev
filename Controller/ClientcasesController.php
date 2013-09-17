@@ -77,10 +77,10 @@ class ClientcasesController extends AppController {
         if ($this->request->is('post')) {
             $this->Clientcase->create();
             if ($this->Clientcase->save($this->request->data)) {
-                $this->Session->setFlash(__('The clientcase has been saved'));
+                $this->Session->setFlash(__('The clientcase has been saved', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The clientcase could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The clientcase could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
             }
         }
         $users = $this->Clientcase->User->find('list');
@@ -103,10 +103,10 @@ class ClientcasesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Clientcase->save($this->request->data)) {
-                $this->Session->setFlash(__('The clientcase has been saved'));
+                $this->Session->setFlash(__('The clientcase has been saved', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The clientcase could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The clientcase could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
             }
         } else {
             $options = array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id));
@@ -133,10 +133,10 @@ class ClientcasesController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Clientcase->delete()) {
-            $this->Session->setFlash(__('Clientcase deleted'));
+            $this->Session->setFlash(__('Clientcase deleted', null),'default', array('class' => 'alert-success'));
             return $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Clientcase was not deleted'));
+        $this->Session->setFlash(__('Clientcase was not deleted', null),'default', array('class' => 'alert-danger'));
         return $this->redirect(array('action' => 'index'));
     }
 }
