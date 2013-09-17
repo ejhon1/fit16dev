@@ -111,6 +111,16 @@
             <?php echo $this->Html->link($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname'], array('controller' => 'applicants', 'action' => 'view', $clientcase['Applicant']['id'])); ?>
             &nbsp;
         </dd>
+        <dt><?php echo __('Phone Number'); ?></dt>
+                <dd>
+                    <?php echo $clientcase['Applicant']['landline_number']; ?>
+                    &nbsp;
+                </dd>
+        <dt><?php echo __('Email'); ?></dt>
+                <dd>
+                    <?php echo $clientcase['Applicant']['email']; ?>
+                    &nbsp;
+                </dd>
     </dl>
 </div>
 <div id="tabs-2">
