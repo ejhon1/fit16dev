@@ -38,7 +38,7 @@ class UsersController extends UserMgmtAppController {
 		parent::beforeFilter();
 		$this->User->userAuth=$this->UserAuth;
         $this->loadModel('Usermgmt.Employee');
-        //$this->Auth->allow('newclient','newemployee'); // Letting users register themselves
+        //$this->Auth->allow('newclient'); // Letting users register themselves
 	}
 	/**
 	 * Used to display all users by Admin
@@ -128,9 +128,11 @@ class UsersController extends UserMgmtAppController {
 					}
 					$OriginAfterLogin=$this->Session->read('Usermgmt.OriginAfterLogin');
 					$this->Session->delete('Usermgmt.OriginAfterLogin');
-					$redirect = (!empty($OriginAfterLogin)) ? $OriginAfterLogin : LOGIN_REDIRECT_URL;
-					$this->redirect($redirect);
-				} else {
+					//$redirect = (!empty($OriginAfterLogin)) ? $OriginAfterLogin : LOGIN_REDIRECT_URL;
+					//$this->redirect($redirect);
+                    $this->redirect(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
+
+                } else {
 					$this->Session->setFlash(__('Incorrect Email/Username or Password'));
 					return;
 				}
@@ -154,10 +156,150 @@ class UsersController extends UserMgmtAppController {
 	 * @access public
 	 * @return void
 	 */
+
+    public function register() {
+        $this->loadModel('Archive');
+        $this->loadModel('Applicant');
+        $this->loadModel('ClientCase');
+
+        if ($this->request -> isPost()) {
+            $this->createArchive(); //Leads to the function that creates the Archive entry.
+            $this->request->data['ClientCase']['nationality_of_parents']= implode(',', $this->request->data['ClientCase']['nationality_of_parents']);
+            $this->request->data['ClientCase']['nationality_of_grandparents']= implode(',', $this->request->data['ClientCase']['nationality_of_grandparents']);
+            $this->request->data['ClientCase']['when_left_poland']= implode(',', $this->request->data['ClientCase']['when_left_poland']);
+            $this->request->data['ClientCase']['where_left_poland']= implode(',', $this->request->data['ClientCase']['where_left_poland']);
+            $this->request->data['ClientCase']['possess_documents_types']= implode(',', $this->request->data['ClientCase']['possess_documents_types']);
+            $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
+            $this->request->data['ClientCase']['open_or_closed'] = 'Open';
+            $this->request->data['ClientCase']['status_id'] = 1;
+            $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
+            //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
+
+            $this->request->data['User']['email_verified']=1;
+            $this->request->data['User']['active']=1;
+            $ip='';
+            if(isset($_SERVER['REMOTE_ADDR'])) {
+                $ip=$_SERVER['REMOTE_ADDR'];
+            }
+            $this->request->data['User']['ip_address']=$ip;
+            $salt=$this->UserAuth->makeSalt();
+            $this->request->data['User']['salt'] = $salt;
+            $this->request->data['User']['password'] = $this->UserAuth->makePassword($this->request->data['User']['password'], $salt);
+            $this->request->data['User']['user_group_id']=2;
+
+            $eligible = true;
+            if(empty($this->request->data['ClientCase']['nationality_of_parents'])
+                && empty($this->request->data['ClientCase']['nationality_of_grandparents'])
+                && $this->request->data['ClientCase']['born_in_poland'] != 'Yes'
+                && $this->request->data['ClientCase']['have_passport'] != 'Yes'
+            )
+            {$eligible = false;}
+
+            if(!($eligible))
+            {
+                $this->User->create();
+                if ($this->User->saveAll($this->request->data, array('deep' => true))) {
+                    $this->request->data['ClientCase']['user_id'] = $this->User->getLastInsertId();
+                    $this->ClientCase->create();
+                    $this->ClientCase->save($this->request->data);
+
+                    $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                    $this->Applicant->create();
+                    $this->Applicant->save($this->request->data);
+
+                    $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                    $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
+                    $this->ClientCase->save($this->request->data);
+                    //$this->emailAccept($this->request->data['Applicant']['email']);
+                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->redirect(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
+                }else {
+                    $this->Session->setFlash(__('The user could not be saved. Please try again.'));
+                }
+            }else {
+                $this->Session->setFlash(__('The user could not be saved. Please try again.'));
+            }
+        }
+    }
+
+
+    public function createArchive()
+    {
+        $available = false;
+        $i = 1;
+        $name = strtoupper(substr($this->request->data['Applicant']['surname'], 0, 3)).'-';
+        $year = substr(idate('Y', $timestamp = time()), -2);
+        do
+        {
+            $archiveName = $name.$i.'/'.$year;
+            $conditions = array('Archive.archive_name' => $archiveName);
+
+            if($this->Archive->hasAny($conditions))
+            {
+                $i++;
+            }
+            else
+            {
+                $available = true;
+            }
+        }while(!$available);
+
+        $this->request->data['Archive']['archive_name'] = $archiveName;
+        $this->Archive->create();
+        $this->Archive->save($this->request->data);
+
+        $this->request->data['ClientCase']['archive_id'] = $this->Archive->getLastInsertId();
+        $this->request->data['Applicant']['archive_id'] = $this->Archive->getLastInsertId();
+    }
+
+
+    public function acceptEmail($email_addr) {
+        $Email = new CakeEmail();
+        $Email->config('default');
+
+        $Email->sender(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->from(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->to($email_addr);
+        $Email->subject('Insert subject here');
+
+
+        $Email->send('Insert message here');
+
+    }
+
+    public function rejectEmail($email_addr) {
+        $Email = new CakeEmail();
+        $Email->config('default');
+
+        $Email->sender(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->from(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->to($email_addr);
+        $Email->subject('Insert subject here');
+
+
+        $Email->send('Insert message here');
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
 	public function register() {
 		$userId = $this->UserAuth->getUserId();
 		if ($userId) {
-			$this->redirect("/dashboard");
+			$this->redirect("/");
 		}
 		if (SITE_REGISTRATION) {
 			$userGroups=$this->UserGroup->getGroupsForRegistration();
@@ -209,6 +351,9 @@ class UsersController extends UserMgmtAppController {
 			$this->redirect('/login');
 		}
 	}
+
+    */
+
 	/**
 	 * Used to change the password by user
 	 *
@@ -300,6 +445,71 @@ class UsersController extends UserMgmtAppController {
                 {$this->Session->setFlash(__('An error was encountered.'));}
 
                 //$this->redirect('/addUser');
+            }
+        }
+    }
+
+    public function newclient() {
+        $this->loadModel('Archive');
+        $this->loadModel('Applicant');
+        $this->loadModel('ClientCase');
+        if ($this->request->is('post')) {
+
+            $this->User->set($this->data);
+            $this->User->RegisterValidate();
+            $this->request->data['User']['email_verified']=1;
+            $this->request->data['User']['active']=1;
+            $salt=$this->UserAuth->makeSalt();
+            $this->request->data['User']['salt'] = $salt;
+            $this->request->data['User']['password'] = $this->UserAuth->makePassword($this->request->data['User']['password'], $salt);
+
+
+
+            $this->createArchive(); //Leads to the function that creates the Archive entry.
+            $this->request->data['ClientCase']['nationality_of_parents']= implode(',', $this->request->data['ClientCase']['nationality_of_parents']);
+            $this->request->data['ClientCase']['nationality_of_grandparents']= implode(',', $this->request->data['ClientCase']['nationality_of_grandparents']);
+            $this->request->data['ClientCase']['when_left_poland']= implode(',', $this->request->data['ClientCase']['when_left_poland']);
+            $this->request->data['ClientCase']['where_left_poland']= implode(',', $this->request->data['ClientCase']['where_left_poland']);
+            $this->request->data['ClientCase']['possess_documents_types']= implode(',', $this->request->data['ClientCase']['possess_documents_types']);
+            $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
+            $this->request->data['ClientCase']['open_or_closed'] = 'Open';
+            $this->request->data['ClientCase']['status_id'] = 1;
+            $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
+            //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
+
+            $eligible = true;
+            if(empty($this->request->data['ClientCase']['nationality_of_parents'])
+                && empty($this->request->data['ClientCase']['nationality_of_grandparents'])
+                && $this->request->data['ClientCase']['born_in_poland'] != 'Yes'
+                && $this->request->data['ClientCase']['have_passport'] != 'Yes'
+            )
+            {$eligible = false;}
+
+            if(!($eligible))
+            {
+                $this->User->create();
+                if ($this->User->saveAll($this->request->data, array('deep' => true))) {
+                    $this->request->data['ClientCase']['user_id'] = $this->User->getLastInsertId();
+                    $this->ClientCase->create();
+                    $this->ClientCase->save($this->request->data);
+
+                    $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                    $this->Applicant->create();
+                    $this->Applicant->save($this->request->data);
+
+                    $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                    $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
+                    $this->ClientCase->save($this->request->data);
+                    $this->emailAccept($this->request->data['Applicant']['email']);
+                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+                }else {
+                    $this->Session->setFlash(__('The user could not be saved. Please try again.'));
+                }
+            }
+            else
+            {
+                $this->emailReject($this->request->data['Applicant']['email']);
             }
         }
     }
