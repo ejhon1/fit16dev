@@ -27,7 +27,7 @@ p {
   overflow:hidden;
   clear:both;
   /** height:300px; */
-  min-height: 0;
+  /** min-height: 0; */
 }
 
 .swMain .stepContainer div.content {
@@ -40,8 +40,8 @@ p {
   font: bold 12px "Maiandra GD", Arial, Helvetica, sans-serif; 
   color:#5A5655;   
   background-color:#F8F8F8;
-  height: 1000px;
-  min-height: 0;
+  height: auto;
+  /** min-height: 0; */
   text-align:left;
   overflow:visible;    
   z-index:88; 
