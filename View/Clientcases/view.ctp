@@ -407,7 +407,7 @@
 
     <div class="actions">
         <ul>
-            <li><?php echo $this->Html->link(__('New Casenote'), array('controller' => 'casenotes', 'action' => 'add')); ?> </li>
+            <li><?php echo $this->Html->link(__('New Casenote'), array('controller' => 'casenotes', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
         </ul>
     </div>
 </div>
