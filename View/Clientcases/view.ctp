@@ -334,38 +334,34 @@
 ?>
 <div id="tabs-4">
     <p>
-    <h3><?php echo __('Related Casestatuses'); ?></h3>
-    <?php if (!empty($clientcase['Casestatus'])): ?>
-        <table cellpadding = "0" cellspacing = "0">
-            <tr>
-                <th><?php echo __('Id'); ?></th>
-                <th><?php echo __('Clientcase Id'); ?></th>
-                <th><?php echo __('Status Id'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
-            </tr>
-            <?php
-            $i = 0;
-            foreach ($clientcase['Casestatus'] as $casestatus): ?>
-                <tr>
-                    <td><?php echo $casestatus['id']; ?></td>
-                    <td><?php echo $casestatus['clientcase_id']; ?></td>
-                    <td><?php echo $casestatus['status_id']; ?></td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('View'), array('controller' => 'casestatuses', 'action' => 'view', $casestatus['id'])); ?>
-                        <?php echo $this->Html->link(__('Edit'), array('controller' => 'casestatuses', 'action' => 'edit', $casestatus['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'casestatuses', 'action' => 'delete', $casestatus['id']), null, __('Are you sure you want to delete # %s?', $casestatus['id'])); ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+        <h3><?php echo __('Case statuses'); ?></h3>
+		<?php if (!empty($clientcase['Casestatus'])): ?>
+            <table cellpadding = "0" cellspacing = "0">
+                           <tr>
+                                   <th><?php echo __('Status'); ?></th>
+                                   <th><?php echo __('Date Updated'); ?></th>
+                                   <th><?php echo __('Employee'); ?></th>
 
-    <div class="actions">
-        <ul>
-            <li><?php echo $this->Html->link(__('New Casestatus'), array('controller' => 'casestatuses', 'action' => 'add')); ?> </li>
-        </ul>
-    </div>
-</div>
+
+                               </tr>
+                           <?php foreach ($casestatuses as $casestatus): ?>
+                                   <tr>
+                                           <td><?php echo $casestatus['Status']['status_type']; ?></td>
+                                           <td><?php echo $casestatus['Casestatus']['date_updated']; ?></td>
+                                           <td><?php echo $casestatus['Casestatus']['employee_id']; ?></td>
+
+
+                                       </tr>
+                               <?php endforeach; ?>
+                       </table>
+		<?php endif; ?>
+
+		<div class="actions">
+			<ul>
+				<li><?php echo $this->Html->link(__('Update Status'), array('controller' => 'casestatuses', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
+				</ul>
+		</div>
+	</div>
 
 
 <div id="tabs-5">
