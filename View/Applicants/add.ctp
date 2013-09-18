@@ -15,8 +15,8 @@
         echo $this->Form->input('mobile_number');
         echo $this->Form->input('applicant_type', array (
             'options' => array(
-                'Main' => 'Main Applicant', 
-                'Secondary' => 'Seconday Applicant')));
+                'Main Applicant' => 'Main Applicant', 
+                'Secondary Applicant' => 'Seconday Applicant')));
         ?>
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
