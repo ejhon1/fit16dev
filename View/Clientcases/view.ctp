@@ -178,6 +178,7 @@
             <tr>
                 <th><?php echo __('Name'); ?></th>
                 <th><?php echo __('Email'); ?></th>
+                <th><?php echo __('Phone Number'); ?></th>
                 <th><?php echo __('Type'); ?></th>
                 <th class="actions"><?php echo __('Actions'); ?></th>
             </tr>
@@ -196,7 +197,7 @@
     <?php endif; ?>
     <div class="actions">
         <ul>
-            <li><?php echo $this->Html->link(__('Add Related Applicant'), array('controller' => 'applicants', 'action' => 'add')); ?> </li>
+            <li><?php echo $this->Html->link(__('Add Related Applicant'), array('controller' => 'applicants', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
         </ul>
     </div>
 </div>
