@@ -1212,7 +1212,7 @@ CREATE TABLE IF NOT EXISTS `casenotes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `clientcase_id` int(12) NOT NULL,
   `user_id` int(12) NOT NULL,
-  `notesubject_id` int(12) NOT NULL,
+  `notesubject` varchar(50) NOT NULL,
   `note_type` varchar(46) NOT NULL,
   `note` text NOT NULL,
   `created` datetime NOT NULL,
