@@ -88,13 +88,6 @@ class Casenote extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		),
-		'Notesubject' => array(
-			'className' => 'Notesubject',
-			'foreignKey' => 'notesubject_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
 		)
 	);
 }
