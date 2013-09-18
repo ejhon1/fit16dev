@@ -45,7 +45,8 @@ class ApplicantsController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($id = null) {
+		$this->request->data['Applicant']['clientcase_id'] = $id;
 		if ($this->request->is('post')) {
 			$this->Applicant->create();
 			if ($this->Applicant->save($this->request->data)) {
@@ -56,7 +57,7 @@ class ApplicantsController extends AppController {
 			}
 		}
 		$clientcases = $this->Applicant->Clientcase->find('list');
-		$archives = $this->Applicant->Archive->find('list');
+		$archives = $this->Applicant->Archive->find('list', array('fields' => array('Archive.id', 'Archive.archive_name'), 'order' => 'archive_name ASC'));
 		$this->set(compact('clientcases', 'archives'));
 	}
 
