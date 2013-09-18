@@ -158,12 +158,20 @@
             <?php echo $this->Html->link($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname'], array('controller' => 'applicants', 'action' => 'view', $clientcase['Applicant']['id'])); ?>
             &nbsp;
         </dd>
-        <dt><?php echo __('Phone Number'); ?></dt>
+        <dt><?php echo __('Landline Number'); ?></dt>
                 <dd>
                     <?php echo $clientcase['Applicant']['landline_number']; ?>
                     &nbsp;
                 </dd>
-        <dt><?php echo __('Email'); ?></dt>
+
+                <dt><?php echo __('Mobile Number'); ?></dt>
+                <dd>
+                    <?php echo $clientcase['Applicant']['mobile_number']; ?>
+                    &nbsp;
+                </dd>
+
+
+                <dt><?php echo __('Email'); ?></dt>
                 <dd>
                     <?php echo $clientcase['Applicant']['email']; ?>
                     &nbsp;
