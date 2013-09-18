@@ -13,7 +13,10 @@
         echo $this->Form->input('email');
         echo $this->Form->input('landline_number');
         echo $this->Form->input('mobile_number');
-        echo $this->Form->input('applicant_type');
+        echo $this->Form->input('applicant_type', array (
+            'options' => array(
+                'Main' => 'Main Applicant', 
+                'Secondary' => 'Seconday Applicant')));
         ?>
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
