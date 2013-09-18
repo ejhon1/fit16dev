@@ -34,7 +34,7 @@ class CasestatusesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Casestatus->exists($id)) {
-			throw new NotFoundException(__('Invalid casestatus'));
+			throw new NotFoundException(__('Invalid Case Status'));
 		}
 		$options = array('conditions' => array('Casestatus.' . $this->Casestatus->primaryKey => $id));
 		$this->set('casestatus', $this->Casestatus->find('first', $options));
@@ -46,18 +46,23 @@ class CasestatusesController extends AppController {
  * @return void
  */
 	public function add() {
+		$userid=$this->UserAuth->getUserId();
+        $this->loadModel('Employee');
+        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
 		if ($this->request->is('post')) {
-			$this->Casestatus->create();
+            $this->request->data['Casestatus']['clientcase_id'] = $id;
+            $this->request->data['Casestatus']['employee_id'] = $employee['Employee']['id'];
+            $this->Casestatus->create();
 			if ($this->Casestatus->save($this->request->data)) {
-				$this->Session->setFlash(__('The casestatus has been saved'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('The case status has been saved'));
+				return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
 			} else {
-				$this->Session->setFlash(__('The casestatus could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
 			}
 		}
 		$clientcases = $this->Casestatus->Clientcase->find('list');
 		$statuses = $this->Casestatus->Status->find('list');
-		$this->set(compact('clientcases', 'statuses'));
+		$this->set(compact('clientcases', 'statuses', 'employee'));
 	}
 
 /**
@@ -69,14 +74,14 @@ class CasestatusesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Casestatus->exists($id)) {
-			throw new NotFoundException(__('Invalid casestatus'));
+			throw new NotFoundException(__('Invalid case status'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Casestatus->save($this->request->data)) {
-				$this->Session->setFlash(__('The casestatus has been saved'));
+				$this->Session->setFlash(__('The case status has been saved'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The casestatus could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Casestatus.' . $this->Casestatus->primaryKey => $id));
@@ -97,14 +102,14 @@ class CasestatusesController extends AppController {
 	public function delete($id = null) {
 		$this->Casestatus->id = $id;
 		if (!$this->Casestatus->exists()) {
-			throw new NotFoundException(__('Invalid casestatus'));
+			throw new NotFoundException(__('Invalid Case Status'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Casestatus->delete()) {
-			$this->Session->setFlash(__('Casestatus deleted'));
+			$this->Session->setFlash(__('Case Status deleted'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Casestatus was not deleted'));
+		$this->Session->setFlash(__('Case Status was not deleted'));
 		return $this->redirect(array('action' => 'index'));
 	}
 }
