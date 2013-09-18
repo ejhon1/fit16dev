@@ -74,7 +74,6 @@ class CasenotesController extends AppController {
 		$this->set(compact('clientcases', 'users', 'notesubjects'));
 	}
 
-
 /**
  * edit method
  *
@@ -117,7 +116,7 @@ class CasenotesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Casenote->delete()) {
-			$this->Session->setFlash(__('Casenote deleted'), null),'default', array('class' => 'alert-success'));
+			$this->Session->setFlash(__('Casenote deleted'));
 			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Casenote was not deleted', null),'default', array('class' => 'alert-danger'));
