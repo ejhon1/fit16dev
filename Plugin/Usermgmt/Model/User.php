@@ -23,6 +23,60 @@ App::uses('CakeEmail', 'Network/Email');
 
 class User extends UserMgmtAppModel {
 
+    public $validate = array(
+        'username' => array(
+            'rule' => array('maxLength', 20),
+            'notempty' => array(
+                'rule' => array('notempty'),
+            ),
+        ),
+        'password' => array(
+            'rule' => array('maxLength', 16),
+            'notempty' => array(
+                'rule' => array('notempty'),
+            ),
+        ),
+        'password_confirm' => array(
+            'required'=>'notEmpty',
+            'match'=>array(
+                'rule' => 'validatePasswdConfirm',
+                'message' => 'Passwords do not match'
+
+            )
+        )
+    );
+
+    public $hasOne = array(
+        'Employee' => array(
+            'className' => 'Employee',
+            'foreignKey' => 'user_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'Clientcase' => array(
+            'className' => 'Clientcase',
+            'foreignKey' => 'user_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
+    );
+
+
+
 	/**
 	 * This model belongs to following models
 	 *
@@ -34,13 +88,40 @@ class User extends UserMgmtAppModel {
 	 *
 	 * @var array
 	 */
-	var $hasMany = array('LoginToken'=>array('className'=>'Usermgmt.LoginToken','limit' =>1));
+    public $hasMany = array(
+        'Casenote' => array(
+            'className' => 'Casenote',
+            'foreignKey' => 'user_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'Docnote' => array(
+            'className' => 'Docnote',
+            'foreignKey' => 'user_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'LoginToken'=>array('className'=>'Usermgmt.LoginToken','limit' =>1)
+    );
 	/**
 	 * model validation array
 	 *
 	 * @var array
 	 */
-	var $validate = array();
 	/**
 	 * UsetAuth component object
 	 *
