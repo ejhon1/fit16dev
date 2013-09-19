@@ -34,7 +34,7 @@
 					<?php echo $this->Form->create('User', array('action' => 'forgotPassword')); ?>
 					<div>
 						<div class="umstyle3"><?php echo __('Enter Email / Username');?></div>
-						<div class="umstyle4" ><?php echo $this->Form->input("email" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
+						<div class="umstyle4" ><?php echo $this->Form->input("username" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
 						<div style="clear:both"></div>
 					</div>
 					<div>

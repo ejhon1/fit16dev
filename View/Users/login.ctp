@@ -34,7 +34,7 @@
 				<div class="um_box_mid_content_mid_left">
 					<?php echo $this->Form->create('User', array('action' => 'login')); ?>
 					<div>
-						<div class="umstyle3"><?php echo __('Email');?></div>
+						<div class="umstyle3"><?php echo __('Email / Username');?></div>
 						<div class="umstyle4" ><?php echo $this->Form->input("username" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
 						<div style="clear:both"></div>
 					</div>

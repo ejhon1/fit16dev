@@ -47,17 +47,17 @@
 					</div>
 					<div>
 						<div class="umstyle3"><?php echo __('First Name');?><font color='red'>*</font></div>
-						<div class="umstyle4" ><?php echo $this->Form->input("first_name" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
+						<div class="umstyle4" ><?php echo $this->Form->input("Employee.first_name" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
 						<div style="clear:both"></div>
 					</div>
 					<div>
 						<div class="umstyle3"><?php echo __('Last Name');?><font color='red'>*</font></div>
-						<div class="umstyle4" ><?php echo $this->Form->input("last_name" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
+						<div class="umstyle4" ><?php echo $this->Form->input("Employee.surname" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
 						<div style="clear:both"></div>
 					</div>
 					<div>
 						<div class="umstyle3"><?php echo __('Email');?><font color='red'>*</font></div>
-						<div class="umstyle4" ><?php echo $this->Form->input("email" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
+						<div class="umstyle4" ><?php echo $this->Form->input("Employee.email" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
 						<div style="clear:both"></div>
 					</div>
 					<div>
