@@ -49,14 +49,16 @@ class UsersController extends UserMgmtAppController {
 	 * @access public
 	 * @return array
 	 */
-	public function index() {
+	public function allemployees() {
 		/*$this->User->unbindModel( array('hasMany' => array('LoginToken')));
 		$users=$this->User->find('all', array('order'=>'User.id desc'));
 		$this->set('users', $users);
 		*/
-        $this->User->recursive = 0;
-        $this->set('users', $this->Paginator->paginate());
-	}
+       // $this->User->recursive = 0;
+        //$this->set('users', $this->Paginator->paginate());
+        //$this->set('users', $this->Employee->find('all', array('recursive' => -1)));
+        $this->set('users', $this->User->find('all', array('conditions' => array('User.type' => 'Employee'), 'recursive' => 2)));
+    }
 	/**
 	 * Used to display detail of user by Admin
 	 *
