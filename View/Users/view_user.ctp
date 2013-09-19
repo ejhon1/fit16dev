@@ -48,15 +48,15 @@
 							</tr>
 							<tr>
 								<td><strong><?php echo __('First Name');?></strong></td>
-								<td><?php echo h($user['User']['first_name'])?></td>
+								<td><?php echo h($employee['Employee']['first_name'])?></td>
 							</tr>
 							<tr>
 								<td><strong><?php echo __('Last Name');?></strong></td>
-								<td><?php echo h($user['User']['last_name'])?></td>
+								<td><?php echo h($employee['Employee']['surname'])?></td>
 							</tr>
 							<tr>
 								<td><strong><?php echo __('Email');?></strong></td>
-								<td><?php echo h($user['User']['email'])?></td>
+								<td><?php echo h($employee['Employee']['email'])?></td>
 							</tr>
 							<tr>
 								<td><strong><?php echo __('Email Verified');?></strong></td>
