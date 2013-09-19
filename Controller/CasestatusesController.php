@@ -45,7 +45,7 @@ class CasestatusesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($id = null) {
 		$userid=$this->UserAuth->getUserId();
         $this->loadModel('Employee');
         $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
