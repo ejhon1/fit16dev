@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.7
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Sep 17, 2013 at 06:37 AM
--- Server version: 5.5.24-log
+-- Host: 130.194.7.82
+-- Generation Time: Sep 19, 2013 at 11:38 AM
+-- Server version: 5.5.20
 -- PHP Version: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `dbtrial`
+-- Database: `fitie2013t16review`
 --
 
 -- --------------------------------------------------------
@@ -1222,13 +1222,6 @@ CREATE TABLE IF NOT EXISTS `casenotes` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `casenotes`
---
-
-INSERT INTO `casenotes` (`id`, `clientcase_id`, `user_id`, `notesubject_id`, `note_type`, `note`, `created`, `modified`) VALUES
-(1, 66, 105, 1, 'Internal', 'test notes\r\n', '2013-08-28 12:33:47', '2013-08-28 12:33:47');
-
 -- --------------------------------------------------------
 
 --
@@ -1239,6 +1232,8 @@ CREATE TABLE IF NOT EXISTS `casestatuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `clientcase_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL,
+  `date_updated` date NOT NULL,
+  `employee_id` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `clientcase_id` (`clientcase_id`),
   KEY `status_id` (`status_id`)
@@ -2337,28 +2332,26 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `user_id` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
-  `status` varchar(50) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `role_id` int(11) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `role_id` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `user_id`, `first_name`, `surname`, `status`, `email`, `role_id`, `created`, `modified`) VALUES
-(1, 423, 'Frangklin', 'M', 'Active', 'famew1@monash.edu', 3, '2013-08-26 11:48:08', '2013-08-26 11:48:08'),
-(2, 425, 'Jessica', 'Greer', 'Active', 'jwgre2@student.monash.edu', 1, '2013-08-26 12:28:43', '2013-08-26 12:28:43'),
-(3, 426, 'aa', 'aa', 'Active', 'aa@aa.com', 1, '2013-08-26 21:18:03', '2013-08-26 21:18:03'),
-(4, 438, 'Frangklin', 'Mewengkang', 'Active', 'fm@fm.com', 3, '2013-08-28 12:27:46', '2013-08-28 12:27:46'),
-(5, 440, 'Sally', 'Staffmember', 'Active', 'salstaff@gmail.com', 1, '2013-09-05 23:59:09', '2013-09-05 23:59:09'),
-(6, 1, 'Andrea', 'Administrator', 'Active', 'polarontest@gmail.com', 1, '2013-08-26 21:18:03', '2013-09-15 03:52:22'),
-(7, 442, 'Kerry', 'Smith', '', 'polarontest@gmail.com', 0, '2013-09-10 03:30:04', '2013-09-10 03:30:04');
+INSERT INTO `employees` (`id`, `user_id`, `first_name`, `surname`, `email`, `created`, `modified`) VALUES
+(1, 423, 'Frangklin', 'M', 'famew1@monash.edu', '2013-08-26 11:48:08', '2013-08-26 11:48:08'),
+(2, 425, 'Jessica', 'Greer', 'jwgre2@student.monash.edu', '2013-08-26 12:28:43', '2013-08-26 12:28:43'),
+(3, 426, 'aa', 'aa', 'aa@aa.com', '2013-08-26 21:18:03', '2013-08-26 21:18:03'),
+(4, 438, 'Frangklin', 'Mewengkang', 'fm@fm.com', '2013-08-28 12:27:46', '2013-08-28 12:27:46'),
+(5, 440, 'Sally', 'Staffmember', 'salstaff@gmail.com', '2013-09-05 23:59:09', '2013-09-05 23:59:09'),
+(6, 1, 'Andrea', 'Administrator', 'polarontest@gmail.com', '2013-08-26 21:18:03', '2013-09-15 03:52:22'),
+(7, 442, 'Kerry', 'Smith', 'polarontest@gmail.com', '2013-09-10 03:30:04', '2013-09-10 03:30:04'),
+(8, 447, 'Tesla', 'Testington', 'test@test.com', '2013-09-19 07:21:18', '2013-09-19 07:21:18');
 
 -- --------------------------------------------------------
 
@@ -2375,71 +2368,12 @@ CREATE TABLE IF NOT EXISTS `login_tokens` (
   `created` datetime NOT NULL,
   `expires` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `login_tokens`
 --
 
-INSERT INTO `login_tokens` (`id`, `user_id`, `token`, `duration`, `used`, `created`, `expires`) VALUES
-(17, 444, '34edc7dc643334ef87a428583c332d6f', '2 weeks', 0, '2013-09-17 02:08:55', '2013-10-01 02:08:55'),
-(16, 1, 'f5c889d0bf49fb4d31bb58bf58f3d39c', '2 weeks', 0, '2013-09-17 01:29:44', '2013-10-01 01:29:44'),
-(15, 444, 'b61cf69b874f2d8092bec9e00f175bf9', '2 weeks', 0, '2013-09-17 01:29:18', '2013-10-01 01:29:18'),
-(14, 444, 'e1c8e7fdfd06527ffd0e10306ece087a', '2 weeks', 0, '2013-09-17 01:26:50', '2013-10-01 01:26:50'),
-(13, 1, '823a157c28f27359e2d18200ca1039ed', '2 weeks', 0, '2013-09-17 01:15:25', '2013-10-01 01:15:25'),
-(6, 442, '6721332052264f3eaba3fa2a914c6d7d', '2 weeks', 0, '2013-09-10 03:30:53', '2013-09-24 03:30:53'),
-(12, 1, '9e142f75b9f181af682fedf7778c182b', '2 weeks', 0, '2013-09-16 22:39:27', '2013-09-30 22:39:27'),
-(11, 1, 'f6626f1c2c1923bc9f720e82bee8be70', '2 weeks', 1, '2013-09-16 03:53:34', '2013-09-30 03:53:34'),
-(10, 1, '69c9658a85ca00a1fb73e895d8cf8407', '2 weeks', 1, '2013-09-15 22:28:03', '2013-09-29 22:28:03'),
-(18, 1, '37200e40368ebf96c5f44bf3c9adf09c', '2 weeks', 0, '2013-09-17 02:09:09', '2013-10-01 02:09:09'),
-(19, 444, '245262b30ffebef6740ba01c653790e6', '2 weeks', 0, '2013-09-17 02:09:34', '2013-10-01 02:09:34'),
-(20, 1, 'c2016d422666b55cb2072dc38cef8281', '2 weeks', 0, '2013-09-17 02:10:16', '2013-10-01 02:10:16'),
-(21, 1, '442ca206ac011f610a98047e5f5b212b', '2 weeks', 0, '2013-09-17 02:33:57', '2013-10-01 02:33:57');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `notesubjects`
---
-
-CREATE TABLE IF NOT EXISTS `notesubjects` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `subject_text` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `notesubjects`
---
-
-INSERT INTO `notesubjects` (`id`, `subject_text`) VALUES
-(1, 'Follow up');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roles`
---
-
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `roles`
---
-
-INSERT INTO `roles` (`id`, `role_name`) VALUES
-(1, 'CEO'),
-(2, 'Operations Manager'),
-(3, 'Business Manager'),
-(4, 'Researcher'),
-(5, 'Research Assistant'),
-(6, 'Researcher in Poland'),
-(7, 'Translator in Poland'),
-(8, 'Read-only');
 
 -- --------------------------------------------------------
 
@@ -2489,7 +2423,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=445 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=448 ;
 
 --
 -- Dumping data for table `users`
@@ -2810,7 +2744,10 @@ INSERT INTO `users` (`id`, `user_group_id`, `username`, `password`, `salt`, `ema
 (440, 0, 'sstaff', '45ce4c835c6b74b3d56b2ac8381c3ec6bfaccfb8', '', 0, 0, NULL, 'Employee', '2013-09-05 23:59:09', '2013-09-05 23:59:09'),
 (442, 1, 'polarontest@gmail.com', 'caaff8dc88742276bd6a71a6f976772d', '61b2e362dce99e815ae6060d850d1bff', 1, 1, NULL, 'Client', '2013-09-10 03:30:03', '2013-09-10 03:30:03'),
 (443, 0, 'rob@gmail.com', 'robert', '', 0, 0, NULL, 'Client', '2013-09-17 00:42:01', '2013-09-17 00:42:01'),
-(444, 2, 'ablake@gmail.com', 'b6a3f667d42b49e6b12ece8d0e9c5084', 'f2c37eddae5ae77205a7bcc84b50557c', 1, 1, '127.0.0.1', 'Client', '2013-09-17 01:24:40', '2013-09-17 01:24:40');
+(444, 2, 'ablake@gmail.com', 'b6a3f667d42b49e6b12ece8d0e9c5084', 'f2c37eddae5ae77205a7bcc84b50557c', 1, 1, '127.0.0.1', 'Client', '2013-09-17 01:24:40', '2013-09-17 01:24:40'),
+(445, 5, 'Test', '29a9c459deb6c866919e18eaf4832a87', 'bcd133a583ec67600c8a13f6d9fb310a', 1, 1, NULL, 'Client', '2013-09-19 07:19:14', '2013-09-19 07:19:14'),
+(446, 5, 'Tesla', 'ea4fd56b4f14c85510812a8fd12108b5', 'db6c361251fc7c2fec1fa41018bc2bce', 1, 1, NULL, 'Client', '2013-09-19 07:20:46', '2013-09-19 07:20:46'),
+(447, 5, 'Teslaff', 'e96591287b079f1f961fc64b2bb1dee6', '8798ce86c03ecfea4eb3bcc43f523e5a', 1, 1, NULL, 'Employee', '2013-09-19 07:21:18', '2013-09-19 07:21:18');
 
 -- --------------------------------------------------------
 
@@ -2961,59 +2898,6 @@ INSERT INTO `user_group_permissions` (`id`, `user_group_id`, `controller`, `acti
 (94, 1, 'Documents', 'view', 0),
 (95, 2, 'Documents', 'view', 1),
 (96, 3, 'Documents', 'view', 0);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `addresses`
---
-ALTER TABLE `addresses`
-  ADD CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`applicant_id`) REFERENCES `applicants` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `applicants`
---
-ALTER TABLE `applicants`
-  ADD CONSTRAINT `applicants_ibfk_2` FOREIGN KEY (`archive_id`) REFERENCES `archives` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `applicants_ibfk_3` FOREIGN KEY (`clientcase_id`) REFERENCES `clientcases` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `archiveloans`
---
-ALTER TABLE `archiveloans`
-  ADD CONSTRAINT `archiveloans_ibfk_1` FOREIGN KEY (`archive_id`) REFERENCES `archives` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `archiveloans_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `casenotes`
---
-ALTER TABLE `casenotes`
-  ADD CONSTRAINT `casenotes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `casenotes_ibfk_3` FOREIGN KEY (`clientcase_id`) REFERENCES `clientcases` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `casestatuses`
---
-ALTER TABLE `casestatuses`
-  ADD CONSTRAINT `casestatuses_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `casestatuses_ibfk_3` FOREIGN KEY (`clientcase_id`) REFERENCES `clientcases` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `clientcases`
---
-ALTER TABLE `clientcases`
-  ADD CONSTRAINT `clientcases_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `clientcases_ibfk_2` FOREIGN KEY (`archive_id`) REFERENCES `archives` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `clientcases_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `docnotes`
---
-ALTER TABLE `docnotes`
-  ADD CONSTRAINT `docnotes_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `docnotes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
