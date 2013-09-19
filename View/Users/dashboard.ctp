@@ -36,7 +36,7 @@
 					<br/><br/>
 			<?php   if ($this->UserAuth->getGroupName()=='Admin') { ?>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Staff Member",true),"/newemployee") ?></span><br/><br/>
-						<span  class="umstyle6"><?php echo $this->Html->link(__("All Staff Members",true),"/allUsers") ?></span><br/><br/>
+						<span  class="umstyle6"><?php echo $this->Html->link(__("All Staff Members",true),"/allemployees") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Group",true),"/addGroup") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("All Groups",true),"/allGroups") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Permissions",true),"/permissions") ?></span><br/><br/>
