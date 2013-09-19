@@ -35,7 +35,7 @@ $loggedUser = $this->Session->read('UserAuth.User');
 	<div id="header">
         	<?php
 				/** echo $this->Html->image('polaronLogo.png', array('alt'=> 'Polaron Logo', true)); */
-				echo $this->Html->image('polaronLogo.png', array("alt" => "Home", 'url' => array ('controller' => 'Pages', 'action' => 'display', 'home')));
+				echo $this->Html->image('polaronLogo.png', array("alt" => "Home", 'url' => array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home')));
 			?>
         </div>
 	<?php
@@ -76,8 +76,7 @@ $loggedUser = $this->Session->read('UserAuth.User');
 						?>
 						<li><?php echo $this->Html->link('Home', '/'); ?> </li>
 						<li><?php echo $this->Html->link('Cases', array('plugin' => false, 'controller'=>'clientcases', 'action'=>'index'));?> </li>
-                        <li><?php echo $this->Html->link('Archives', array('plugin' => false, 'controller'=>'archives', 'action'=>'index'));?> </li>
-                        <li><?php echo $this->Html->link('Staff Dashboard', array('plugin' => false, 'controller'=>'employees', 'action'=>'index'));?> </li>
+                        <li><?php echo $this->Html->link('Admin Dashboard', '/dashboard');?> </li>
 						<li><?php echo $this->Html->link('My Account', array('plugin' => false, 'controller' => 'employees', 'action' => 'myaccount')); ?></li>
 					<?php
 					}
