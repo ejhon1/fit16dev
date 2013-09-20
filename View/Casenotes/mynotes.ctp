@@ -2,6 +2,13 @@
 
 <div class="casenotes index">
 	<h2><?php echo __('Contact Notes'); ?></h2>
+	<div class="actions">
+        <ul>
+            <li>
+            <?php echo $this->Html->link(__('Add Contact Notes'), array('controller' => 'casenotes', 'action' => 'mynotesadd')); ?>
+            </li>
+        </ul>
+    	</div>
 	<table cellpadding="0" cellspacing="0">
         <tr>
             <th class="heading">Date</th>
