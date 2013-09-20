@@ -1,5 +1,5 @@
 <div>
-<?php echo $this->Form->create('Casenote'); ?>
+<?php echo $this->Form->create('Contact Note'); ?>
 	<fieldset>
 		<legend><?php echo __('Add Casenote'); ?></legend>
 	<?php
