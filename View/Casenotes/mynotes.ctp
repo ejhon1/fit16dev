@@ -1,7 +1,7 @@
 <?php echo $this->HTML->css('usersIndex'); ?>
 
 <div class="casenotes index">
-	<h2><?php echo __('Casenotes'); ?></h2>
+	<h2><?php echo __('Contact Notes'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
         <tr>
             <th class="heading">Date</th>
