@@ -73,6 +73,28 @@ class CasenotesController extends AppController {
 		// $users = $this->Casenote->User->find('list');
 		$this->set(compact('clientcases', 'users', 'notesubjects'));
 	}
+	
+	public function mynotesadd() {
+		$userId = $this->UserAuth->getUserId();
+		
+		if ($this->request->is('post')) {
+			$this->Casenote->create();
+			$this->loadModel('Clientcase');
+			
+			$clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $userId)));
+			
+            $this->request->data['Casenote']['clientcase_id'] = $clientcase['Clientcase']['id'];
+			if ($this->Casenote->save($this->request->data)) {
+				$this->Session->setFlash(__('The casenote has been saved', null),'default', array('class' => 'alert-success'));
+				return $this->redirect(array('controller' => 'Clientcases', 'action' => 'mynotes'));
+			} else {
+				$this->Session->setFlash(__('The casenote could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+			}
+		}
+		$clientcases = $this->Casenote->Clientcase->find('list');
+		// $users = $this->Casenote->User->find('list');
+		$this->set(compact('clientcases', 'users', 'notesubjects'));
+	}
 
 /**
  * edit method
