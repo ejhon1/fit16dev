@@ -1,5 +1,5 @@
 <div class="casenotes view">
-<h2><?php echo __('Casenote'); ?></h2>
+<h2><?php echo __('Contact Note'); ?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
