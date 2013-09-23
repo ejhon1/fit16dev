@@ -71,6 +71,12 @@ class ClientcasesController extends AppController {
         $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses'));
     }
 
+    public function myaccount() {
+        $id=$this->Session->read('UserAuth.User.id');
+        $options = array('conditions' => array('Clientcase.user_id' => $id));
+        $this->set('clientcase', $this->Clientcase->find('first', $options));
+    }
+
     /**
      * add method
      *

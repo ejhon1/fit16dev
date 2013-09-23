@@ -393,7 +393,9 @@ class UsersController extends UserMgmtAppController {
 	 */
 	public function changeUserPassword($userId=null) {
 		if (!empty($userId)) {
-			$name=$this->User->getNameById($userId);
+			$this->loadModel('Employee');
+            $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userId)));
+            $name=$employee['Employee']['first_name'].' '.$employee['Employee']['surname'];
 			$this->set('name', $name);
 			if ($this->request -> isPost()) {
 				$this->User->set($this->data);
@@ -521,12 +523,15 @@ class UsersController extends UserMgmtAppController {
 	 */
 	public function editUser($userId=null) {
 		if (!empty($userId)) {
+            $this->loadModel('Employee');
 			$userGroups=$this->UserGroup->getGroups();
 			$this->set('userGroups', $userGroups);
 			if ($this->request -> isPut()) {
 				$this->User->set($this->data);
 				if ($this->User->RegisterValidate()) {
-					$this->User->save($this->request->data,false);
+                    $emp_id = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userId)));
+                    $this->request->data['Employee']['id'] = $emp_id['Employee']['id'];
+					$this->User->saveAll($this->request->data);
 					$this->Session->setFlash(__('The user was successfully updated', null),'default', array('class' => 'alert-success'));
                     $this->redirect('/allemployees');
 				}
