@@ -26,14 +26,12 @@
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 				<span class="umstyle1"><?php echo __('Dashboard'); ?></span>
-				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>
 			<div class="um_box_mid_content_mid">
 				<div class="um_box_mid_content_mid_left">
-					Hello <?php echo h($employee['Employee']['first_name']).' '.h($employee['Employee']['surname']); ?>
-					<br/><br/>
+					<br/>
 			<?php   if ($this->UserAuth->getGroupName()=='Admin') { ?>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Staff Member",true),"/newemployee") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("All Staff Members",true),"/allemployees") ?></span><br/><br/>

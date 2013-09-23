@@ -26,7 +26,6 @@
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 				<span class="umstyle1"><?php echo __('All Staff Members'); ?></span>
-				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>
@@ -71,7 +70,7 @@
 										echo "<span class='icon'><a href='".$this->Html->url('/usermgmt/users/makeActiveInactive/'.$row['User']['id'].'/0')."'><img src='".SITE_URL."usermgmt/img/approve.png' border='0' alt='Make Inactive' title='Make Inactive'></a></span>";
 									}
 									if ($row['User']['id']!=1 && $row['User']['username']!='Admin') {
-										echo $this->Form->postLink($this->Html->image(SITE_URL.'usermgmt/img/delete.png', array("alt" => __('Delete'), "title" => __('Delete'))), array('action' => 'deleteUser', $row['User']['id']), array('escape' => false, 'confirm' => __('Are you sure you want to delete this user?')));
+										echo $this->Form->postLink($this->Html->image(SITE_URL.'usermgmt/img/delete.png', array("alt" => __('Delete'), "title" => __('Delete'))), array('action' => 'deleteUser', $row['User']['id']), array('escape' => false, 'confirm' => __('Are you sure you want to delete '.$row['Employee']['first_name'].' '.$row['Employee']['surname'].'?')));
 									}
 								echo "</td>";
 								echo "</tr>";

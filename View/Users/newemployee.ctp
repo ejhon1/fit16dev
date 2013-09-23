@@ -25,8 +25,7 @@
 	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
-				<span class="umstyle1"><?php echo __('Add Employee'); ?></span>
-				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
+				<span class="umstyle1"><?php echo __('Add a Staff Member'); ?></span>
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>
@@ -72,7 +71,7 @@
 					</div>
 					<div>
 						<div class="umstyle3"></div>
-						<div class="umstyle4"><?php echo $this->Form->Submit(__('Add Employee'));?></div>
+						<div class="umstyle4"><?php echo $this->Form->Submit(__('Add Staff Member'));?></div>
 						<div style="clear:both"></div>
 					</div>
 					<?php echo $this->Form->end(); ?>
