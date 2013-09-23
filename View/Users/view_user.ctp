@@ -25,8 +25,7 @@
 	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
-				<span class="umstyle1"><?php echo __('User Detail'); ?></span>
-				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
+				<span class="umstyle1"><?php echo __('Staff Details'); ?></span>
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>
@@ -34,10 +33,6 @@
 				<table cellspacing="0" cellpadding="0" width="100%" border="0" >
 					<tbody>
 			<?php       if (!empty($user)) { ?>
-							<tr>
-								<td><strong><?php echo __('User Id');?></strong></td>
-								<td><?php echo $user['User']['id']?></td>
-							</tr>
 							<tr>
 								<td><strong><?php echo __('User Group');?></strong></td>
 								<td><?php echo h($user['UserGroup']['name'])?></td>
@@ -58,16 +53,7 @@
 								<td><strong><?php echo __('Email');?></strong></td>
 								<td><?php echo h($employee['Employee']['email'])?></td>
 							</tr>
-							<tr>
-								<td><strong><?php echo __('Email Verified');?></strong></td>
-								<td><?php
-										if ($user['User']['email_verified']) {
-											echo 'Yes';
-										} else {
-											echo 'No';
-										} ?>
-								</td>
-							</tr>
+						
 							<tr>
 								<td><strong><?php echo __('Status');?></strong></td>
 								<td><?php
@@ -78,10 +64,7 @@
 										} ?>
 								</td>
 							</tr>
-							<tr>
-								<td><strong><?php echo __('Ip Address');?></strong></td>
-								<td><?php echo h($user['User']['ip_address'])?></td>
-							</tr>
+							
 							<tr>
 								<td><strong><?php echo __('Created');?></strong></td>
 								<td><?php echo date('d-M-Y',strtotime($user['User']['created']))?></td>
