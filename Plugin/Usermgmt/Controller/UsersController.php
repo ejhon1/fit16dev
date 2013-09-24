@@ -407,7 +407,7 @@ class UsersController extends UserMgmtAppController {
 					$user['User']['password'] = $this->UserAuth->makePassword($this->request->data['User']['password'], $salt);
 					$this->User->save($user,false);
 					$this->LoginToken->deleteAll(array('LoginToken.user_id'=>$userId), false);
-					$this->Session->setFlash(__('Password for %s changed successfully', $name, null),'default', array('class' => 'alert-success'));
+					$this->Session->setFlash(__('Password for '.$employee['Employee']['first_name'].' '.$employee['Employee']['surname'].' changed successfully', $name, null),'default', array('class' => 'alert-success'));
                     $this->redirect('/allemployees');
 				}
 			}
@@ -443,7 +443,8 @@ class UsersController extends UserMgmtAppController {
                     $this->Session->setFlash(__('The employee was successfully added', null),'default', array('class' => 'alert-success', null),'default', array('class' => 'alert-success'));
                 }
                 else
-                {$this->Session->setFlash(__('An error was encountered.', null),'default', array('class' => 'alert-danger'));}
+                {$this->Session->setFlash(__('An error was encountered.', null),'default', array('class' => 'alert-danger'));
+                }
 
                 $this->redirect('/allemployees');
             }

@@ -106,9 +106,6 @@ class EmployeesController extends AppController {
             $options = array('conditions' => array('Employee.user_id' => $id));
             $this->request->data = $this->Employee->find('first', $options);
         }
-
-        $roles = $this->Employee->Role->find('list');
-        $this->set(compact('roles'));
     }
 
 /**

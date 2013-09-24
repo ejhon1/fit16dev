@@ -23,112 +23,6 @@ App::uses('CakeEmail', 'Network/Email');
 
 class User extends UserMgmtAppModel {
 
-    public $validate = array(
-        "user_group_id" => array(
-            'rule' => array('comparison', '!=', 0),
-            'message'=> 'Please select group'),
-        'username'=> array(
-            'mustNotEmpty'=>array(
-                'rule' => 'notEmpty',
-                'message'=> 'Please enter username',
-                'last'=>true),
-            'mustUnique'=>array(
-                'rule' =>'isUnique',
-                'message' =>'This username already taken',
-                'last'=>true),
-            'mustBeLonger'=>array(
-                'rule' => array('minLength', 4),
-                'message'=> 'Username must be greater than 3 characters',
-                'last'=>true),
-        ),
-        'Employee.first_name'=> array(
-            'mustNotEmpty'=>array(
-                'rule' => 'notEmpty',
-                'message'=> 'Please enter first name')
-        ),
-        'Employee.surname'=> array(
-            'mustNotEmpty'=>array(
-                'rule' => 'notEmpty',
-                'on' => 'create',
-                'message'=> 'Please enter last name')
-        ),
-        'Employee.email'=> array(
-            'mustNotEmpty'=>array(
-                'rule' => 'notEmpty',
-                'message'=> 'Please enter email',
-                'last'=>true),
-            'mustBeEmail'=> array(
-                'rule' => array('email'),
-                'message' => 'Please enter valid email',
-                'last'=>true),
-            'mustUnique'=>array(
-                'rule' =>'isUnique',
-                'message' =>'This email is already registered',
-            )
-        ),
-        'oldpassword'=>array(
-            'mustNotEmpty'=>array(
-                'rule' => 'notEmpty',
-                'message'=> 'Please enter old password',
-                'last'=>true),
-            'mustMatch'=>array(
-                'rule' => array('verifyOldPass'),
-                'message' => 'Please enter correct old password'),
-        ),
-        'password'=>array(
-            'mustNotEmpty'=>array(
-                'rule' => 'notEmpty',
-                'message'=> 'Please enter password',
-                'on' => 'create',
-                'last'=>true),
-            'mustBeLonger'=>array(
-                'rule' => array('minLength', 6),
-                'message'=> 'Password must be greater than 5 characters',
-                'on' => 'create',
-                'last'=>true),
-            'mustMatch'=>array(
-                'rule' => array('verifies'),
-                'message' => 'Both passwords must match'),
-            //'on' => 'create'
-        ),
-        'captcha'=>array(
-            'mustMatch'=>array(
-                'rule' => array('recaptchaValidate'),
-                'message' => ''),
-        )
-    );
-
-    public $hasOne = array(
-        'Employee' => array(
-            'className' => 'Employee',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Clientcase' => array(
-            'className' => 'Clientcase',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        )
-    );
-
-
-
 	/**
 	 * This model belongs to following models
 	 *
@@ -140,40 +34,13 @@ class User extends UserMgmtAppModel {
 	 *
 	 * @var array
 	 */
-    public $hasMany = array(
-        'Casenote' => array(
-            'className' => 'Casenote',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Docnote' => array(
-            'className' => 'Docnote',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'LoginToken'=>array('className'=>'Usermgmt.LoginToken','limit' =>1)
-    );
+	var $hasMany = array('LoginToken'=>array('className'=>'Usermgmt.LoginToken','limit' =>1));
 	/**
 	 * model validation array
 	 *
 	 * @var array
 	 */
+	var $validate = array();
 	/**
 	 * UsetAuth component object
 	 *
@@ -225,18 +92,18 @@ class User extends UserMgmtAppModel {
 						'message'=> 'Username must be greater than 3 characters',
 						'last'=>true),
 					),
-				'Employee.first_name'=> array(
+				'first_name'=> array(
 					'mustNotEmpty'=>array(
 						'rule' => 'notEmpty',
 						'message'=> 'Please enter first name')
 					),
-				'Employee.surname'=> array(
+				'last_name'=> array(
 					'mustNotEmpty'=>array(
 						'rule' => 'notEmpty',
 						'on' => 'create',
 						'message'=> 'Please enter last name')
 					),
-				'Employee.email'=> array(
+				'email'=> array(
 					'mustNotEmpty'=>array(
 						'rule' => 'notEmpty',
 						'message'=> 'Please enter email',

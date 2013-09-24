@@ -29,6 +29,9 @@
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>
+            <p>
+            <div class="astreq">Fields marked with <font color='red'>*</font> are required.</div>
+            </p>
 			<div class="um_box_mid_content_mid" id="register">
 				<div class="um_box_mid_content_mid_left">
 					<?php echo $this->Form->create('User'); ?>
@@ -43,7 +46,8 @@
 					<div>
 						<div class="umstyle3"><?php echo __('Username');?><font color='red'>*</font></div>
 						<div class="umstyle4" ><?php echo $this->Form->input("username" ,array('label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
-						<div style="clear:both"></div>
+                        <div class="umstyle7">Username must be unique and must contain at least 4 characters.</div>
+                        <div style="clear:both"></div>
 					</div>
 					<div>
 						<div class="umstyle3"><?php echo __('First Name');?><font color='red'>*</font></div>
