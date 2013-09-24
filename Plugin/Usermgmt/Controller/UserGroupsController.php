@@ -42,8 +42,8 @@ class UserGroupsController extends UserMgmtAppController {
 			$this->UserGroup->set($this->data);
 			if ($this->UserGroup->addValidate()) {
 				$this->UserGroup->save($this->request->data,false);
-				$this->Session->setFlash(__('The group is successfully added'));
-				$this->redirect('/addGroup');
+				$this->Session->setFlash(__('The group was successfully added', null),'default', array('class' => 'alert-success', null),'default', array('class' => 'alert-success'));
+                $this->redirect('/addGroup');
 			}
 		}
 	}
@@ -60,8 +60,8 @@ class UserGroupsController extends UserMgmtAppController {
 				$this->UserGroup->set($this->data);
 				if ($this->UserGroup->addValidate()) {
 					$this->UserGroup->save($this->request->data,false);
-					$this->Session->setFlash(__('The group is successfully updated'));
-					$this->redirect('/allGroups');
+					$this->Session->setFlash(__('The group wass successfully updated', null),'default', array('class' => 'alert-success', null),'default', array('class' => 'alert-success'));
+                    $this->redirect('/allGroups');
 				}
 			} else {
 				$this->request->data = $this->UserGroup->read(null, $groupId);
@@ -82,12 +82,12 @@ class UserGroupsController extends UserMgmtAppController {
 			if ($this->request -> isPost()) {
 				$users=$this->User->isUserAssociatedWithGroup($groupId);
 				if($users) {
-					$this->Session->setFlash(__('Some users are still associated with this group. You cannot delete it.'));
+					$this->Session->setFlash(__('Some users are still associated with this group. You cannot delete it.', null),'default', array('class' => 'alert-danger'));
 					$this->redirect('/allGroups');
 				}
 				if ($this->UserGroup->delete($groupId, false)) {
-					$this->Session->setFlash(__('Group is successfully deleted'));
-				}
+					$this->Session->setFlash(__('The group was successfully deleted', null),'default', array('class' => 'alert-success', null),'default', array('class' => 'alert-success'));
+                }
 			}
 			$this->redirect('/allGroups');
 		} else {

@@ -88,6 +88,7 @@
 	border-bottom:#2485b2 solid 1px;
 	height:10px;
 }
+
 .umstyle3 {
 	font-size:12px;
 }
@@ -115,6 +116,13 @@ input[type="submit"] {
 	width:400px;
 	padding-bottom:10px;
 }
+#login .umstyle7 {
+    float:left;
+    width:auto;
+    padding-bottom:20px;
+    font-style:italic;
+    font-size:10px
+}
 #register .umstyle3 {
 	float:left;
 	width:150px;
@@ -124,6 +132,13 @@ input[type="submit"] {
 	float:left;
 	width:400px;
 	padding-bottom:10px;
+}
+#register .umstyle7 {
+    float:left;
+    width:auto;
+    padding-bottom:20px;
+    font-style:italic;
+    font-size:11px
 }
 #forgot .umstyle3 {
 	float:left;
@@ -148,7 +163,7 @@ input[type="submit"] {
 #addgroup .umstyle7 {
 	float:left;
 	width:auto;
-	padding-bottom:10px;
+	padding-bottom:11px;
 	font-style:italic;
 	font-size:10px
 }
@@ -200,4 +215,9 @@ input[type="submit"] {
 }
 table {
 	margin-bottom:  0px;
+}
+
+.astreq {
+    font-style:italic;
+    font-size:11px
 }
