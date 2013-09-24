@@ -32,7 +32,7 @@ class CasenotesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view() {
+	public function view($id = NULL) {
 		if (!$this->Casenote->exists($id)) {
 			throw new NotFoundException(__('Invalid casenote'));
 		}

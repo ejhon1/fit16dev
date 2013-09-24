@@ -28,23 +28,28 @@
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>
+            <p>
+            <div class="astreq">Fields marked with <font color='red'>*</font> are required.</div>
+            </p>
 			<div class="um_box_mid_content_mid" id="login">
 				<div class="um_box_mid_content_mid_left">
 					<?php echo $this->Form->create('User', array('action' => 'changePassword')); ?>
 					<div>
-						<div class="umstyle3"><?php echo __('Old Password');?></div>
+						<div class="umstyle3"><?php echo __('Old Password');?><font color='red'>*</font></div>
 						<div class="umstyle4"><?php echo $this->Form->input("oldpassword" ,array("type"=>"password",'label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
 						<div style="clear:both"></div>
 					</div>
 					<div>
-						<div class="umstyle3"><?php echo __('New Password');?></div>
+						<div class="umstyle3"><?php echo __('New Password');?><font color='red'>*</font></div>
 						<div class="umstyle4"><?php echo $this->Form->input("password" ,array("type"=>"password",'label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
-						<div style="clear:both"></div>
+                        <div class="umstyle7">Password must contain at least 6 characters.</div>
+                        <div style="clear:both"></div>
 					</div>
 					<div>
-						<div class="umstyle3"><?php echo __('Confirm Password');?></div>
+						<div class="umstyle3"><?php echo __('Confirm Password');?><font color='red'>*</font></div>
 						<div class="umstyle4"><?php echo $this->Form->input("cpassword" ,array("type"=>"password",'label' => false,'div' => false,'class'=>"umstyle5" ))?></div>
-						<div style="clear:both"></div>
+                        <div class="umstyle7">Passwords must match.</div>
+                        <div style="clear:both"></div>
 					</div>
 					<div>
 						<div class="umstyle3"></div>

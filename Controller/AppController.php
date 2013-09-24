@@ -25,7 +25,7 @@ App::uses('Controller', 'Controller');
 /**
  * Application Controller
  *
- * Add your application-wide methods in the class below, your controllers
+
  * will inherit them.
  *
  * @package		app.Controller
@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $helpers = array('Html', 'Form', 'Session','Paginator','Usermgmt.UserAuth','Js' =>array('prototype', 'scriptaculous', 'Jquery'));
+    public $helpers = array('Html', 'Form'=>array('className'=>'AppForm'), 'Session','Paginator','Usermgmt.UserAuth','Js' =>array('prototype', 'scriptaculous', 'Jquery'));
 
     public $components = array('DebugKit.Toolbar', 'Session', 'DataTable', 'RequestHandler', 'Usermgmt.UserAuth');
 
