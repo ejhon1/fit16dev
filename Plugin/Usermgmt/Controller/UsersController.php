@@ -73,6 +73,7 @@ class UsersController extends UserMgmtAppController {
             $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userId)));
 			$this->set('user', $user);
             $this->set('employee', $employee);
+            $this->set('userId', $userId);
 		} else {
 			$this->redirect('/allemployees');
 		}
@@ -171,7 +172,6 @@ class UsersController extends UserMgmtAppController {
         $this->loadModel('ClientCase');
 
         if ($this->request -> isPost()) {
-            $this->createArchive(); //Leads to the function that creates the Archive entry.
             $this->request->data['ClientCase']['nationality_of_parents']= implode(',', $this->request->data['ClientCase']['nationality_of_parents']);
             $this->request->data['ClientCase']['nationality_of_grandparents']= implode(',', $this->request->data['ClientCase']['nationality_of_grandparents']);
             $this->request->data['ClientCase']['when_left_poland']= implode(',', $this->request->data['ClientCase']['when_left_poland']);
@@ -185,15 +185,12 @@ class UsersController extends UserMgmtAppController {
 
             $this->request->data['User']['email_verified']=1;
             $this->request->data['User']['active']=1;
-            $ip='';
-            if(isset($_SERVER['REMOTE_ADDR'])) {
-                $ip=$_SERVER['REMOTE_ADDR'];
-            }
-            $this->request->data['User']['ip_address']=$ip;
+
             $salt=$this->UserAuth->makeSalt();
             $this->request->data['User']['salt'] = $salt;
-            $this->request->data['User']['password'] = $this->UserAuth->makePassword($this->request->data['User']['password'], $salt);
+            $this->request->data['User']['password'] = $this->UserAuth->makePassword($this->generatePassword(), $salt);
             $this->request->data['User']['user_group_id']=2;
+            $this->request->data['User']['type']='Client';
 
             $eligible = true;
             if(empty($this->request->data['ClientCase']['nationality_of_parents'])
@@ -203,10 +200,11 @@ class UsersController extends UserMgmtAppController {
             )
             {$eligible = false;}
 
-            if(!($eligible))
+            if($eligible)
             {
+                $this->createArchive(); //Leads to the function that creates the Archive entry.
                 $this->User->create();
-                if ($this->User->saveAll($this->request->data, array('deep' => true))) {
+                if ($this->User->save($this->request->data, false)) {
                     $this->request->data['ClientCase']['user_id'] = $this->User->getLastInsertId();
                     $this->ClientCase->create();
                     $this->ClientCase->save($this->request->data);
@@ -218,14 +216,14 @@ class UsersController extends UserMgmtAppController {
                     $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
                     $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
                     $this->ClientCase->save($this->request->data);
-                    //$this->emailAccept($this->request->data['Applicant']['email']);
+                    //$this->acceptEmail($this->request->data['Applicant']['email']);
                     $this->Session->setFlash(__('The user has been saved', null),'default', array('class' => 'alert-success'));
                     $this->redirect(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
                 }else {
-                    $this->Session->setFlash(__('The user could not be saved (Rejected)', null),'default', array('class' => 'alert-danger'));
+                    $this->Session->setFlash(__('The user could not be saved', null),'default', array('class' => 'alert-danger'));
                 }
             }else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+                $this->Session->setFlash(__('The user could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
             }
         }
     }
@@ -271,7 +269,7 @@ class UsersController extends UserMgmtAppController {
         $Email->subject('Eligibility Check');
         $Email->template('welcome');
         $Email->emailFormat('text');
-        $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name'], 'email' => $this->request->data['Applicant']['email'], 'password' => $this->Auth->user('password')));
+        $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name'], 'email' => $this->request->data['Applicant']['email'], $this->request->data['User']['password']));
         $Email->attachments(array(
             'Client details form - 2013.pdf' => array(
                 'file' => APP.'Documents/Email_attachments/Client details form - 2013.pdf',
@@ -414,6 +412,7 @@ class UsersController extends UserMgmtAppController {
 		} else {
 			$this->redirect('/allemployees');
 		}
+        $this->set('userId', $userId);
 	}
 	/**
 	 * Used to add user on the site by Admin
@@ -547,6 +546,7 @@ class UsersController extends UserMgmtAppController {
 		} else {
 			$this->redirect('/allemployees');
 		}
+        $this->set('userId', $userId);
 	}
 	/**
 	 * Used to delete the user by Admin
