@@ -308,6 +308,7 @@ class User extends UserMgmtAppModel {
 	 * @return boolean
 	 */
 	public function verifies() {
+        if(!empty($this->data['User']['cpassword']))
 		return ($this->data['User']['password']===$this->data['User']['cpassword']);
 	}
 	/**
