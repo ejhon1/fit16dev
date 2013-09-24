@@ -26,6 +26,12 @@
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
 				<span class="umstyle1"><?php echo __('Staff Details'); ?></span>
+                <span class="umstyle2" style="float:right">
+                <?php
+                   echo "<span class='icon'><a href='".$this->Html->url('/editUser/'.$userId)."'><img src='".SITE_URL."usermgmt/img/edit.png' border='0' alt='Edit' title='Edit'></a></span>";
+                   echo "<span class='icon'><a href='".$this->Html->url('/changeUserPassword/'.$userId)."'><img src='".SITE_URL."usermgmt/img/password.png' border='0' alt='Change Password' title='Change Password'></a></span>";
+                ?>
+                </span>
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>

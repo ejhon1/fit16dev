@@ -6,12 +6,7 @@
         echo $this->Form->hidden('id');
 		echo $this->Form->input('first_name');
 		echo $this->Form->input('surname');
-		echo $this->Form->input('status', array(
-            'options' => array(
-                'Active' => 'Active',
-                'Inactive' => 'Inactive')));
 		echo $this->Form->input('email');
-		echo $this->Form->input('role_id');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
