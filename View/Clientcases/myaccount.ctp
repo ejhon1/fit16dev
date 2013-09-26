@@ -1,5 +1,21 @@
 <div class="clientcases view">
-<h2><?php echo __('Case information'); ?></h2>
+    <h2><?php echo __('Your account information'); ?></h2>
+
+    <div class="um_box_mid_content_mid" id="index">
+        <table cellspacing="0" cellpadding="0" width="100%" border="0" >
+            <tbody>
+            <tr>
+                <td id="infotype"><strong><?php echo __('Test1');?></strong></td>
+                <td><?php echo h($clientcase['Applicant']['first_name'])?></td>
+            </tr>
+            <tr>
+                <td id="infotype"><strong><?php echo __('Test1');?></strong></td>
+                <td><?php echo h($clientcase['Applicant']['first_name'])?></td>
+            </tr>
+            </tbody>
+            </table>
+    </div>
+
 	<dl>
 		<dt><?php echo __('First Name'); ?></dt>
 		<dd>

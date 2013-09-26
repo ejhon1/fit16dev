@@ -20,9 +20,16 @@ class DocnotesController extends AppController {
  *
  * @return void
  */
-	public function index() {
-		$this->Docnote->recursive = 0;
-		$this->set('docnotes', $this->Paginator->paginate());
+	public function index($id = NULL) {
+        if(!empty($id))
+        {
+
+        }
+        else
+        {
+            $this->Docnote->recursive = 0;
+            $this->set('docnotes', $this->Paginator->paginate());
+        }
 	}
 
 /**

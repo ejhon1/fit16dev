@@ -17,6 +17,62 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+
+
+
+.expand, .close {
+    -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+    background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-color:#ededed;
+    -webkit-border-top-left-radius:4px;
+    -moz-border-radius-topleft:4px;
+    border-top-left-radius:4px;
+    -webkit-border-top-right-radius:4px;
+    -moz-border-radius-topright:4px;
+    border-top-right-radius:4px;
+    -webkit-border-bottom-right-radius:4px;
+    -moz-border-radius-bottomright:4px;
+    border-bottom-right-radius:4px;
+    -webkit-border-bottom-left-radius:4px;
+    -moz-border-radius-bottomleft:4px;
+    border-bottom-left-radius:4px;
+    text-indent:0;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#777777;
+    font-family:arial;
+    font-size:13px;
+    font-weight:bold;
+    font-style:normal;
+    height:30px;
+    line-height:30px;
+    width:100px;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0px #ffffff;
+}
+.expand:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+    background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+    background-color:#dfdfdf;
+}.expand:active {
+     position:relative;
+     top:1px;
+ }
+
+
+
+
+
+
+
+
+
 /*Panels are used for showing/hiding sections of forms & text*/
 .panel1{
 
@@ -31,17 +87,45 @@
 
 
 * {
-	margin:0;
-	padding:0;
+	margin:0em;
+	padding:0em;
 }
 
 /** General Style Info **/
 body {
-	background: #fff;
+	background: #BF5F52;
 	color: #000;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
 	margin: 0;
+    padding: 0px 0px 35px 0px;
+}
+
+.contentarea
+{
+    padding-top: 1.3em;
+}
+
+#outer
+{
+    z-index: 2;
+    position: relative;
+    /*
+        The width value below controls the overall width of the design. By default it's set to 82%
+        (so it'll take up 82% of the browser window's width). You can set it to a different percentage
+        value (70%, 90%, etc.) or even a pixel value (760px, 800px, etc.) to enforce a fixed width.
+    */
+    width: 82%;
+    /*border-right: solid 7px #EBCBB9;
+    border-left: solid 7px #EBCBB9;
+    border-bottom: solid 7px #EBCBB9;
+    */
+    border: solid 7px #EDDCD8;
+    border-top: solid 1px #EDDCD8;
+
+
+    background-color: #FFFDFC;
+    margin: 0 auto;
 }
 a {
 	color: #003d4c;
@@ -66,11 +150,11 @@ h1 {
 	font-size: 100%;
 }
 h2 {
-	font-family: "Candara", Arial, Helvetica, sans-serif;
-	font-size: 36px;
-	font-weight: bold;
-	color: #06C;
-	margin: 10px 0 10px 30px;
+	font-family: Arial, 'verdana', 'lucida grande',Helvetica, sans-serif;
+	font-size: 26px;
+    font-weight: bold;
+	color: #6E3A39;
+	margin: 10px 0 8px 5px;
 }
 
 h3 {
@@ -99,7 +183,7 @@ p {
 }
 
 #header{
-	padding: 10px 20px;
+	padding: 0px 20px;
 }
 #header h1 {
 	line-height:20px;
@@ -118,21 +202,29 @@ p {
 	background: #003d4c;
 	text-decoration: underline;
 }
+#headerpic
+{
+
+    height: 74px;
+    background: #FFFDFC url('../img/polaronLogo1.png') no-repeat center center;
+    margin-bottom: 20px;
+}
 #content{
-	background: #fff;
+	background: #FFFDFC;
 	clear: both;
 	color: #333;
 	padding: 10px 20px 40px 20px;
 	overflow: auto;
 }
-#footer {
+/*#footer {
 	clear: both;
 	padding: 6px 10px;
 	text-align: right;
 }
+*/
 
 /** containers **/
-div.form,
+/*div.form,
 div.index,
 div.view {
 	float:right;
@@ -149,21 +241,25 @@ div.actions h3 {
 	padding-top:0;
 	color:#777;
 }
+*/
 
 
 /** Tables **/
+
 table {
-	border-right:0;
 	clear: both;
 	color: #333;
 	margin-bottom: 10px;
-	width: 80%;
+	width: 100%;
+    border-collapse:collapse;
+    font-size: 14px;
 }
 th {
-	border:0;
-	border-bottom:2px solid #555;
+    padding: 0px 18px 8px 6px;
+    border-bottom: 1px solid #EBEBEB;
+    font-weight: bold;
 	text-align: left;
-	padding:4px;
+
 }
 th a {
 	display: block;
@@ -171,13 +267,14 @@ th a {
 	text-decoration: none;
 }
 th a.asc:after {
-	content: ' ⇣';
+	content: ' ?';
 }
 th a.desc:after {
-	content: ' ⇡';
+	content: ' ?';
 }
 table tr td {
-	padding: 6px;
+    padding: 6px;
+
 	text-align: left;
 	vertical-align: top;
 	border-bottom:1px solid #ddd;
@@ -189,10 +286,16 @@ td.actions {
 	text-align: center;
 	white-space: nowrap;
 }
+
+td {
+    padding: 6px;
+    font-size: 13px;
+}
 table td.actions a {
 	margin: 0px 6px;
 	padding:2px 5px;
 }
+
 
 /* SQL log */
 .cake-sql-log {
