@@ -477,7 +477,7 @@
                             <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
                             <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
                             <td>
-                                <?php echo $this->Html->link($this->Html->image('comments_icon.png',array('alt'=>'Comments')),'http://www.facebook.com', array('target'=>'_blank','escape'=>false)); ?>
+                                <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'index', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                 <?php echo $this->Html->link($this->Html->image('download_icon.png',array('alt'=>'Download')),'http://www.facebook.com', array('target'=>'_blank','escape'=>false)); ?>
 							</td>
 						</tr>

@@ -21,14 +21,27 @@ class DocnotesController extends AppController {
  * @return void
  */
 	public function index($id = NULL) {
+        $userID = $this->UserAuth->getUserId();
         if(!empty($id))
         {
-
+            $this->set('docnotes', $this->Docnote->find('all', array('conditions' => array('Docnote.document_id' => $id))));
+            $this->set(compact($id));
         }
         else
         {
             $this->Docnote->recursive = 0;
             $this->set('docnotes', $this->Paginator->paginate());
+        }
+        if ($this->request->is('post')) {
+            $this->request->data['Docnote']['document_id'] = $id;
+            $this->request->data['Docnote']['user_id'] = $userID;
+            $this->Docnote->create();
+            if ($this->Docnote->save($this->request->data)) {
+                $this->Session->setFlash(__('The docnote has been saved'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The docnote could not be saved. Please, try again.'));
+            }
         }
 	}
 
