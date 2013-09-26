@@ -20,7 +20,7 @@
 
 
 
-.expand, .close {
+.expand, .close, .btn {
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
     box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -273,7 +273,7 @@ th a.desc:after {
 	content: ' ?';
 }
 table tr td {
-    padding: 6px;
+    padding: 10px 10px 6px 6px;
 
 	text-align: left;
 	vertical-align: top;
@@ -288,7 +288,8 @@ td.actions {
 }
 
 td {
-    padding: 6px;
+
+
     font-size: 13px;
 }
 table td.actions a {
