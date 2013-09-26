@@ -3,6 +3,7 @@
     $(function()
     {
         $( "#tabs" ).tabs();
+
     });
     $(function() {
         $( "#accordion" ).accordion({
@@ -12,7 +13,43 @@
 
         });
     });
-    
+    $(function() {
+        //  jQueryUI 1.10 and HTML5 ready
+        //      http://jqueryui.com/upgrade-guide/1.10/#removed-cookie-option
+        //  Documentation
+        //      http://api.jqueryui.com/tabs/#option-active
+        //      http://api.jqueryui.com/tabs/#event-activate
+        //      http://balaarjunan.wordpress.com/2010/11/10/html5-session-storage-key-things-to-consider/
+        //
+        //  Define friendly index name
+        var index = 'key';
+        //  Define friendly data store name
+        var dataStore = window.sessionStorage;
+        //  Start magic!
+        try {
+            // getter: Fetch previous value
+            var oldIndex = dataStore.getItem(index);
+        } catch(e) {
+            // getter: Always default to first tab in error state
+            var oldIndex = 0;
+        }
+        $('#tabs').tabs({
+            // The zero-based index of the panel that is active (open)
+            active : oldIndex,
+            // Triggered after a tab has been activated
+            activate : function( event, ui ){
+                //  Get future value
+                var newIndex = ui.newTab.parent().children().index(ui.newTab);
+                //  Set future value
+                dataStore.setItem( index, newIndex )
+            }
+        });
+    });
+
+
+
+
+
     $(function () {
 	$("#accordion").accordion(
 	{
@@ -20,7 +57,7 @@
 		active:false
 	});
 		var icons = $( "#accordion" ).accordion( "option", "icons" );
-		$('.open').click(function () 
+		$('.expand').click(function ()
 		{
 			$('.ui-accordion-header').removeClass('ui-corner-all').addClass('ui-accordion-header-active ui-state-active ui-corner-top').attr(
 			{
@@ -50,11 +87,11 @@
 					'aria-hidden': 'true'
 				}).hide();
 				$(this).attr("disabled","disabled");
-				$('.open').removeAttr("disabled");
+				$('.expand').removeAttr("disabled");
 			});
 			$('.ui-accordion-header').click(function () 
 			{
-				$('.open').removeAttr("disabled");
+				$('.expand').removeAttr("disabled");
 				$('.close').removeAttr("disabled");
         
 			});
@@ -413,9 +450,10 @@
 </div>
 <div id="tabs-6">
     <div class="accordion-expand-holder">
-			<button type="button" class="open">Expand all</button>
+			<button type="button" class="expand">Expand all</button>
 			<button type="button" class="close">Collapse all</button>
 		</div>
+    <br>
 		<div id="accordion">
 			<h3>Ancestor Documents</h3>
 			<div>
@@ -426,20 +464,21 @@
 						<th class="heading">Document Type</th>
 		                <th class="heading">File name</th>
 						<th class="heading">Uploaded</th>
-						<th class="actions"><?php echo __('View'); ?></th>
+						<th class="actions"><?php echo __('Actions'); ?></th>
 						</tr>
 						<?php foreach ($ancestordocuments as $ancestordocument): ?>
 						<tr class="list">
 							<td valign="top">
-								<?php echo h($ancestordocument['Ancestortype']['ancestor_type']); ?>
-								</td>
-								<td valign="top">
-									<?php echo h($ancestordocument['Documenttype']['type']); ?>
-									</td>
-									<td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
-									<td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
-									<td class="actions">
-										<?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $ancestordocument['Document']['id'])); ?>
+                            <?php echo h($ancestordocument['Ancestortype']['ancestor_type']); ?>
+                            </td>
+                            <td valign="top">
+                            <?php echo h($ancestordocument['Documenttype']['type']); ?>
+                            </td>
+                            <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
+                            <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
+                            <td>
+                                <?php echo $this->Html->link($this->Html->image('comments_icon.png',array('alt'=>'Comments')),'http://www.facebook.com', array('target'=>'_blank','escape'=>false)); ?>
+                                <?php echo $this->Html->link($this->Html->image('download_icon.png',array('alt'=>'Download')),'http://www.facebook.com', array('target'=>'_blank','escape'=>false)); ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>

@@ -1,19 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 
-body {
-	
-	background: #FFF;
-	/** background-color: #fffff; */
-	font-family: "Century Gothic", Trebuchet MS, Arial, Helvetica, sans-serif;
-	margin-left: auto;
-	margin-right: auto;
-	
-}
-
-#container {
-	
-}
 
 	#loginReg {
 	/** background: #CCC; */
@@ -31,7 +18,7 @@ body {
 }
 
 #loginReg ul {
-	
+
 }
 
 #loginReg ul li {
@@ -72,7 +59,7 @@ body {
 }
 
 #navigation {
-	
+
 	font-family:"Century Gothic", Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	text-align: center;
@@ -80,9 +67,9 @@ body {
 	/** padding: 8px; */
 	padding: 0;
 	/** margin-top: 35px; */
-	margin-top: 20px;
+	margin-top: 10px;
 	/** margin-right: 1px; */
-	line-height: 40px;
+	line-height: 20px;
 }
 
 #navigation ul {
@@ -95,12 +82,12 @@ body {
 
 #navigation ul li {
 	display:inline;
-	margin-right: 1px; 
+	margin-right: 1px;
 	text-transform: uppercase;
 }
 
 #navigation a {
-	line-height: 50px;
+	line-height: 40px;
 	border-bottom: 1px solid #cfcfcf;
   	border-radius: 3px 3px 0 0;
   	background-image: -webkit-linear-gradient(top, whiteffd, #eef2f5);
@@ -123,14 +110,14 @@ body {
 	background:url(https://lh4.googleusercontent.com/-MMqxKNnx55Q/TaHJ_uvkeqI/AAAAAAAAAj8/zXTFzXUefTY/s128/HeaderMid.png) repeat;
 	color: #FFF;
 	font-weight: bold;
-} 
+}
 
 #content {
-	
+
 }
 
 #footer {
-	background: #999;
+	background: #F2E9E6;
 	text-align: center;
 	line-height: 1.2em;
 	width: 400px;
@@ -142,7 +129,7 @@ body {
 	margin-right: auto;
 	margin-left: auto; */
 	margin: 55px auto 10px auto;
-	border: 1px solid #999;
+	border: 2px solid #EDDCD8;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;

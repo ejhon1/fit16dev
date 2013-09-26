@@ -32,40 +32,51 @@ $loggedUser = $this->Session->read('UserAuth.User');
 		<?php echo $cakeDescription ?>:
 		<?php echo $title_for_layout; ?>
 	</title>
-	<div id="header">
-        	<?php
-				/** echo $this->Html->image('polaronLogo.png', array('alt'=> 'Polaron Logo', true)); */
-				echo $this->Html->image('polaronLogo.png', array("alt" => "Home", 'url' => array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home')));
-			?>
-        </div>
-	<?php
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
 
-		echo $this->Html->meta('icon');
-		
-		echo $this->Html->css('default');
-		echo $this->Html->css('cake.generic');
-        echo $this->Html->css('jQuery.dataTables');
-        echo $this->Html->css('/usermgmt/css/umstyle');
+    <?php
+    echo $this->fetch('meta');
+    echo $this->fetch('css');
+    echo $this->fetch('script');
+
+    echo $this->Html->meta('icon');
+
+    echo $this->Html->css('default');
+    echo $this->Html->css('cake.generic');
+    echo $this->HTML->css('jquery.dataTables');
+    echo $this->Html->css('/usermgmt/css/umstyle');
+    //echo $this->Html->css('layout');
 
 
-		echo $this->Html->script('jquery');
-		echo $this->Html->script('jquery.smartWizard-2.0.min');
-		echo $this->Html->script('jquery.smartWizard-2.0');
-		echo $this->Html->script('jquery.dataTables');
+
+    echo $this->Html->script('jquery');
+    echo $this->Html->script('jquery.smartWizard-2.0.min');
+    echo $this->Html->script('jquery.smartWizard-2.0');
+    echo $this->Html->script('jquery.dataTables');
 
     //Not sure what these are for, but they break DataTables
-        //echo $this->Html->script('jquery-1.5.min.js');
-        //echo $this->Html->script('jquery-ui-1.10.3.custom.min.js');
-        //echo $this->Html->css('jquery-ui-1.10.3.custom.min.css');
+    //echo $this->Html->script('jquery-1.5.min.js');
+    //echo $this->Html->script('jquery-ui-1.10.3.custom.min.js');
+    //echo $this->Html->css('jquery-ui-1.10.3.custom.min.css');
 
     echo $this->Html->script('jquery-ui-1.10.3.custom.js');
     echo $this->Html->css('jquery-ui-1.10.3.custom.css');
 
-		
-		?>
+
+    ?>
+</head>
+<body>
+
+
+<div id="outer">
+
+	<div id="header">
+        	<?php
+				/** echo $this->Html->image('polaronLogo.png', array('alt'=> 'Polaron Logo', true)); */
+				//echo $this->Html->image('polaronLogo.png', array("alt" => "Home", 'url' => array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home')));
+			?>
+        </div>
+<div id="headerpic"></div>
+
 			
 				<div id="navigation">
 					<!-- <ul  class="nav nav-tabs"> -->
@@ -103,8 +114,8 @@ $loggedUser = $this->Session->read('UserAuth.User');
 					?>
 					</ul>
 				</div>  
-</head>
-<body>
+
+
     
 	<div id="container">
     	
@@ -132,12 +143,14 @@ $loggedUser = $this->Session->read('UserAuth.User');
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
+            <div id="footer">
+                <p>Copyright &copy; 2013 <a href="http://ie.infotech.monash.edu.au/team16/Development/">Polaron</a>. All Rights Reserved<br/></p>
+            </div>
 		</div>
         
-        <div id="footer">
-        	<p>Copyright &copy; 2013 <a href="http://ie.infotech.monash.edu.au/team16/Development/">Polaron</a>. All Rights Reserved<br/></p>
-        </div>
+
 	</div>
+   </div>
 	<?php /** echo $this->element('sql_dump'); */ ?>
 </body>
 </html>
