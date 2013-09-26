@@ -251,7 +251,7 @@
     ?>
     <div id="tabs-3">
         <p>
-        <h3>Case Information</h3>
+        <h3>Eligibility Check Information</h3>
         <p>
         <dl>
             <dt><?php echo __('Born In Poland'); ?></dt>
@@ -279,22 +279,22 @@
                 <?php echo h($clientcase['Clientcase']['nationality_of_grandparents']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Mat Grandmother Name'); ?></dt>
+            <dt><?php echo __('Maternal Grandmother Name'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['mat_grandmother_name']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Mat Grandfather Name'); ?></dt>
+            <dt><?php echo __('Maternal Grandfather Name'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['mat_grandfather_name']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Pat Grandmother Name'); ?></dt>
+            <dt><?php echo __('Paternal Grandmother Name'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['pat_grandmother_name']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Pat Grandfather Name'); ?></dt>
+            <dt><?php echo __('Paternal Grandfather Name'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['pat_grandfather_name']); ?>
                 &nbsp;
@@ -309,7 +309,7 @@
                 <?php echo h($clientcase['Clientcase']['serve_in_army']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Serve In Army Info'); ?></dt>
+            <dt><?php echo __('Serve In Army Information'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['serve_in_army_info']); ?>
                 &nbsp;
@@ -329,22 +329,22 @@
                 <?php echo h($clientcase['Clientcase']['where_left_poland_other']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Have Passport'); ?></dt>
+            <dt><?php echo __('Passport'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['have_passport']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Possess Documents'); ?></dt>
+            <dt><?php echo __('Documents'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['possess_documents']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Possess Documents Types'); ?></dt>
+            <dt><?php echo __('Documents Types'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['possess_documents_types']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Possess Documents Other'); ?></dt>
+            <dt><?php echo __('Other Documents'); ?></dt>
             <dd>
                 <?php echo h($clientcase['Clientcase']['possess_documents_other']); ?>
                 &nbsp;
@@ -354,14 +354,9 @@
                 <?php echo h($clientcase['Clientcase']['other_factors']); ?>
                 &nbsp;
             </dd>
-            <dt><?php echo __('Created'); ?></dt>
+            <dt><?php echo __('Date Registered'); ?></dt>
             <dd>
-                <?php echo h($clientcase['Clientcase']['created']); ?>
-                &nbsp;
-            </dd>
-            <dt><?php echo __('Modified'); ?></dt>
-            <dd>
-                <?php echo h($clientcase['Clientcase']['modified']); ?>
+                <?php echo $this->Time->format('d-m-Y',$clientcase['Clientcase']['created']); ?>
                 &nbsp;
             </dd>
         </dl>
