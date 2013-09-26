@@ -216,7 +216,7 @@ class UsersController extends UserMgmtAppController {
                     $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
                     $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
                     $this->ClientCase->save($this->request->data);
-                    //$this->acceptEmail($this->request->data['Applicant']['email']);
+                    $this->acceptEmail($this->request->data['Applicant']['email']);
                     $this->Session->setFlash(__('The user has been saved', null),'default', array('class' => 'alert-success'));
                     $this->redirect(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
                 }else {
@@ -272,16 +272,16 @@ class UsersController extends UserMgmtAppController {
         $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name'], 'email' => $this->request->data['Applicant']['email'], $this->request->data['User']['password']));
         $Email->attachments(array(
             'Client details form - 2013.pdf' => array(
-                'file' => APP.'Documents/Email_attachments/Client details form - 2013.pdf',
+                'file' => APP.'documents/Email_attachments/Client details form - 2013.pdf',
                 'mimetype' => 'pdf'),
             'Polaron - PL Passport - Info Pack - 2013.pdf' => array(
-                'file' => APP.'Documents/Email_attachments/Polaron - PL Passport - Info Pack - 2013.pdf',
+                'file' => APP.'documents/Email_attachments/Polaron - PL Passport - Info Pack - 2013.pdf',
                 'mimetype' => 'pdf'),
             'Polaron Family Tree - 2013.pdf' => array(
-                'file' => APP.'Documents/Email_attachments/Polaron Family Tree - 2013.pdf',
+                'file' => APP.'documents/Email_attachments/Polaron Family Tree - 2013.pdf',
                 'mimetype' => 'pdf'),
             'Polaron Processing Stages - 2013.pdf' => array(
-                'file' => APP.'Documents/Email_attachments/Polaron Processing Stages - 2013.pdf',
+                'file' => APP.'documents/Email_attachments/Polaron Processing Stages - 2013.pdf',
                 'mimetype' => 'pdf'),
         ));
 
