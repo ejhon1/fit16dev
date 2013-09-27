@@ -50,10 +50,10 @@ class ApplicantsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Applicant->create();
 			if ($this->Applicant->save($this->request->data)) {
-				$this->Session->setFlash(__('The applicant has been saved'));
+				$this->Session->setFlash(__('The applicant has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The applicant could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The applicant could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		}
 		$clientcases = $this->Applicant->Clientcase->find('list');
@@ -74,10 +74,10 @@ class ApplicantsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Applicant->save($this->request->data)) {
-				$this->Session->setFlash(__('The applicant has been saved'));
+				$this->Session->setFlash(__('The applicant has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The applicant could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The applicant could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Applicant.' . $this->Applicant->primaryKey => $id));
@@ -102,10 +102,10 @@ class ApplicantsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Applicant->delete()) {
-			$this->Session->setFlash(__('Applicant deleted'));
+			$this->Session->setFlash(__('Applicant deleted', null),'default', array('class' => 'alert-success'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Applicant was not deleted'));
+		$this->Session->setFlash(__('Applicant was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
 }
