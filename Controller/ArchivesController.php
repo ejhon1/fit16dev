@@ -49,10 +49,10 @@ class ArchivesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Archive->create();
 			if ($this->Archive->save($this->request->data)) {
-				$this->Session->setFlash(__('The archive has been saved'));
+				$this->Session->setFlash(__('The archive has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The archive could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The archive could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		}
 	}
@@ -70,10 +70,10 @@ class ArchivesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Archive->save($this->request->data)) {
-				$this->Session->setFlash(__('The archive has been saved'));
+				$this->Session->setFlash(__('The archive has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The archive could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The archive could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Archive.' . $this->Archive->primaryKey => $id));
@@ -95,10 +95,10 @@ class ArchivesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Archive->delete()) {
-			$this->Session->setFlash(__('Archive deleted'));
+			$this->Session->setFlash(__('Archive deleted', null),'default', array('class' => 'alert-success'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Archive was not deleted'));
+		$this->Session->setFlash(__('Archive was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
 }
