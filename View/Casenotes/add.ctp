@@ -1,7 +1,7 @@
 <div>
 <?php echo $this->Form->create('Contact Note'); ?>
 	<fieldset>
-		<legend><?php echo __('Add Casenote'); ?></legend>
+		<legend><?php echo __('Add Contact Note'); ?></legend>
 	<?php
 		//echo $this->Form->input('clientcase_id');
 		//echo $this->Form->input('user_id');
