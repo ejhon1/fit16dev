@@ -7,8 +7,13 @@
 		//echo $this->Form->input('user_id');
 		//echo $this->Form->input('notesubject_id');
 		echo $this->Form->input('subject');
-		$options = array('Internal' => 'Internal', 'Public' => 'Public');
-		echo $this->Form->radio('note_type', $options);
+		//$options = array('Internal' => 'Internal', 'Public' => 'Public');
+		//echo $this->Form->radio('note_type', $options);
+		echo $this->Form->input('note_type', array(
+					'type' => 'radio',
+					'legend'=>'Note Type',
+					'default' => 'Internal',
+					'options' => array('Internal' => 'Internal', 'Public'=>'Public')));
 		echo $this->Form->input('note');
 	?>
 	</fieldset>
