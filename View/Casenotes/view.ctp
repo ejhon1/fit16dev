@@ -46,10 +46,10 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Casenote'), array('action' => 'edit', $casenote['Casenote']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Casenote'), array('action' => 'delete', $casenote['Casenote']['id']), null, __('Are you sure you want to delete # %s?', $casenote['Casenote']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Casenotes'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Casenote'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit Contact Note'), array('action' => 'edit', $casenote['Casenote']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Contact Note'), array('action' => 'delete', $casenote['Casenote']['id']), null, __('Are you sure you want to delete # %s?', $casenote['Casenote']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List Contact Note'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Contact Note'), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Clientcases'), array('controller' => 'clientcases', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Clientcase'), array('controller' => 'clientcases', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
