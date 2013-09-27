@@ -55,10 +55,10 @@ class EmployeesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Employee->create();
 			if ($this->Employee->save($this->request->data)) {
-				$this->Session->setFlash(__('The employee has been saved'));
+				$this->Session->setFlash(__('The employee has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The employee could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The employee could not be saved. Please, try again.', null),'default', array('class' => 'alert-success'));
 			}
 		}
 		$users = $this->Employee->User->find('list');
@@ -79,10 +79,10 @@ class EmployeesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Employee->save($this->request->data)) {
-				$this->Session->setFlash(__('The employee has been saved'));
+				$this->Session->setFlash(__('The employee has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The employee could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The employee could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Employee.' . $this->Employee->primaryKey => $id));
@@ -97,10 +97,10 @@ class EmployeesController extends AppController {
         $id=$this->Session->read('UserAuth.User.id');
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Employee->save($this->request->data)) {
-                $this->Session->setFlash(__('The employee has been saved'));
+                $this->Session->setFlash(__('The employee has been saved', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('action' => 'myaccount'));
             } else {
-                $this->Session->setFlash(__('The employee could not be saved. Please try again.'));
+                $this->Session->setFlash(__('The employee could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
             }
         } else {
             $options = array('conditions' => array('Employee.user_id' => $id));
@@ -122,10 +122,10 @@ class EmployeesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Employee->delete()) {
-			$this->Session->setFlash(__('Employee deleted'));
+			$this->Session->setFlash(__('Employee deleted', null),'default', array('class' => 'alert-success'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Employee was not deleted'));
+		$this->Session->setFlash(__('Employee was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
 }
