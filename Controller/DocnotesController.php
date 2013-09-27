@@ -37,10 +37,10 @@ class DocnotesController extends AppController {
             $this->request->data['Docnote']['user_id'] = $userID;
             $this->Docnote->create();
             if ($this->Docnote->save($this->request->data)) {
-                $this->Session->setFlash(__('The docnote has been saved'));
+                $this->Session->setFlash(__('The docnote has been saved', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The docnote could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The docnote could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
             }
         }
 	}
@@ -69,10 +69,10 @@ class DocnotesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Docnote->create();
 			if ($this->Docnote->save($this->request->data)) {
-				$this->Session->setFlash(__('The docnote has been saved'));
+				$this->Session->setFlash(__('The docnote has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The docnote could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The docnote could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		}
 		$documents = $this->Docnote->Document->find('list');
@@ -93,10 +93,10 @@ class DocnotesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Docnote->save($this->request->data)) {
-				$this->Session->setFlash(__('The docnote has been saved'));
+				$this->Session->setFlash(__('The docnote has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The docnote could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The docnote could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Docnote.' . $this->Docnote->primaryKey => $id));
@@ -121,10 +121,10 @@ class DocnotesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Docnote->delete()) {
-			$this->Session->setFlash(__('Docnote deleted'));
+			$this->Session->setFlash(__('Docnote deleted', null),'default', array('class' => 'alert-success'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Docnote was not deleted'));
+		$this->Session->setFlash(__('Docnote was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
 }
