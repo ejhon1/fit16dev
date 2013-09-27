@@ -49,10 +49,10 @@ class NotesubjectsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Notesubject->create();
 			if ($this->Notesubject->save($this->request->data)) {
-				$this->Session->setFlash(__('The notesubject has been saved'));
+				$this->Session->setFlash(__('The note subject has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The notesubject could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The note subject could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		}
 	}
@@ -70,10 +70,10 @@ class NotesubjectsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Notesubject->save($this->request->data)) {
-				$this->Session->setFlash(__('The notesubject has been saved'));
+				$this->Session->setFlash(__('The note subject has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The notesubject could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The note subject could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Notesubject.' . $this->Notesubject->primaryKey => $id));
@@ -95,10 +95,10 @@ class NotesubjectsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Notesubject->delete()) {
-			$this->Session->setFlash(__('Notesubject deleted'));
+			$this->Session->setFlash(__('Note subject deleted', null),'default', array('class' => 'alert-success'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Notesubject was not deleted'));
+		$this->Session->setFlash(__('Note subject was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
 }
