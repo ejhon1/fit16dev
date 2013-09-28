@@ -166,6 +166,42 @@
 
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){ 
+ 
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('.buttonNext').fadeIn();
+            } else {
+                $('.buttonNext').fadeOut();
+            }
+        }); 
+ 
+        $('.buttonNext').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+ 
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){ 
+ 
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('.buttonPrevious').fadeIn();
+            } else {
+                $('.buttonPrevious').fadeOut();
+            }
+        }); 
+ 
+        $('.buttonPrevious').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+ 
+    });
+</script>
 
 <fieldset>
 <legend><?php echo __('Quickcheck Eligibility Form'); ?></legend>
