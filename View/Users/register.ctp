@@ -172,7 +172,6 @@
 <br>
 <p>Fields marked with an * are required. </p>
 <br><br>
-<!-- <div id="panel1" class="panel1"> -->
 <div id="wizard" class="swMain">
 <ul>
     <li><a href="#step-1">
@@ -206,6 +205,15 @@ Step 4<br />
 </ul>
 <div id="step-1">
     <h2 class="StepTitle">Your Details</h2>
+    <h3>Polish Citizenship Eligibility Assessment</h3>
+    <br />
+    <p>Free..... Fast..... Convinient.....</p>
+    <br />
+    <br />
+    <p>Thank you for your interest in Polaron's QuickCheck Eligibility Assessment. Please fill out the following form. There are four sections to complete that will require you to divulge some personal details about you and your relatives/ancestors. The information collected is strictly for our use and will remain private. Once completed you will be notified of the results by email. </p>
+    <br>
+<h4>Fields marked with an asterisk (*) are required. </h4>
+<br><br>
     <?php
     echo $this->Form->input('Applicant.title', array(
         'options' => array(
