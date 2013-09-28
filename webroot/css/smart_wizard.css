@@ -1,5 +1,26 @@
 p {
-	font: bold 14px "Maiandra GD", Candara, Arial, sans-serif;
+	font: normal 14px "Candara", Arial, sans-serif;
+	width: 400px;
+	margin: auto;
+	text-align: justify;
+	line-height: 30px;
+}
+
+h3 {
+	margin: auto;
+	text-align: center;
+	font: "Maiandra GD", Candara, Arial, sans-serif;
+	color: #333;
+	padding-top: 40px;
+	margin: 0 0 20px 0;
+}
+
+h4 {
+	font: bold 13px "Maiandra GD", Candara, Arial, sans-serif;
+	color: #666;
+	text-align: left;
+	margin: 0 0 0 30px;
+	padding-top: 25px;
 }
 
 .swMain {
@@ -10,7 +31,7 @@ p {
   border: 0px solid #CCC;
   overflow:visible;
   float:left;
-  width:980px;
+  width:765px;
 }
 
 .swMain legend {
@@ -26,8 +47,7 @@ p {
   border: 0px solid #CCC;    
   overflow:hidden;
   clear:both;
-  /** height:300px; */
-  /** min-height: 0; */
+  height: 1340px
 }
 
 .swMain .stepContainer div.content {
@@ -40,14 +60,13 @@ p {
   font: bold 12px "Maiandra GD", Arial, Helvetica, sans-serif; 
   color:#5A5655;   
   background-color:#F8F8F8;
-  height: auto;
-  /** min-height: 0; */
+  height: 1340px;
   text-align:left;
   overflow:visible;    
   z-index:88; 
   -webkit-border-radius: 5px;
   -moz-border-radius  : 5px;
-  width:968px;
+  width:750px;
   clear:both;
 }
 
@@ -64,7 +83,6 @@ p {
   text-align:left;
   overflow:auto;    
   z-index:88; 
-
   -webkit-border-radius: 5px;
   -moz-border-radius  : 5px;
   left:0;
@@ -112,9 +130,9 @@ p {
   position:relative;
   float:left;
   margin: 0;
-  padding:3px;
+  padding:6px;
   height:60px;
-  width:230px;
+  width:171px; /** Step header {title and description} */
   text-decoration: none;
   outline-style:none;
   -moz-border-radius  : 5px;
@@ -144,28 +162,28 @@ p {
 }
 .swMain ul.anchor li a.selected{
   color:#F8F8F8;
-  background: #EA8511;  /* EA8511 */
-  border: 1px solid #EA8511;
+  background: #E77471;
+  border: 1px solid #E77471;
   cursor:text;
   -moz-box-shadow: 5px 5px 8px #888;
   -webkit-box-shadow: 5px 5px 8px #888;
   box-shadow: 5px 5px 8px #888;
 }
 .swMain ul.anchor li a.selected:hover {
-  color:#F8F8F8;  
-  background: #EA8511;  
+  color:#F8F8F8;
+  background: #E77471;
 }
 
 .swMain ul.anchor li a.done { 
   position:relative;
-  color:#FFF;  
-  background: #8CC63F;  
-  border: 1px solid #8CC63F;   
+  color:#FFF;
+  background: #F2BB66;
+  border: 1px solid #F2BB66;   
   z-index:99;
 }
 .swMain ul.anchor li a.done:hover {
   color:#5A5655;  
-  background: #8CC63F; 
+  background: #F2BB66; 
   border: 1px solid #5A5655;   
 }
 .swMain ul.anchor li a.disabled {
@@ -196,7 +214,7 @@ p {
   text-decoration: none;
   text-align: center;
   font: bold 13px "Maiandra GD", Arial, Helvetica, sans-serif;
-  width:100px;
+  width:80px;
   color:#FFF;
   outline-style:none;
   background-color:   #5A5655;
@@ -218,7 +236,7 @@ p {
   text-decoration: none;
   text-align: center;
   font: bold 13px "Maiandra GD", Arial, Helvetica, sans-serif;
-  width:100px;
+  width:80px;
   color:#FFF;
   outline-style:none;
   background-color:   #5A5655;
@@ -234,7 +252,7 @@ p {
   text-decoration: none;
   text-align: center;
   font: bold 13px "Maiandra GD", Arial, Helvetica, sans-serif;
-  width:100px;
+  width:80px;
   color:#FFF;
   outline-style:none;
   background-color:   #5A5655;
