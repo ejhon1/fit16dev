@@ -13,3 +13,10 @@
 2013-09-26 02:27:23 Debug: permission: actionUrl-clientcases/myaccount
 2013-09-26 02:27:28 Debug: permission: actionUrl-casenotes/mynotes
 2013-09-26 02:32:28 Debug: permission: actionUrl-users/allemployees
+2013-09-29 03:29:35 Debug: permission: actionUrl-docnotes/notes
+2013-09-29 05:45:28 Debug: permission: actionUrl-docnotes/mynotes
+2013-09-29 05:50:48 Debug: permission: actionUrl-toolbar_access/sql_explain
+2013-09-30 05:21:42 Debug: permission: actionUrl-clientcases/index
+2013-09-30 23:11:17 Debug: permission: actionUrl-clientcases/view
+2013-10-01 07:34:02 Debug: permission: actionUrl-documents/uploadfile
+2013-10-01 07:34:56 Debug: permission: actionUrl-documents/uploadfile

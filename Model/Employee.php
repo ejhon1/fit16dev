@@ -95,7 +95,20 @@ class Employee extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+        ),
+        'Docnote' => array(
+            'className' => 'Docnote',
+            'foreignKey' => 'employee_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
 	);
 
 }

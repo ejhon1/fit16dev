@@ -44,22 +44,19 @@ $loggedUser = $this->Session->read('UserAuth.User');
     echo $this->Html->css('cake.generic');
     echo $this->HTML->css('jquery.dataTables');
     echo $this->Html->css('/usermgmt/css/umstyle');
-    //echo $this->Html->css('layout');
+    //echo $this->HTML->css('bootstrap-responsive');
+   echo $this->Html->script('jquery');
+   echo $this->Html->script('jquery.smartWizard-2.0.min');
+   echo $this->Html->script('jquery.smartWizard-2.0');
+   echo $this->Html->script('jquery.dataTables');
+
+    echo $this->Html->script('bootstrap');
+    echo $this->HTML->css('bootstrap');
 
 
 
-    echo $this->Html->script('jquery');
-    echo $this->Html->script('jquery.smartWizard-2.0.min');
-    echo $this->Html->script('jquery.smartWizard-2.0');
-    echo $this->Html->script('jquery.dataTables');
-
-    //Not sure what these are for, but they break DataTables
-    //echo $this->Html->script('jquery-1.5.min.js');
-    //echo $this->Html->script('jquery-ui-1.10.3.custom.min.js');
-    //echo $this->Html->css('jquery-ui-1.10.3.custom.min.css');
-
-    echo $this->Html->script('jquery-ui-1.10.3.custom.js');
-    echo $this->Html->css('jquery-ui-1.10.3.custom.css');
+    //echo $this->Html->script('jquery-ui-1.10.3.custom.js');
+    //echo $this->Html->css('jquery-ui-1.10.3.custom.css');
 
 
     ?>
@@ -94,7 +91,7 @@ $loggedUser = $this->Session->read('UserAuth.User');
 					else if(!empty($loggedUser) && $loggedUser['type']=='Client')
 					{
 					?>
-                        <li><?php echo $this->Html->link('My Case Notes', array('plugin' => false, 'controller'=>'casenotes', 'action'=>'mynotes'));?> </li>
+                        <li><?php echo $this->Html->link('My Contact Notes', array('plugin' => false, 'controller'=>'casenotes', 'action'=>'mynotes'));?> </li>
 						<li><?php echo $this->Html->link('My Documents', array('plugin' => false, 'controller'=>'documents', 'action'=>'mydocs'));?> </li>
 						<li><?php echo $this->Html->link('My Account', array('plugin' => false, 'controller'=>'clientcases', 'action'=>'myaccount'));?> </li><?php
 					}

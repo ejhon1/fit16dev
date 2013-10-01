@@ -7,7 +7,6 @@ App::uses('AppModel', 'Model');
  * @property Archive $Archive
  * @property Status $Status
  * @property Applicant $Applicant
- * @property Applicant $Applicant
  * @property Casenote $Casenote
  * @property Casestatus $Casestatus
  */
@@ -113,7 +112,20 @@ class Clientcase extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+        'Docnote' => array(
+            'className' => 'Docnote',
+            'foreignKey' => 'employee_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
 	);
 
 }

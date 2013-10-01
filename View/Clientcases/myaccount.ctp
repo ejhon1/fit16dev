@@ -1,6 +1,6 @@
 <div class="clientcases view">
-    <h2><?php echo __('Your account information'); ?></h2>
-
+    <h2><?php echo __('Account information'); ?></h2>
+<?php /*
     <div class="um_box_mid_content_mid" id="index">
         <table cellspacing="0" cellpadding="0" width="100%" border="0" >
             <tbody>
@@ -15,7 +15,8 @@
             </tbody>
             </table>
     </div>
-
+ */?>
+<br>
 	<dl>
 		<dt><?php echo __('First Name'); ?></dt>
 		<dd>
