@@ -397,10 +397,14 @@
 
 
 <div id="tabs-5">
+<?php
+	echo $this->HTML->script('JQueryUser');
+?>
     <p>
     <h3><?php echo __('Related Casenotes'); ?></h3>
     <?php if (!empty($clientcase['Casenote'])): ?>
-        <table cellpadding = "0" cellspacing = "0">
+        <table cellpadding = "0" cellspacing = "0" id="data">
+        <thead>
             <tr>
                 <!-- <th><?php echo __('Id'); ?></th>
 <th><?php echo __('Clientcase Id'); ?></th>
@@ -413,6 +417,8 @@
                 <!-- <th><?php echo __('Modified'); ?></th> -->
                 <th class="actions"><?php echo __('Actions'); ?></th>
             </tr>
+            </thead>
+            <tbody>
             <?php
             $i = 0;
             foreach ($clientcase['Casenote'] as $casenote): ?>
@@ -439,6 +445,7 @@
                     </td>
                 </tr>
             <?php endforeach; ?>
+            </tbody>
         </table>
     <?php endif; ?>
 
