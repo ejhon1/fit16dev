@@ -248,8 +248,8 @@ Step 4<br />
     <br />
     <p>Thank you for your interest in Polaron's QuickCheck Eligibility Assessment. Please fill out the following form. There are four sections to complete that will require you to divulge some personal details about you and your relatives/ancestors. The information collected is strictly for our use and will remain private. Once completed you will be notified of the results by email. </p>
     <br>
-<h4>Fields marked with an asterisk (*) are required. </h4>
-<br><br>
+    <h4>Fields marked with an asterisk (*) are required. </h4>
+    <br><br>
     <?php
     echo $this->Form->input('Applicant.title', array(
         'options' => array(
@@ -260,36 +260,38 @@ Step 4<br />
             'Miss' => 'Miss')
     ));
     ?>
-
-
-
-    <?php
-    echo $this->Form->input('Applicant.first_name', array(
-            'id' => 'firstname')
-    );
-    ?>
     <td align="left"><span id="msg_firstname"></span>&nbsp;</td>
     <?php
-    echo $this->Form->input('Applicant.surname', array(
-            'id' => 'surname')
-    );
+        echo $this->Form->input('Applicant.first_name', array(
+            'id' => 'firstname')
+        );
     ?>
     <td align="left"><span id="msg_surname"></span>&nbsp;</td>
     <?php
-    echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth', 'id' => 'datepicker', 'type'=>'text', 'class'=>'datepicker'));
-    echo $this->Form->input('Applicant.landline_number', array(
-            'id' => 'phone',
-            'label' => 'Phone Number')
-    );
+        echo $this->Form->input('Applicant.surname', array(
+            'id' => 'surname')
+        );
     ?>
+    <?php
+        echo $this->Form->input('Applicant.birthdate', array('label' => 'Date of birth',
+            'id' => 'datepicker',
+            'type'=>'text',
+            'class'=>'datepicker'));
+	?>
     <td align="left"><span id="msg_phone"></span>&nbsp;</td>
     <?php
-    echo $this->Form->input('Applicant.email', array(
-            'id' => 'email',
-            'label' => 'E-mail Address')
-    );
+        echo $this->Form->input('Applicant.landline_number', array(
+            'id' => 'phone',
+            'label' => 'Phone Number')
+        );
     ?>
     <td align="left"><span id="msg_email"></span>&nbsp;</td>
+    <?php
+        echo $this->Form->input('Applicant.email', array(
+            'id' => 'email',
+            'label' => 'E-mail Address')
+        );
+    ?>
 </div>
 
 <div id="step-2">
