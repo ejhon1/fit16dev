@@ -424,7 +424,12 @@
                     <th><?php echo $this->Time->format('d-m-Y',$casenote['created']); ?></th>
                     <td><?php echo $casenote['subject']; ?></td>
                     <td><?php echo $casenote['note_type']; ?></td>
-                    <td><?php echo $casenote['note']; ?></td>
+                    <td>
+                    	<?php
+	                    $note = substr($casenote['note'], 0, 50);
+	                    echo $note.' ... ';
+	                 ?>
+	            </td>
                     <!-- <td><?php echo $casenote['modified']; ?></td> -->
                     <!-- 
                     <td class="actions">
