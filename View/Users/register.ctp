@@ -297,6 +297,10 @@ Step 4<br />
 <div id="step-2">
     <h2 class="StepTitle">My Polishness</h2>
     <?php
+    ?>
+    <td align="left"><span id="msg_born_in_poland"></span>&nbsp;</td>
+    <?php
+    <?php
     echo $this->Form->input('ClientCase.born_in_poland', array(
         'type' => 'radio',
         'options' => array(
