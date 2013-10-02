@@ -300,7 +300,6 @@ Step 4<br />
     ?>
     <td align="left"><span id="msg_born_in_poland"></span>&nbsp;</td>
     <?php
-    <?php
     echo $this->Form->input('ClientCase.born_in_poland', array(
         'type' => 'radio',
         'options' => array(
