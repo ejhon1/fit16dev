@@ -49,6 +49,16 @@ class ClientcasesController extends AppController {
         $this->loadModel('Archiveloan');
         $this->loadModel('Casestatus');
         $this->loadModel('Status');
+        $this->loadModel('DocumentType');
+        $this->loadModel('AncestorType');
+
+        $documentTypes = $this->DocumentType->find('list', array('fields' => array('DocumentType.id', 'DocumentType.type'), 'order'=>'type ASC'));
+        $ancestorTypes = $this->AncestorType->find('list', array('fields' => array('AncestorType.id', 'AncestorType.ancestor_type'), 'order'=>'ancestor_type ASC'));
+
+
+        $statuses = $this->Casestatus->Status->find('list');
+        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
+
         if (!$this->Clientcase->exists($id)) {
             throw new NotFoundException(__('Invalid Case.'));
 
@@ -66,10 +76,99 @@ class ClientcasesController extends AppController {
         $casestatuses = $this->Casestatus->find('all', array('conditions' => array('Casestatus.clientcase_id' => $clientcase['Clientcase']['id'])));
 
         $currentloan = $this->Archiveloan->find('first', array('conditions' => array('Archiveloan.archive_id' => $clientcase['Clientcase']['archive_id'], 'Archiveloan.date_returned' => NULL)));
+
+
+        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes'));
+    }
+
+    public function statustest($id = null) {
+        $userid=$this->Session->read('UserAuth.User.id');
+        $this->loadModel('Applicant');
+        $this->loadModel('Document');
+        $this->loadModel('Employee');
+        $this->loadModel('Archiveloan');
+        $this->loadModel('Casestatus');
+        $this->loadModel('Status');
+
         $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
+        $clientcases = $this->Casestatus->Clientcase->find('list');
+        $statuses = $this->Casestatus->Status->find('list');
+        if (!$this->Clientcase->exists($id)) {
+            throw new NotFoundException(__('Invalid Case.'));
 
+        }
+        /*if ($this->request->is('post') || $this->request->is('put')) {
+            $this->request->data['Casestatus']['clientcase_id'] = $id;
+            $this->request->data['Casestatus']['employee_id'] = $employee['Employee']['id'];
+            $this->Casestatus->create();
+            if ($this->Casestatus->save($this->request->data)) {
+                $this->Session->setFlash(__('The case status has been saved'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
+            } else {
+                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
+            }
+        }*/
+        if ($this->request->is('post')) {
+            $this->Casestatus->create();
+            if ($this->Casestatus->save($this->request->data)) {
+                $this->Session->setFlash(__('The case status has been saved'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
+            } else {
+                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
+            }
+        }
+        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
+        $casestatuses = $this->Casestatus->find('all', array('conditions' => array('Casestatus.clientcase_id' => $clientcase['Clientcase']['id'])));
 
-        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses'));
+        $this->set(compact('clientcase',  'employee', 'casestatuses', 'clientcases', 'statuses', 'id'));
+    }
+
+    public function updatestatus()
+    {
+        /*$this->loadModel('Casestatus');
+        if ($this->request->is('post')) {
+            $this->Casestatus->create();
+            if ($this->Casestatus->save($this->request->data)) {
+                $this->Session->setFlash(__('The case status has been saved'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
+            } else {
+                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
+            }
+        }
+        */
+        $userid=$this->Session->read('UserAuth.User.id');
+        $this->loadModel('Applicant');
+        $this->loadModel('Document');
+        $this->loadModel('Employee');
+        $this->loadModel('Archiveloan');
+        $this->loadModel('Casestatus');
+        $this->loadModel('Status');
+
+        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
+        $clientcases = $this->Casestatus->Clientcase->find('list');
+        $statuses = $this->Casestatus->Status->find('list');
+        /*if ($this->request->is('post') || $this->request->is('put')) {
+            $this->request->data['Casestatus']['clientcase_id'] = $id;
+            $this->request->data['Casestatus']['employee_id'] = $employee['Employee']['id'];
+            $this->Casestatus->create();
+            if ($this->Casestatus->save($this->request->data)) {
+                $this->Session->setFlash(__('The case status has been saved'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
+            } else {
+                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
+            }
+        }*/
+        if ($this->request->is('post')) {
+            $this->Casestatus->create();
+            if ($this->Casestatus->save($this->request->data, false)) {
+                $this->Session->setFlash(__('The case status has been saved'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
+            } else {
+                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
+            }
+        }
+
+        $this->set(compact('clientcase',  'employee', 'casestatuses', 'clientcases', 'statuses', 'id'));
     }
 
     public function myaccount() {

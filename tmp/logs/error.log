@@ -4009,3 +4009,589 @@ Request URL: /development/css/images/ui-icons_0164f9_256x240.png
 Stack Trace:
 #0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2013-10-01 13:55:29 Error: [MissingPluginException] Plugin Usermgmt could not be found.
+Exception Attributes: array (
+  'plugin' => 'Usermgmt',
+)
+Request URL: /team16/development/
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(365): CakePlugin::path('Usermgmt')
+#1 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(226): App::pluginPath('Usermgmt')
+#2 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(543): App::path('Controller/Comp...', 'Usermgmt')
+#3 [internal function]: App::load('UserAuthCompone...')
+#4 [internal function]: spl_autoload_call('UserAuthCompone...')
+#5 D:\Websites\ie\team16\development\lib\Cake\Controller\ComponentCollection.php(100): class_exists('UserAuthCompone...')
+#6 D:\Websites\ie\team16\development\lib\Cake\Controller\ComponentCollection.php(53): ComponentCollection->load('Usermgmt.UserAu...', Array)
+#7 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(635): ComponentCollection->init(Object(PagesController))
+#8 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(183): Controller->constructClasses()
+#9 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#10 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-10-01 13:55:29 Error: [MissingControllerException] Controller class UsermgmtController could not be found.
+Exception Attributes: array (
+  'class' => 'UsermgmtController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/usermgmt/css/umstyle.css
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-01 09:55:50 Error: Fatal Error (64): Cannot redeclare FullCalendarAppController::$components in [D:\Websites\ie\team16\development\plugins\FullCalendar\Controller\FullCalendarAppController.php, line 16]
+2013-10-01 09:55:51 Error: [FatalErrorException] Cannot redeclare FullCalendarAppController::$components
+Request URL: /team16/development/
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'D:\Websites\ie\...', 16)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'D:\Websites\ie\...', 16, Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(927): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'D:\Websites\ie\...', 16, Array)
+#3 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(900): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-01 09:58:06 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[HY000] [1130] Host \'FIT-IE01-V01.AD.MONASH.EDU\' is not allowed to connect to this MySQL server',
+  'enabled' => true,
+)
+Request URL: /team16/development/login
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(262): Mysql->connect()
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\ConnectionManager.php(102): DboSource->__construct(Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(3209): ConnectionManager::getDataSource('default')
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1108): Model->setDataSource('default')
+#4 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(3231): Model->setSource('users')
+#5 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1319): Model->getDataSource()
+#6 D:\Websites\ie\team16\development\lib\Cake\View\Helper\FormHelper.php(198): Model->schema()
+#7 D:\Websites\ie\team16\development\lib\Cake\View\Helper\FormHelper.php(448): FormHelper->_introspectModel('User', 'fields')
+#8 D:\Websites\ie\team16\development\app\View\Helper\AppFormHelper.php(23): FormHelper->create('User', Array)
+#9 D:\Websites\ie\team16\development\app\View\Users\login.ctp(35): AppFormHelper->create('User', Array)
+#10 D:\Websites\ie\team16\development\lib\Cake\View\View.php(948): include('D:\Websites\ie\...')
+#11 D:\Websites\ie\team16\development\lib\Cake\View\View.php(910): View->_evaluate('D:\Websites\ie\...', Array)
+#12 D:\Websites\ie\team16\development\lib\Cake\View\View.php(471): View->_render('D:\Websites\ie\...')
+#13 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(948): View->render(NULL, NULL)
+#14 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(194): Controller->render()
+#15 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#16 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#17 {main}
+2013-10-01 09:58:15 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[HY000] [1130] Host \'FIT-IE01-V01.AD.MONASH.EDU\' is not allowed to connect to this MySQL server',
+  'enabled' => true,
+)
+Request URL: /team16/development/login
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(262): Mysql->connect()
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\ConnectionManager.php(102): DboSource->__construct(Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(3209): ConnectionManager::getDataSource('default')
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1108): Model->setDataSource('default')
+#4 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(3231): Model->setSource('users')
+#5 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1319): Model->getDataSource()
+#6 D:\Websites\ie\team16\development\lib\Cake\View\Helper\FormHelper.php(198): Model->schema()
+#7 D:\Websites\ie\team16\development\lib\Cake\View\Helper\FormHelper.php(448): FormHelper->_introspectModel('User', 'fields')
+#8 D:\Websites\ie\team16\development\app\View\Helper\AppFormHelper.php(23): FormHelper->create('User', Array)
+#9 D:\Websites\ie\team16\development\app\View\Users\login.ctp(35): AppFormHelper->create('User', Array)
+#10 D:\Websites\ie\team16\development\lib\Cake\View\View.php(948): include('D:\Websites\ie\...')
+#11 D:\Websites\ie\team16\development\lib\Cake\View\View.php(910): View->_evaluate('D:\Websites\ie\...', Array)
+#12 D:\Websites\ie\team16\development\lib\Cake\View\View.php(471): View->_render('D:\Websites\ie\...')
+#13 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(948): View->render(NULL, NULL)
+#14 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(194): Controller->render()
+#15 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#16 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#17 {main}
+2013-10-01 10:01:52 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Docnote.employee_id' in 'field list'
+Request URL: /team16/development/casenotes/mynotes
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Docnote...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(670): DboSource->execute('SELECT `Docnote...', Array, Array)
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1343): DboSource->fetchAll('SELECT `Docnote...', false)
+#4 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1205): DboSource->fetchAssociated(Object(Clientcase), 'SELECT `Docnote...', Array)
+#5 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1116): DboSource->queryAssociation(Object(Clientcase), Object(Docnote), 'hasMany', 'Docnote', Array, Array, true, Array, 0, Array)
+#6 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(2688): DboSource->read(Object(Clientcase), Array)
+#7 D:\Websites\ie\team16\development\app\Controller\CasenotesController.php(48): Model->find('first', Array)
+#8 [internal function]: CasenotesController->mynotes()
+#9 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(CasenotesController), Array)
+#10 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(CasenotesController), Object(CakeRequest), Object(CakeResponse))
+#12 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-10-01 10:02:00 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Docnote.employee_id' in 'field list'
+Request URL: /team16/development/documents/mydocs
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Docnote...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(670): DboSource->execute('SELECT `Docnote...', Array, Array)
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1343): DboSource->fetchAll('SELECT `Docnote...', false)
+#4 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1205): DboSource->fetchAssociated(Object(Clientcase), 'SELECT `Docnote...', Array)
+#5 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1116): DboSource->queryAssociation(Object(Clientcase), Object(Docnote), 'hasMany', 'Docnote', Array, Array, true, Array, 0, Array)
+#6 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(2688): DboSource->read(Object(Clientcase), Array)
+#7 D:\Websites\ie\team16\development\app\Controller\DocumentsController.php(48): Model->find('first', Array)
+#8 [internal function]: DocumentsController->mydocs()
+#9 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(DocumentsController), Array)
+#10 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocumentsController), Object(CakeRequest), Object(CakeResponse))
+#12 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2013-10-01 10:12:45 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Docnote.user_id' in 'field list'
+Request URL: /team16/development/login
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Docnote...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(670): DboSource->execute('SELECT `Docnote...', Array, Array)
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1343): DboSource->fetchAll('SELECT `Docnote...', false)
+#4 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1205): DboSource->fetchAssociated(Object(User), 'SELECT `Docnote...', Array)
+#5 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1116): DboSource->queryAssociation(Object(User), Object(Docnote), 'hasMany', 'Docnote', Array, Array, true, Array, 0, Array)
+#6 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(2688): DboSource->read(Object(User), Array)
+#7 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(599): Model->find('first', Array)
+#8 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(800): DboSource->query('findByUsername', Array, Object(User))
+#9 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(105): Model->__call('findByUsername', Array)
+#10 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(105): User->findByUsername('admin')
+#11 [internal function]: UsersController->login()
+#12 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#13 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#14 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#15 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
+2013-10-01 10:17:06 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Docnote.user_id' in 'field list'
+Request URL: /team16/development/login
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Docnote...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(670): DboSource->execute('SELECT `Docnote...', Array, Array)
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1343): DboSource->fetchAll('SELECT `Docnote...', false)
+#4 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1205): DboSource->fetchAssociated(Object(User), 'SELECT `Docnote...', Array)
+#5 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1116): DboSource->queryAssociation(Object(User), Object(Docnote), 'hasMany', 'Docnote', Array, Array, true, Array, 0, Array)
+#6 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(2688): DboSource->read(Object(User), Array)
+#7 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(599): Model->find('first', Array)
+#8 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(800): DboSource->query('findByUsername', Array, Object(User))
+#9 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(105): Model->__call('findByUsername', Array)
+#10 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(105): User->findByUsername('admin')
+#11 [internal function]: UsersController->login()
+#12 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#13 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#14 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#15 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
+2013-10-01 14:25:32 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-01 10:26:25 Error: Fatal Error (1): Allowed memory size of 134217728 bytes exhausted (tried to allocate 46595719 bytes) in [D:\Websites\ie\team16\development\app\Plugin\DebugKit\View\Helper\HtmlToolbarHelper.php, line 162]
+2013-10-01 10:26:25 Error: [FatalErrorException] Allowed memory size of 134217728 bytes exhausted (tried to allocate 46595719 bytes)
+Request URL: /team16/development/applicants/view/424
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Allowed memory ...', 'D:\Websites\ie\...', 162)
+#1 [internal function]: ErrorHandler::handleError(1, 'Allowed memory ...', 'D:\Websites\ie\...', 162, Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(927): call_user_func('ErrorHandler::h...', 1, 'Allowed memory ...', 'D:\Websites\ie\...', 162, Array)
+#3 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(900): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-01 14:27:02 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-01 15:15:43 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-01 15:58:33 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 00:56:18 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 00:57:41 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:02:14 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-01 21:18:47 Error: Fatal Error (4): syntax error, unexpected '<' in [D:\Websites\ie\team16\development\app\View\Users\register.ctp, line 303]
+2013-10-01 21:18:47 Error: [FatalErrorException] syntax error, unexpected '<'
+Request URL: /team16/development/register
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'D:\Websites\ie\...', 303)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'D:\Websites\ie\...', 303, Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(927): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'D:\Websites\ie\...', 303, Array)
+#3 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(900): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-01 21:21:24 Error: Fatal Error (4): syntax error, unexpected '<' in [D:\Websites\ie\team16\development\app\View\Users\register.ctp, line 303]
+2013-10-01 21:21:24 Error: [FatalErrorException] syntax error, unexpected '<'
+Request URL: /team16/development/register
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'D:\Websites\ie\...', 303)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'D:\Websites\ie\...', 303, Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(927): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'D:\Websites\ie\...', 303, Array)
+#3 D:\Websites\ie\team16\development\lib\Cake\Core\App.php(900): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-02 01:24:00 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:26:09 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:26:13 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:26:22 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:29:48 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:30:11 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:31:16 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:31:18 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/loader.gif
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:31:50 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:32:19 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:33:17 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_glass_85_dfeffc_1x400.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:33:17 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-icons_d8e7f3_256x240.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:33:17 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:33:17 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:33:17 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_flat_55_b3f3d3_40x100.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:33:20 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_glass_75_d0e5f5_1x400.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-01 21:35:30 Error: [PDOException] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime value: '12-10-1991' for column 'birthdate' at row 1
+Request URL: /team16/development/register
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('INSERT INTO `fi...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1008): DboSource->execute('INSERT INTO `fi...')
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1736): DboSource->create(Object(Applicant), Array, Array)
+#4 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(214): Model->save(Array)
+#5 [internal function]: UsersController->register()
+#6 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-02 01:38:21 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_glass_85_dfeffc_1x400.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:38:21 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:38:21 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_flat_55_b3f3d3_40x100.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:38:21 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-icons_d8e7f3_256x240.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 01:38:28 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-bg_glass_75_d0e5f5_1x400.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-01 21:39:25 Error: [PDOException] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '01-10-1973' for column 'birthdate' at row 1
+Request URL: /team16/development/register
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('INSERT INTO `fi...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1008): DboSource->execute('INSERT INTO `fi...')
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1736): DboSource->create(Object(Applicant), Array, Array)
+#4 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(214): Model->save(Array)
+#5 [internal function]: UsersController->register()
+#6 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-02 01:43:42 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/css/images/ui-icons_217bc0_256x240.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-01 21:44:08 Error: [PDOException] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '04-10-19941994' for column 'birthdate' at row 1
+Request URL: /team16/development/register
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('INSERT INTO `fi...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1008): DboSource->execute('INSERT INTO `fi...')
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1736): DboSource->create(Object(Applicant), Array, Array)
+#4 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(214): Model->save(Array)
+#5 [internal function]: UsersController->register()
+#6 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-01 21:46:43 Error: [PDOException] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '01-10-19751975' for column 'birthdate' at row 1
+Request URL: /team16/development/register
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('INSERT INTO `fi...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1008): DboSource->execute('INSERT INTO `fi...')
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1736): DboSource->create(Object(Applicant), Array, Array)
+#4 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(214): Model->save(Array)
+#5 [internal function]: UsersController->register()
+#6 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-01 21:48:46 Error: [PDOException] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '03-10-1994' for column 'birthdate' at row 1
+Request URL: /team16/development/register
+Stack Trace:
+#0 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('INSERT INTO `fi...', Array)
+#2 D:\Websites\ie\team16\development\lib\Cake\Model\Datasource\DboSource.php(1008): DboSource->execute('INSERT INTO `fi...')
+#3 D:\Websites\ie\team16\development\lib\Cake\Model\Model.php(1736): DboSource->create(Object(Applicant), Array, Array)
+#4 D:\Websites\ie\team16\development\app\Plugin\Usermgmt\Controller\UsersController.php(214): Model->save(Array)
+#5 [internal function]: UsersController->register()
+#6 D:\Websites\ie\team16\development\lib\Cake\Controller\Controller.php(486): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 D:\Websites\ie\team16\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-02 02:40:34 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 06:14:04 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-03 01:13:37 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-03 01:13:49 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /team16/development/images/sort_both.png
+Stack Trace:
+#0 D:\Websites\ie\team16\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-03 01:33:33 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-02 21:33:34 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Docnote.employee_id' in 'field list'
+Request URL: /development/employees/myaccount
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Docnote...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT `Docnote...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Docnote...', false)
+#4 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Employee), 'SELECT `Docnote...', Array)
+#5 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Employee), Object(Docnote), 'hasMany', 'Docnote', Array, Array, true, Array, 0, Array)
+#6 C:\wamp\www\development\lib\Cake\Model\Model.php(2700): DboSource->read(Object(Employee), Array)
+#7 C:\wamp\www\development\app\Controller\EmployeesController.php(46): Model->find('first', Array)
+#8 [internal function]: EmployeesController->myaccount()
+#9 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(EmployeesController), Array)
+#10 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#11 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(EmployeesController), Object(CakeRequest), Object(CakeResponse))
+#12 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}

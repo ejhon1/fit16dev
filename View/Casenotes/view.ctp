@@ -1,24 +1,14 @@
 <div class="casenotes view">
 <h2><?php echo __('Contact Note'); ?></h2>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
+		<dt><?php echo __('Created by'); ?></dt>
 		<dd>
-			<?php echo h($casenote['Casenote']['id']); ?>
-			&nbsp;
+            <?php echo h($author); ?>
+            &nbsp;
 		</dd>
-		<dt><?php echo __('Clientcase'); ?></dt>
+		<dt><?php echo __('Subject'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($casenote['Clientcase']['id'], array('controller' => 'clientcases', 'action' => 'view', $casenote['Clientcase']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('User'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($casenote['User']['id'], array('controller' => 'users', 'action' => 'view', $casenote['User']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Notesubject'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($casenote['Notesubject']['id'], array('controller' => 'notesubjects', 'action' => 'view', $casenote['Notesubject']['id'])); ?>
+			<?php echo h($casenote['Casenote']['subject']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Note Type'); ?></dt>
@@ -33,28 +23,9 @@
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
-			<?php echo h($casenote['Casenote']['created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
-		<dd>
-			<?php echo h($casenote['Casenote']['modified']); ?>
+			<?php echo h($this->Time->format('d-m-Y h:i', $casenote['Casenote']['created'])); ?>
 			&nbsp;
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Contact Note'), array('action' => 'edit', $casenote['Casenote']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Contact Note'), array('action' => 'delete', $casenote['Casenote']['id']), null, __('Are you sure you want to delete # %s?', $casenote['Casenote']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Contact Note'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Contact Note'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Clientcases'), array('controller' => 'clientcases', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Clientcase'), array('controller' => 'clientcases', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Notesubjects'), array('controller' => 'notesubjects', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Notesubject'), array('controller' => 'notesubjects', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+

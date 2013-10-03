@@ -54,16 +54,17 @@ class CasestatusesController extends AppController {
             $this->request->data['Casestatus']['employee_id'] = $employee['Employee']['id'];
             $this->Casestatus->create();
 			if ($this->Casestatus->save($this->request->data)) {
-				$this->Session->setFlash(__('The case status has been saved'));
+				$this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
 			} else {
-				$this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The status could not be saved. Please try again.'));
 			}
 		}
 		$clientcases = $this->Casestatus->Clientcase->find('list');
 		$statuses = $this->Casestatus->Status->find('list');
 		$this->set(compact('clientcases', 'statuses', 'employee'));
 	}
+
 
 /**
  * edit method
@@ -78,10 +79,10 @@ class CasestatusesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Casestatus->save($this->request->data)) {
-				$this->Session->setFlash(__('The case status has been saved'));
+				$this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The status could not be saved. Please try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Casestatus.' . $this->Casestatus->primaryKey => $id));
@@ -106,10 +107,59 @@ class CasestatusesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Casestatus->delete()) {
-			$this->Session->setFlash(__('Case Status deleted'));
+			$this->Session->setFlash(__('Case Status deleted', null),'default', array('class' => 'alert-success'));
 			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Case Status was not deleted'));
 		return $this->redirect(array('action' => 'index'));
 	}
+
+    public function updatestatus()
+    {
+        /*$this->loadModel('Casestatus');
+        if ($this->request->is('post')) {
+            $this->Casestatus->create();
+            if ($this->Casestatus->save($this->request->data)) {
+                $this->Session->setFlash(__('The status has been saved'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
+            } else {
+                $this->Session->setFlash(__('The status could not be saved. Please try again.'));
+            }
+        }
+        */
+        $userid=$this->Session->read('UserAuth.User.id');
+        $this->loadModel('Applicant');
+        $this->loadModel('Document');
+        $this->loadModel('Employee');
+        $this->loadModel('Archiveloan');
+        $this->loadModel('Casestatus');
+        $this->loadModel('Status');
+
+        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
+        $clientcases = $this->Casestatus->Clientcase->find('list');
+        $statuses = $this->Casestatus->Status->find('list');
+        /*if ($this->request->is('post') || $this->request->is('put')) {
+            $this->request->data['Casestatus']['clientcase_id'] = $id;
+            $this->request->data['Casestatus']['employee_id'] = $employee['Employee']['id'];
+            $this->Casestatus->create();
+            if ($this->Casestatus->save($this->request->data)) {
+                $this->Session->setFlash(__('The status has been saved'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
+            } else {
+                $this->Session->setFlash(__('The status could not be saved. Please try again.'));
+            }
+        }*/
+        if ($this->request->is('post')) {
+            $this->Casestatus->create();
+            if ($this->Casestatus->save($this->request->data, false)) {
+                $this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
+            } else {
+                $this->Session->setFlash(__('The status could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
+            }
+        }
+
+        $this->set(compact('clientcase',  'employee', 'casestatuses', 'clientcases', 'statuses', 'id'));
+    }
 }

@@ -1,11 +1,11 @@
-<?php echo $this->HTML->css('usersIndex'); ?>
+
 
 <div class="casenotes index">
 	<h2><?php echo __('Contact Notes'); ?></h2>
 	<div class="actions">
         <ul>
             <li>
-            <?php echo $this->Html->link(__('Add Contact Notes'), array('controller' => 'casenotes', 'action' => 'mynotesadd')); ?>
+            <?php echo $this->Html->link(__('Add a Note'), array('controller' => 'casenotes', 'action' => 'mynotesadd')); ?>
             </li>
         </ul>
     	</div>

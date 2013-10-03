@@ -41,16 +41,49 @@ class DocumentsController extends AppController {
     }
 
     public function mydocs() {
+        $this->loadModel('Applicant');
         $userid = $this->UserAuth->getUserId();
         $this->loadModel('ClientCase');
 
-        $clientCase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $userid),'fields' => array('ClientCase.id','archive_id')));
+        $clientcase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $userid),'fields' => array('ClientCase.id','archive_id')));
 
-        $options = array('conditions' => array('Document.archive_id' => $clientCase['ClientCase']['archive_id'], 'Document.applicant_id' => NULL));
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['ClientCase']['archive_id'], 'Document.applicant_id' => NULL));
         $this->set('ancestordocuments', $this->Document->find('all', $options));
 
-        $options = array('conditions' => array('Document.archive_id' => $clientCase['ClientCase']['archive_id'], 'Document.ancestortype_id' => NULL), 'order'=>'applicant_id ASC');
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['ClientCase']['archive_id'], 'Document.ancestortype_id' => NULL), 'order'=>'applicant_id ASC');
         $this->set('applicantdocuments', $this->Document->find('all', $options));
+
+        //For uploading
+        $id=$this->Session->read('UserAuth.User.id');
+        $this->loadModel('AncestorType');
+        $this->loadModel('DocumentType');
+
+        /*if ($this->request->is('post')) {
+            $this->Document->create();
+            $this->loadModel('ClientCase');
+            $this->loadModel('Archive');
+
+            $clientcase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $id), 'fields' => array('ClientCase.id', 'ClientCase.archive_id'), 'recursive' => -1));
+            $this->set('ClientCase');
+            $test = $clientcase['ClientCase']['archive_id'];
+            $this->request->data['Document']['archive_id'] = $test;
+
+            $archive = $this->Archive->find('first', array('conditions' => array('Archive.id' => $this->request->data['Document']['archive_id']),'fields' => array('Archive.id', 'Archive.archive_name')));
+            $doctype = $this->DocumentType->find('first', array('conditions' => array('DocumentType.id' => $this->request->data['Document']['documenttype_id']),'fields' => array('DocumentType.id', 'DocumentType.code')));
+            $ancestortype = $this->AncestorType->find('first', array('conditions' => array('AncestorType.id' => $this->request->data['Document']['ancestortype_id']),'fields' => array('AncestorType.id', 'AncestorType.ancestor_type')));
+
+            if ($this->uploadDoc($archive, $doctype['DocumentType']['code'], $ancestortype['AncestorType']['ancestor_type']) && $this->Document->save($this->data)) {
+                $this->Session->setFlash(__('The document was uploaded successfully'),'default', array('class' => 'alert-success'));
+                //$this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
+            } else {
+                $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
+            }
+        }*/
+        $documentTypes = $this->DocumentType->find('list', array('fields' => array('DocumentType.id', 'DocumentType.type'), 'order'=>'type ASC'));
+        $ancestorTypes = $this->AncestorType->find('list', array('fields' => array('AncestorType.id', 'AncestorType.ancestor_type'), 'order'=>'ancestor_type ASC'));
+        $applicants = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['ClientCase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
+
+        $this->set(compact('documentTypes', 'ancestorTypes', 'applicants'));
     }
 
     /**
@@ -76,7 +109,7 @@ class DocumentsController extends AppController {
     }
 
     public function uploadancestor() {
-        $id = $this->Auth->user('id');
+        $id=$this->Session->read('UserAuth.User.id');
         $this->loadModel('AncestorType');
         $this->loadModel('DocumentType');
 
@@ -99,6 +132,7 @@ class DocumentsController extends AppController {
                 $this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
             } else {
                 $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
+                $this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
             }
         }
         $documentTypes = $this->DocumentType->find('list', array('fields' => array('DocumentType.id', 'DocumentType.type'), 'order'=>'type ASC'));
@@ -107,7 +141,7 @@ class DocumentsController extends AppController {
     }
 
     public function uploadapplicant() {
-        $id = $this->Auth->user('id');
+        $id=$this->Session->read('UserAuth.User.id');
         $this->loadModel('Applicant');
         $this->loadModel('DocumentType');
         $this->loadModel('ClientCase');
@@ -131,11 +165,51 @@ class DocumentsController extends AppController {
                 $this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
             } else {
                 $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
+                $this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
             }
         }
         $documentTypes = $this->DocumentType->find('list', array('fields' => array('DocumentType.id', 'DocumentType.type'), 'order'=>'type ASC'));
         $applicants = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['ClientCase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
         $this->set(compact('documentTypes', 'ancestorTypes', 'applicants'));
+    }
+
+    public function uploadfile()
+    {
+        $id=$this->Session->read('UserAuth.User.id');
+        $this->loadModel('AncestorType');
+        $this->loadModel('DocumentType');
+        $this->loadModel('Applicant');
+        $this->loadModel('ClientCase');
+        $clientcase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $id), 'fields' => array('ClientCase.id', 'ClientCase.archive_id'), 'recursive' => -1));
+        $this->set('ClientCase');
+
+
+        if ($this->request->is('post')) {
+            $this->Document->create();
+            $this->loadModel('ClientCase');
+            $this->loadModel('Archive');
+            $this->loadModel('DocumentType');
+            $this->loadModel('Applicant');
+            $this->loadModel('AncestorType');
+
+            $clientcase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $id), 'fields' => array('ClientCase.id', 'ClientCase.archive_id'), 'recursive' => -1));
+            $this->set('ClientCase');
+            $test = $clientcase['ClientCase']['archive_id'];
+            $this->request->data['Document']['archive_id'] = $test;
+
+            $archive = $this->Archive->find('first', array('conditions' => array('Archive.id' => $this->request->data['Document']['archive_id']),'fields' => array('Archive.id', 'Archive.archive_name')));
+            $doctype = $this->DocumentType->find('first', array('conditions' => array('DocumentType.id' => $this->request->data['Document']['documenttype_id']),'fields' => array('DocumentType.id', 'DocumentType.code')));
+            $ancestortype = $this->AncestorType->find('first', array('conditions' => array('AncestorType.id' => $this->request->data['Document']['ancestortype_id']),'fields' => array('AncestorType.id', 'AncestorType.ancestor_type')));
+
+            if ($this->uploadDoc($archive, $doctype['DocumentType']['code'], $ancestortype['AncestorType']['ancestor_type']) && $this->Document->save($this->data)) {
+                $this->Session->setFlash(__('The document was uploaded successfully'),'default', array('class' => 'alert-success'));
+                //$this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
+            } else {
+                $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
+                //$this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
+            }
+        }
+
     }
 
     /**

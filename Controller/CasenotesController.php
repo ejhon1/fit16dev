@@ -36,8 +36,30 @@ class CasenotesController extends AppController {
 		if (!$this->Casenote->exists($id)) {
 			throw new NotFoundException(__('Invalid casenote'));
 		}
-		$options = array('conditions' => array('Casenote.' . $this->Casenote->primaryKey => $id));
-		$this->set('casenote', $this->Casenote->find('first', $options));
+        $this->loadModel('Casenote');
+        $this->loadModel('Employee');
+        $this->loadModel('Clientcase');
+        $this->loadModel('Applicant');
+        $author = 'Author unknown';
+        $casenote = $this->Casenote->find('first',array('conditions' => array('Casenote.' . $this->Casenote->primaryKey => $id)));
+		$employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $casenote['Casenote']['user_id']), 'fields' => array('Employee.id', 'Employee.first_name', 'Employee.surname')));
+        if(empty($employee['Employee']['id']))
+        {
+            $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $casenote['Casenote']['user_id']), 'fields' => array('Clientcase.id', 'Clientcase.applicant_id')));
+            $applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id']), 'fields' => array('Applicant.id', 'Applicant.first_name', 'Applicant.surname')));
+
+            if(!empty($clientcase['Clientcase']['id']))
+            {
+                $author = $applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname'];
+            }
+        }
+        else
+        {
+            $author = $employee['Employee']['first_name'].' '.$employee['Employee']['surname'];
+        }
+
+        $this->set(compact('casenote', 'author'));
+
 	}
 	
 	public function mynotes() {
@@ -57,16 +79,16 @@ class CasenotesController extends AppController {
  * @return void
  */
 	public function add($id=null) {
-		$userId = $this->UserAuth->getUserId();
+		$userId=$this->Session->read('UserAuth.User.id');
 		if ($this->request->is('post')) {
 			$this->request->data['Casenote']['clientcase_id'] = $id;
 			$this->request->data['Casenote']['user_id'] = $userId;
 			$this->Casenote->create();
 			if ($this->Casenote->save($this->request->data)) {
-				$this->Session->setFlash(__('The casenote has been saved', null),'default', array('class' => 'alert-success'));
+				$this->Session->setFlash(__('The contact note has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('controller' => 'Clientcases', 'action' => 'view', $id));
 			} else {
-				$this->Session->setFlash(__('The casenote could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+				$this->Session->setFlash(__('The contact note could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		}
 		$clientcases = $this->Casenote->Clientcase->find('list');
@@ -75,20 +97,20 @@ class CasenotesController extends AppController {
 	}
 	
 	public function mynotesadd() {
-		$userId = $this->UserAuth->getUserId();
+		$userId=$this->Session->read('UserAuth.User.id');
 		
 		if ($this->request->is('post')) {
 			$this->Casenote->create();
 			$this->loadModel('Clientcase');
 			
 			$clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $userId)));
-			
+            $this->request->data['Casenote']['user_id'] = $userId;
             $this->request->data['Casenote']['clientcase_id'] = $clientcase['Clientcase']['id'];
 			if ($this->Casenote->save($this->request->data)) {
-				$this->Session->setFlash(__('The casenote has been saved', null),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('controller' => 'Clientcases', 'action' => 'mynotes'));
+				$this->Session->setFlash(__('The contact note has been saved', null),'default', array('class' => 'alert-success'));
+				return $this->redirect(array('controller' => 'Casenotes', 'action' => 'mynotes'));
 			} else {
-				$this->Session->setFlash(__('The casenote could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+				$this->Session->setFlash(__('The contact note could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		}
 		$clientcases = $this->Casenote->Clientcase->find('list');
@@ -109,10 +131,10 @@ class CasenotesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Casenote->save($this->request->data)) {
-				$this->Session->setFlash(__('The casenote has been saved', null),'default', array('class' => 'alert-success'));
+				$this->Session->setFlash(__('The contact note has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The casenote could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+				$this->Session->setFlash(__('The contact note could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Casenote.' . $this->Casenote->primaryKey => $id));

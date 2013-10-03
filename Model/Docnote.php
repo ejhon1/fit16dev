@@ -24,16 +24,6 @@ class Docnote extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'user_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'note' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -61,12 +51,19 @@ class Docnote extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
+		'Employee' => array(
+			'className' => 'Employee',
+			'foreignKey' => 'employee_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+        'Clientcase' => array(
+            'className' => 'Clientcase',
+            'foreignKey' => 'clientcase_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
 	);
 }
