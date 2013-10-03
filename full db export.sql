@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.7
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Oct 01, 2013 at 02:08 PM
--- Server version: 5.5.24-log
+-- Host: 130.194.7.82
+-- Generation Time: Oct 03, 2013 at 01:46 AM
+-- Server version: 5.5.20
 -- PHP Version: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `dbtrial`
+-- Database: `fitie2013t16dev`
 --
 
 -- --------------------------------------------------------
@@ -376,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `applicants` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `clientcase_id` int(11) NOT NULL DEFAULT '0',
   `archive_id` int(12) DEFAULT NULL,
-  `birthdate` datetime DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
   `title` varchar(12) DEFAULT NULL,
   `first_name` varchar(100) NOT NULL DEFAULT '',
   `middle_name` varchar(100) NOT NULL DEFAULT '',
@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `applicants` (
   PRIMARY KEY (`id`),
   KEY `clientcase_id` (`clientcase_id`),
   KEY `archive_id` (`archive_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=437 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=438 ;
 
 --
 -- Dumping data for table `applicants`
@@ -701,9 +701,10 @@ INSERT INTO `applicants` (`id`, `clientcase_id`, `archive_id`, `birthdate`, `tit
 (431, 433, 216, NULL, '', 'r', '', 'r', 'jwgre2@student.monash.edu', '', NULL, 'Main applicant', '2013-08-28 02:52:40', '2013-08-28 02:52:40'),
 (432, 434, 217, NULL, '', 't', '', 't', 'jwgre2@student.monash.edu', '', NULL, 'Main applicant', '2013-08-28 02:56:31', '2013-08-28 02:56:31'),
 (433, 435, 222, NULL, '', 'Robert', '', 'Redford', 'rob@gmail.com', '45454545', NULL, 'Main applicant', '2013-09-17 00:42:01', '2013-09-17 00:42:01'),
-(434, 436, 223, '0000-00-00 00:00:00', 'Miss', 'Alicia', '', 'Blake', 'ablake@gmail.com', '67676767', NULL, 'Main applicant', '2013-09-17 01:24:40', '2013-09-17 01:24:40'),
+(434, 436, 223, '0000-00-00', 'Miss', 'Alicia', '', 'Blake', 'ablake@gmail.com', '67676767', NULL, 'Main applicant', '2013-09-17 01:24:40', '2013-09-17 01:24:40'),
 (435, 437, 230, NULL, '', 'Four', '', 'Four', 'Four@test.com', '99999999', NULL, 'Main applicant', '2013-09-24 03:05:44', '2013-09-24 03:05:44'),
-(436, 438, 231, NULL, '', 'Five', '', 'Five', 'lizziness@gmail.com', '55555555', NULL, 'Main applicant', '2013-09-24 03:09:17', '2013-09-24 03:09:17');
+(436, 438, 231, NULL, '', 'Five', '', 'Five', 'lizziness@gmail.com', '55555555', NULL, 'Main applicant', '2013-09-24 03:09:17', '2013-09-24 03:09:17'),
+(437, 68, NULL, '2013-10-01', 'Sir', 'Lance', 'A', 'Lot', 'dominic.carter@gmail.com', '0412 5860281', '', 'Main Applicant', '2013-10-01 22:50:01', '2013-10-01 22:50:01');
 
 -- --------------------------------------------------------
 
@@ -720,7 +721,7 @@ CREATE TABLE IF NOT EXISTS `archiveloans` (
   PRIMARY KEY (`id`),
   KEY `archive_id` (`archive_id`),
   KEY `employee_id` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `archiveloans`
@@ -743,7 +744,12 @@ INSERT INTO `archiveloans` (`id`, `archive_id`, `employee_id`, `date_borrowed`, 
 (15, 207, 6, '2013-09-29 10:02:00', '2013-09-29 10:02:00'),
 (16, 207, 6, '2013-09-29 10:07:06', '2013-09-29 10:07:00'),
 (17, 207, 6, '2013-09-30 04:00:19', '2013-09-30 04:00:25'),
-(18, 207, 6, '2013-09-30 11:34:23', '2013-09-30 11:34:25');
+(18, 207, 6, '2013-09-30 11:34:23', '2013-09-30 11:34:25'),
+(19, 207, 6, '2013-10-01 10:25:40', '2013-10-01 10:25:44'),
+(20, 223, 6, '2013-10-01 11:58:56', NULL),
+(21, 207, 6, '2013-10-01 09:24:31', '2013-10-01 09:24:57'),
+(22, 3, 6, '2013-10-01 10:47:25', NULL),
+(23, 3, 6, '2013-10-01 10:47:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -980,7 +986,7 @@ CREATE TABLE IF NOT EXISTS `archives` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=234 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=239 ;
 
 --
 -- Dumping data for table `archives`
@@ -1219,7 +1225,12 @@ INSERT INTO `archives` (`id`, `archive_name`, `family_name`, `created`, `modifie
 (230, 'FOU-1/13', NULL, '2013-09-24 03:05:44', '2013-09-24 03:05:44'),
 (231, 'FIV-1/13', NULL, '2013-09-24 03:09:17', '2013-09-24 03:09:17'),
 (232, 'SIX-1/13', NULL, '2013-09-24 03:10:11', '2013-09-24 03:10:11'),
-(233, 'SIX-2/13', NULL, '2013-09-24 03:11:33', '2013-09-24 03:11:33');
+(233, 'SIX-2/13', NULL, '2013-09-24 03:11:33', '2013-09-24 03:11:33'),
+(234, 'SON-1/13', NULL, '2013-10-01 21:35:30', '2013-10-01 21:35:30'),
+(235, 'GUE-1/13', NULL, '2013-10-01 21:39:25', '2013-10-01 21:39:25'),
+(236, 'GUE-2/13', NULL, '2013-10-01 21:44:08', '2013-10-01 21:44:08'),
+(237, 'MEW-1/13', NULL, '2013-10-01 21:46:43', '2013-10-01 21:46:43'),
+(238, 'MEW-2/13', NULL, '2013-10-01 21:48:46', '2013-10-01 21:48:46');
 
 -- --------------------------------------------------------
 
@@ -1239,14 +1250,16 @@ CREATE TABLE IF NOT EXISTS `casenotes` (
   PRIMARY KEY (`id`),
   KEY `clientcase_id` (`clientcase_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `casenotes`
 --
 
 INSERT INTO `casenotes` (`id`, `clientcase_id`, `user_id`, `subject`, `note_type`, `note`, `created`, `modified`) VALUES
-(1, 424, 1, 'Test', 'Internal', 'sfsdf', '2013-09-26 05:07:08', '2013-09-26 05:07:08');
+(1, 424, 1, 'Test', 'Internal', 'sfsdf', '2013-09-26 05:07:08', '2013-09-26 05:07:08'),
+(2, 436, 444, 'Test1', 'Public', 'Testing notes', '2013-10-01 11:55:19', '2013-10-01 11:55:19'),
+(3, 66, 1, 'Appointment', 'Internal', 'Date ...', '2013-10-01 21:31:46', '2013-10-01 21:31:46');
 
 -- --------------------------------------------------------
 
@@ -1263,7 +1276,7 @@ CREATE TABLE IF NOT EXISTS `casestatuses` (
   PRIMARY KEY (`id`),
   KEY `clientcase_id` (`clientcase_id`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `casestatuses`
@@ -1285,7 +1298,13 @@ INSERT INTO `casestatuses` (`id`, `clientcase_id`, `status_id`, `date_updated`, 
 (13, 424, 4, '2013-09-30 00:00:00', 6),
 (14, 424, 9, '2013-09-30 00:00:00', 6),
 (15, 424, 2, '2013-10-01 07:09:16', 6),
-(16, 424, 6, '2013-10-01 07:12:07', 6);
+(16, 424, 6, '2013-10-01 07:12:07', 6),
+(17, 424, 4, '2013-10-01 10:25:47', 6),
+(18, 424, 6, '2013-10-01 10:26:53', 6),
+(19, 436, 1, '2013-10-01 12:05:23', 6),
+(20, 436, 2, '2013-10-01 08:56:35', 6),
+(21, 424, 6, '2013-10-01 09:25:06', 6),
+(22, 68, 6, '2013-10-01 10:46:52', 6);
 
 -- --------------------------------------------------------
 
@@ -1331,7 +1350,7 @@ CREATE TABLE IF NOT EXISTS `clientcases` (
   KEY `archive_id` (`archive_id`),
   KEY `status_id` (`status_id`),
   KEY `applicant_id` (`applicant_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=441 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=446 ;
 
 --
 -- Dumping data for table `clientcases`
@@ -1649,7 +1668,12 @@ INSERT INTO `clientcases` (`id`, `user_id`, `archive_id`, `status_id`, `applican
 (437, 449, 230, 1, 435, 'Open', NULL, NULL, 'Yes', '', NULL, '', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-09-24 03:05:44', '2013-09-24 03:05:44'),
 (438, 450, 231, 1, 436, 'Open', NULL, NULL, 'Yes', '', NULL, '', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-09-24 03:09:17', '2013-09-24 03:09:17'),
 (439, 451, 232, 1, NULL, 'Open', NULL, NULL, 'Yes', '', NULL, '', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-09-24 03:10:11', '2013-09-24 03:10:11'),
-(440, 452, 233, 1, NULL, 'Open', NULL, NULL, 'Yes', '', NULL, '', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-09-24 03:11:33', '2013-09-24 03:11:33');
+(440, 452, 233, 1, NULL, 'Open', NULL, NULL, 'Yes', '', NULL, '', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-09-24 03:11:33', '2013-09-24 03:11:33'),
+(441, 453, 234, 1, NULL, 'Open', NULL, NULL, 'Yes', 'Yes', 'Mother', 'Jenny', '', 'Paternal Grandmother', '', '', 'Poppy', '', '', 'Yes', '', 'After WW2 (after 1945)', 'Austria,Italy', '', 'Yes', 'Yes', 'Baptism certificate(s),Army records,School records', '', 'None of the above', 'blablly blab', '2013-10-01 21:35:30', '2013-10-01 21:35:30'),
+(442, 454, 235, 1, NULL, 'Open', NULL, NULL, 'Yes', 'No', 'Mother', 'Kathleen Guevara', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-10-01 21:39:25', '2013-10-01 21:39:25'),
+(443, 455, 236, 1, NULL, 'Open', NULL, NULL, 'Yes', 'Yes', NULL, '', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-10-01 21:44:08', '2013-10-01 21:44:08'),
+(444, 456, 237, 1, NULL, 'Open', NULL, NULL, 'Yes', '', 'Mother', 'Kathleen Guevara', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-10-01 21:46:43', '2013-10-01 21:46:43'),
+(445, 457, 238, 1, NULL, 'Open', NULL, NULL, 'Yes', '', NULL, '', '', NULL, '', '', '', '', '', '', '', NULL, NULL, '', '', '', NULL, '', NULL, '', '2013-10-01 21:48:46', '2013-10-01 21:48:46');
 
 -- --------------------------------------------------------
 
@@ -2286,7 +2310,7 @@ CREATE TABLE IF NOT EXISTS `docnotes` (
   PRIMARY KEY (`id`),
   KEY `document_id` (`document_id`),
   KEY `user_id` (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `docnotes`
@@ -2300,7 +2324,8 @@ INSERT INTO `docnotes` (`id`, `document_id`, `employee_id`, `clientcase_id`, `no
 (5, 1, 6, NULL, 'Test 4', '2013-09-28 05:39:18', '2013-09-28 05:39:18'),
 (9, 21, NULL, 436, 'fghfgh', '2013-09-29 05:59:11', '2013-09-29 05:59:11'),
 (10, 21, NULL, 436, 'fgn', '2013-09-29 05:59:15', '2013-09-29 05:59:15'),
-(11, 20, NULL, 436, 'sdf', '2013-10-01 08:31:53', '2013-10-01 08:31:53');
+(11, 20, NULL, 436, 'sdf', '2013-10-01 08:31:53', '2013-10-01 08:31:53'),
+(12, 34, NULL, 436, 'Testing doc note', '2013-10-01 11:57:54', '2013-10-01 11:57:54');
 
 -- --------------------------------------------------------
 
@@ -2323,7 +2348,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
   KEY `applicant_id` (`applicant_id`),
   KEY `ancestortype_id` (`ancestortype_id`),
   KEY `documenttype_id` (`documenttype_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `documents`
@@ -2360,7 +2385,11 @@ INSERT INTO `documents` (`id`, `archive_id`, `applicant_id`, `ancestortype_id`, 
 (28, 223, 434, NULL, 6, 'BLA-1-13  ASP 01-10-13.txt', 4, 'text/plain', '2013-10-01 07:39:51'),
 (29, 223, NULL, 8, 6, 'BLA-1-13 Family ASP 01-10-13.txt', 4, 'text/plain', '2013-10-01 08:11:06'),
 (30, 223, 434, NULL, 6, 'BLA-1-13 Alicia ASP 01-10-13.txt', 4, 'text/plain', '2013-10-01 08:11:26'),
-(31, 223, NULL, 6, 1, 'BLA-1-13 Great grandfather BC 01-10-13.txt', 4, 'text/plain', '2013-10-01 08:11:43');
+(31, 223, NULL, 6, 1, 'BLA-1-13 Great grandfather BC 01-10-13.txt', 4, 'text/plain', '2013-10-01 08:11:43'),
+(32, 223, NULL, 3, 12, 'BLA-1-13 Grandmother FamB 01-10-13.png', 395, 'image/png', '2013-10-01 10:11:36'),
+(33, 223, 434, NULL, 13, 'BLA-1-13 Alicia FamT 01-10-13.txt', 4, 'text/plain', '2013-10-01 10:11:52'),
+(34, 223, NULL, 1, 16, 'BLA-1-13 Mother IRO 01-10-13.txt', 4, 'text/plain', '2013-10-01 11:55:42'),
+(35, 223, 434, NULL, 18, 'BLA-1-13 Alicia DL 01-10-13.txt', 4, 'text/plain', '2013-10-01 11:55:56');
 
 -- --------------------------------------------------------
 
@@ -2428,7 +2457,7 @@ INSERT INTO `employees` (`id`, `user_id`, `first_name`, `surname`, `email`, `cre
 (3, 426, 'aa', 'aa', 'aa@aa.com', '2013-08-26 21:18:03', '2013-08-26 21:18:03'),
 (4, 438, 'Frangklin', 'Mewengkang', 'fm@fm.com', '2013-08-28 12:27:46', '2013-08-28 12:27:46'),
 (5, 440, 'Sally', 'Staffmember', 'salstaff@gmail.com', '2013-09-05 23:59:09', '2013-09-23 03:20:07'),
-(6, 1, 'Andrea', 'Administrator', 'polarontest@gmail.com', '2013-08-26 21:18:03', '2013-09-15 03:52:22'),
+(6, 1, 'Andrea', 'Administrator', 'polarontest@gmail.com', '2013-08-26 21:18:03', '2013-10-01 10:25:24'),
 (7, 442, 'Kerry', 'Smith', 'polarontest@gmail.com', '2013-09-10 03:30:04', '2013-09-10 03:30:04'),
 (8, 447, 'Tesla', 'Testington', 'test@test.com', '2013-09-19 07:21:18', '2013-09-19 07:21:18'),
 (9, 448, '', '', 'admin', '2013-09-23 22:35:48', '2013-09-23 22:35:48');
@@ -2448,61 +2477,35 @@ CREATE TABLE IF NOT EXISTS `login_tokens` (
   `created` datetime NOT NULL,
   `expires` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=72 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
 -- Dumping data for table `login_tokens`
 --
 
 INSERT INTO `login_tokens` (`id`, `user_id`, `token`, `duration`, `used`, `created`, `expires`) VALUES
-(24, 1, '2b2a91529aa76cd0c33f04e8eee850bd', '2 weeks', 1, '2013-09-23 04:06:51', '2013-10-07 04:06:51'),
-(25, 1, '85aae13073e0335fd2e96b536580e85d', '2 weeks', 0, '2013-09-23 06:34:23', '2013-10-07 06:34:23'),
 (26, 444, '2b261eb8c3d880244179654f1a2bfdc1', '2 weeks', 0, '2013-09-23 06:40:04', '2013-10-07 06:40:04'),
-(27, 1, '8adc13da7ac406f5b15419fcd08793ab', '2 weeks', 1, '2013-09-23 06:46:02', '2013-10-07 06:46:02'),
-(28, 1, 'db59694be2c81d1a9949e87797305738', '2 weeks', 1, '2013-09-23 21:16:20', '2013-10-07 21:16:20'),
-(29, 1, '607175505c00f5fcbf2e0c9d559af8c9', '2 weeks', 1, '2013-09-23 21:32:35', '2013-10-07 21:32:35'),
-(30, 1, '401c5a403d880875edc750a865a4924c', '2 weeks', 0, '2013-09-24 01:30:42', '2013-10-08 01:30:42'),
-(31, 1, 'e527e4343378761feaf1644f9df27bfe', '2 weeks', 1, '2013-09-24 02:32:01', '2013-10-08 02:32:01'),
-(32, 1, 'dca963416f676b51a5dd79d5134e854d', '2 weeks', 1, '2013-09-24 04:14:20', '2013-10-08 04:14:20'),
-(33, 1, '1ffae821120eb98c3e07562ebea8b44f', '2 weeks', 1, '2013-09-24 05:31:31', '2013-10-08 05:31:31'),
-(34, 1, '3d19fb9b4cc996b25fceb491b9f57c95', '2 weeks', 0, '2013-09-24 06:33:32', '2013-10-08 06:33:32'),
-(35, 1, 'e8f5414ef12a100a5065407a9792c954', '2 weeks', 0, '2013-09-24 09:48:48', '2013-10-08 09:48:48'),
 (36, 444, '0e9cb0a079e6d28d98bd81783de84df4', '2 weeks', 0, '2013-09-26 02:27:20', '2013-10-10 02:27:20'),
-(37, 1, 'c021eb4be81fbafea66a9a17afaaeb45', '2 weeks', 0, '2013-09-26 02:27:33', '2013-10-10 02:27:33'),
 (38, 444, '675b3eb79b232e53d45bdcb884e05f12', '2 weeks', 0, '2013-09-26 02:30:29', '2013-10-10 02:30:29'),
-(39, 1, 'cc3e962bfa723c70d365b251f189351c', '2 weeks', 1, '2013-09-26 02:42:19', '2013-10-10 02:42:19'),
-(40, 1, '1d774f12c1fe8d4500262b12e9dfaf5d', '2 weeks', 0, '2013-09-26 06:32:42', '2013-10-10 06:32:42'),
 (41, 444, '6a85e1813a24160f06708bfcae2fab47', '2 weeks', 0, '2013-09-26 06:32:55', '2013-10-10 06:32:55'),
-(42, 1, 'ef77ef9bc5e67d20c06f5f24f9f23ac2', '2 weeks', 1, '2013-09-26 06:33:11', '2013-10-10 06:33:11'),
-(43, 1, '4005786eee3e45aa734ba6d5f67291db', '2 weeks', 1, '2013-09-28 04:28:10', '2013-10-12 04:28:10'),
-(44, 1, 'ea1901030ccd21c4a081fd88a0378d17', '2 weeks', 0, '2013-09-29 01:20:02', '2013-10-13 01:20:02'),
 (45, 444, 'ff75e913708a344c0fc58d3a23df28ba', '2 weeks', 0, '2013-09-29 01:49:49', '2013-10-13 01:49:49'),
-(46, 1, '984cba932e10e41074f2fca0c5f16240', '2 weeks', 0, '2013-09-29 03:30:21', '2013-10-13 03:30:21'),
 (47, 444, 'ce13bd1b48e76102232d9f8ab3f6b286', '2 weeks', 1, '2013-09-29 03:31:13', '2013-10-13 03:31:13'),
 (48, 444, 'd72305838c920ae33bc691c57d355235', '2 weeks', 0, '2013-09-29 05:28:42', '2013-10-13 05:28:42'),
-(49, 1, '0c122839638b71eb1cbdae004b1f097f', '2 weeks', 0, '2013-09-29 05:45:42', '2013-10-13 05:45:42'),
 (50, 444, '1b17aceb26b53ec4c75c3fffbfa33af4', '2 weeks', 0, '2013-09-29 05:46:03', '2013-10-13 05:46:03'),
-(51, 1, '00aabb769086d9aca39f2f00e4290f38', '2 weeks', 0, '2013-09-29 05:53:02', '2013-10-13 05:53:02'),
 (52, 444, '643f1b0d9fb402675545523c6550457c', '2 weeks', 1, '2013-09-29 05:56:33', '2013-10-13 05:56:33'),
 (53, 444, 'ef5170f3e8c24929a06c41b8b16e3990', '2 weeks', 0, '2013-09-29 20:28:37', '2013-10-13 20:28:37'),
-(54, 1, '4b239ae9c3b4a66f26d23a3307152081', '2 weeks', 0, '2013-09-29 20:28:48', '2013-10-13 20:28:48'),
-(55, 1, '69a964990e8a4b38b8ed8d231f3f52b1', '2 weeks', 0, '2013-09-29 23:02:04', '2013-10-13 23:02:04'),
-(56, 1, '4f3e6a5608566c61333d82a46843ec4c', '2 weeks', 1, '2013-09-29 23:46:06', '2013-10-13 23:46:06'),
-(57, 1, 'eafa4e4963c7ddb9590c28d253b87afa', '2 weeks', 1, '2013-09-30 00:31:05', '2013-10-14 00:31:05'),
-(58, 1, '0b0bff840898166426d20572a4d52ac2', '2 weeks', 0, '2013-09-30 05:09:20', '2013-10-14 05:09:20'),
-(59, 1, 'd2be4e38c767e5a60870097afac18823', '2 weeks', 1, '2013-09-30 05:23:56', '2013-10-14 05:23:56'),
-(60, 1, '1c185ba16c7d1ba46541d25d46f7e058', '2 weeks', 0, '2013-09-30 23:11:17', '2013-10-14 23:11:17'),
-(61, 1, 'fd3c51a9542f9f6935b3cec809caa084', '2 weeks', 1, '2013-09-30 23:11:19', '2013-10-14 23:11:19'),
-(62, 1, 'e6db869a4461c19ef417d5725405a0f3', '2 weeks', 0, '2013-10-01 03:41:35', '2013-10-15 03:41:35'),
+(79, 1, 'f63b6e135d1854940bbb112dc6786c98', '2 weeks', 0, '2013-10-02 21:13:30', '2013-10-16 21:13:30'),
+(78, 1, '86caa5b6fb2b83116f92b5327ee4cf47', '2 weeks', 0, '2013-10-02 02:14:01', '2013-10-16 02:14:01'),
 (63, 444, '7551e41a6af2a2c58822d3acb2dd5545', '2 weeks', 0, '2013-10-01 04:13:18', '2013-10-15 04:13:18'),
-(64, 1, 'f30e95e9ab34af81fbe0dc3f8ed5d5db', '2 weeks', 0, '2013-10-01 06:17:24', '2013-10-15 06:17:24'),
+(77, 1, 'e575a5677c765bedb2e88f545d94698b', '2 weeks', 0, '2013-10-01 21:23:28', '2013-10-15 21:23:28'),
 (65, 444, '4030f44db66b4789db985a26ceb0f17d', '2 weeks', 0, '2013-10-01 06:31:30', '2013-10-15 06:31:30'),
-(66, 1, 'c1e978a61d2dd17252a579fddbc472fe', '2 weeks', 0, '2013-10-01 06:32:03', '2013-10-15 06:32:03'),
+(76, 1, 'ac4c2aa925d1786c8fa99e07d64f5d17', '2 weeks', 0, '2013-10-01 20:56:02', '2013-10-15 20:56:02'),
 (67, 444, 'c3644a29bde19406db8154ff4a8777f3', '2 weeks', 0, '2013-10-01 06:33:15', '2013-10-15 06:33:15'),
-(68, 1, '54207c740b5c37af750035fd4da29a43', '2 weeks', 0, '2013-10-01 06:45:27', '2013-10-15 06:45:27'),
-(69, 1, 'a731abbfecc4e496f553131f0f4d94d9', '2 weeks', 0, '2013-10-01 07:08:58', '2013-10-15 07:08:58'),
+(75, 1, '3eae8c10f8f3700a26b68dc642247a02', '2 weeks', 1, '2013-10-01 11:58:24', '2013-10-15 11:58:24'),
+(74, 1, '8ffdfeebf9f7841239b78c2f40c1e4f6', '2 weeks', 0, '2013-10-01 11:54:30', '2013-10-15 11:54:30'),
 (70, 444, '66d1b4a79898362038643e99f2b31d20', '2 weeks', 1, '2013-10-01 07:09:46', '2013-10-15 07:09:46'),
-(71, 444, 'af6a175027d413332839e47bb1c78c31', '2 weeks', 0, '2013-10-01 08:11:00', '2013-10-15 08:11:00');
+(71, 444, 'af6a175027d413332839e47bb1c78c31', '2 weeks', 0, '2013-10-01 08:11:00', '2013-10-15 08:11:00'),
+(73, 444, '55dc4b4e2f0215899eaea549ee45b540', '2 weeks', 0, '2013-10-01 11:54:14', '2013-10-15 11:54:14');
 
 -- --------------------------------------------------------
 
@@ -2552,14 +2555,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=453 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=458 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `user_group_id`, `username`, `password`, `salt`, `email_verified`, `active`, `ip_address`, `type`, `created`, `modified`) VALUES
-(1, 1, 'admin', 'cc37a7ea2efc71195f8cc5f239daa511', '2c8143bfaac1441c93723d75c326f8e4', 1, 1, '', 'Employee', '2013-09-09 13:01:56', '2013-09-23 04:06:45'),
+(1, 1, 'admin', '7ec630d165be2fc50f1d67a3e7abc152', '1e4ddf07d67ae942704335290e6b6ca3', 1, 1, '', 'Employee', '2013-09-09 13:01:56', '2013-10-01 10:25:07'),
 (66, 0, 'purple67@me.com', NULL, '', 0, 0, NULL, 'Client', '2012-10-29 00:00:00', '2012-10-21 00:00:00'),
 (67, 0, 'mibberz@hotmail.com', NULL, '', 0, 0, NULL, 'Client', '2013-03-12 00:00:00', '2013-03-08 00:00:00'),
 (68, 0, 'danilayman@hotmail.com', NULL, '', 0, 0, NULL, 'Client', '2012-10-29 00:00:00', '2012-08-22 00:00:00'),
@@ -2880,7 +2883,12 @@ INSERT INTO `users` (`id`, `user_group_id`, `username`, `password`, `salt`, `ema
 (449, 2, 'Four@test.com', '56c2ee83ca952008d8540cd1dd2cb8de', '1e5066675392a797e4b548435cbd1359', 1, 1, NULL, 'Client', '2013-09-24 03:05:44', '2013-09-24 03:05:44'),
 (450, 2, 'lizziness@gmail.com', '87621dc06961de96dae7aad15d017c9d', 'b66b982360d6152bd17586fd4a6c171f', 1, 1, NULL, 'Client', '2013-09-24 03:09:17', '2013-09-24 03:09:17'),
 (451, 2, 'lizziness@gmail.com', '0eb2b1fd5e7d2eb7fed5eccec64ab140', '189ba2da33dd38c2f03ac59bfa4b9855', 1, 1, NULL, 'Client', '2013-09-24 03:10:11', '2013-09-24 03:10:11'),
-(452, 2, 'lizziness@gmail.com', 'e08484734cc911d76f53209143c18b29', '843e60265bc8faf371e5ed57a9a6e354', 1, 1, NULL, 'Client', '2013-09-24 03:11:33', '2013-09-24 03:11:33');
+(452, 2, 'lizziness@gmail.com', 'e08484734cc911d76f53209143c18b29', '843e60265bc8faf371e5ed57a9a6e354', 1, 1, NULL, 'Client', '2013-09-24 03:11:33', '2013-09-24 03:11:33'),
+(453, 2, 'joshuaso91@gmail.com', '6b0d8ffc35f9527174edf69b88ef221e', '88acee5b87f3300ea9a50e8179a3118a', 1, 1, NULL, 'Client', '2013-10-01 21:35:30', '2013-10-01 21:35:30'),
+(454, 2, 'famew1@student.monash.edu', 'e102526d0b217829ba5d3fce698b25e5', 'e1f09d6f638e94a452cb4ccd06cab609', 1, 1, NULL, 'Client', '2013-10-01 21:39:25', '2013-10-01 21:39:25'),
+(455, 2, 'famew1@student.monash.edu', '875ead98bb5fbf0d646b12bb250d6652', '18ccfe242299b92d9ff4001895e85c99', 1, 1, NULL, 'Client', '2013-10-01 21:44:08', '2013-10-01 21:44:08'),
+(456, 2, 'famew1@student.monash.edu', '3e3d84d21b0d9ce00e575dd9bab56c5f', '2806878923d1b3ae0e59b4bb5d693bb3', 1, 1, NULL, 'Client', '2013-10-01 21:46:43', '2013-10-01 21:46:43'),
+(457, 2, 'famew1@student.monash.edu', '94b683f2831d1d95956b792cb9b95e90', 'b432a158b8d488e386418b46150e050e', 1, 1, NULL, 'Client', '2013-10-01 21:48:46', '2013-10-01 21:48:46');
 
 -- --------------------------------------------------------
 
