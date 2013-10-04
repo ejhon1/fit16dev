@@ -2,7 +2,7 @@
 	<h2><?php echo __('Document Notes'); ?></h2>
     <br>
     <div class="actions">
-        <?php echo $this->Html->link(__('Return to case'), array('controller' => 'Clientcases', 'action' => 'view', $clientcase['Clientcase']['id'].'#tab5')); ?>
+        <?php echo $this->Html->link(__('Return to case'), array('controller' => 'Clientcases', 'action' => 'view', $clientcase['Clientcase']['id'], '#' => 'tab5')); ?>
     </div>
     <br>
     <?php

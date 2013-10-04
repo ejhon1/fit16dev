@@ -56,6 +56,7 @@ class ClientcasesController extends AppController {
         $ancestorTypes = $this->AncestorType->find('list', array('fields' => array('AncestorType.id', 'AncestorType.ancestor_type'), 'order'=>'ancestor_type ASC'));
 
 
+
         $statuses = $this->Casestatus->Status->find('list');
         $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
 
@@ -67,9 +68,12 @@ class ClientcasesController extends AppController {
             $this->Archiveloan->save($this->request->data);
         }
         $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
+        $applicantslist = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
+
         $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $id), 'order'=>'first_name ASC', 'recursive' => -1));
         $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL));
         $this->set('ancestordocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
+
 
         $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL), 'order'=>'applicant_id ASC');
         $this->set('applicantdocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
@@ -78,7 +82,7 @@ class ClientcasesController extends AppController {
         $currentloan = $this->Archiveloan->find('first', array('conditions' => array('Archiveloan.archive_id' => $clientcase['Clientcase']['archive_id'], 'Archiveloan.date_returned' => NULL)));
 
 
-        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes'));
+        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist'));
     }
 
     public function statustest($id = null) {
