@@ -173,29 +173,19 @@ class DocumentsController extends AppController {
         $this->set(compact('documentTypes', 'ancestorTypes', 'applicants'));
     }
 
-    public function uploadfile()
-    {
-        $id=$this->Session->read('UserAuth.User.id');
+    public function staffuploadan() {
         $this->loadModel('AncestorType');
         $this->loadModel('DocumentType');
-        $this->loadModel('Applicant');
-        $this->loadModel('ClientCase');
-        $clientcase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $id), 'fields' => array('ClientCase.id', 'ClientCase.archive_id'), 'recursive' => -1));
-        $this->set('ClientCase');
 
+        $clientcase_id = $this->request->data['Document']['clientcase_id'];
 
         if ($this->request->is('post')) {
             $this->Document->create();
             $this->loadModel('ClientCase');
             $this->loadModel('Archive');
-            $this->loadModel('DocumentType');
-            $this->loadModel('Applicant');
-            $this->loadModel('AncestorType');
 
-            $clientcase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $id), 'fields' => array('ClientCase.id', 'ClientCase.archive_id'), 'recursive' => -1));
-            $this->set('ClientCase');
-            $test = $clientcase['ClientCase']['archive_id'];
-            $this->request->data['Document']['archive_id'] = $test;
+            $clientcase = $this->ClientCase->findById($clientcase_id);
+            $this->request->data['Document']['archive_id'] = $clientcase['ClientCase']['archive_id'];
 
             $archive = $this->Archive->find('first', array('conditions' => array('Archive.id' => $this->request->data['Document']['archive_id']),'fields' => array('Archive.id', 'Archive.archive_name')));
             $doctype = $this->DocumentType->find('first', array('conditions' => array('DocumentType.id' => $this->request->data['Document']['documenttype_id']),'fields' => array('DocumentType.id', 'DocumentType.code')));
@@ -203,13 +193,43 @@ class DocumentsController extends AppController {
 
             if ($this->uploadDoc($archive, $doctype['DocumentType']['code'], $ancestortype['AncestorType']['ancestor_type']) && $this->Document->save($this->data)) {
                 $this->Session->setFlash(__('The document was uploaded successfully'),'default', array('class' => 'alert-success'));
-                //$this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
+                $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $clientcase_id, '#'=>'tab5'));
             } else {
                 $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
-                //$this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
+                $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $clientcase_id, '#'=>'tab5'));
             }
         }
+    }
 
+    public function staffuploadapp() {
+        $this->loadModel('Applicant');
+        $this->loadModel('DocumentType');
+        $this->loadModel('ClientCase');
+
+        $clientcase_id = $this->request->data['Document']['clientcase_id'];
+        $clientcase = $this->ClientCase->findById($clientcase_id);
+
+        if ($this->request->is('post')) {
+            $this->Document->create();
+            $this->loadModel('Archive');
+
+            $this->request->data['Document']['archive_id'] = $clientcase['ClientCase']['archive_id'];
+
+            $archive = $this->Archive->find('first', array('conditions' => array('Archive.id' => $this->request->data['Document']['archive_id']),'fields' => array('Archive.id', 'Archive.archive_name')));
+            $doctype = $this->DocumentType->find('first', array('conditions' => array('DocumentType.id' => $this->request->data['Document']['documenttype_id']),'fields' => array('DocumentType.id', 'DocumentType.code')));
+            $applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $this->request->data['Document']['applicant_id']),'fields' => array('Applicant.id', 'Applicant.first_name'),'recursive' => -1));
+
+            if ($this->uploadDoc($archive, $doctype['DocumentType']['code'], $applicant['Applicant']['first_name']) && $this->Document->save($this->data)) {
+                $this->Session->setFlash(__('The document was uploaded successfully'),'default', array('class' => 'alert-success'));
+                $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $clientcase_id, '#'=>'tab5'));
+            } else {
+                $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
+                $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $clientcase_id, '#'=>'tab5'));
+            }
+        }
+        $documentTypes = $this->DocumentType->find('list', array('fields' => array('DocumentType.id', 'DocumentType.type'), 'order'=>'type ASC'));
+        $applicants = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['ClientCase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
+        $this->set(compact('documentTypes', 'ancestorTypes', 'applicants'));
     }
 
     /**
@@ -308,12 +328,11 @@ class DocumentsController extends AppController {
     }
 
     public function sendFile($id) {
+        $this->loadModel('Archive');
         $document = $this->Document->findById($id);
-        $user = $document['Document']['user_id'];
-        $filename = $document['Document']['filename'];
-        $ext = substr(strrchr($filename, '.'), 1);
-        $title = substr($filename, 0, strrpos($filename, '.'));
-        $this->response->file(APP.'documents'.DS.$user.DS.$id.'.'.$ext, array('download' => true, 'name' => $title.'.'.$ext));
+        $archive = $this->Archive->findById($document['Document']['archive_id']);
+        $archivename = str_replace('/', '-', $archive['Archive']['archive_name']);
+        $this->response->file('documents'.DS.$archivename.DS.$document['Document']['filename'], array('download' => true, 'name' => $document['Document']['filename']));
         //Return response object to prevent controller from trying to render a view
         return $this->response;
     }
