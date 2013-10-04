@@ -34,6 +34,7 @@
                                     <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
                                     <td>
                                         <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'mynotes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
+                                        <?php echo $this->html->link($this->html->image("download_icon.png"), array('action' => 'sendfile', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -77,6 +78,7 @@
                                     <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
                                     <td>
                                         <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'mynotes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
+                                        <?php echo $this->html->link($this->html->image("download_icon.png"), array('action' => 'sendfile', $applicantdocument['Document']['id']), array('escape' => false)); ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
