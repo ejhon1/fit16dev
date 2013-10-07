@@ -381,7 +381,7 @@
 
     <div class="tab-pane" id="tab4">
         <p>
-        <h3><?php echo __('Related Casenotes'); ?></h3>
+        <h3><?php echo __('Contact Notes'); ?></h3>
         <?php if (!empty($clientcase['Casenote'])): ?>
             <table cellpadding = "0" cellspacing = "0" id="data">
 			<thead> 
