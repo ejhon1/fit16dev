@@ -17,8 +17,23 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+#filter
+{
+    float: left;
+    width:22%;
+    position:relative;
+}
 
+#filterbutton
+{
+    position:absolute; bottom:0;
+    border:none;
+}
 
+#filterbox
+{
+    border:none;
+}
 
 .expand, .close, .btn {
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -477,12 +492,13 @@ input[type=radio] {
 	margin: 0 0 6px 20px;
 	line-height: 26px;
 }
+
 input[type=submit] {
 	display: inline;
 	font-size: 110%;
 	width: auto;
 }
-form .submit input[type=submit] {
+/*form .submit input[type=submit] {
 	background:#62af56;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#76BF6B), to(#3B8230));
 	background-image: -webkit-linear-gradient(top, #76BF6B, #3B8230);
@@ -495,6 +511,7 @@ form .submit input[type=submit] {
 form .submit input[type=submit]:hover {
 	background: #5BA150;
 }
+*/
 /* Form errors */
 form .error {
 	background: #FFDACC;

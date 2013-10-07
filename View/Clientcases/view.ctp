@@ -3,7 +3,19 @@
 ?>
 <div class="clientcases view">
 <script>
-    $(document).ready(function() {
+    $(function(){
+        var hash = window.location.hash;
+        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+        $('.nav-tabs a').click(function (e) {
+            $(this).tab('show');
+            var scrollmem = $('body').scrollTop();
+            window.location.hash = this.hash;
+            $('html,body').scrollTop(scrollmem);
+        });
+    });
+
+    /*$(document).ready(function() {
         if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
         return $('a[data-toggle="tab"]').on('shown', function(e) {
             return location.hash = $(e.target).attr('href').substr(1);
@@ -18,6 +30,13 @@
             return false; // or true - whichever you prefer
         });
     });
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+
+
+
+
+
     /*$(function() {
         $( "#accordion" ).accordion({
             active: false,
@@ -75,10 +94,11 @@
         
 			});
 		});
-		*/
+
     $(window).load(function() {
         $(".acc-wizard").accwizard();
     });
+     */
 </script>
 
 <div id="clientcases">
@@ -339,7 +359,7 @@
     <div class="tab-pane" id="tab3">
     <p>
     <h3><?php echo __('Case statuses'); ?></h3>
-    <a class="btn" data-toggle="modal" href="#myModal2">Update Status</a>
+    <a class="btn" data-toggle="modal" href="#myModal1">Update Status</a>
     <?php if (!empty($clientcase['Casestatus'])): ?>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
@@ -409,7 +429,7 @@
                     <h4 class="panel-title">
                         <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
                             Ancestor Documents
-                        </a><a class="btn" data-toggle="modal" href="#myModal1">Upload</a>
+                        </a><a class="btn" data-toggle="modal" href="#myModal2">Upload</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in">
@@ -435,6 +455,7 @@
                                         <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
+                                            <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -478,7 +499,7 @@
                                             <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
-
+                                            <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $applicantdocument['Document']['id']), array('escape' => false)); ?>
                                         </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -495,7 +516,7 @@
 </div>
 
 
-<div class="modal hide" id="myModal2"><!-- note the use of "hide" class -->
+<div class="modal hide" id="myModal1"><!-- note the use of "hide" class -->
 
     <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
@@ -506,7 +527,7 @@
         <?php echo $this->Form->create('Casestatus', array('action' => 'updatestatus')); ?>
         <fieldset>
             <?php
-            echo $this->Form->input('status_id');
+            echo $this->Form->input('status_id', array('default' => $clientcase['Clientcase']['status_id']));
             echo $this->Form->hidden('date_updated', array('default' => date('Y-m-d h:i:s')));
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->hidden('employee_id', array('default' => $employee['Employee']['id']));
@@ -519,7 +540,7 @@
     </div>
 </div>
 
-<div class="modal hide" id="myModal4"><!-- note the use of "hide" class -->
+<div class="modal hide" id="myModal2"><!-- note the use of "hide" class -->
 
     <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
@@ -527,13 +548,14 @@
     </div>
     <div class="modal-body">
 
-        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'uploadancestor'));?>
+        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'staffuploadan'));?>
         <fieldset>
             <?php
             //echo $this->Form->hidden('archive_id', array('default' => $client['Client']['archive_id']));
             echo $this->Form->input('file', array('id' => 'file', 'type' => 'file'));
             echo $this->Form->input('ancestortype_id', array('id' => 'ancestortype_id','options'=>$ancestorTypes, 'label'=>'Family member'));
             echo $this->Form->input('documenttype_id', array('id' => 'documenttype_id','options'=>$documentTypes, 'label'=>'Type of document'));
+            echo $this->Form->hidden('clientcase_id', array('default' => $id));
 
             ?>
         </fieldset>
@@ -544,7 +566,7 @@
 </div>
 
 
-<div class="modal hide" id="myModal5"><!-- note the use of "hide" class -->
+<div class="modal hide" id="myModal3"><!-- note the use of "hide" class -->
 
     <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
@@ -552,13 +574,14 @@
     </div>
     <div class="modal-body">
 
-        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'uploadapplicant'));?>
+        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'staffuploadapp'));?>
         <fieldset>
             <?php
             //echo $this->Form->hidden('archive_id', array('default' => $client['Client']['archive_id']));
             echo $this->Form->input('file', array('type' => 'file'));
-            echo $this->Form->input('applicant_id', array('options'=>$applicants, 'label'=>'Applicant'));
+            echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
+            echo $this->Form->hidden('clientcase_id', array('default' => $id));
             ?>
         </fieldset>
     </div>

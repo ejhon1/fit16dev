@@ -170,6 +170,7 @@ class UsersController extends UserMgmtAppController {
         $this->loadModel('Archive');
         $this->loadModel('Applicant');
         $this->loadModel('ClientCase');
+        $this->loadModel('Casestatus');
 
         if ($this->request -> isPost()) {
             $this->request->data['ClientCase']['nationality_of_parents']= implode(',', $this->request->data['ClientCase']['nationality_of_parents']);
@@ -216,9 +217,18 @@ class UsersController extends UserMgmtAppController {
                     $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
                     $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
                     $this->ClientCase->save($this->request->data);
+
+                    $this->request->data['Casestatus']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                    $this->request->data['Casestatus']['status_id'] = 1;
+                    $this->Casestatus->save($this->request->data);
+
                     $this->acceptEmail($this->request->data['Applicant']['email']);
-                    $this->Session->setFlash(__('The user has been saved', null),'default', array('class' => 'alert-success'));
-                    $this->redirect(array('plugin' => false, 'controller' => 'pages', 'action' => 'display', 'home'));
+                    $this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
+                Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
+                passport and can be conducted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
+                receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
+                        'default', array('class' => 'alert-success'));
+                    $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
                 }else {
                     $this->Session->setFlash(__('The user could not be saved', null),'default', array('class' => 'alert-danger'));
                 }
