@@ -39,7 +39,6 @@
 							<th><?php echo __('Username');?></th>
 							<th><?php echo __('Email');?></th>
 							<th><?php echo __('Group');?></th>
-							<th><?php echo __('Email Verified');?></th>
 							<th><?php echo __('Status');?></th>
 							<th><?php echo __('Created');?></th>
 							<th><?php echo __('Action');?></th>
