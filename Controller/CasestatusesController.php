@@ -57,7 +57,7 @@ class CasestatusesController extends AppController {
 				$this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
 			} else {
-				$this->Session->setFlash(__('The status could not be saved. Please try again.'));
+				$this->Session->setFlash(__('The status could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		}
 		$clientcases = $this->Casestatus->Clientcase->find('list');
@@ -82,7 +82,7 @@ class CasestatusesController extends AppController {
 				$this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The status could not be saved. Please try again.'));
+				$this->Session->setFlash(__('The status could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Casestatus.' . $this->Casestatus->primaryKey => $id));
@@ -110,7 +110,7 @@ class CasestatusesController extends AppController {
 			$this->Session->setFlash(__('Case Status deleted', null),'default', array('class' => 'alert-success'));
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Case Status was not deleted'));
+		$this->Session->setFlash(__('Case Status was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
 
