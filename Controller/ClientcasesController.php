@@ -20,18 +20,25 @@ class ClientcasesController extends AppController {
      *
      * @return void
      */
-    public function index() {
+    public function index($id = null) {
         $this->loadModel('Status');
         $this->Clientcase->recursive = 0;
-        $this->set('clientcases', $this->Clientcase->find('all'));
-        /*if ($this->request->is('post') || $this->request->is('put')) {
-            $status = $this->request->data['Clientcases']['status_id'];
-            $this->set(compact('status'));
+        if(empty($id))
+        {
+            $clientcases =  $this->Clientcase->find('all');
         }
-        */
+        else
+        {
+            $clientcases =  $this->Clientcase->find('all', array('conditions' => array('Clientcase.status_id' => $id)));
+        }
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            return $this->redirect(array('controller' => 'clientcases', 'action' => 'index', $this->request->data['Clientcases']['status_id']));
+
+        }
 
         $statuses = $this->Status->find('list');
-        $this->set(compact('statuses'));
+        $this->set(compact('statuses','clientcases', 'id'));
     }
 
     /**

@@ -527,7 +527,7 @@
         <?php echo $this->Form->create('Casestatus', array('action' => 'updatestatus')); ?>
         <fieldset>
             <?php
-            echo $this->Form->input('status_id');
+            echo $this->Form->input('status_id', array('default' => $clientcase['Clientcase']['status_id']));
             echo $this->Form->hidden('date_updated', array('default' => date('Y-m-d h:i:s')));
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->hidden('employee_id', array('default' => $employee['Employee']['id']));

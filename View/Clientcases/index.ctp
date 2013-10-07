@@ -7,13 +7,19 @@ echo $this->HTML->script('JQueryUser');
 
 <div class="clientcases index">
     <h2><?php echo __('Client Case List'); ?></h2>
-    <?php
-    /*
-    echo $this->Form->create('Clientcases');
-    echo $this->Form->input('status_id', array('empty' => 'All', 'options' => $statuses, 'label' => 'Status Filter'));
-    echo $this->Form->end(__('Filter'));
-    */
-    ?>
+
+    <table id=filter>
+        <?php
+        echo $this->Form->create('Clientcases');
+        ?>
+        <tbody>
+        <tr>
+            <td id='filterbox'><?php echo $this->Form->input('status_id', array('empty' => 'All', 'options' => $statuses, 'label' => 'Status Filter', 'default' => $id)); ?> </td>
+            <td id='filterbutton'><?php echo $this->Form->end(__('Filter')); ?></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
     <table id="data">
         <thead>
         <tr>
@@ -27,8 +33,7 @@ echo $this->HTML->script('JQueryUser');
         </thead>
         <tbody>
         <?php foreach ($clientcases as $clientcase): ?>
-            <?php if(empty($status) || $clientcase['Clientcase']['status_id'] == $status){
-                ?>
+
             <tr class="list">
                 <td valign="top">
                     <?php echo h($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname']); ?>
@@ -45,9 +50,6 @@ echo $this->HTML->script('JQueryUser');
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $clientcase['Clientcase']['id'])); ?>
                 </td>
             </tr>
-        <?php
-            }
-        ?>
         <?php endforeach; ?>
         </tbody>
     </table>
