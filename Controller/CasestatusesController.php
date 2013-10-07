@@ -123,6 +123,7 @@ class CasestatusesController extends AppController {
         $this->loadModel('Archiveloan');
         $this->loadModel('Casestatus');
         $this->loadModel('Status');
+        $this->loadModel('Clientcase');
 
         $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
         $clientcases = $this->Casestatus->Clientcase->find('list');
@@ -131,6 +132,10 @@ class CasestatusesController extends AppController {
         if ($this->request->is('post')) {
             $this->Casestatus->create();
             if ($this->Casestatus->save($this->request->data, false)) {
+                $this->request->data['Clientcase']['id'] = $this->request->data['Casestatus']['clientcase_id'];
+                $this->request->data['Clientcase']['status_id'] = $this->request->data['Casestatus']['status_id'];
+                $this->Clientcase->save($this->request->data, false);
+
                 $this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id'], '#'=>'tab3'));
             } else {
