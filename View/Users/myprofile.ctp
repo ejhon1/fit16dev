@@ -59,17 +59,6 @@
 								<td><?php echo h($user['User']['email'])?></td>
 							</tr>
 							<tr>
-								<td><strong><?php echo __('Email Verified');?></strong></td>
-								<td><?php
-										if ($user['User']['email_verified']) {
-											echo 'Yes';
-										} else {
-											echo 'No';
-										}
-									?>
-								</td>
-							</tr>
-							<tr>
 								<td><strong><?php echo __('Status');?></strong></td>
 								<td><?php
 										if ($user['User']['active']) {

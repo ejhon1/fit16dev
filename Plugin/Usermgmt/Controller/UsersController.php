@@ -113,11 +113,6 @@ class UsersController extends UserMgmtAppController {
 					$this->Session->setFlash(__('Sorry your account is not active, please contact the Administrator', null),'default', array('class' => 'alert-danger'));
                     return;
 				}
-				// check for verified account
-				if ($user['User']['id'] != 1 and $user['User']['email_verified']==0) {
-					$this->Session->setFlash(__('Your registration has not been confirmed. Please verify your email or contact the Administrator', null),'default', array('class' => 'alert-danger'));
-                    return;
-				}
 				if(empty($user['User']['salt'])) {
 					$hashed = md5($password);
 				} else {
@@ -183,8 +178,6 @@ class UsersController extends UserMgmtAppController {
             $this->request->data['ClientCase']['status_id'] = 1;
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
             //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
-
-            $this->request->data['User']['email_verified']=1;
             $this->request->data['User']['active']=1;
 
             $salt=$this->UserAuth->makeSalt();
@@ -437,7 +430,6 @@ class UsersController extends UserMgmtAppController {
         if ($this->request -> isPost()) {
             $this->User->set($this->data);
             if ($this->User->RegisterValidate()) {
-                $this->request->data['User']['email_verified']=1;
 				$this->request->data['User']['type']='Employee';
                 $this->request->data['User']['active']=1;
                 $salt=$this->UserAuth->makeSalt();
@@ -468,7 +460,6 @@ class UsersController extends UserMgmtAppController {
 
             $this->User->set($this->data);
             $this->User->RegisterValidate();
-            $this->request->data['User']['email_verified']=1;
             $this->request->data['User']['active']=1;
             $salt=$this->UserAuth->makeSalt();
             $this->request->data['User']['salt'] = $salt;
@@ -646,7 +637,7 @@ class UsersController extends UserMgmtAppController {
 	 * @access public
 	 * @return void
 	 */
-	public function userVerification() {
+	/*public function userVerification() {
 		if (isset($_GET['ident']) && isset($_GET['activate'])) {
 			$userId= $_GET['ident'];
 			$activateKey= $_GET['activate'];
@@ -674,6 +665,7 @@ class UsersController extends UserMgmtAppController {
 		}
 		$this->redirect('/login');
 	}
+	*/
 	/**
 	 * Used to send forgot password email to user
 	 *
@@ -696,10 +688,6 @@ class UsersController extends UserMgmtAppController {
 				}
 				*/
 				// check for inactive account
-				if ($user['User']['id'] != 1 and $user['User']['email_verified']==0) {
-					$this->Session->setFlash(__('Your registration has not been confirmed yet please verify your email before reset password'));
-					return;
-				}
 				$this->User->forgotPassword($user);
 				$this->Session->setFlash(__('Please check your mail to reset your password', null),'default', array('class' => 'alert-success'));
                 //$this->redirect('/login');
@@ -756,7 +744,7 @@ class UsersController extends UserMgmtAppController {
 	 * @access public
 	 * @return void
 	 */
-	public function emailVerification() {
+	/*public function emailVerification() {
 		if ($this->request -> isPost()) {
 			$this->User->set($this->data);
 			if ($this->User->LoginValidate()) {
@@ -779,4 +767,5 @@ class UsersController extends UserMgmtAppController {
 			}
 		}
 	}
+	*/
 }

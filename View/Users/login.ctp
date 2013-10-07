@@ -58,7 +58,6 @@
 					</div>
 					<?php echo $this->Form->end(); ?>
 					<div  align="left"><?php echo $this->Html->link(__("Forgot Password?",true),"/forgotPassword",array("class"=>"style30")) ?></div>
-					<div  align="left"><?php echo $this->Html->link(__("Email Verification",true),"/emailVerification",array("class"=>"style30")) ?></div>
 				</div>
 				<div class="um_box_mid_content_mid_right" align="right">
 

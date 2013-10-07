@@ -52,6 +52,8 @@ class PagesController extends AppController {
  * @return void
  */
 	public function display() {
+        $this->home();
+
 		$path = func_get_args();
 
 		$count = count($path);
@@ -72,4 +74,49 @@ class PagesController extends AppController {
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 		$this->render(implode('/', $path));
 	}
+    public function home()
+    {
+        $this->loadModel('Clientcase');
+
+        //Status list
+        $this->loadModel('Status');
+        $statuses =  $this->Status->find('all');
+        $i=0;
+        foreach($statuses as $status):
+            //$status['Status']['count'] = $this->Clientcase->find('count', array('conditions' => array('Clientcase.status_id' => $status['Status']['id'])));
+            $count[$i] = $this->Clientcase->find('count', array('conditions' => array('Clientcase.status_id' => $status['Status']['id'])));
+            $i++;
+        endforeach;
+
+        //Recent documents list
+        $this->loadModel('Document');
+        $documents = $this->Document->find('all', array('order' => array('Document.created' => 'DESC'), 'limit' => 10));
+
+        //Recent contact notes list
+        $this->loadModel('Casenote');
+        $casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC'), 'limit' => 5));
+
+        //Recent docnotes list
+        $this->loadModel('Docnote');
+        $this->loadModel('Applicant');
+
+        $docnotes = $this->Applicant->Clientcase->Docnote->find('all', array(
+            'contain' => array(
+                'Clientcase' => array('fields' => array ('id' ),
+                    'Applicant' => array(
+                        'fields' => array ( 'Applicant.id', 'Applicant.first_name', 'Applicant.surname' )
+                    )
+                ),
+                'Employee' => array('fields' => array('Employee.first_name', 'Employee.surname'))
+            ),
+            'order' => array('Docnote.created' => 'DESC'), 'limit' => 5
+        ));
+
+        //$docnotes = $this->Docnote->find('all', array('order' => array('Docnote.created' => 'DESC'), 'limit' => 5));
+
+        $this->set(compact('statuses', 'count', 'documents', 'casenotes', 'docnotes'));
+
+
+    }
+
 }
