@@ -599,13 +599,15 @@
 		<?php echo $this->Form->create('Casenote', array('action' => 'add')); ?>
         <fieldset>
             <?php
+			echo $this->Form->hidden('clientcase_id', array('default' => $id));
 			echo $this->Form->input('subject');
-			echo $this->Form->input('note_type', array(
-						'type' => 'radio',
-						'legend'=>'Note Type',
-						'default' => 'Internal',
-						'options' => array('Internal' => 'Internal', 'Public'=>'Public')));
-			echo $this->Form->input('note');
+			
+			$echo $this->Form->input('note_type', array(
+					'type' => 'radio',
+					'legend'=>'Note Type',
+					'default' => 'Internal',
+					'options' => array('Internal' => 'Internal', 'Public'=>'Public')));
+		echo $this->Form->input('note');
             ?>
         </fieldset>
     </div>
