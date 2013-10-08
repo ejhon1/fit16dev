@@ -382,7 +382,6 @@
     <div class="tab-pane" id="tab4">
         <p>
         <h3><?php echo __('Contact Notes'); ?></h3>
-	<a class="btn" data-toggle="modal" href="#modalCaseNoteAdd">Add Note</a>
         <?php if (!empty($clientcase['Casenote'])): ?>
             <table cellpadding = "0" cellspacing = "0" id="data">
 			<thead> 
@@ -417,6 +416,11 @@
             </table>
         <?php endif; ?>
 
+        <div class="actions">
+            <ul>
+                <li><?php echo $this->Html->link(__('New Casenote'), array('controller' => 'casenotes', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
+            </ul>
+        </div>
     </div>
     <div class="tab-pane" id="tab5">
         <div class="panel-group" id="accordion">
