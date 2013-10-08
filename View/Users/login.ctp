@@ -18,6 +18,50 @@
 	along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 ?>
+<div id="carousel-example-generic" class="carousel slide">
+	<!-- indicators -->
+	<ol class="carousel-indicators">
+		<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+		<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	</ol>
+	
+	<!-- Wrapper for slides-->
+	<div class="carousel-inner">
+		<div class="item active">
+			<?php echo $this->Html->image('bannerforwebsite.png', array(
+				'alt' => 'Website Banner',
+				'width' => 1000,
+				'height' => 200
+			));?>
+			
+		</div>
+		<div class="item">
+			<?php echo $this->Html->image('mapofpoland.png', array(
+				'alt' => 'Poland Map',
+				'width' => 1000,
+				'height' => 200
+			));?>
+			
+		</div>
+		<div class="item">
+			<?php echo $this->Html->image('WorldOfHands.png', array(
+				'alt' => 'World Of Hands',
+				'width' => 1000,
+				'height' => 200
+			));?>
+			
+		</div>
+	</div>	
+	<!-- Controls -->
+		<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+			&lsaquo;
+		</a>
+		<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+			&rsaquo;
+		</a>
+</div>
+
 <div class="umtop">
 	<?php echo $this->Session->flash(); ?>
 	<div class="um_box_up"></div>
