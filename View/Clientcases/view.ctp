@@ -382,6 +382,7 @@
     <div class="tab-pane" id="tab4">
         <p>
         <h3><?php echo __('Contact Notes'); ?></h3>
+	<a class="btn" data-toggle="modal" href="#myModal6">Add Note</a>
         <?php if (!empty($clientcase['Casenote'])): ?>
             <table cellpadding = "0" cellspacing = "0" id="data">
 			<thead> 
@@ -587,5 +588,29 @@
     </div>
     <div class="modal-footer">
         <?php echo $this->Form->end(__('Upload File')); ?>
+    </div>
+</div>
+
+<div class="modal hide" id="myModal6"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Add Contact Note</h3>
+    </div>
+    <div class="modal-body">
+		<?php echo $this->Form->create('Casenote', array('action' => 'add')); ?>
+        <fieldset>
+            <?php
+			echo $this->Form->input('subject');
+			echo $this->Form->input('note_type', array(
+						'type' => 'radio',
+						'legend'=>'Note Type',
+						'default' => 'Internal',
+						'options' => array('Internal' => 'Internal', 'Public'=>'Public')));
+			echo $this->Form->input('note');
+            ?>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->end(__('Add Note')); ?>
     </div>
 </div>
