@@ -371,7 +371,7 @@
             <tr>
                 <td><?php echo $casestatus['Status']['status_type']; ?></td>
                 <td><?php echo $casestatus['Casestatus']['date_updated']; ?></td>
-                <td><?php echo <?php echo $employee['Employee']['first_name']. ' '.$employee['Employee']['surname']; ?></td>
+                <td><?php echo $employee['Employee']['first_name']. ' '.$employee['Employee']['surname']; ?></td>
             </tr>
             <?php endforeach; ?>
             </table>
