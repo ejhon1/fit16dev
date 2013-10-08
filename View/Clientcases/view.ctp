@@ -417,11 +417,6 @@
             </table>
         <?php endif; ?>
 
-        <div class="actions">
-            <ul>
-                <li><?php echo $this->Html->link(__('New Casenote'), array('controller' => 'casenotes', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
-            </ul>
-        </div>
     </div>
     <div class="tab-pane" id="tab5">
         <div class="panel-group" id="accordion">
