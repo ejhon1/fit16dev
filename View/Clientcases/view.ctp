@@ -382,7 +382,7 @@
     <div class="tab-pane" id="tab4">
         <p>
         <h3><?php echo __('Contact Notes'); ?></h3>
-	<a class="btn" data-toggle="modal" href="#myModal6">Add Note</a>
+	<a class="btn" data-toggle="modal" href="#modalCaseNoteAdd">Add Note</a>
         <?php if (!empty($clientcase['Casenote'])): ?>
             <table cellpadding = "0" cellspacing = "0" id="data">
 			<thead> 
@@ -586,7 +586,7 @@
     </div>
 </div>
 
-<div class="modal hide" id="myModal6"><!-- note the use of "hide" class -->
+<div class="modal hide" id="modalCaseNoteAdd"><!-- note the use of "hide" class -->
     <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
         <h3>Add Contact Note</h3>
