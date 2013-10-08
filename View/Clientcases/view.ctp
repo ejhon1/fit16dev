@@ -382,6 +382,7 @@
     <div class="tab-pane" id="tab4">
         <p>
         <h3><?php echo __('Contact Notes'); ?></h3>
+        <a class="btn" data-toggle="modal" href="#modalCaseNoteAdd">Add Note</a>
         <?php if (!empty($clientcase['Casenote'])): ?>
             <table cellpadding = "0" cellspacing = "0" id="data">
 			<thead> 
