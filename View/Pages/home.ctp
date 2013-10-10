@@ -64,6 +64,8 @@
                         </td>
                         <td class="actions">
                             <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $document['Document']['id'])); ?>
+                            <?php echo $this->Html->link(__('Download'), array('controller' => 'documents', 'action' => 'sendFile', $document['Document']['id'])); ?>
+
                         </td>
                     </tr>
                 <?php
