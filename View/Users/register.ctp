@@ -80,7 +80,7 @@
             }
         }else{
             isValid = false;
-            $('#msg_firstname').html('Please enter you first name').show();
+            $('#msg_firstname').html('Please enter your first name').show();
         }
 
 // validate surname
@@ -94,7 +94,7 @@
             }
         }else{
             isValid = false;
-            $('#msg_surname').html('Please enter you surname').show();
+            $('#msg_surname').html('Please enter your surname').show();
         }
 // validate phone number
         var phone = $('#phone').val();
@@ -107,7 +107,7 @@
             }
         }else{
             isValid = false;
-            $('#msg_phone').html('Please enter you phone number').show();
+            $('#msg_phone').html('Please enter your phone number').show();
         }
 //validate email
         var email = $('#email').val();
@@ -120,7 +120,7 @@
             }
         }else{
             isValid = false;
-            $('#msg_email').html('Please enter email').show();
+            $('#msg_email').html('Please enter your email address').show();
         }
         return isValid;
     }
