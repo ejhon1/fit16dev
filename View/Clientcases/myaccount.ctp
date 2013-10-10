@@ -18,6 +18,11 @@
  */?>
 <br>
 	<dl>
+    <dt><?php echo __('Archive Name'); ?></dt>
+		<dd>
+			<?php echo h($clientcase['Archive']['archive_name']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('First Name'); ?></dt>
 		<dd>
 			<?php echo h($clientcase['Applicant']['first_name']); ?>
@@ -36,6 +41,17 @@
 		<dt><?php echo __('Email'); ?></dt>
 		<dd>
 			<?php echo h($clientcase['Applicant']['email']); ?>
+			&nbsp;
+		</dd>
+        </dd>
+		<dt><?php echo __('Phone Number'); ?></dt>
+		<dd>
+			<?php echo h($clientcase['Applicant']['landline_number']); ?>
+			&nbsp;
+		</dd>
+        <dt><?php echo __('Mobile Number'); ?></dt>
+		<dd>
+			<?php echo h($clientcase['Applicant']['mobile_number']); ?>
 			&nbsp;
 		</dd>
 	</dl>
