@@ -37,6 +37,14 @@ class User extends AppModel {
                 'message' => 'Passwords do not match'
 
             )
+        ),
+        'Applicant.email' => array(
+            'uniqueEmail' => array(
+                'rule' => array(
+                    'isUnique'
+                ),
+                'message' => 'This email is already registered'
+            )
         )
     );
 
