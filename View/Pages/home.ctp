@@ -63,7 +63,7 @@
                             <?php echo h($this->Time->format('d-m-Y', $document['Document']['created'])); ?>
                         </td>
                         <td class="actions">
-                            <?php //echo $this->Html->link(__('View'), array('controller' => 'clientcases', 'action' => 'view', $casenote['Casenote']['clientcase_id'])); ?>
+                            <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $document['Document']['id'])); ?>
                         </td>
                     </tr>
                 <?php
