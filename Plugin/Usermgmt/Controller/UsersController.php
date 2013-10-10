@@ -182,7 +182,8 @@ class UsersController extends UserMgmtAppController {
 
             $salt=$this->UserAuth->makeSalt();
             $this->request->data['User']['salt'] = $salt;
-            $this->request->data['User']['password'] = $this->UserAuth->makePassword($this->generatePassword(), $salt);
+            $password = $this->generatePassword();
+            $this->request->data['User']['password'] = $this->UserAuth->makePassword($password, $salt);
             $this->request->data['User']['user_group_id']=2;
             $this->request->data['User']['type']='Client';
 
@@ -215,7 +216,7 @@ class UsersController extends UserMgmtAppController {
                     $this->request->data['Casestatus']['status_id'] = 1;
                     $this->Casestatus->save($this->request->data);
 
-                    $this->acceptEmail($this->request->data['Applicant']['email']);
+                    $this->acceptEmail($this->request->data['Applicant']['email'], $password);
                     $this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
                 Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
                 passport and can be conducted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
@@ -262,7 +263,7 @@ class UsersController extends UserMgmtAppController {
     }
 
 
-    public function acceptEmail($email_addr) {
+    public function acceptEmail($email_addr, $password) {
         $Email = new CakeEmail();
         $Email->config('default');
 
@@ -272,7 +273,7 @@ class UsersController extends UserMgmtAppController {
         $Email->subject('Eligibility Check');
         $Email->template('welcome');
         $Email->emailFormat('text');
-        $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name'], 'email' => $this->request->data['Applicant']['email'], $this->request->data['User']['password']));
+        $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name'], 'email' => $this->request->data['Applicant']['email'], 'password' => $password));
         $Email->attachments(array(
             'Polaron - PL Passport - Info Pack - 2013.pdf' => array(
                 'file' => APP.'documents/Email_attachments/Polaron - PL Passport - Info Pack - 2013.pdf',
