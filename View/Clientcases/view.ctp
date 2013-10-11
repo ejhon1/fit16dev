@@ -214,24 +214,63 @@
                 <li><?php echo $this->Html->link(__('Add Applicant'), array('controller' => 'applicants', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
             </ul>
         </div>
-        <?php if (!empty($applicants)): ?>
-            <table cellpadding = "0" cellspacing = "0">
-                <tr>
-                    <th><?php echo __('Name'); ?></th>
-                    <th><?php echo __('Email'); ?></th>
-                    <th><?php echo __('Phone Number'); ?></th>
-                    <th><?php echo __('Type'); ?></th>
-                </tr>
-                <?php foreach ($applicants as $applicant): ?>
-                    <tr>
-                        <td><?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']); ?></td>
-                        <td><?php echo $applicant['Applicant']['email']; ?></td>
-                        <td><?php echo $applicant['Applicant']['landline_number']; ?></td>
-                        <td><?php echo $applicant['Applicant']['applicant_type']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        <?php endif; ?>
+        
+        <br />
+        <div>
+        	<?php if (!empty($applicants)): ?>
+									<table cellpadding = "0" cellspacing = "0">
+										<tr>
+						                    <th><?php echo __('Name'); ?></th>
+						                    <th></th>
+						                </tr>
+					                <?php foreach ($applicants as $applicant): ?>
+					                    <tr>
+					                        <td><?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']); ?></td>
+					                        <td><button class="btn btn-primary accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#first">
+							View More Applicant Details
+						</button></td>
+					                    </tr>
+					                <?php endforeach; ?>
+					            </table>
+					        <?php endif; ?>
+        </div>
+        <br />
+        <br />
+		<div>
+			<div class="panel-group" id="myaccordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						
+						</h4>
+					</div>
+					<div id="first" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<?php if (!empty($applicants)): ?>
+									<table cellpadding = "0" cellspacing = "0">
+										<tr>
+											<th><?php echo __('Birthdate'); ?></th>
+						                    <th><?php echo __('Email'); ?></th>
+						                    <th><?php echo __('Phone Number'); ?></th>
+						                    <th><?php echo __('Mobile Number'); ?></th>
+						                    <th><?php echo __('Type'); ?></th>
+						                </tr>
+					                <?php foreach ($applicants as $applicant): ?>
+					                    <tr>
+					                        <td><?php echo $applicant['Applicant']['birthdate']; ?></td>
+					                        <td><?php echo $applicant['Applicant']['email']; ?></td>
+					                        <td><?php echo $applicant['Applicant']['landline_number']; ?></td>
+					                        <td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
+					                        <td><?php echo $applicant['Applicant']['applicant_type']; ?></td>
+					                    </tr>
+					                <?php endforeach; ?>
+					            </table>
+					        <?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 
