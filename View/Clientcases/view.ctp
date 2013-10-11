@@ -239,12 +239,7 @@
 		<div>
 			<div class="panel-group" id="myaccordion">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-						
-						</h4>
-					</div>
-					<div id="first" class="panel-collapse collapse in">
+					<div id="first" class="panel-collapse collapse out">
 						<div class="panel-body">
 							<?php if (!empty($applicants)): ?>
 									<table cellpadding = "0" cellspacing = "0">
