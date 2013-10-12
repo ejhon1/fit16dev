@@ -1,5 +1,7 @@
 <?php
-//echo $this->HTML->script('JQueryUser');
+$loggedUser = $this->UserAuth->getUser();
+if(!empty($loggedUser['User']['type']) && $loggedUser['User']['type'] == 'Employee')
+{
 ?>
 
 <div class="home">
@@ -108,9 +110,6 @@
                             <?php echo h($casenote['Casenote']['subject']); ?>
                         </td>
                         <td valign="top">
-                            <?php echo h($casenote['Casenote']['user_id']); ?>
-                        </td>
-                        <td valign="top">
                             <?php echo h($this->Time->format('h:i d-m-Y', $casenote['Casenote']['created'])); ?>
                         </td>
                         <td class="actions">
@@ -118,7 +117,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td valign="top" colspan="4">
+                        <td valign="top" colspan="3">
                             <?php echo String::truncate($casenote['Casenote']['note'], 255, array('html' => true));
                             //echo h($casenote['Casenote']['note']); ?>
                         </td>
@@ -167,3 +166,4 @@
     </div>
 </div>
 
+<?php } ?>
