@@ -14,7 +14,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
 // Smart Wizard
-        $('#wizard').smartWizard({transitionEffect:'slideleft',onLeaveStep:leaveAStepCallback,onFinish:onFinishCallback});
+        $('#wizard').smartWizard({transitionEffect:'fade',onLeaveStep:leaveAStepCallback,onFinish:onFinishCallback});
 
         function leaveAStepCallback(obj){
             var step_num= obj.attr('rel');
@@ -206,7 +206,6 @@
 <fieldset>
 <legend><?php echo __('Quickcheck Eligibility Form'); ?></legend>
 <br>
-<p>Fields marked with an * are required. </p>
 <br><br>
 <div id="wizard" class="swMain">
 <ul>
@@ -302,12 +301,14 @@ Step 4<br />
     <?php
     echo $this->Form->input('ClientCase.born_in_poland', array(
         'type' => 'radio',
+	'default' => 'Yes',
         'options' => array(
             'Yes' => 'Yes',
             'No' => 'No'),
         'legend' => 'I was born in Poland'));
     echo $this->Form->input('ClientCase.spouse_nationality', array(
         'type' => 'radio',
+        'default' => 'Yes',
         'options' => array(
             'Yes' => 'Yes',
             'No' => 'No'),
