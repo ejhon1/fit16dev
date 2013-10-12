@@ -14,91 +14,6 @@
             $('html,body').scrollTop(scrollmem);
         });
     });
-
-    /*$(document).ready(function() {
-        if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
-        return $('a[data-toggle="tab"]').on('shown', function(e) {
-            return location.hash = $(e.target).attr('href').substr(1);
-        });
-
-    });
-
-    $(document).ready(function()  {
-        $('a[data-toggle="tab"]').on('shown', function(e) {
-            location.hash = $(e.target).attr('href').substr(1);
-            $(this).focus();
-            return false; // or true - whichever you prefer
-        });
-    });
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
-
-
-
-
-
-    /*$(function() {
-        $( "#accordion" ).accordion({
-            active: false,
-            collapsible: true,
-            heightStyle: "content"
-
-        });
-        $('.nav nav-tabs').on('click', false);
-    });
-
-
-    $(function () {
-	$("#accordion").accordion(
-	{
-		collapsible:true,
-		active:false
-	});
-		var icons = $( "#accordion" ).accordion( "option", "icons" );
-		$('.expand').click(function ()
-		{
-			$('.ui-accordion-header').removeClass('ui-corner-all').addClass('ui-accordion-header-active ui-state-active ui-corner-top').attr(
-			{
-				'aria-selected': 'true',
-				'tabindex': '0'
-			});
-			$('.ui-accordion-header-icon').removeClass(icons.header).addClass(icons.headerSelected);
-			$('.ui-accordion-content').addClass('ui-accordion-content-active').attr(
-		{
-			'aria-expanded': 'true',
-			'aria-hidden': 'false'
-		}).show();
-			$(this).attr("disabled","disabled");
-				$('.close').removeAttr("disabled");
-			});
-			$('.close').click(function () 
-			{
-				$('.ui-accordion-header').removeClass('ui-accordion-header-active ui-state-active ui-corner-top').addClass('ui-corner-all').attr(
-				{
-					'aria-selected': 'false',
-					'tabindex': '-1'
-				});
-				$('.ui-accordion-header-icon').removeClass(icons.headerSelected).addClass(icons.header);
-				$('.ui-accordion-content').removeClass('ui-accordion-content-active').attr(
-				{
-					'aria-expanded': 'false',
-					'aria-hidden': 'true'
-				}).hide();
-				$(this).attr("disabled","disabled");
-				$('.expand').removeAttr("disabled");
-			});
-			$('.ui-accordion-header').click(function () 
-			{
-				$('.expand').removeAttr("disabled");
-				$('.close').removeAttr("disabled");
-        
-			});
-		});
-
-    $(window).load(function() {
-        $(".acc-wizard").accwizard();
-    });
-     */
 </script>
 
 <div id="clientcases">
@@ -433,7 +348,7 @@
                     <h4 class="panel-title">
                         <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
                             Ancestor Documents
-                        </a><a class="btn" data-toggle="modal" href="#myModal2">Upload</a>
+                        </a><a class="btn pull-right" data-toggle="modal" href="#myModal2">Upload</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in">
@@ -476,7 +391,7 @@
                     <h4 class="panel-title">
                         <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo">
                             Applicant Documents
-                        </a><a class="btn" data-toggle="modal" href="#myModal3" >Upload</a>
+                        </a><a class="btn pull-right" data-toggle="modal" href="#myModal3" >Upload</a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse">
