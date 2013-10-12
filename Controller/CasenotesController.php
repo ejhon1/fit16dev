@@ -9,21 +9,31 @@ App::uses('AppController', 'Controller');
 class CasenotesController extends AppController {
 
 /**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator');
-
-/**
  * index method
  *
  * @return void
  */
 	public function index() {
-		$this->Casenote->recursive = 0;
-		$this->set('casenotes', $this->Paginator->paginate());
-	}
+        //Recent contact notes list
+        $this->loadModel('Casenote');
+        $casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC')));
+
+        /*$casenotes = $this->Casenote->find('all', array(
+                'contain' => array(
+                    'Clientcase' => array('fields' => array ('id', 'archive_id'),
+                        'contain'=> array('Archive' => array('fields' => 'archive_name'))
+
+                )
+            )
+        ));
+        */
+
+       //$casenotes = debug($this->Casenote->Clientcase->Archive->find('all', array('contain' => array('Clientcase' => array('fields' => array('id', 'archive_id'),'Archive')))));
+
+
+
+        $this->set(compact('casenotes'));
+    }
 
 /**
  * view method

@@ -8,12 +8,6 @@ App::uses('AppController', 'Controller');
  */
 class DocumentsController extends AppController {
 
-    /**
-     * Components
-     *
-     * @var array
-     */
-    public $components = array('Paginator');
 
     /**
      * index method
@@ -21,8 +15,11 @@ class DocumentsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->Document->recursive = 0;
-        $this->set('documents', $this->Paginator->paginate());
+        //Recent documents list
+        $this->loadModel('Document');
+        $documents = $this->Document->find('all', array('order' => array('Document.created' => 'DESC')));
+
+        $this->set(compact('documents'));
     }
 
     /**
