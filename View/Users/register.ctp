@@ -146,7 +146,7 @@
     }
     function validatePhone(phone)
     {
-        var pattern = new RegExp("^[0-9]{1,20}$");
+        var pattern = new RegExp("^([a-zA-Z,#/ \.\(\)\-\+\*]*[0-9]){7}[0-9a-zA-Z,#/ \.\(\)\-\+\*]*$");
         return pattern.test(phone);
     }
     function isValidEmailAddress(emailAddress) {
