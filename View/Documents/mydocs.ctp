@@ -8,7 +8,7 @@
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
                         Ancestor Documents
-                    </a><a class="btn" data-toggle="modal" href="#myModal1">Upload</a>
+                    </a><a class="btn pull-right" data-toggle="modal" href="#myModal1">Upload</a>
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse in">
@@ -51,7 +51,7 @@
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo">
                         Applicant Documents
-                    </a><a class="btn" data-toggle="modal" href="#myModal2" >Upload</a>
+                    </a><a class="btn pull-right" data-toggle="modal" href="#myModal2" >Upload</a>
                 </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
