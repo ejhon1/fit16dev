@@ -121,8 +121,22 @@
             </tr>
             </tbody>
         </table>
+        <br>
+        <?php
+        if($user['User']['active'] != 1 && $user['User']['password'] == NULL)
+        {
+            ?>
+            <div class="actions">
+                <ul>
+                    <li><?php echo $this->Html->link(__('Activate'), array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'activateAccount', $clientcase['Clientcase']['id'])); ?> </li>
+                </ul>
+            </div>
+        <?php
+        }
+        ?>
 
-        <br><br>
+
+        <br><br><br>
         <h3><?php echo __('Applicants'); ?></h3>
         <div class="actions">
             <ul>
@@ -534,3 +548,4 @@
         <?php echo $this->Form->end(__('Add Note')); ?>
     </div>
 </div>
+
