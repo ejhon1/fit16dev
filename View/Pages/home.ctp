@@ -118,7 +118,7 @@ if(!empty($loggedUser['User']['type']) && $loggedUser['User']['type'] == 'Employ
                     </tr>
                     <tr>
                         <td valign="top" colspan="3">
-                            <?php echo String::truncate($casenote['Casenote']['note'], 255, array('html' => true));
+                            <?php echo String::truncate($casenote['Casenote']['note'], 55, array('html' => true));
                             //echo h($casenote['Casenote']['note']); ?>
                         </td>
                     </tr>
@@ -155,7 +155,7 @@ if(!empty($loggedUser['User']['type']) && $loggedUser['User']['type'] == 'Employ
                     </tr>
                     <tr>
                         <td valign="top" colspan="4">
-                            <?php echo String::truncate($docnote['Docnote']['note'], 255, array('html' => true)); ?>
+                            <?php echo String::truncate($docnote['Docnote']['note'], 55, array('html' => true)); ?>
                         </td>
                     </tr>
                 <?php
