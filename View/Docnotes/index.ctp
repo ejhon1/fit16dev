@@ -1,35 +1,44 @@
+<?php
+echo $this->HTML->script('JQueryUser');
+?>
 <div class="docnotes index">
 	<h2><?php echo __('Document Notes'); ?></h2>
-    <button type="button" class="expand">Expand all</button>
-    <?php
-    echo $this->Form->create('Docnote');
-    echo $this->Form->input('note');
-    echo $this->Form->end(__('Submit'));
-    ?>
-	<table cellpadding="0" cellspacing="0">
-    <tbody>
-	<?php foreach ($docnotes as $docnote): ?>
-	<tr>
-		<td>
-			<?php echo h($docnote['User']['id']); ?>
-        <td><?php echo h($this->Time->format('d-m-Y', $docnote['Docnote']['created'])); ?>&nbsp;</td>
-    </tr>
-    <tr>
-		<td colspan="2"><?php echo h($docnote['Docnote']['note']); ?>&nbsp;</td>
-
-	</tr>
-    </tbody>
-<?php endforeach; ?>
-	</table>
-
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Docnote'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Documents'), array('controller' => 'documents', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Document'), array('controller' => 'documents', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-	</ul>
+    <table id="data">
+        <thead>
+        <tr>
+            <th>Author</th>
+            <th>Note</th>
+            <th>Created</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($docnotes as $docnote): ?>
+            <tr>
+                <td valign="top">
+                    <?php if(!empty($docnote['Docnote']['employee_id']))
+                    {
+                        echo h($docnote['Employee']['first_name'].' '.$docnote['Employee']['surname'].' (Staff)');
+                    }
+                    else
+                    {
+                        echo h($docnote['Clientcase']['Applicant']['first_name'].' '.$docnote['Clientcase']['Applicant']['surname'].' (Client)');
+                    }
+                    ?>
+                </td>
+                <td valign="top">
+                    <?php echo String::truncate($docnote['Docnote']['note'], 255, array('html' => true)); ?>
+                </td>
+                <td valign="top">
+                    <?php echo h($this->Time->format('d-m-Y h:i', $docnote['Docnote']['created'])); ?>
+                </td>
+                <td class="actions">
+                    <?php echo $this->Html->link(__('View'), array('controller' => 'docnotes', 'action' => 'notes', $docnote['Docnote']['document_id'])); ?>
+                </td>
+            </tr>
+        <?php
+        endforeach; ?>
+        </tbody>
+    </table>
 </div>
