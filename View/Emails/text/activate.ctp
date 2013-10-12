@@ -12,7 +12,7 @@
  */
 ?>
 
-<?php echo $message ?>,
+<?php echo $message ?>
 
 
 Username: <?php echo $username ?>

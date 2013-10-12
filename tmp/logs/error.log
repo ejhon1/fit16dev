@@ -4595,3 +4595,727 @@ Stack Trace:
 #11 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(EmployeesController), Object(CakeRequest), Object(CakeResponse))
 #12 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #13 {main}
+2013-10-12 03:49:52 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 03:55:36 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 01:06:01 Error: [NotFoundException] The requested file C:\wamp\www\development\app\documents\TES-1-13\TES-1-13 Thomas ASP.txt was not found or not readable
+Request URL: /development/documents/sendFile/3
+Stack Trace:
+#0 C:\wamp\www\development\app\Controller\DocumentsController.php(335): CakeResponse->file('documents\TES-1...', Array)
+#1 [internal function]: DocumentsController->sendFile('3')
+#2 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(DocumentsController), Array)
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#4 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocumentsController), Object(CakeRequest), Object(CakeResponse))
+#5 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2013-10-12 05:11:27 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 05:16:22 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 05:21:24 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 01:24:11 Error: [MissingActionException] Action DocnotesController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocnotesController',
+  'action' => 'index',
+)
+Request URL: /development/docnotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocnotesController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-12 05:34:44 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 05:44:06 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 05:47:19 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 01:49:19 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Clientcase.contain' in 'field list'
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Casenot...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT `Casenot...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Casenot...', false)
+#4 C:\wamp\www\development\lib\Cake\Model\Model.php(2700): DboSource->read(Object(Casenote), Array)
+#5 C:\wamp\www\development\app\Controller\CasenotesController.php(30): Model->find('all', Array)
+#6 [internal function]: CasenotesController->index()
+#7 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(CasenotesController), Array)
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(CasenotesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-10-12 05:58:28 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 06:09:15 Error: Fatal Error (4): syntax error, unexpected ')' in [C:\wamp\www\development\app\Controller\CasenotesController.php, line 32]
+2013-10-12 06:09:15 Error: [FatalErrorException] syntax error, unexpected ')'
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 32)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 32, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\dev...', 32, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-12 02:10:00 Error: Fatal Error (1): Maximum execution time of 30 seconds exceeded in [C:\wamp\www\development\lib\Cake\Utility\Debugger.php, line 553]
+2013-10-12 02:10:00 Error: [FatalErrorException] Maximum execution time of 30 seconds exceeded
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 553)
+#1 [internal function]: ErrorHandler::handleError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 553, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Maximum executi...', 'C:\wamp\www\dev...', 553, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-12 02:15:37 Error: Fatal Error (1): Maximum execution time of 30 seconds exceeded in [C:\wamp\www\development\lib\Cake\Utility\Debugger.php, line 827]
+2013-10-12 02:15:37 Error: [FatalErrorException] Maximum execution time of 30 seconds exceeded
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 827)
+#1 [internal function]: ErrorHandler::handleError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 827, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Maximum executi...', 'C:\wamp\www\dev...', 827, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-12 06:20:24 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 06:21:41 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 02:23:54 Error: [MissingActionException] Action DocnotesController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocnotesController',
+  'action' => 'index',
+)
+Request URL: /development/docnotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocnotesController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-12 02:27:10 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Clientcase.contain' in 'field list'
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Casenot...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT `Casenot...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Casenot...', false)
+#4 C:\wamp\www\development\lib\Cake\Model\Model.php(2700): DboSource->read(Object(Casenote), Array)
+#5 C:\wamp\www\development\app\Controller\CasenotesController.php(28): Model->find('all', Array)
+#6 [internal function]: CasenotesController->index()
+#7 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(CasenotesController), Array)
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(CasenotesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-10-12 07:19:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/bannerforwebsite.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 07:19:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/mapofpoland.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 07:19:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/WorldOfHands.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 03:20:05 Error: Fatal Error (4): syntax error, unexpected '(' in [C:\wamp\www\development\app\View\Pages\home.ctp, line 3]
+2013-10-12 03:20:05 Error: [FatalErrorException] syntax error, unexpected '('
+Request URL: /development/
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 3)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 3, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\dev...', 3, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-12 07:20:15 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/mapofpoland.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 07:20:15 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/WorldOfHands.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 07:20:15 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/bannerforwebsite.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 08:23:49 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 09:18:28 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 09:48:55 Error: [MissingControllerException] Controller class UsersController could not be found.
+Exception Attributes: array (
+  'class' => 'UsersController',
+  'plugin' => NULL,
+)
+Request URL: /development/users/activateaccount
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 09:56:46 Error: [MissingControllerException] Controller class UsersController could not be found.
+Exception Attributes: array (
+  'class' => 'UsersController',
+  'plugin' => NULL,
+)
+Request URL: /development/users/activateAccount
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 06:19:47 Error: [NotFoundException] Invalid Case.
+Request URL: /development/clientcases/view
+Stack Trace:
+#0 [internal function]: ClientcasesController->view()
+#1 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#2 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-10-12 06:54:10 Error: Fatal Error (1): Call to undefined method UsersController::generatePassword() in [C:\wamp\www\development\app\Controller\UsersController.php, line 21]
+2013-10-12 06:54:10 Error: [FatalErrorException] Call to undefined method UsersController::generatePassword()
+Request URL: /development/users/activateAccount
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\wamp\www\dev...', 21)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\wamp\www\dev...', 21, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\wamp\www\dev...', 21, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-12 07:03:15 Error: [MissingActionException] Action UsersController::activateAccount() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'activateAccount',
+)
+Request URL: /development/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-10-12 11:06:38 Error: [MissingControllerException] Controller class Usermgmt.usersController could not be found.
+Exception Attributes: array (
+  'class' => 'Usermgmt.usersController',
+  'plugin' => NULL,
+)
+Request URL: /development/Usermgmt.users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:08:37 Error: [MissingControllerException] Controller class Usermgmt.usersController could not be found.
+Exception Attributes: array (
+  'class' => 'Usermgmt.usersController',
+  'plugin' => NULL,
+)
+Request URL: /development/Usermgmt.users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:08:48 Error: [MissingControllerException] Controller class Usermgmt.usersController could not be found.
+Exception Attributes: array (
+  'class' => 'Usermgmt.usersController',
+  'plugin' => NULL,
+)
+Request URL: /development/Usermgmt.users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:10:29 Error: [MissingControllerException] Controller class UsersController could not be found.
+Exception Attributes: array (
+  'class' => 'UsersController',
+  'plugin' => NULL,
+)
+Request URL: /development/Users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:10:40 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 07:11:51 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php, line 236]
+2013-10-12 07:11:51 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 236)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 236, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\wamp\www\dev...', 236, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-10-12 07:17:59 Error: [SocketException] You need to specify at least one destination for to, cc or bcc.
+Request URL: /development/usermgmt/users/activateAccount
+Stack Trace:
+#0 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(255): CakeEmail->send('Test1\nUsername...')
+#1 [internal function]: UsersController->activateAccount()
+#2 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#4 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2013-10-12 07:22:17 Error: [SocketException] You need to specify at least one destination for to, cc or bcc.
+Request URL: /development/usermgmt/users/activateAccount
+Stack Trace:
+#0 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(251): CakeEmail->send('test\nUsername:...')
+#1 [internal function]: UsersController->activateAccount()
+#2 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#4 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2013-10-12 07:23:12 Error: [SocketException] You need to specify at least one destination for to, cc or bcc.
+Request URL: /development/usermgmt/users/activateAccount
+Stack Trace:
+#0 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(253): CakeEmail->send('tuyt\nUsername:...')
+#1 [internal function]: UsersController->activateAccount()
+#2 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#4 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2013-10-12 07:23:32 Error: [SocketException] You need to specify at least one destination for to, cc or bcc.
+Request URL: /development/usermgmt/users/activateAccount
+Stack Trace:
+#0 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(254): CakeEmail->send('tuyt\nUsername:...')
+#1 [internal function]: UsersController->activateAccount()
+#2 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#4 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2013-10-12 07:24:49 Error: [SocketException] Unable to find the socket transport "ssl" - did you forget to enable it when you configured PHP?
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Network\Email\SmtpTransport.php(101): CakeSocket->connect()
+#1 C:\wamp\www\development\lib\Cake\Network\Email\SmtpTransport.php(61): SmtpTransport->_connect()
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1075): SmtpTransport->send(Object(CakeEmail))
+#3 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(254): CakeEmail->send('tyj\nUsername: ...')
+#4 [internal function]: UsersController->activateAccount('66')
+#5 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#6 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#7 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2013-10-12 07:27:04 Error: [SocketException] Unable to find the socket transport "ssl" - did you forget to enable it when you configured PHP?
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Network\Email\SmtpTransport.php(101): CakeSocket->connect()
+#1 C:\wamp\www\development\lib\Cake\Network\Email\SmtpTransport.php(61): SmtpTransport->_connect()
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1075): SmtpTransport->send(Object(CakeEmail))
+#3 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(254): CakeEmail->send('tyj\nUsername: ...')
+#4 [internal function]: UsersController->activateAccount('66')
+#5 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#6 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#7 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2013-10-12 11:27:36 Error: [MissingControllerException] Controller class ClientcasesController could not be found.
+Exception Attributes: array (
+  'class' => 'ClientcasesController',
+  'plugin' => 'Usermgmt',
+)
+Request URL: /development/usermgmt/clientcases/view
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:29:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/mapofpoland.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:29:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/bannerforwebsite.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:29:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/WorldOfHands.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:29:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/WorldOfHands.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:29:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/mapofpoland.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:29:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/bannerforwebsite.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:30:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/mapofpoland.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:30:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/WorldOfHands.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:30:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/bannerforwebsite.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:31:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/WorldOfHands.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:31:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/bannerforwebsite.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:31:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/mapofpoland.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:31:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/mapofpoland.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:31:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/WorldOfHands.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:31:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /development/img/bannerforwebsite.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 07:41:33 Error: [MissingViewException] View file "C:\wamp\www\development\app\View\Emails\text\activate.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\development\\app\\View\\Emails\\text\\activate.ctp',
+)
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\View\View.php(468): View->_getViewFileName('activate')
+#1 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1582): View->render('activate', 'default')
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1448): CakeEmail->_renderTemplates('?')
+#3 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1073): CakeEmail->_render(Array)
+#4 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(257): CakeEmail->send()
+#5 [internal function]: UsersController->activateAccount('66')
+#6 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-12 07:42:11 Error: [MissingViewException] View file "C:\wamp\www\development\app\View\Emails\text\activate.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\development\\app\\View\\Emails\\text\\activate.ctp',
+)
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\View\View.php(468): View->_getViewFileName('activate')
+#1 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1582): View->render('activate', 'default')
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1448): CakeEmail->_renderTemplates('?')
+#3 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1073): CakeEmail->_render(Array)
+#4 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(257): CakeEmail->send()
+#5 [internal function]: UsersController->activateAccount('66')
+#6 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-12 07:42:44 Error: [MissingViewException] View file "C:\wamp\www\development\app\View\Emails\text\activate.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\development\\app\\View\\Emails\\text\\activate.ctp',
+)
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\View\View.php(468): View->_getViewFileName('activate')
+#1 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1582): View->render('activate', 'default')
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1448): CakeEmail->_renderTemplates('?')
+#3 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1073): CakeEmail->_render(Array)
+#4 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(257): CakeEmail->send()
+#5 [internal function]: UsersController->activateAccount('66')
+#6 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-12 07:43:20 Error: [MissingViewException] View file "C:\wamp\www\development\app\View\Emails\text\activate.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\development\\app\\View\\Emails\\text\\activate.ctp',
+)
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\View\View.php(468): View->_getViewFileName('activate')
+#1 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1582): View->render('activate', 'default')
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1448): CakeEmail->_renderTemplates('?')
+#3 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1073): CakeEmail->_render(Array)
+#4 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(257): CakeEmail->send()
+#5 [internal function]: UsersController->activateAccount('66')
+#6 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-12 07:43:26 Error: [MissingViewException] View file "C:\wamp\www\development\app\View\Emails\text\activate.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\development\\app\\View\\Emails\\text\\activate.ctp',
+)
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\View\View.php(468): View->_getViewFileName('activate')
+#1 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1582): View->render('activate', 'default')
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1448): CakeEmail->_renderTemplates('?')
+#3 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1073): CakeEmail->_render(Array)
+#4 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(257): CakeEmail->send()
+#5 [internal function]: UsersController->activateAccount('66')
+#6 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-12 07:45:04 Error: [MissingViewException] View file "C:\wamp\www\development\app\View\Emails\text\activate.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\development\\app\\View\\Emails\\text\\activate.ctp',
+)
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\View\View.php(468): View->_getViewFileName('activate')
+#1 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1582): View->render('activate', 'default')
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1448): CakeEmail->_renderTemplates('?')
+#3 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1073): CakeEmail->_render(Array)
+#4 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(257): CakeEmail->send()
+#5 [internal function]: UsersController->activateAccount('66')
+#6 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#7 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2013-10-12 11:46:16 Error: [MissingControllerException] Controller class ClientcasesController could not be found.
+Exception Attributes: array (
+  'class' => 'ClientcasesController',
+  'plugin' => 'Usermgmt',
+)
+Request URL: /development/usermgmt/clientcases/view/66
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 11:47:59 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-10-12 07:49:59 Error: [MissingLayoutException] Layout file "C:\wamp\www\development\app\View\Layouts\Emails\text\blank.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\development\\app\\View\\Layouts\\Emails\\text\\blank.ctp',
+)
+Request URL: /development/usermgmt/users/activateAccount/66
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\View\View.php(509): View->_getLayoutFileName('blank')
+#1 C:\wamp\www\development\lib\Cake\View\View.php(479): View->renderLayout('', 'blank')
+#2 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1582): View->render('activate', 'blank')
+#3 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1448): CakeEmail->_renderTemplates('?')
+#4 C:\wamp\www\development\lib\Cake\Network\Email\CakeEmail.php(1073): CakeEmail->_render(Array)
+#5 C:\wamp\www\development\app\Plugin\Usermgmt\Controller\UsersController.php(257): CakeEmail->send()
+#6 [internal function]: UsersController->activateAccount('66')
+#7 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}

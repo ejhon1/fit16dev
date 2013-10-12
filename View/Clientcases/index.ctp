@@ -1,8 +1,5 @@
 <?php
 echo $this->HTML->script('JQueryUser');
-
-
-
 ?>
 
 <div class="clientcases index">
