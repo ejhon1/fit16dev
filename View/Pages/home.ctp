@@ -5,7 +5,7 @@
 <div class="home">
     <br>
     <div class="row">
-        <div class="span6"><p>
+        <div class="span5"><p>
             <h3><?php echo __('Number of cases at each stage'); ?></h3>
             <br>
             <table>
@@ -37,14 +37,14 @@
                 </tbody>
             </table>
         </p></div>
-        <div class="span6"><p>
-            <h3><?php echo __('Most recent documents uploaded'); ?></h3>
+        <div class="span5"><p>
+            <h3><?php echo __('Most recent documents'); ?><a class="btn pull-right" data-toggle="modal" href="./documents">Full list</a></h3>
             <br>
             <table>
                 <thead>
                 <tr>
                     <th class="heading">Archive</th>
-                    <th class="heading">File Name</th>
+                    <th class="heading">Category</th>
                     <th class="heading">Uploaded</th>
                     <th class="heading">Action</th>
                 </tr>
@@ -56,16 +56,36 @@
                         <td valign="top">
                             <?php echo h($document['Archive']['archive_name']); ?>
                         </td>
-                        <td valign="top">
-                            <?php echo h($document['Document']['filename']); ?>
+                        <td>
+                            <?php
+                            if(!empty($document['Applicant']['id']))
+                            {
+                                echo 'Applicant';
+                            }
+                            else if(!empty($document['Ancestortype']['id']))
+                            {
+                                echo 'Ancestor';
+                            }
+                            else if(!empty($document['Document']['copy_type']) && $document['Document']['copy_type'] != 'Digital')
+                            {
+                                echo h($document['Document']['copy_type']);
+                            }
+                            else
+                            {
+                                echo 'Unknown';
+                            }
+                            ?>
                         </td>
                         <td valign="top">
                             <?php echo h($this->Time->format('d-m-Y', $document['Document']['created'])); ?>
                         </td>
                         <td class="actions">
                             <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $document['Document']['id'])); ?>
-                            <?php echo $this->Html->link(__('Download'), array('controller' => 'documents', 'action' => 'sendFile', $document['Document']['id'])); ?>
-
+                            <?php if($document['Document']['copy_type'] == 'Digital')
+                            {
+                                echo $this->Html->link(__('Download'), array('controller' => 'documents', 'action' => 'sendFile', $document['Document']['id']));
+                            }
+                            ?>
                         </td>
                     </tr>
                 <?php
@@ -76,8 +96,8 @@
     </div>
     <br>
     <div class="row">
-        <div class="span6"><p>
-            <h3><?php echo __('Most recent contact notes'); ?></h3>
+        <div class="span5"><p>
+            <h3><?php echo __('Most recent contact notes'); ?><a class="btn pull-right" data-toggle="modal" href="./casenotes">Full list</a></h3>
             <br>
             <table>
                 <tbody>
@@ -108,8 +128,8 @@
                 </tbody>
             </table>
         </p></div>
-        <div class="span6"><p>
-            <h3><?php echo __('Most recent document notes'); ?></h3>
+        <div class="span5"><p>
+            <h3><?php echo __('Most recent document notes'); ?><a class="btn pull-right" data-toggle="modal" href="./docnotes">Full list</a></h3>
             <br>
             <table>
                 <tbody>

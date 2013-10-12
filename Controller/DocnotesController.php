@@ -20,6 +20,28 @@ class DocnotesController extends AppController {
  *
  * @return void
  */
+    public function index() {
+        //Recent docnotes list
+        $this->loadModel('Docnote');
+        $this->loadModel('Applicant');
+
+        $docnotes = $this->Applicant->Clientcase->Docnote->find('all', array(
+            'contain' => array(
+                'Clientcase' => array('fields' => array ('id' ),
+                    'Applicant' => array(
+                        'fields' => array ( 'Applicant.id', 'Applicant.first_name', 'Applicant.surname' )
+                    )
+                ),
+                'Employee' => array('fields' => array('Employee.first_name', 'Employee.surname'))
+            ),
+            'order' => array('Docnote.created' => 'DESC')
+        ));
+
+        //$docnotes = $this->Docnote->find('all', array('order' => array('Docnote.created' => 'DESC'), 'limit' => 5));
+
+        $this->set(compact('docnotes'));
+
+    }
 
     public function notes($id = NULL) {
         $userID = $this->UserAuth->getUserId();
