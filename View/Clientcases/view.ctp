@@ -153,22 +153,21 @@
         <br />
         <div>
         	<?php if (!empty($applicants)): ?>
-									<table cellpadding = "0" cellspacing = "0">
-										<tr>
-						                    <th><?php echo __('Name'); ?></th>
-                                            <th><?php echo __('Type'); ?></th>
-                                            <th><?php echo __('Action'); ?></th>
-						                    <th></th>
-						                </tr>
-					                		<?php foreach ($applicants as $applicant): ?>
-					                    <tr>
-					                        <td><?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']); ?></td>
-                                            <td><?php echo h($applicant['Applicant']['applicant_type']); ?></td>
-					                        <td><a class="btn btn-primary accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#first">Full Details</a></td>
-					                    </tr>
-					                <?php endforeach; ?>
-					            </table>
-					        <?php endif; ?>
+			<table cellpadding = "0" cellspacing = "0">
+				<tr>
+					<th><?php echo __('Name'); ?></th>
+                                        <th><?php echo __('Type'); ?></th>
+                                        <th><?php echo __('Action'); ?></th>
+				</tr>
+					<?php foreach ($applicants as $applicant): ?>
+				<tr>
+				        <td><?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']); ?></td>
+                                        <td><?php echo h($applicant['Applicant']['applicant_type']); ?></td>
+				        <td><a class="btn btn-primary accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#first">Full Details</a></td>
+				</tr>
+					<?php endforeach; ?>
+			</table>
+		<?php endif; ?>
         </div>
         <br />
         <br />
@@ -178,34 +177,65 @@
 					<div id="first" class="panel-collapse collapse out">
 						<div class="panel-body">
 							<?php if (!empty($applicants)): ?>
-									<table cellpadding = "0" cellspacing = "0">
-										<tr>
-											<th><?php echo __('Name'); ?></th>
-                                            <th><?php echo __('Birthdate'); ?></th>
-						                    <th><?php echo __('Email'); ?></th>
-						                    <th><?php echo __('Phone Number'); ?></th>
-						                    <th><?php echo __('Mobile Number'); ?></th>
+								<table cellpadding = "0" cellspacing = "0">
+								<tr>
+									<th><?php echo __('Name'); ?></th>
+                                            				<th><?php echo __('Birthdate'); ?></th>
+						                    	<th><?php echo __('Email'); ?></th>
+						                    	<th><?php echo __('Phone Number'); ?></th>
+						                    	<th><?php echo __('Mobile Number'); ?></th>
 						                </tr>
-					                <?php foreach ($applicants as $applicant): ?>
-					                    <tr>
-					                        <td><?php echo $applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']; ?></td>
-                                            <td><?php echo $applicant['Applicant']['birthdate']; ?></td>
-					                        <td><?php echo $applicant['Applicant']['email']; ?></td>
-					                        <td><?php echo $applicant['Applicant']['landline_number']; ?></td>
-					                        <td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
-					                    </tr>
-					                <?php endforeach; ?>
-					            </table>
-					        <?php endif; ?>
+					                		<?php foreach ($applicants as $applicant): ?>
+					                    	<tr>
+					                        	<td><?php echo $applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']; ?></td>
+                                            				<td><?php echo $applicant['Applicant']['birthdate']; ?></td>
+					                        	<td><?php echo $applicant['Applicant']['email']; ?></td>
+					                        	<td><?php echo $applicant['Applicant']['landline_number']; ?></td>
+					                        	<td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
+					                    	</tr>
+					                		<?php endforeach; ?>
+					            		</table>
+					        	<?php endif; ?>
+					        	
+					        	<br />
+						    	<div class="related">
+								<h3><?php echo __('Addresses'); ?></h3>
+						    		<?php foreach ($addresses as $address): ?>
+									<?php if(!empty($address['Address']['applicant_id'])) ?>
+						            			<dl>
+						            				<dt><?php echo __('Address Line'); ?></dt>
+						                				<dd>
+													<?php echo h($address['Address']['address_line']); ?>
+						                        				&nbsp;
+												</dd>
+											<dt><?php echo __('Suburb'); ?></dt>
+						                				<dd>
+													<?php echo h($address['Address']['suburb']); ?>
+						                        				&nbsp;
+												</dd>
+											<dt><?php echo __('Postcode'); ?></dt>
+						                				<dd>
+													<?php echo h($address['Address']['postcode']); ?>
+						                        				&nbsp;
+												</dd>
+											<dt><?php echo __('State'); ?></dt>
+						                				<dd>
+													<?php echo h($address['Address']['state']); ?>
+						                        				&nbsp;
+												</dd>
+											<dt><?php echo __('Country'); ?></dt>
+						                				<dd>
+													<?php echo h($address['Country']['country_name']); ?>
+						                        				&nbsp;
+												</dd>
+						            			</dl>
+								<?php endforeach; ?>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
-
-
 
     </div>
     <?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
