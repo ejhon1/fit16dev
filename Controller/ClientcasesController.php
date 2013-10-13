@@ -83,11 +83,18 @@ class ClientcasesController extends AppController {
         $this->set('updateAppointmentDate', $this->User->find('all', $options));
         
         $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $id), 'order'=>'first_name ASC', 'recursive' => -1));
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL));
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'));
         $this->set('ancestordocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
 
 
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL), 'order'=>'applicant_id ASC');
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')));
+        $this->set('physicalancdocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
+
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=>'applicant_id ASC');
+        $this->set('physicalappdocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
+
+
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=>'applicant_id ASC');
         $this->set('applicantdocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
         $casestatuses = $this->Casestatus->find('all', array('conditions' => array('Casestatus.clientcase_id' => $clientcase['Clientcase']['id'])));
 
