@@ -690,9 +690,22 @@
     <div class="modal-body">
         <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'addphydoc', $id));?>
 
+         <script>
+            $(function() {
+                $( "#datepickerOne" ).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-100:+0",
+                    showAnim: 'slideDown',
+                    dateFormat: "dd-mm-yy"
+                });
+
+            });
+        </script>
+
         <script>
             $(function() {
-                $( "#datepicker" ).datepicker({
+                $( "#datepickerTwo" ).datepicker({
                     changeMonth: true,
                     changeYear: true,
                     yearRange: "-100:+0",
@@ -708,9 +721,11 @@
             echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
             echo $this->Form->input('date_received', array('label' => 'Date Received',
+                'id'=>'datepickerOne',
                 'type'=>'text',
                 'class'=>'datepicker'));
             echo $this->Form->input('date_returned', array('label' => 'Date Returned',
+                'id'=>'datepickerTwo',
                 'type'=>'text',
                 'class'=>'datepicker'));
             echo $this->Form->input('copy_type', array(
@@ -734,9 +749,22 @@
     <div class="modal-body">
         <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'addphydoc', $id));?>
 
+         <script>
+            $(function() {
+                $( "#datepickerOne" ).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-100:+0",
+                    showAnim: 'slideDown',
+                    dateFormat: "dd-mm-yy"
+                });
+
+            });
+        </script>
+
         <script>
             $(function() {
-                $( "#datepicker" ).datepicker({
+                $( "#datepickerTwo" ).datepicker({
                     changeMonth: true,
                     changeYear: true,
                     yearRange: "-100:+0",
@@ -752,9 +780,11 @@
             echo $this->Form->input('ancestortype_id', array('id' => 'ancestortype_id','options'=>$ancestorTypes, 'label'=>'Family member:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
             echo $this->Form->input('date_received', array('label' => 'Date Received',
+                'id'=>'datepickerOne',
                 'type'=>'text',
                 'class'=>'datepicker'));
             echo $this->Form->input('date_returned', array('label' => 'Date Returned',
+                'id'=>'datepickerTwo',
                 'type'=>'text',
                 'class'=>'datepicker'));
             echo $this->Form->input('copy_type', array(
