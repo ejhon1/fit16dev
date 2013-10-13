@@ -490,7 +490,6 @@
                                         </td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
-                                            <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -543,7 +542,6 @@
                             </td>
                             <td>
                                 <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
-                                <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
