@@ -58,7 +58,9 @@
                     }
                     else
                     {
-                            echo __('Add');
+                    ?>
+                            <a class="btn" data-toggle="modal" href="#modalAddAppointmentDate">Add Date</a>
+                    <?php
                     }
                     ?>
                 </td>
@@ -551,3 +553,25 @@
     </div>
 </div>
 
+<div class="modal hide" id="modalAddAppointmentDate"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Add Appointment Date</h3>
+    </div>
+    <div class="modal-body">
+		<?php echo $this->Form->create('Clientcase', array('action' => 'updateAppointmentDate', $clientcase['Clientcase']['id'])); ?>
+        <fieldset>
+        <?php
+            echo $this->Form->hidden('id', array('default' => $id));
+			echo $this->Form->input('appointment_date', array('label' => 'Appointment Date',
+            'id' => 'datepicker',
+            'type'=>'text',
+            'class'=>'datepicker'));
+			
+            ?>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->end(__('Add Date')); ?>
+    </div>
+</div>
