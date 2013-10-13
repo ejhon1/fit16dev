@@ -231,6 +231,12 @@
 						            			</dl>
 								<?php endforeach; ?>
 							</div>
+							<br />
+    							<div class="actions">
+								<ul>
+									<li><?php echo $this->Html->link(__('Edit Address'), array('controller' => 'addresses', 'action' => 'edit', $clientcase['Clientcase']['id'])); ?> </li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
