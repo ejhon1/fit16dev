@@ -455,7 +455,7 @@
                     <h4 class="panel-title">
                         <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseThree" href="#collapseThree">
                             Applicant Physical Documents
-                        </a><a class="btn" data-toggle="modal" href="#modalAddPhysicalDoc1" >Add</a>
+                        </a><a class="btn pull-right" data-toggle="modal" href="#modalAddPhysicalDoc1" >Add</a>
                     </h4>
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse">
@@ -508,7 +508,7 @@
         <h4 class="panel-title">
             <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseFour" href="#collapseFour">
                 Ancestor Physical Documents
-            </a><a class="btn" data-toggle="modal" href="#modalAddPhysicalDoc2" >Add</a>
+            </a><a class="btn pull-right" data-toggle="modal" href="#modalAddPhysicalDoc2" >Add</a>
         </h4>
     </div>
     <div id="collapseFour" class="panel-collapse collapse">
