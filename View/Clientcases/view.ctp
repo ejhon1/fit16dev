@@ -1,5 +1,8 @@
 <?php
   echo $this->HTML->script('JQueryUser');
+  echo $this->Html->css('jquery-ui-1.10.3.custom');
+  echo $this->Html->script('jquery-1.5.min');
+  echo $this->Html->script('jquery-ui-1.10.3.custom.min');
 ?>
 <div class="clientcases view">
 <script>
@@ -447,7 +450,111 @@
                     </div>
                 </div>
             </div>
+                       <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseThree" href="#collapseThree">
+                            Applicant Physical Documents
+                        </a><a class="btn" data-toggle="modal" href="#modalAddPhysicalDoc1" >Add</a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php if (!empty($physicalappdocuments)): ?>
+
+                            <table cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <th class="heading">Applicant Name</th>
+                                    <th class="heading">Document Type</th>
+                                    <th class="heading">Date Received</th>
+                                    <th class="heading">Date Returned</th>
+                                    <th class="heading">Category</th>
+                                    <th class="heading">View</th>
+                                </tr>
+                                <?php foreach ($physicalappdocuments as $physicalappdocument): ?>
+                                    <tr class="list">
+                                        <td valign="top">
+                                            <?php echo h($physicalappdocument['Applicant']['first_name'].' '.$physicalappdocument['Applicant']['surname']); ?>
+                                        </td>
+                                        <td valign="top">
+                                            <?php echo h($physicalappdocument['Documenttype']['type']); ?>
+                                        </td>
+                                        <td valign="top">
+                                            <?php echo h($physicalappdocument['Document']['date_received']); ?>
+                                        </td>
+                                        <td valign="top">
+                                            <?php echo h($physicalappdocument['Document']['date_returned']); ?>
+                                        </td>
+                                        <td valign="top">
+                                            <?php echo h($physicalappdocument['Document']['copy_type']); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
+                                            <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        <?php
+                        endif;
+                        ?>
+                    </div>
+                </div>
+            </div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseFour" href="#collapseFour">
+                Ancestor Physical Documents
+            </a><a class="btn" data-toggle="modal" href="#modalAddPhysicalDoc2" >Add</a>
+        </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse">
+        <div class="panel-body">
+            <?php if (!empty($physicalancdocuments)): ?>
+
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th class="heading">Ancestor</th>
+                        <th class="heading">Document Type</th>
+                        <th class="heading">Date Received</th>
+                        <th class="heading">Date Returned</th>
+                        <th class="heading">Category</th>
+                        <th class="heading">View</th>
+                    </tr>
+                    <?php foreach ($physicalancdocuments as $physicalancdocument): ?>
+                        <tr class="list">
+                            <td valign="top">
+                                <?php echo h($physicalancdocument['Ancestortype']['ancestor_type']); ?>
+                            </td>
+                            <td valign="top">
+                                <?php echo h($physicalancdocument['Documenttype']['type']); ?>
+                            </td>
+                            <td valign="top">
+                                <?php echo h($physicalancdocument['Document']['date_received']); ?>
+                            </td>
+                            <td valign="top">
+                                <?php echo h($physicalancdocument['Document']['date_returned']); ?>
+                            </td>
+                            <td valign="top">
+                                <?php echo h($physicalancdocument['Document']['copy_type']); ?>
+                            </td>
+                            <td>
+                                <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
+                                <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php
+            endif;
+            ?>
         </div>
+    </div>
+</div>
+       </div>
     </div>
 </div>
 </div>
@@ -573,5 +680,92 @@
     </div>
     <div class="modal-footer">
         <?php echo $this->Form->end(__('Add Date')); ?>
+    </div>
+</div>
+<div class="modal hide" id="modalAddPhysicalDoc1"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Add Applicant Physical Document</h3>
+    </div>
+    <div class="modal-body">
+        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'addphydoc', $id));?>
+
+        <script>
+            $(function() {
+                $( "#datepicker" ).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-100:+0",
+                    showAnim: 'slideDown',
+                    dateFormat: "dd-mm-yy"
+                });
+
+            });
+        </script>
+        <fieldset>
+            <?php
+            echo $this->Form->hidden('clientcase_id', array('default' => $id));
+            echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
+            echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
+            echo $this->Form->input('date_received', array('label' => 'Date Received',
+                'type'=>'text',
+                'class'=>'datepicker'));
+            echo $this->Form->input('date_returned', array('label' => 'Date Returned',
+                'type'=>'text',
+                'class'=>'datepicker'));
+            echo $this->Form->input('copy_type', array(
+                'type' => 'radio',
+                'legend'=>'Note Type',
+                'default' => 'Original',
+                'options' => array('Original' => 'Original', 'Certified/Notarised'=>'Certified/Notarised')));
+            ?>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->end(__('Add Document')); ?>
+    </div>
+</div>
+
+<div class="modal hide" id="modalAddPhysicalDoc2"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Add Ancestor Physical Document</h3>
+    </div>
+    <div class="modal-body">
+        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'addphydoc', $id));?>
+
+        <script>
+            $(function() {
+                $( "#datepicker" ).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-100:+0",
+                    showAnim: 'slideDown',
+                    dateFormat: "dd-mm-yy"
+                });
+
+            });
+        </script>
+        <fieldset>
+            <?php
+            echo $this->Form->hidden('clientcase_id', array('default' => $id));
+            echo $this->Form->input('ancestortype_id', array('id' => 'ancestortype_id','options'=>$ancestorTypes, 'label'=>'Family member:'));
+            echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
+            echo $this->Form->input('date_received', array('label' => 'Date Received',
+                'type'=>'text',
+                'class'=>'datepicker'));
+            echo $this->Form->input('date_returned', array('label' => 'Date Returned',
+                'type'=>'text',
+                'class'=>'datepicker'));
+            echo $this->Form->input('copy_type', array(
+                'type' => 'radio',
+                'legend'=>'Note Type',
+                'default' => 'Original',
+                'options' => array('Original' => 'Original', 'Certified/Notarised'=>'Certified/Notarised')));
+            ?>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->end(__('Add Document')); ?>
     </div>
 </div>
