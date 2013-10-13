@@ -58,6 +58,8 @@ class ClientcasesController extends AppController {
         $this->loadModel('Status');
         $this->loadModel('DocumentType');
         $this->loadModel('AncestorType');
+        $this->loadModel('Archive');
+        $this->loadModel('User');
 
         $documentTypes = $this->DocumentType->find('list', array('fields' => array('DocumentType.id', 'DocumentType.type'), 'order'=>'type ASC'));
         $ancestorTypes = $this->AncestorType->find('list', array('fields' => array('AncestorType.id', 'AncestorType.ancestor_type'), 'order'=>'ancestor_type ASC'));
@@ -76,7 +78,10 @@ class ClientcasesController extends AppController {
         }
         $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
         $applicantslist = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
-
+        
+        $options = array('conditions' => array('User.id' => $clientcase['Clientcase']['user_id']));
+        $this->set('updateAppointmentDate', $this->User->find('all', $options));
+        
         $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $id), 'order'=>'first_name ASC', 'recursive' => -1));
         $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL));
         $this->set('ancestordocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
