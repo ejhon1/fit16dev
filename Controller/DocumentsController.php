@@ -333,4 +333,25 @@ class DocumentsController extends AppController {
         //Return response object to prevent controller from trying to render a view
         return $this->response;
     }
+    
+    
+    public function addphydoc($id = null){
+        $this->loadModel('ClientCase');
+        $this->loadModel('Archive');
+
+        $id = $this->request->data['Document']['clientcase_id'];
+
+        $clientcase = $this->ClientCase->findById($id);
+        $this->request->data['Document']['archive_id'] = $clientcase['ClientCase']['archive_id'];
+
+        if($this->Document->save($this->data))
+        {
+            $this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
+            $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id, '#'=>'tab5'));
+        }
+        else {
+            $this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
+            $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id, '#'=>'tab5'));
+        }
+    }
 }
