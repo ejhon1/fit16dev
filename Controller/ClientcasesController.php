@@ -212,6 +212,18 @@ class ClientcasesController extends AppController {
             }
         }
     }
+    
+    public function updateOpenClose($id=null) {
+        if ($this->request->is('post')|| $this->request->is('put')) {
+            if ($this->Clientcase->save($this->request->data, false)) {
+                $this->Session->setFlash(__('The Case Information has been saved', null),'default', array('class' => 'alert-success'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Clientcase']['id']));
+            } else {
+                $this->Session->setFlash(__('The Case Information could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+
+            }
+        }
+    }
 
     public function myaccount() {
         $id=$this->Session->read('UserAuth.User.id');
