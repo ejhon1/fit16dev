@@ -204,6 +204,13 @@
 					        	<?php endif; ?>
 					        	
 					        	<br />
+                            				<div class="actions">
+								<ul>
+									<li><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $clientcase['Clientcase']['id'])); ?> </li>
+								</ul>
+							</div>
+					        	
+					        	<br />
 						    	<div class="related">
 								<h3><?php echo __('Addresses'); ?></h3>
 						    		<?php foreach ($addresses as $address): ?>
