@@ -284,6 +284,13 @@
             <p>
             <h3>Eligibility Check Information</h3>
             <p>
+            <div class="actions">
+	            <ul>
+		            <li>
+			        	<?php echo $this->Html->link(__('Edit'), array('controller' => 'clientcases', 'action' => 'edit', $clientcase['Clientcase']['id'])); ?>
+		            </li>
+	            </ul>
+	    </div>
             <table>
             	<tbody>
             		<tr>
