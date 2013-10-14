@@ -57,7 +57,6 @@ class ApplicantsController extends AppController {
 			}
 		}
 		$clientcases = $this->Applicant->Clientcase->find('list');
-		$archives = $this->Applicant->Archive->find('list', array('fields' => array('Archive.id', 'Archive.archive_name'), 'order' => 'archive_name ASC'));
 		$this->set(compact('clientcases', 'archives'));
 	}
 
