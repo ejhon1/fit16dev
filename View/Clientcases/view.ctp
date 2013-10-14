@@ -1,7 +1,7 @@
 <?php
   echo $this->HTML->script('JQueryUser');
   echo $this->Html->css('jquery-ui-1.10.3.custom');
-  echo $this->Html->script('jquery-1.5.min');
+  //echo $this->Html->script('jquery-1.5.min');
   echo $this->Html->script('jquery-ui-1.10.3.custom.min');
 ?>
 <div class="clientcases view">
