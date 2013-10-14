@@ -109,13 +109,6 @@ class Applicant extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        ),
-        'Archive' => array(
-            'className' => 'Archive',
-            'foreignKey' => 'archive_id',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
         )
     );
 
