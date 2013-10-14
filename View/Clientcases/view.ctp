@@ -375,6 +375,7 @@
     <p>
     <h3><?php echo __('Case Status'); ?></h3>
     <a class="btn" data-toggle="modal" href="#myModal1">Update Status</a>
+    <?php echo $this->Html->link(__('New Status'), array('controller' => 'statuses', 'action' => 'add')); ?>
     <?php if (!empty($clientcase['Casestatus'])): ?>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
@@ -439,6 +440,12 @@
         </div>
     </div>
     <div class="tab-pane" id="tab5">
+    <div class="actions">
+	
+		<?php echo $this->Html->link(__('New Ancestor Type'), array('controller' => 'ancestortypes', 'action' => 'add')); ?>
+		<?php echo $this->Html->link(__('New Document Type'), array('controller' => 'documenttypes', 'action' => 'add')); ?>
+	
+	</div>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
