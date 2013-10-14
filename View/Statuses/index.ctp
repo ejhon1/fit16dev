@@ -1,5 +1,14 @@
 <div class="statuses index">
 	<h2><?php echo __('Statuses'); ?></h2>
+	<div class="actions">
+	<ul>
+		<!-- <li><?php echo $this->Html->link(__('New Status'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Casestatuses'), array('controller' => 'casestatuses', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Casestatus'), array('controller' => 'casestatuses', 'action' => 'add')); ?> </li> -->
+		<li><?php echo $this->Html->link(__('View Clientcases'), array('controller' => 'clientcases', 'action' => 'index')); ?> </li>
+		<!-- <li><?php echo $this->Html->link(__('New Clientcase'), array('controller' => 'clientcases', 'action' => 'add')); ?> </li> -->
+	</ul>
+</div>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -32,13 +41,4 @@
 	?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Status'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Casestatuses'), array('controller' => 'casestatuses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Casestatus'), array('controller' => 'casestatuses', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Clientcases'), array('controller' => 'clientcases', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Clientcase'), array('controller' => 'clientcases', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+
