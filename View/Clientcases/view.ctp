@@ -163,17 +163,18 @@
 				<tr>
 					<th><?php echo __('Name'); ?></th>
                                         <th><?php echo __('Type'); ?></th>
-                                        <th><?php echo __('Action'); ?></th>
 				</tr>
 					<?php foreach ($applicants as $applicant): ?>
 				<tr>
 				        <td><?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']); ?></td>
                                         <td><?php echo h($applicant['Applicant']['applicant_type']); ?></td>
-				        <td><a class="btn btn-primary accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#first">Full Details</a></td>
 				</tr>
 					<?php endforeach; ?>
 			</table>
 		<?php endif; ?>
+		
+		<br />
+		<td><a class="btn btn-primary accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#first">Full Details</a></td>
         </div>
         <br />
         <br />
