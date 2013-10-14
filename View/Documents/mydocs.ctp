@@ -11,7 +11,7 @@
                     </a><a class="btn pull-right" data-toggle="modal" href="#myModal1">Upload</a>
                 </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
+            <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
                     <?php if (!empty($ancestordocuments)): ?>
                         <table cellpadding="0" cellspacing="0">
