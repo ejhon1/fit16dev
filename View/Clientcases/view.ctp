@@ -206,7 +206,7 @@
 					        	<br />
                             				<div class="actions">
 								<ul>
-									<li><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $clientcase['Clientcase']['id'])); ?> </li>
+									<li><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $clientcase['Clientcase']['applicant_id'])); ?> </li>
 								</ul>
 							</div>
 					        	
