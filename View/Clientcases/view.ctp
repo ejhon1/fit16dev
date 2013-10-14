@@ -127,18 +127,24 @@
             </tbody>
         </table>
         <br>
+        <div class="actions">
+            <ul>
         <?php
         if($user['User']['active'] != 1 && $user['User']['password'] == NULL)
         {
             ?>
-            <div class="actions">
-                <ul>
                     <li><?php echo $this->Html->link(__('Activate'), array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'activateAccount', $clientcase['Clientcase']['id'])); ?> </li>
-                </ul>
-            </div>
         <?php
         }
+        if($archivecount <= 1)
+        {
         ?>
+                    <li><?php echo $this->Html->link(__('Merge'), array('action' => 'merge', $clientcase['Clientcase']['id'])); ?> </li>
+                <?php
+        }
+                ?>
+            </ul>
+        </div>
 
 
         <br><br><br>
