@@ -388,8 +388,11 @@ class ClientcasesController extends AppController {
 
             endforeach;
             $delFolder = APP.'documents' . DS . $currentarchivename;
-            $oldfolder = new Folder($delFolder);
-            $oldfolder->delete();
+            if(file_exists( $delFolder))
+            {
+                $oldfolder = new Folder($delFolder);
+                $oldfolder->delete();
+            }
             $this->Session->setFlash(__('The archives were successfully merged', null),'default', array('class' => 'alert-success'));
 
             return $this->redirect(array('action' => 'view', $current_client_id));
