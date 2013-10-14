@@ -38,19 +38,6 @@ class Archive extends AppModel {
             'finderQuery' => '',
             'counterQuery' => ''
         ),
-        'Applicant' => array(
-            'className' => 'Applicant',
-            'foreignKey' => 'archive_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
         'ClientCase' => array(
             'className' => 'ClientCase',
             'foreignKey' => 'archive_id',
