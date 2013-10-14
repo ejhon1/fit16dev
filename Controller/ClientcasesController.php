@@ -103,10 +103,12 @@ class ClientcasesController extends AppController {
         $casestatuses = $this->Casestatus->find('all', array('conditions' => array('Casestatus.clientcase_id' => $clientcase['Clientcase']['id'])));
 
         $currentloan = $this->Archiveloan->find('first', array('conditions' => array('Archiveloan.archive_id' => $clientcase['Clientcase']['archive_id'], 'Archiveloan.date_returned' => NULL)));
-        
+        $user = $this->User->find('first', array('conditions' => array('User.id' => $clientcase['Clientcase']['user_id'])));
+
+
         $addresses = $this->Address->find('all', array('conditions' => array('Address.applicant_id' => $clientcase['Clientcase']['applicant_id'])));
         
-        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'addresses', 'archivecount'));
+        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'user', 'addresses', 'archivecount'));
     }
 
     public function statustest($id = null) {
