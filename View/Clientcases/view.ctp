@@ -48,7 +48,26 @@
             </tr>
             <tr>
                 <th>Open or closed</th>
-                <td><?php echo h($clientcase['Clientcase']['open_or_closed']); ?></td>
+                <td><?php 
+                		if($clientcase['Clientcase']['open_or_closed'] == 'Open')
+                		{
+	                		echo h($clientcase['Clientcase']['open_or_closed']); 
+	                		echo $this->Form->create('Clientcase', array('action' => 'updateOpenClose', $clientcase['Clientcase']['id']));
+                			echo $this->Form->hidden('id', array('default' => $clientcase['Clientcase']['id']));
+                            echo $this->Form->hidden('open_or_closed', array('default' => 'Closed'));
+                            echo $this->Form->end(__('Close'));?></td>
+                        <?php
+                		}
+                		else
+                		{
+                			echo h($clientcase['Clientcase']['open_or_closed']); 
+                   			echo $this->Form->create('Clientcase', array('action' => 'updateOpenClose', $clientcase['Clientcase']['id']));
+                			echo $this->Form->hidden('id', array('default' => $clientcase['Clientcase']['id']));
+                            echo $this->Form->hidden('open_or_closed', array('default' => 'Open'));
+                            echo $this->Form->end(__('Open')); ?></td>
+                        <?php
+                		}
+						?>
                 <th>Date of enquiry</th>
                 <td><?php echo h($this->Time->format('d-m-Y', $clientcase['Clientcase']['created'])); ?></td>
             </tr>
