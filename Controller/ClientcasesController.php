@@ -78,7 +78,10 @@ class ClientcasesController extends AppController {
             $this->Archiveloan->save($this->request->data);
         }
         $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
-        $applicantslist = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
+        $archivecount = $this->Clientcase->find('count', array('conditions' => array('Clientcase.archive_id' =>$clientcase['Clientcase']['archive_id'])));
+
+		
+		$applicantslist = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
         
         $options = array('conditions' => array('User.id' => $clientcase['Clientcase']['user_id']));
         $this->set('updateAppointmentDate', $this->User->find('all', $options));
@@ -103,7 +106,7 @@ class ClientcasesController extends AppController {
         
         $addresses = $this->Address->find('all', array('conditions' => array('Address.applicant_id' => $clientcase['Clientcase']['applicant_id'])));
         
-        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'addresses'));
+        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'addresses', 'archivecount'));
     }
 
     public function statustest($id = null) {
@@ -284,5 +287,118 @@ class ClientcasesController extends AppController {
         }
         $this->Session->setFlash(__('Client case was not deleted', null),'default', array('class' => 'alert-danger'));
         return $this->redirect(array('action' => 'index'));
+    }
+	 public function merge($id = null) {
+        $this->loadModel('Archive');
+        $this->loadModel('Clientcase');
+        if (!$this->Clientcase->exists($id)) {
+            throw new NotFoundException(__('Invalid case'));
+        }
+
+        if ($this->request->is('post') || $this->request->is('put'))
+        {
+            $archive = $this->Archive->find('first', array('conditions' => array('Archive.archive_name' => $this->request->data['Clientcase']['archive_name'])));
+            $clientcase =  $this->Clientcase->find('first', array('conditions' => array('Clientcase.archive_id' => $archive['Archive']['id'])));
+            $this->set(compact('clientcase'));
+        }
+        $this->set(compact('id'));
+    }
+    public function performmerge() {
+        $this->loadModel('Archive');
+        $this->loadModel('Clientcase');
+        $this->loadModel('Archiveloan');
+        $this->loadModel('Document');
+        $current_client_id = $this->request->data['Clientcase']['new_clientcase_id'];
+        $merging_archive_id  = $this->request->data['Clientcase']['old_archive_id'];
+        $currentclientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.id' => $current_client_id), 'fields' => array('id', 'archive_id')));
+        $current_archive_id = $currentclientcase['Clientcase']['archive_id'];
+
+        $archiveloans = $this->Archiveloan->find('all', array('conditions' => array('Archiveloan.archive_id' => $current_archive_id)));
+
+        $currentarchive = $this->Archive->find('first', array('conditions' => array('Archive.id' => $current_archive_id)));
+        $mergingarchive = $this->Archive->find('first', array('conditions' => array('Archive.id' => $merging_archive_id)));
+
+        if($merging_archive_id != $current_archive_id)
+        {
+
+
+            foreach ($archiveloans as $archiveloan):
+            $this->Archiveloan->id = $archiveloan['Archiveloan']['id'];
+            $this->Archiveloan->delete();
+            endforeach;
+
+            $this->request->data['Clientcase']['id'] = $current_client_id;
+            $this->request->data['Clientcase']['archive_id'] = $merging_archive_id;
+
+            $this->Clientcase->save($this->request->data);
+
+            //Copy/move docs to older archive, delete folder etc.
+            $documents = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $current_archive_id)));
+
+            $currentarchivename = str_replace('/', '-', $currentarchive['Archive']['archive_name']);
+            $mergingarchivename = str_replace('/', '-', $mergingarchive['Archive']['archive_name']);
+            $uploadFolder = APP.'documents' . DS . $mergingarchivename;
+
+            if( !file_exists($uploadFolder) ){
+                mkdir($uploadFolder);
+            }
+            foreach ($documents as $document):
+                if(!empty($document['Document']['applicant_id']))
+                {
+                    $type = $document['Applicant']['first_name'];
+                }
+                else{
+                    $type = $document['Ancestortype']['ancestor_type'];
+                }
+                $ext = substr(strrchr($document['Document']['filename'], '.'), 1);
+                $newfilename = $mergingarchivename.' '.$type.' '.$document['Documenttype']['code'].' '.date('d-m-y');
+                $fullname = $newfilename.'.'. $ext;
+
+                $i = 0;
+                $available = false;
+                do
+                {
+                    $conditions = array('Document.filename' => $fullname);
+
+                    if($this->Document->hasAny($conditions))
+                    {
+                        $i++;
+                        $fullname = $newfilename.' '.$i.'.'.$ext;
+                    }
+                    else
+                    {
+                        $available = true;
+                    }
+                }while(!$available);
+
+                $newfilename = $fullname;
+
+                $this->Document->id = $document['Document']['id'];
+                $this->request->data['Document']['archive_id'] = $merging_archive_id;
+                if($document['Document']['copy_type'] == 'Digital')
+                {
+                    $file = new File( APP.'documents'.DS.$currentarchivename.DS.$document['Document']['filename']);
+
+                    $dir = new Folder($uploadFolder);
+                    $file->copy($dir->path . DS . $newfilename);
+
+                    $this->request->data['Document']['filename'] = $newfilename;
+                }
+                $this->Document->save($this->request->data);
+
+            endforeach;
+            $delFolder = APP.'documents' . DS . $currentarchivename;
+            $oldfolder = new Folder($delFolder);
+            $oldfolder->delete();
+            $this->Session->setFlash(__('The archives were successfully merged', null),'default', array('class' => 'alert-success'));
+
+            return $this->redirect(array('action' => 'view', $current_client_id));
+        }
+        else
+        {
+            $this->Session->setFlash(__('You cannot merge an archive with itself.'),'default', array('class' => 'alert-danger'));
+            return $this->redirect(array('action' => 'view', $current_client_id));
+        }
+
     }
 }
