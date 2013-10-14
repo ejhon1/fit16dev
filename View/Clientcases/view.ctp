@@ -247,7 +247,7 @@
 							<br />
     							<div class="actions">
 								<ul>
-									<li><?php echo $this->Html->link(__('Edit Address'), array('controller' => 'addresses', 'action' => 'edit', $clientcase['Clientcase']['applicant_id'])); ?> </li>
+									<li><?php echo $this->Html->link(__('Edit Address'), array('controller' => 'addresses', 'action' => 'edit', $address['Address']['id'])); ?> </li>
 								</ul>
 							</div>
 						</div>
