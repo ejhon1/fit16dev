@@ -439,7 +439,8 @@
         <?php endif; ?>
 
         
-    </div>lass="tab-pane" id="tab5">
+    </div>
+    <div class="tab-pane" id="tab5">
     <div class="actions">
 	
 		<?php echo $this->Html->link(__('New Ancestor Type'), array('controller' => 'ancestortypes', 'action' => 'add')); ?>
