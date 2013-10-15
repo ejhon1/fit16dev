@@ -6,6 +6,10 @@ if(!empty($loggedUser['User']['type']) && $loggedUser['User']['type'] == 'Employ
 
 <div class="home">
     <br>
+    <div class="actions">
+        <?php echo $this->Html->link(__('Generate Reports'), array('controller' => 'clientcases', 'action' => 'reporting')); ?>
+    </div>
+    <br>
     <div class="row">
         <div class="span5"><p>
             <h3><?php echo __('Number of cases at each stage'); ?></h3>
