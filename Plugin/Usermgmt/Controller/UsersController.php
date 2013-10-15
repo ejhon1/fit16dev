@@ -227,8 +227,13 @@ class UsersController extends UserMgmtAppController {
                     $this->Session->setFlash(__('The user could not be saved', null),'default', array('class' => 'alert-danger'));
                 }
             }else {
-                $this->Session->setFlash(__('The user could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
-            }
+		$this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
+                Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
+                passport and can be conducted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
+                receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
+                    'default', array('class' => 'alert-success'));
+                $this->rejectEmail($this->request->data['Applicant']['email']);
+                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));            }
         }
     }
     public function activateAccount($id = null) {
