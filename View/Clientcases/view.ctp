@@ -375,7 +375,6 @@
     <p>
     <h3><?php echo __('Case Status'); ?></h3>
     <a class="btn" data-toggle="modal" href="#myModal1">Update Status</a>
-    <?php echo $this->Html->link(__('New Status'), array('controller' => 'statuses', 'action' => 'add')); ?>
     <?php if (!empty($clientcase['Casestatus'])): ?>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
