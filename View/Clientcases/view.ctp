@@ -398,7 +398,12 @@
     <div class="tab-pane" id="tab4">
         <p>
         <h3><?php echo __('Contact Notes'); ?></h3>
-        <a class="btn" data-toggle="modal" href="#modalCaseNoteAdd">Add Note</a>
+        <!--<a class="btn" data-toggle="modal" href="#modalCaseNoteAdd">Add Note</a>-->
+		<div class="actions">
+            <ul>
+                <li><?php echo $this->Html->link(__('New Note'), array('controller' => 'casenotes', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
+            </ul>
+        </div>
         <?php if (!empty($clientcase['Casenote'])): ?>
             <table cellpadding = "0" cellspacing = "0" id="data">
 			<thead> 
@@ -433,13 +438,8 @@
             </table>
         <?php endif; ?>
 
-        <div class="actions">
-            <ul>
-                <li><?php echo $this->Html->link(__('New Casenote'), array('controller' => 'casenotes', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
-            </ul>
-        </div>
-    </div>
-    <div class="tab-pane" id="tab5">
+        
+    </div>lass="tab-pane" id="tab5">
     <div class="actions">
 	
 		<?php echo $this->Html->link(__('New Ancestor Type'), array('controller' => 'ancestortypes', 'action' => 'add')); ?>
