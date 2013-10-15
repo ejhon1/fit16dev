@@ -418,4 +418,55 @@ class ClientcasesController extends AppController {
         }
 
     }
+    public function reporting()
+    {
+        $this->loadModel('Casenote');
+        $this->loadModel('Clientcase');
+        $this->loadModel('Document');
+        $this->loadModel('Docnote');
+
+        $casenotes = $this->Casenote->query("SELECT distinct Clientcase.id, Casenote.subject, Casenote.created, Applicant.first_name, Applicant.surname, Archive.archive_name
+            FROM casenotes AS Casenote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
+            WHERE Casenote.clientcase_id = Clientcase.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Casenote.id IN(
+            SELECT MAX(casenotes.id)
+            FROM casenotes
+            GROUP BY casenotes.clientcase_id
+        );");
+
+
+        if ($this->request->is('post')) {
+            $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date1'])));
+            $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date2'])));
+
+            $noSucEnq = $this->Clientcase->find('count', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2)));
+            $noDenEnq = 0;
+            $noCaseNotes =$this->Casenote->find('count', array('conditions' => array('DATE_FORMAT(Casenote.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Casenote.created, "%Y%m%d") <= '.$date2)));
+            $noDocsDown =$this->Document->find('count', array('conditions' => array('DATE_FORMAT(Document.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Document.created, "%Y%m%d") <= '.$date2)));
+            $noDocNotes = $this->Docnote->find('count', array('conditions' => array('DATE_FORMAT(Docnote.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Docnote.created, "%Y%m%d") <= '.$date2)));
+
+
+            $clientcases = $this->Clientcase->find('all', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2)));
+
+
+            //    $date2 = $this->request->data['Clientcase']['date2'];
+        }
+
+
+        //if ($this->request->is('post') || $this->request->is('put')) {
+
+        //    $this->report();
+        //}
+
+        $this->set(compact('casenotes', 'date1', 'noSucEnq', 'noDenEnq', 'noCaseNotes', 'noDocsDown', 'noDocNotes', 'clientcases'));
+    }
+    public function report()
+    {
+        $this->loadModel('Clientcase');
+
+        $data = $this->Clientcase->find('all');
+
+
+
+        $this->set(compact('data'));
+    }
 }
