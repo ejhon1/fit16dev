@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
+
 /**
  * Casenotes Controller
  *
@@ -95,6 +97,9 @@ class CasenotesController extends AppController {
 			$this->request->data['Casenote']['user_id'] = $userId;
 			$this->Casenote->create();
 			if ($this->Casenote->save($this->request->data)) {
+				if ($this->request->data['Casenote']['note_type'] == 'Public'){
+                    $this->email($id);
+                }
 				$this->Session->setFlash(__('The contact note has been saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('controller' => 'Clientcases', 'action' => 'view', $id));
 			} else {
@@ -176,4 +181,27 @@ class CasenotesController extends AppController {
 		$this->Session->setFlash(__('Casenote was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
+	
+	 public function email($id){
+        $this->loadModel('Applicant');
+        $this->loadModel('Clientcase');
+
+        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.id' => $id)));
+        $applicants = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id']), 'fields' => array('Applicant.email', 'Applicant.first_name')));
+
+        $Email = new CakeEmail();
+        $Email->config('default');
+
+        $Email->sender(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->from(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->to($applicants['Applicant']['email']);
+        $Email->subject('New Case Note Added To Your Case!');
+        $Email->template('casenote');
+        $Email->emailFormat('text');
+        $Email->viewVars(array('name' => $applicants['Applicant']['first_name']));
+
+
+        $Email->send();
+
+    }
 }
