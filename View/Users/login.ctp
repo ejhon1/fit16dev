@@ -28,39 +28,50 @@
 	
 	<!-- Wrapper for slides-->
 	<div class="carousel-inner">
-		<div class="item active">
-			<?php echo $this->Html->image('bannerforwebsite.png', array(
+		<div class="item active" align="center">
+			<?php echo $this->Html->image('websitebanner.png', array(
 				'alt' => 'Website Banner',
-				'width' => 1000,
-				'height' => 200
+				
 			));?>
 			
 		</div>
-		<div class="item">
-			<?php echo $this->Html->image('mapofpoland.png', array(
-				'alt' => 'Poland Map',
-				'width' => 1000,
-				'height' => 200
+		<div class="item" align="center">
+			<?php echo $this->Html->image('TESTPIC1.png', array(
+				'alt' => 'Kraków',
 			));?>
 			
 		</div>
-		<div class="item">
-			<?php echo $this->Html->image('WorldOfHands.png', array(
-				'alt' => 'World Of Hands',
-				'width' => 1000,
-				'height' => 200
+		<div class="item" align="center">
+			<?php echo $this->Html->image('TESTPIC2.png', array(
+				'alt' => 'Polska',
+			));?>
+			
+		</div>
+		<div class="item" align="center">
+			<?php echo $this->Html->image('TESTPIC3.png', array(
+				'alt' => 'Passport',
+			));?>
+			
+		</div>
+		<div class="item" align="center">
+			<?php echo $this->Html->image('TESTPIC4.png', array(
+				'alt' => 'Warszava',
+			));?>
+			
+		</div>
+		<div class="item" align="center">
+			<?php echo $this->Html->image('TESTPIC5.png', array(
+				'alt' => 'Warszava Map',
+			));?>
+			
+		</div>
+		<div class="item" align="center">
+			<?php echo $this->Html->image('TESTPIC6.png', array(
+				'alt' => 'Books',
 			));?>
 			
 		</div>
 	</div>	
-	<!-- Controls -->
-		<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-			&lsaquo;
-		</a>
-		<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-			&rsaquo;
-		</a>
-</div>
 
 <div class="umtop">
 	<?php echo $this->Session->flash(); ?>
