@@ -137,11 +137,11 @@
         return isValid;
     }
     function validateFirstName(firstname) {
-        var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
+        var pattern = new RegExp("^([a-zA-Z '-]+)$");
         return pattern.test(firstname);
     }
     function validateSurname(surname) {
-        var pattern = new RegExp("^[a-zA-Z'.]{1,40}$");
+        var pattern = new RegExp("^([a-zA-Z '-]+)$");
         return pattern.test(surname);
     }
     function validatePhone(phone)
