@@ -303,14 +303,12 @@ Step 4<br />
     <?php
     echo $this->Form->input('ClientCase.born_in_poland', array(
         'type' => 'radio',
-	'default' => 'Yes',
         'options' => array(
             'Yes' => 'Yes',
             'No' => 'No'),
         'legend' => 'I was born in Poland'));
     echo $this->Form->input('ClientCase.spouse_nationality', array(
         'type' => 'radio',
-        'default' => 'Yes',
         'options' => array(
             'Yes' => 'Yes',
             'No' => 'No'),
