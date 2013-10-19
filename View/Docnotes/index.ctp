@@ -6,10 +6,11 @@ echo $this->HTML->script('JQueryUser');
     <table id="data">
         <thead>
         <tr>
-            <th>Author</th>
-            <th>Note</th>
-            <th>Created</th>
-            <th>View</th>
+            <th class="heading">Archive</th>
+            <th class="heading">Client</th>
+            <th class="heading">Note</th>
+            <th class="heading">Created</th>
+            <th class="heading"></th>
         </tr>
         </thead>
         <tbody>
@@ -17,21 +18,16 @@ echo $this->HTML->script('JQueryUser');
         foreach ($docnotes as $docnote): ?>
             <tr>
                 <td valign="top">
-                    <?php if(!empty($docnote['Docnote']['employee_id']))
-                    {
-                        echo h($docnote['Employee']['first_name'].' '.$docnote['Employee']['surname'].' (Staff)');
-                    }
-                    else
-                    {
-                        echo h($docnote['Clientcase']['Applicant']['first_name'].' '.$docnote['Clientcase']['Applicant']['surname'].' (Client)');
-                    }
-                    ?>
+                    <?php echo h($docnote['Archive']['archive_name']); ?>
                 </td>
                 <td valign="top">
-                    <?php echo String::truncate($docnote['Docnote']['note'], 255, array('html' => true)); ?>
+                    <?php echo h($docnote['Applicant']['first_name'].' '.$docnote['Applicant']['surname']); ?>
                 </td>
                 <td valign="top">
-                    <?php echo h($this->Time->format('d-m-Y h:i', $docnote['Docnote']['created'])); ?>
+                    <?php echo String::truncate($docnote['Docnote']['note'], 25, array('html' => true)); ?>
+                </td>
+                <td valign="top">
+                    <?php echo h($this->Time->format('d-m-Y', $docnote['Docnote']['created'])); ?>
                 </td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('controller' => 'docnotes', 'action' => 'notes', $docnote['Docnote']['document_id'])); ?>
