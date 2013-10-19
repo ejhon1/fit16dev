@@ -6,16 +6,24 @@ echo $this->HTML->script('JQueryUser');
 	<table id="data">
     <thead>
 	<tr>
-			<th>Subject</th>
-			<th>Note</th>
-			<th>Created</th>
-			<th class="actions"><?php echo __('View'); ?></th>
+        <th class="heading">Archive</th>
+        <th class="heading">Client</th>
+        <th class="heading">Subject</th>
+        <th class="heading">Note</th>
+        <th class="heading">Created</th>
+	    <th class="actions"></th>
 	</tr>
     </thead>
     <tbody>
         <?php
         foreach ($casenotes as $casenote): ?>
         <tr>
+            <td valign="top">
+                <?php echo h($casenote['Archive']['archive_name']); ?>
+            </td>
+            <td valign="top">
+                <?php echo h($casenote['Applicant']['first_name'].' '.$casenote['Applicant']['surname']); ?>
+            </td>
             <td valign="top">
                 <?php echo h($casenote['Casenote']['subject']); ?>
             </td>
