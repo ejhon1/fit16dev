@@ -6,7 +6,8 @@ echo $this->HTML->script('JQueryUser');
 	<table id="data">
     <thead>
         <tr>
-			<th class="heading">Archive Name</th>
+			<th class="heading">Archive</th>
+            <th class="heading">Client</th>
 			<th class="heading">Category</th>
 			<th class="heading">Type</th>
 			<th class="heading">Filename</th>
@@ -20,13 +21,16 @@ echo $this->HTML->script('JQueryUser');
 		<td>
 			<?php echo h($document['Archive']['archive_name']); ?>
 		</td>
+        <td>
+            <?php echo h($document['Applicant']['first_name'].' '.$document['Applicant']['surname']); ?>
+        </td>
 		<td>
 			<?php
-            if(!empty($document['Applicant']['id']))
+            if(!empty($document['Document']['applicant_id']))
             {
                 echo 'Applicant';
             }
-            else if(!empty($document['Ancestortype']['id']))
+            else if(!empty($document['Document']['ancestortype_id']))
             {
                 echo 'Ancestor';
             }
@@ -46,7 +50,7 @@ echo $this->HTML->script('JQueryUser');
 		<td valign="top"><?php echo h($document['Document']['filename']); ?></td>
 		<td valign="top"><?php echo h($this->Time->format('d-m-Y h:i', $document['Document']['created'])); ?></td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $document['Document']['id'])); ?>
+			<?php echo $this->Html->link(__('View'), array('controller' => 'clientcases', 'action' => 'view', $document['Clientcase']['id'], '#' => 'tab5')); ?>
             <?php if($document['Document']['copy_type'] == 'Digital')
             {
                 echo $this->Html->link(__('Download'), array('controller' => 'documents', 'action' => 'sendFile', $document['Document']['id']));
