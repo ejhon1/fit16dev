@@ -25,19 +25,10 @@ class DocnotesController extends AppController {
         $this->loadModel('Docnote');
         $this->loadModel('Applicant');
 
-        $docnotes = $this->Applicant->Clientcase->Docnote->find('all', array(
-            'contain' => array(
-                'Clientcase' => array('fields' => array ('id' ),
-                    'Applicant' => array(
-                        'fields' => array ( 'Applicant.id', 'Applicant.first_name', 'Applicant.surname' )
-                    )
-                ),
-                'Employee' => array('fields' => array('Employee.first_name', 'Employee.surname'))
-            ),
-            'order' => array('Docnote.created' => 'DESC')
-        ));
-
-        //$docnotes = $this->Docnote->find('all', array('order' => array('Docnote.created' => 'DESC'), 'limit' => 5));
+        $docnotes = $this->Docnote->query("SELECT distinct Docnote.id,  Docnote.note, Docnote.document_id, Docnote.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
+            FROM docnotes AS Docnote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
+            WHERE Docnote.clientcase_id = Clientcase.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+            ORDER BY Docnote.id DESC;");
 
         $this->set(compact('docnotes'));
 
