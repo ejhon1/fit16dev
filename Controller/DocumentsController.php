@@ -357,4 +357,15 @@ class DocumentsController extends AppController {
             $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id, '#'=>'tab5'));
         }
     }
+    
+    public function editdate(){
+        if ($this->request->is('post') || $this->request->is('put')){
+            if ($this->Document->save($this->request->data)){
+                $this->Session->setFlash(__('The date has been updated'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Document']['clientcase_id'], '#'=>'tab5'));
+            }
+            $this->Session->setFlash(__('Unable to update the return date'));
+        }
+
+    }
 }
