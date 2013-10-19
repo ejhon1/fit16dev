@@ -705,7 +705,7 @@ echo $this->HTML->css('datepicker');
             <?php
             //echo $this->Form->hidden('archive_id', array('default' => $client['Client']['archive_id']));
             echo $this->Form->input('file', array('type' => 'file'));
-            echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant'));
+            echo $this->Form->input('applicant_id', array('options'=>array($applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']), 'label'=>'Applicant'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             ?>
@@ -774,7 +774,7 @@ echo $this->HTML->css('datepicker');
         <fieldset>
             <?php
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
-            echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
+            echo $this->Form->input('applicant_id', array('options'=>array($applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']), 'label'=>'Applicant'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
             echo $this->Form->input('date_received', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd5"));
             echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd4"));
