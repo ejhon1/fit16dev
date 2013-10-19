@@ -312,20 +312,40 @@ Step 4<br />
     <h2 class="StepTitle">My Polishness</h2>
     <?php
     ?>
-    <td align="left"><span id="msg_born_in_poland"></span>&nbsp;</td>
+    <br />
+     <td align="left"><span id="msg_bip"></span>&nbsp;</td>
+	<table>
+    	<tr>
+    		<td>
+				<?php
+                echo $this->Form->input('ClientCase.born_in_poland', array(
+                    'id' => 'bip',
+                    'class' => 'bip',
+                    'type' => 'radio',
+                    'options' => array(
+                        'Yes' => 'Yes',
+                        'No' => 'No'),
+                    'legend' => 'I was born in Poland'));
+                ?>
+    		</td>
+    		<td>
+				<?php
+                echo $this->Form->input('ClientCase.spouse_nationality', array(
+                    'id' => 'spouse',
+                    'type' => 'radio',
+                    'options' => array(
+                        'Yes' => 'Yes',
+                        'No' => 'No'),
+                    'legend' => 'My Spouse is Polish'));
+                ?>
+    		</td>
+            <td>
+            	<div id="warning" style="display:none">Please be aware that blah blah blah.... </div>
+            </td>
+    	</tr>
+    </table>
+    
     <?php
-    echo $this->Form->input('ClientCase.born_in_poland', array(
-        'type' => 'radio',
-        'options' => array(
-            'Yes' => 'Yes',
-            'No' => 'No'),
-        'legend' => 'I was born in Poland'));
-    echo $this->Form->input('ClientCase.spouse_nationality', array(
-        'type' => 'radio',
-        'options' => array(
-            'Yes' => 'Yes',
-            'No' => 'No'),
-        'legend' => 'My Spouse is Polish'));
     echo $this->Form->input('ClientCase.nationality_of_parents', array(
         'type' => 'select',
         'multiple' => 'checkbox',
