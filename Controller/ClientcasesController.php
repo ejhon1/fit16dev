@@ -301,7 +301,7 @@ class ClientcasesController extends AppController {
         $this->Session->setFlash(__('Client case was not deleted', null),'default', array('class' => 'alert-danger'));
         return $this->redirect(array('action' => 'index'));
     }
-	 public function merge($id = null) {
+    public function merge($id = null) {
         $this->loadModel('Archive');
         $this->loadModel('Clientcase');
         if (!$this->Clientcase->exists($id)) {
@@ -311,7 +311,14 @@ class ClientcasesController extends AppController {
         if ($this->request->is('post') || $this->request->is('put'))
         {
             $archive = $this->Archive->find('first', array('conditions' => array('Archive.archive_name' => $this->request->data['Clientcase']['archive_name'])));
-            $clientcase =  $this->Clientcase->find('first', array('conditions' => array('Clientcase.archive_id' => $archive['Archive']['id'])));
+            if(!empty($archive))
+            {
+                $clientcase =  $this->Clientcase->find('first', array('conditions' => array('Clientcase.archive_id' => $archive['Archive']['id'])));
+            }
+            else
+            {
+                $this->Session->setFlash(__('That is not a valid archive name', null),'default', array('class' => 'alert-danger'));
+            }
             $this->set(compact('clientcase'));
         }
         $this->set(compact('id'));
