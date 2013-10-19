@@ -75,7 +75,8 @@ class ApplicantsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Applicant->save($this->request->data)) {
 				$this->Session->setFlash(__('The applicant has been saved', null),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				
+				return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
 			} else {
 				$this->Session->setFlash(__('The applicant could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
