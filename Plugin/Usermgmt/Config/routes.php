@@ -25,6 +25,7 @@ Router::connect('/logout', array('plugin' => 'usermgmt', 'controller' => 'users'
 Router::connect('/forgotPassword', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'forgotPassword'));
 Router::connect('/activatePassword/*', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'activatePassword'));
 Router::connect('/register', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'register'));
+Router::connect('/newapplicant', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'newapplicant'));
 Router::connect('/changePassword', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'changePassword'));
 Router::connect('/changeUserPassword/*', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'changeUserPassword'));
 Router::connect('/newemployee', array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'newemployee'));
