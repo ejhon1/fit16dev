@@ -83,7 +83,7 @@ class AddressesController extends AppController {
 			$this->request->data = $this->Address->find('first', $options);
 		}
 		$applicants = $this->Address->Applicant->find('list');
-		$countries = $this->Address->Country->find('list');
+		$countries = $this->Address->Country->find('list', array('fields' => array('Country.id', 'Country.country_name')));
 		$this->set(compact('applicants', 'countries'));
 	}
 
