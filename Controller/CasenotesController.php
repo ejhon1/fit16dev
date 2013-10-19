@@ -18,21 +18,11 @@ class CasenotesController extends AppController {
 	public function index() {
         //Recent contact notes list
         $this->loadModel('Casenote');
-        $casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC')));
-
-        /*$casenotes = $this->Casenote->find('all', array(
-                'contain' => array(
-                    'Clientcase' => array('fields' => array ('id', 'archive_id'),
-                        'contain'=> array('Archive' => array('fields' => 'archive_name'))
-
-                )
-            )
-        ));
-        */
-
-       //$casenotes = debug($this->Casenote->Clientcase->Archive->find('all', array('contain' => array('Clientcase' => array('fields' => array('id', 'archive_id'),'Archive')))));
-
-
+        //$casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC')));
+        $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.note, Casenote.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
+            FROM casenotes AS Casenote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
+            WHERE Casenote.clientcase_id = Clientcase.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+            ORDER BY Casenote.id DESC");
 
         $this->set(compact('casenotes'));
     }
