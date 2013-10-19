@@ -130,6 +130,12 @@ class UsersController extends UserMgmtAppController {
 					if ($remember) {
 						$this->UserAuth->persist('2 weeks');
 					}
+					$userid=$this->Session->read('UserAuth.User.id');
+                    $user = $this->User->find('first', array('conditions' => array('User.id' => $userid)));
+
+                    if(!empty($user['User']['type']) && $user['User']['type'] == 'Client'){
+                        $this->redirect(array('plugin' => false, 'controller' => 'clientcases', 'action' => 'myaccount'));
+                    }
 					$OriginAfterLogin=$this->Session->read('Usermgmt.OriginAfterLogin');
 					$this->Session->delete('Usermgmt.OriginAfterLogin');
 					//$redirect = (!empty($OriginAfterLogin)) ? $OriginAfterLogin : LOGIN_REDIRECT_URL;
