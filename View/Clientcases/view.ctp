@@ -1,8 +1,6 @@
 <?php
-  echo $this->HTML->script('JQueryUser');
-  echo $this->Html->css('jquery-ui-1.10.3.custom');
-  //echo $this->Html->script('jquery-1.5.min');
-  echo $this->Html->script('jquery-ui-1.10.3.custom.min');
+echo $this->Html->script('bootstrap-datepicker.js');
+echo $this->HTML->css('datepicker');
 ?>
 <div class="clientcases view">
 <script>
@@ -573,6 +571,8 @@
                                         </td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
+                                            <a class="btn" data-toggle="modal" href="#modalEditAppReturnedDate">Edit Returned Date</a>
+
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -625,6 +625,7 @@
                             </td>
                             <td>
                                 <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
+                            	<a class="btn" data-toggle="modal" href="#modalEditAncReturnedDate">Edit Returned Date</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -751,10 +752,8 @@
         <fieldset>
         <?php
             echo $this->Form->hidden('id', array('default' => $id));
-			echo $this->Form->input('appointment_date', array('label' => 'Appointment Date',
-            'id' => 'datepicker',
-            'type'=>'text',
-            'class'=>'datepicker'));
+	    echo $this->Form->input('appointment_date', array('label' => 'Appointment Date','class'=>'datepicker', 'id'=>"dpd6"));
+
 			
             ?>
         </fieldset>
@@ -771,44 +770,14 @@
     <div class="modal-body">
         <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'addphydoc', $id));?>
 
-         <script>
-            $(function() {
-                $( "#datepickerOne" ).datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    yearRange: "-100:+0",
-                    showAnim: 'slideDown',
-                    dateFormat: "dd-mm-yy"
-                });
-
-            });
-        </script>
-
-        <script>
-            $(function() {
-                $( "#datepickerTwo" ).datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    yearRange: "-100:+0",
-                    showAnim: 'slideDown',
-                    dateFormat: "dd-mm-yy"
-                });
-
-            });
-        </script>
+         
         <fieldset>
             <?php
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
-            echo $this->Form->input('date_received', array('label' => 'Date Received',
-                'id'=>'datepickerOne',
-                'type'=>'text',
-                'class'=>'datepicker'));
-            echo $this->Form->input('date_returned', array('label' => 'Date Returned',
-                'id'=>'datepickerTwo',
-                'type'=>'text',
-                'class'=>'datepicker'));
+            echo $this->Form->input('date_received', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd5"));
+            echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd4"));
             echo $this->Form->input('copy_type', array(
                 'type' => 'radio',
                 'legend'=>'Note Type',
@@ -830,44 +799,13 @@
     <div class="modal-body">
         <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'addphydoc', $id));?>
 
-         <script>
-            $(function() {
-                $( "#datepickerOne" ).datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    yearRange: "-100:+0",
-                    showAnim: 'slideDown',
-                    dateFormat: "dd-mm-yy"
-                });
-
-            });
-        </script>
-
-        <script>
-            $(function() {
-                $( "#datepickerTwo" ).datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    yearRange: "-100:+0",
-                    showAnim: 'slideDown',
-                    dateFormat: "dd-mm-yy"
-                });
-
-            });
-        </script>
         <fieldset>
             <?php
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->input('ancestortype_id', array('id' => 'ancestortype_id','options'=>$ancestorTypes, 'label'=>'Family member:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
-            echo $this->Form->input('date_received', array('label' => 'Date Received',
-                'id'=>'datepickerOne',
-                'type'=>'text',
-                'class'=>'datepicker'));
-            echo $this->Form->input('date_returned', array('label' => 'Date Returned',
-                'id'=>'datepickerTwo',
-                'type'=>'text',
-                'class'=>'datepicker'));
+            echo $this->Form->input('date_received', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd2"));
+            echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd3"));
             echo $this->Form->input('copy_type', array(
                 'type' => 'radio',
                 'legend'=>'Note Type',
@@ -880,3 +818,50 @@
         <?php echo $this->Form->end(__('Add Document')); ?>
     </div>
 </div>
+
+<div class="modal hide" id="modalEditAppReturnedDate"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Edit Applicant Document Return Date</h3>
+    </div>
+    <div class="modal-body">
+
+        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'editdate', $id));?>
+
+        <fieldset>
+            <?php
+            echo $this->Form->hidden('clientcase_id', array('default' => $id));
+            echo $this->Form->hidden('id', array('default' => $physicalappdocument['Document']['id']));
+            echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd1"));
+
+            ?>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->end(__('Add Date')); ?>
+    </div>
+</div>
+
+<div class="modal hide" id="modalEditAncReturnedDate"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Edit Ancestor Document Return Date</h3>
+    </div>
+    <div class="modal-body">
+
+        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'editdate', $id));?>
+
+        <fieldset>
+            <?php
+            echo $this->Form->hidden('clientcase_id', array('default' => $id));
+            echo $this->Form->hidden('id', array('default' => $physicalancdocument['Document']['id']));
+            echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd1"));
+
+            ?>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->end(__('Add Date')); ?>
+    </div>
+</div>
+
