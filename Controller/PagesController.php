@@ -83,36 +83,41 @@ class PagesController extends AppController {
         $statuses =  $this->Status->find('all');
         $i=0;
         foreach($statuses as $status):
-            //$status['Status']['count'] = $this->Clientcase->find('count', array('conditions' => array('Clientcase.status_id' => $status['Status']['id'])));
             $count[$i] = $this->Clientcase->find('count', array('conditions' => array('Clientcase.status_id' => $status['Status']['id'])));
             $i++;
         endforeach;
 
         //Recent documents list
         $this->loadModel('Document');
-        $documents = $this->Document->find('all', array('order' => array('Document.created' => 'DESC'), 'limit' => 10));
+        //$documents = $this->Document->find('all', array('order' => array('Document.created' => 'DESC'), 'limit' => 10));
+
+        $documents = $this->Document->query("SELECT distinct Document.id, Document.copy_type, Document.applicant_id, Document.ancestortype_id,Document.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
+            FROM documents AS Document, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
+            WHERE Document.archive_id = Archive.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+            ORDER BY Document.id DESC
+            LIMIT 5;");
+
 
         //Recent contact notes list
         $this->loadModel('Casenote');
-        $casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC'), 'limit' => 5));
+        //$casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC'), 'limit' => 5));
+
+        $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.note, Casenote.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
+            FROM casenotes AS Casenote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
+            WHERE Casenote.clientcase_id = Clientcase.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+            ORDER BY Casenote.id DESC
+            LIMIT 5;");
+
 
         //Recent docnotes list
         $this->loadModel('Docnote');
         $this->loadModel('Applicant');
 
-        $docnotes = $this->Applicant->Clientcase->Docnote->find('all', array(
-            'contain' => array(
-                'Clientcase' => array('fields' => array ('id' ),
-                    'Applicant' => array(
-                        'fields' => array ( 'Applicant.id', 'Applicant.first_name', 'Applicant.surname' )
-                    )
-                ),
-                'Employee' => array('fields' => array('Employee.first_name', 'Employee.surname'))
-            ),
-            'order' => array('Docnote.created' => 'DESC'), 'limit' => 5
-        ));
-
-        //$docnotes = $this->Docnote->find('all', array('order' => array('Docnote.created' => 'DESC'), 'limit' => 5));
+        $docnotes = $this->Docnote->query("SELECT distinct Docnote.id,  Docnote.note, Docnote.document_id, Docnote.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
+            FROM docnotes AS Docnote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
+            WHERE Docnote.clientcase_id = Clientcase.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+            ORDER BY Docnote.id DESC
+            LIMIT 5;");
 
         $this->set(compact('statuses', 'count', 'documents', 'casenotes', 'docnotes'));
 
