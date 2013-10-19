@@ -17,7 +17,10 @@ class DocumentsController extends AppController {
     public function index() {
         //Recent documents list
         $this->loadModel('Document');
-        $documents = $this->Document->find('all', array('order' => array('Document.created' => 'DESC')));
+        $documents = $this->Document->query("SELECT distinct Documenttype.type, Document.id, Document.applicant_id, Document.ancestortype_id, Document.filename, Document.copy_type, Document.applicant_id, Document.ancestortype_id,Document.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
+            FROM documents AS Document, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, documenttypes AS Documenttype
+            WHERE Document.archive_id = Archive.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Document.documenttype_id = Documenttype.id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+            ORDER BY Document.id DESC ");
 
         $this->set(compact('documents'));
     }
