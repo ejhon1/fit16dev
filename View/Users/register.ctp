@@ -203,6 +203,18 @@
  
     });
 </script>
+<script>
+$(document).ready(function(){
+		$("input[value='No']").change(function(){
+        var checked = $(this).attr('checked');
+        	if (checked) {
+           		$('#warning').show();             
+        	} else {
+            	$('#warning').hide();
+        	}
+    	});
+		});
+</script>
 
 <fieldset>
 <legend><?php echo __('Quickcheck Eligibility Form'); ?></legend>
