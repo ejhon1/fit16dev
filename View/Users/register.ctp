@@ -128,11 +128,12 @@
     {
         var isValid = true;
         var born_in_poland = $("input[@name='born_in_poland']:checked").val();
-        if(born_in_poland.length < 0 ){
+        if(!born_in_poland){
             isValid = false;
-            $('#msg_born_in_poland').html('Please select an option').show();
+            $('#msg_bip').html('Please select an option').show();
         }else{
-            $('#msg_born_in_poland').html('').hide();
+			isValid = true;
+            $('#msg_bip').html('').hide();
         }
         return isValid;
     }
