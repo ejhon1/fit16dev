@@ -335,7 +335,7 @@ class UsersController extends UserMgmtAppController {
                 $Email->sender(array('lizziness@gmail.com' => 'Polaron'));
                 $Email->from(array('lizziness@gmail.com' => 'Polaron'));
                 $Email->to($clientcase['Applicant']['email']);
-                $Email->subject('Activate Account');
+                $Email->subject($this->request->data['User']['subject']);
                 $Email->template('activate');
                 $Email->emailFormat('text');
                 $Email->viewVars(array('message' => $this->request->data['User']['message'], 'username' => $clientcase['User']['username'], 'password' => $password, 'signature' => $this->request->data['User']['signature']));
@@ -349,6 +349,39 @@ class UsersController extends UserMgmtAppController {
             }
         }
     }
+
+    public function recoverPassword($id = null) {
+        $this->loadModel('Clientcase');
+        $this->loadModel('Applicant');
+        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
+        $this->set(compact('clientcase'));
+        if ($this->request -> isPost()) {
+            $salt=$this->UserAuth->makeSalt();
+            $this->request->data['User']['salt'] = $salt;
+            $password = $this->generatePassword();
+            $this->request->data['User']['password'] = $this->UserAuth->makePassword($password, $salt);
+
+            if ($this->User->save($this->request->data, false)) {
+                $Email = new CakeEmail();
+                $Email->config('default');
+                $Email->sender(array('lizziness@gmail.com' => 'Polaron'));
+                $Email->from(array('lizziness@gmail.com' => 'Polaron'));
+                $Email->to($clientcase['Applicant']['email']);
+                $Email->subject($this->request->data['User']['subject']);
+                $Email->template('activate');
+                $Email->emailFormat('text');
+                $Email->viewVars(array('message' => $this->request->data['User']['message'], 'username' => $clientcase['User']['username'], 'password' => $password, 'signature' => $this->request->data['User']['signature']));
+
+                $Email->send();
+
+                $this->Session->setFlash(__('The client\'s account has been activated', null),'default', array('class' => 'alert-success'));
+                return $this->redirect(array('plugin' => false, 'controller' => 'clientcases', 'action' => 'view', $clientcase['Clientcase']['id']));
+            } else {
+                $this->Session->setFlash(__('The account could not be activated. Please try again.'));
+            }
+        }
+    }
+
 
 
     public function createArchive()
