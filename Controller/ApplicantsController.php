@@ -85,7 +85,6 @@ class ApplicantsController extends AppController {
 			$this->request->data = $this->Applicant->find('first', $options);
 		}
 		$clientcases = $this->Applicant->Clientcase->find('list');
-		$archives = $this->Applicant->Archive->find('list');
 		$this->set(compact('clientcases', 'archives'));
 	}
 
