@@ -265,10 +265,16 @@ echo $this->HTML->css('datepicker');
 							</div>
 							<br />
     							<div class="actions">
-								<ul>
-									<li><?php echo $this->Html->link(__('Edit Address'), array('controller' => 'addresses', 'action' => 'edit', $address['Address']['id'])); ?> </li>
-								</ul>
-							</div>
+                                				<?php foreach ($addresses as $address): ?>
+								<?php if(!empty($address['Address']['applicant_id'])) {
+                                    					echo $this->Html->link(__('Edit Address'), array('controller' => 'addresses', 'action' => 'edit', $address['Address']['id']));
+								}
+								else {
+									echo $this->Html->link(__('Add Address'), array('controller' => 'addresses', 'action' => 'add', $clientcase['Clientcase']['applicant_id'])); 
+								}
+									?>
+                                <?php endforeach; ?>
+								</div>
 						</div>
 					</div>
 				</div>
