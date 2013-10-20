@@ -38,6 +38,7 @@
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Group",true),"/addGroup") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("All Groups",true),"/allGroups") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Permissions",true),"/permissions") ?></span><br/><br/>
+						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Document Type",true),"newdoctype") ?></span><br/><br/>
 			<?php   } ?>
 				</div>
 				<div class="um_box_mid_content_mid_right" align="right"></div>
