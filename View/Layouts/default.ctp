@@ -86,7 +86,7 @@ $loggedUser = $this->Session->read('UserAuth.User');
 						<li><?php echo $this->Html->link('Cases', array('plugin' => false, 'controller'=>'clientcases', 'action'=>'index'));?> </li>
                         <li><?php echo $this->Html->link('Admin Dashboard', '/dashboard');?> </li>
 						<li><?php echo $this->Html->link('My Account', array('plugin' => false, 'controller' => 'employees', 'action' => 'myaccount')); ?></li>
-						<li><?php echo $this->Html->link('Enquire','/register') ?></li>
+						<li><?php echo $this->Html->link('New Applicant','/newapplicant') ?></li>
 					<?php
 					}
 					else if(!empty($loggedUser) && $loggedUser['type']=='Client')
