@@ -86,8 +86,12 @@ class ClientcasesController extends AppController {
         $options = array('conditions' => array('User.id' => $clientcase['Clientcase']['user_id']));
         $this->set('updateAppointmentDate', $this->User->find('all', $options));
         
-        $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $id), 'order'=>'first_name ASC', 'recursive' => -1));
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'));
+        //$applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $id), 'order'=>'first_name ASC', 'recursive' => -1));
+        $mainapplicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id'])));
+
+        $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id'], 'NOT' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id']))));
+
+        $address = $this->Address->find('first', array('conditions' => array('Address.applicant_id' => $id, 'Address.date_changed' => NULL)));        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'));
         $this->set('ancestordocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
 
 
@@ -107,7 +111,7 @@ class ClientcasesController extends AppController {
 
         $addresses = $this->Address->find('all', array('conditions' => array('Address.applicant_id' => $clientcase['Clientcase']['applicant_id'])));
         
-        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'user', 'addresses', 'archivecount'));
+        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'user', 'addresses', 'archivecount', 'address', 'mainapplicant'));
     }
 
     public function statustest($id = null) {
@@ -224,6 +228,32 @@ class ClientcasesController extends AppController {
         }
     }
     
+    public function changeMainApplicant()
+    {
+        $this->loadModel('Applicant');
+        if ($this->request->is('post')|| $this->request->is('put')) {
+
+            $applicant = $this->Applicant->findByid($this->request->data['Clientcase']['applicant_id']);
+
+            if(empty($applicant['Applicant']['email']))
+            {
+                $this->Session->setFlash(__('Applicant must have an email address before it can become the main applicant', null),'default', array('class' => 'alert-danger'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $applicant['Applicant']['clientcase_id']));
+            }
+            if ($this->Clientcase->save($this->request->data, false))
+            {
+                $this->Session->setFlash(__('The main applicant was changed', null),'default', array('class' => 'alert-success'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Clientcase']['id']));
+
+            }
+            else {
+                $this->Session->setFlash(__('The main applicant could not be changed.', null),'default', array('class' => 'alert-danger'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $applicant['Applicant']['clientcase_id']));
+            }
+
+        }
+    }
+    
     public function updateOpenClose($id=null) {
         if ($this->request->is('post')|| $this->request->is('put')) {
             if ($this->Clientcase->save($this->request->data, false)) {
@@ -238,8 +268,21 @@ class ClientcasesController extends AppController {
 
     public function myaccount() {
         $id=$this->Session->read('UserAuth.User.id');
-        $options = array('conditions' => array('Clientcase.user_id' => $id));
-        $this->set('clientcase', $this->Clientcase->find('first', $options));
+        //$options = array('conditions' => array('Clientcase.user_id' => $id));
+        //$this->set('clientcase', $this->Clientcase->find('first', $options));
+        $this->loadModel('Clientcase');
+        $this->loadModel('Applicant');
+        $this->loadModel('Address');
+
+        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $id)));
+
+        $mainapplicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id'])));
+
+        $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id'], 'NOT' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id']))));
+
+        $address = $this->Address->find('first', array('conditions' => array('Address.applicant_id' => $id, 'Address.date_changed' => NULL)));
+
+        $this->set(compact('clientcase', 'mainapplicant', 'applicants', 'address'));
     }
 
     /**
