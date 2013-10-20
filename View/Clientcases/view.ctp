@@ -270,7 +270,7 @@ echo $this->HTML->css('datepicker');
                                     					echo $this->Html->link(__('Edit Address'), array('controller' => 'addresses', 'action' => 'edit', $address['Address']['id']));
 								}
 								else {
-									echo $this->Html->link(__('Add Address'), array('controller' => 'addresses', 'action' => 'add', $clientcase['Clientcase']['applicant_id'])); 
+									
 								}
 									?>
                                 <?php endforeach; ?>
