@@ -3,14 +3,14 @@
 	<fieldset>
 		<legend><?php echo __('Edit Clientcase'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('archive_id');
-		echo $this->Form->input('status_id');
-		echo $this->Form->input('applicant_id');
-		echo $this->Form->input('open_or_closed');
-		echo $this->Form->input('enquiry_date');
-		echo $this->Form->input('appointment_date');
+		//echo $this->Form->input('id');
+		//echo $this->Form->input('user_id');
+		//echo $this->Form->input('archive_id');
+		//echo $this->Form->input('status_id');
+		//echo $this->Form->input('applicant_id');
+		//echo $this->Form->input('open_or_closed');
+		echo $this->Form->input('existing_family');
+		//echo $this->Form->input('appointment_date');
 		echo $this->Form->input('born_in_poland');
 		echo $this->Form->input('nationality_of_parents');
 		echo $this->Form->input('mother_name');
@@ -35,6 +35,7 @@
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
+<!--
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
@@ -55,3 +56,4 @@
 		<li><?php echo $this->Html->link(__('New Casestatus'), array('controller' => 'casestatuses', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
+-->
