@@ -28,6 +28,7 @@
         <div style="float:left;padding-left:25px"><?php echo $this->Html->link(__("Permissions",true),"/permissions") ?></div>
         <div style="float:left;padding-left:25px"><?php echo $this->Html->link(__("Add Document Type",true),"newdoctype") ?></div>
         <div style="float:left;padding-left:25px"><?php echo $this->Html->link(__("Add Ancestor Type",true),"newancestortype") ?></div>
+        <div style="float:left;padding-left:25px"><?php echo $this->Html->link(__("Add Status Type",true),"newstatustype") ?></div>
 
     <?php   }?>
     <div style="clear:both"></div>
