@@ -321,10 +321,22 @@ echo $this->HTML->css('datepicker');
             <table>
             	<tbody>
             		<tr>
+            			<th>Existing Family</th>
+            			<td><?php echo h($clientcase['Clientcase']['existing_family']); ?></td>
+            			<th></th>
+            			<td></td>
+            		</tr>
+            		<tr>
             			<th>Born In Poland</th>
             			<td><?php echo h($clientcase['Clientcase']['born_in_poland']); ?></td>
+            			<th></th>
+            			<td></td>
+            		</tr>
+            		<tr>
             			<th>Nationality Of Parents</th>
 						<td><?php echo h($clientcase['Clientcase']['nationality_of_parents']); ?></td>
+						<th></th>
+						<td></td>
             		</tr>
             		<tr>
             			<th>Mother Name</th>
@@ -359,8 +371,14 @@ echo $this->HTML->css('datepicker');
             		<tr>
             			<th>Service In Army</th>
             			<td><?php echo h($clientcase['Clientcase']['serve_in_army']); ?></td>
+            			<th></th>
+            			<td></td>
+            		</tr>
+            		<tr>
             			<th>Service In Army Information</th>
             			<td><?php echo h($clientcase['Clientcase']['serve_in_army_info']); ?></td>
+            			<th></th>
+            			<td></td>
             		</tr>
             		<tr>
             			<th>When Left Poland</th>
@@ -371,8 +389,14 @@ echo $this->HTML->css('datepicker');
             		<tr>
             			<th>Where Left Poland</th>
             			<td><?php echo h($clientcase['Clientcase']['where_left_poland']); ?></td>
+            			<th></th>
+            			<td></td>
+            		</tr>
+            		<tr>
             			<th>Where Left Poland Other</th>
             			<td><?php echo h($clientcase['Clientcase']['where_left_poland_other']); ?></td>
+            			<th></th>
+            			<td></td>
             		</tr>
             		<tr>
             			<th>Passport Available?</th>
@@ -383,8 +407,14 @@ echo $this->HTML->css('datepicker');
             		<tr>
             			<th>Document Types</th>
             			<td><?php echo h($clientcase['Clientcase']['possess_documents_types']); ?></td>
+            			<th></th>
+            			<td></td>
+            		</tr>
+            		<tr>
             			<th>Other Documents</th>
-						<td><?php echo h($clientcase['Clientcase']['possess_documents_other']); ?></td>
+				<td><?php echo h($clientcase['Clientcase']['possess_documents_other']); ?></td>
+				<th></th>
+				<td></td>
             		</tr>
             		<tr>
             			<th>Other Factors</th>
@@ -392,10 +422,6 @@ echo $this->HTML->css('datepicker');
             			<th>Date Registered</th>
             			<td><?php echo $this->Time->format('d-m-Y',$clientcase['Clientcase']['created']); ?></td>
             		</tr>
-            		<tr>
-                        <th>Others That Have Used Polaron</th>
-                        <td><?php echo h($clientcase['Clientcase']['existing_family']); ?></td>
-                    </tr>
             	</tbody>
             </table>
         </div>
