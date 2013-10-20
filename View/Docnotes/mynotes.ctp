@@ -5,7 +5,7 @@
     <?php
     echo $this->Form->create('Docnote');
     echo $this->Form->input('note');
-    echo $this->Form->end(__('New note'));
+    echo $this->Form->end(__('Add note'));
     ?>
 	<table cellpadding="0" cellspacing="0">
     <tbody>
