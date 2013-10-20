@@ -591,6 +591,20 @@ class UsersController extends UserMgmtAppController {
             }
         }
     }
+    
+    public function newdoctype() {
+        $this->loadModel('Documenttype');
+		
+        if ($this->request->is('post')) {
+			$this->Documenttype->create();
+			if ($this->Documenttype->save($this->request->data)) {
+				$this->Session->setFlash(__('The documenttype has been saved', null),'default', array('class' => 'alert-success'));
+				return $this->redirect(array('action' => '/dashboard'));
+			} else {
+				$this->Session->setFlash(__('The documenttype could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+			}
+		}
+    }
 
     public function newclient() {
         $this->loadModel('Archive');
