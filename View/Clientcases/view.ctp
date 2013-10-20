@@ -28,7 +28,7 @@ echo $this->HTML->css('datepicker');
     }
     ?>
     <li><a href="#tab3" data-toggle="tab">Case Status</a></li>
-    <li><a href="#tab4" data-toggle="tab">Case Notes</a></li>
+    <li><a href="#tab4" data-toggle="tab">Contact Notes</a></li>
     <li><a href="#tab5" data-toggle="tab">Documents</a></li>
 </ul>
 <div id="my-tab-content" class="tab-content">
@@ -363,6 +363,10 @@ echo $this->HTML->css('datepicker');
             			<th>Date Registered</th>
             			<td><?php echo $this->Time->format('d-m-Y',$clientcase['Clientcase']['created']); ?></td>
             		</tr>
+            		<tr>
+                        <th>Others That Have Used Polaron</th>
+                        <td><?php echo h($clientcase['Clientcase']['existing_family']); ?></td>
+                    </tr>
             	</tbody>
             </table>
         </div>
@@ -571,8 +575,7 @@ echo $this->HTML->css('datepicker');
                                         </td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
-                                            <a class="btn" data-toggle="modal" href="#modalEditAppReturnedDate">Edit Returned Date</a>
-
+                                            <a class="" data-toggle="modal" href="#modalEditAppReturnedDate"><?php echo $this->html->image("edit-icon.png")?></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -625,7 +628,7 @@ echo $this->HTML->css('datepicker');
                             </td>
                             <td>
                                 <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
-                            	<a class="btn" data-toggle="modal" href="#modalEditAncReturnedDate">Edit Returned Date</a>
+                                <a class="" data-toggle="modal" href="#modalEditAncReturnedDate"><?php echo $this->html->image("edit-icon.png")?></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
