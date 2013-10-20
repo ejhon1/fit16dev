@@ -41,17 +41,6 @@ class Applicant extends AppModel {
                 'message' => 'Name can only contain letters'
             )
         ),
-        'middle_name' => array(
-            'notempty' => array(
-                'rule' => array(
-                    'notempty'),
-//'message' => 'Your custom message here',
-//'allowEmpty' => false,
-//'required' => false,
-//'last' => false, // Stop validation after this rule
-//'on' => 'create', // Limit validation to 'create' or 'update' operations
-            ),
-        ),
         'surname' => array(
             'notempty' => array(
                 'rule' => array(
@@ -67,32 +56,23 @@ class Applicant extends AppModel {
                 'message' => 'Name can only contain letters'
             )
         ),
-        'landline_number' => array(
-            'notempty' => array(
-                'rule' => array(
-                    'notempty'),
-                'message' => 'Please enter your phone number'
-            ),
-        ),
-        'email' => array(
-            'notempty' => array(
-                'rule' => array(
-                    'notempty'),
-                'message' => 'Please enter your email address'
-            ),
+        /*'email' => array(
+
             'validEmail' => array(
                 'rule' => array(
                     'email'
                 ),
+                'allowEmpty' => true,
                 'message' => 'Invalid email address! Please try again!'
             ),
             'uniqueEmail' => array(
                 'rule' => array(
                     'isUnique'
                 ),
+                'allowEmpty' => true,
                 'message' => 'This email is already registered'
             )
-        )
+        )*/
     );
 
 //The Associations below have been created with all possible keys, those that are not needed can be removed

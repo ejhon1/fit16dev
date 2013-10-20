@@ -21,7 +21,13 @@
         <legend><?php echo __('Add Applicant'); ?></legend>
         <?php
         /** echo $this->Form->input('archive', array('options' => $archives)); */
-        echo $this->Form->input('title');
+        echo $this->Form->input('title',array(
+            'options' => array(
+                '' => '',
+                'Mr' => 'Mr',
+                'Mrs' => 'Mrs',
+                'Ms' => 'Ms',
+                'Miss' => 'Miss')));
         echo $this->Form->input('first_name');
         echo $this->Form->input('middle_name');
         echo $this->Form->input('surname');
@@ -32,14 +38,6 @@
         echo $this->Form->input('email');
         echo $this->Form->input('landline_number');
         echo $this->Form->input('mobile_number');
-        echo $this->Form->input('applicant_type', array (
-            'type' => 'radio',
-			'options' => array(
-                'Main Applicant' => 'Main Applicant', 
-                'Secondary Applicant' => 'Seconday Applicant'),
-			'default' => 'Secondary Applicants',
-			'legend' => 'Applicant Type'
-			));
         ?>
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
