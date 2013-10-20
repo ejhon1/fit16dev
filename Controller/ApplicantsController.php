@@ -76,16 +76,14 @@ class ApplicantsController extends AppController {
 			if ($this->Applicant->save($this->request->data)) {
 				$this->Session->setFlash(__('The applicant has been saved', null),'default', array('class' => 'alert-success'));
 				
-				return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
+				return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Applicant']['clientcase_id']));
 			} else {
-				$this->Session->setFlash(__('The applicant could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+				$this->Session->setFlash(__('The applicant could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
 			}
-		} else {
-			$options = array('conditions' => array('Applicant.' . $this->Applicant->primaryKey => $id));
-			$this->request->data = $this->Applicant->find('first', $options);
 		}
-		$clientcases = $this->Applicant->Clientcase->find('list');
-		$this->set(compact('clientcases', 'archives'));
+        $options = array('conditions' => array('Applicant.' . $this->Applicant->primaryKey => $id));
+        $this->request->data = $this->Applicant->find('first', $options);
+		$this->set(compact('id'));
 	}
 
 /**
