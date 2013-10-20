@@ -208,6 +208,7 @@ echo $this->HTML->css('datepicker');
 						                    	<th><?php echo __('Email'); ?></th>
 						                    	<th><?php echo __('Phone Number'); ?></th>
 						                    	<th><?php echo __('Mobile Number'); ?></th>
+						                    	<th><?php echo __(''); ?></th>
 						                </tr>
 					                		<?php foreach ($applicants as $applicant): ?>
 					                    	<tr>
@@ -216,6 +217,11 @@ echo $this->HTML->css('datepicker');
 					                        	<td><?php echo $applicant['Applicant']['email']; ?></td>
 					                        	<td><?php echo $applicant['Applicant']['landline_number']; ?></td>
 					                        	<td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
+					                    		<td>
+	                                                			<div class="actions">
+	                                                				<ul><li><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $applicant['Applicant']['id'])); ?> </li></ul>
+	                                                			</div>
+                                                			</td>
 					                    	</tr>
 					                		<?php endforeach; ?>
 					            		</table>
