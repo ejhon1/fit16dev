@@ -40,6 +40,7 @@
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Permissions",true),"/permissions") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Document Type",true),"newdoctype") ?></span><br/><br/>
 						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Ancestor Type",true),"newancestortype") ?></span><br/><br/>
+						<span  class="umstyle6"><?php echo $this->Html->link(__("Add Status Type",true),"newstatustype") ?></span><br/><br/>
 			<?php   } ?>
 				</div>
 				<div class="um_box_mid_content_mid_right" align="right"></div>
