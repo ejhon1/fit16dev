@@ -28,7 +28,7 @@
 	
 	<!-- Wrapper for slides-->
 	<div class="carousel-inner">
-		<div class="item active" align="center">
+		<div class="item" align="center">
 			<?php echo $this->Html->image('websitebanner.png', array(
 				'alt' => 'Website Banner',
 				
@@ -41,7 +41,7 @@
 			));?>
 			
 		</div>
-		<div class="item" align="center">
+		<div class="item active" align="center">
 			<?php echo $this->Html->image('TESTPIC2.png', array(
 				'alt' => 'Polska',
 			));?>
