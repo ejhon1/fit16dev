@@ -75,6 +75,10 @@ echo $this->HTML->css('datepicker');
                     <?php if($clientcase['Clientcase']['appointment_date'] != NULL)
                     {
                         echo h($this->Time->format('d-m-Y h:i', $clientcase['Clientcase']['appointment_date']));
+                    ?>
+                    	<br/>
+                    	<a class="btn" data-toggle="modal" href="#modalEditdAppointmentDate">Edit Date</a>
+                    <?php
                     }
                     else
                     {
@@ -881,3 +885,24 @@ echo $this->HTML->css('datepicker');
     </div>
 </div>
 
+<div class="modal hide" id="modalEditdAppointmentDate"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Edit Appointment Date</h3>
+    </div>
+    <div class="modal-body">
+		<?php echo $this->Form->create('Clientcase', array('action' => 'editAppointmentDate', $clientcase['Clientcase']['id'])); ?>
+        <fieldset>
+        <?php
+            echo $this->Form->hidden('id', array('default' => $id));
+			echo $this->Form->input('appointment_date', array('label' => 'Appointment Date',
+            'id' => 'datepicker2',
+            'type'=>'text',
+            'class'=>'datepicker2'));
+            ?>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->end(__('Edit Date')); ?>
+    </div>
+</div>
