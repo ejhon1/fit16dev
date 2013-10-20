@@ -619,6 +619,20 @@ class UsersController extends UserMgmtAppController {
 			}
 		}
     }
+    
+    public function newstatustype() {
+        $this->loadModel('Status');
+		
+        if ($this->request->is('post')) {
+			$this->Status->create();
+			if ($this->Status->save($this->request->data)) {
+				$this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
+				return $this->redirect(array('action' => '/dashboard'));
+			} else {
+				$this->Session->setFlash(__('The status could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+			}
+		}
+    }
 
     public function newclient() {
         $this->loadModel('Archive');
