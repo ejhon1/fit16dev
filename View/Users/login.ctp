@@ -18,6 +18,14 @@
 	along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 ?>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#carousel-example-generic').carousel({
+    //options here
+    });
+});
+</script>
+
 <div id="carousel-example-generic" class="carousel slide">
 	<!-- indicators -->
 	<ol class="carousel-indicators">
@@ -41,7 +49,7 @@
 			));?>
 			
 		</div>
-		<div class="item active" align="center">
+		<div class="item" align="center">
 			<?php echo $this->Html->image('TESTPIC2.png', array(
 				'alt' => 'Polska',
 			));?>
@@ -65,7 +73,7 @@
 			));?>
 			
 		</div>
-		<div class="item" align="center">
+		<div class="item active" align="center">
 			<?php echo $this->Html->image('TESTPIC6.png', array(
 				'alt' => 'Books',
 			));?>
