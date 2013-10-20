@@ -206,6 +206,8 @@ class ClientcasesController extends AppController {
     
     public function editAppointmentDate($id=null) {
         if ($this->request->is('post')|| $this->request->is('put')) {
+       	    $this->request->data['Clientcase']['appointment_date'] = date('Y-m-d', strtotime($this->request->data['Clientcase']['appointmentDate']));
+
             if ($this->Clientcase->save($this->request->data, false)) {
                 $this->Session->setFlash(__('The Appointment Date has been edited', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Clientcase']['id']));
