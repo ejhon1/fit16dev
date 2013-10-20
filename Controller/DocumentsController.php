@@ -338,11 +338,17 @@ class DocumentsController extends AppController {
     }
     
     
+   
     public function addphydoc($id = null){
         $this->loadModel('ClientCase');
         $this->loadModel('Archive');
 
         $id = $this->request->data['Document']['clientcase_id'];
+
+        $this->request->data['Document']['date_returned'] = date('Y-m-d', strtotime($this->request->data['Document']['dateReturned']));
+        $this->request->data['Document']['date_received'] = date('Y-m-d', strtotime($this->request->data['Document']['dateReceived']));
+
+
 
         $clientcase = $this->ClientCase->findById($id);
         $this->request->data['Document']['archive_id'] = $clientcase['ClientCase']['archive_id'];
@@ -357,9 +363,11 @@ class DocumentsController extends AppController {
             $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id, '#'=>'tab5'));
         }
     }
-    
+
     public function editdate(){
+
         if ($this->request->is('post') || $this->request->is('put')){
+            $this->request->data['Document']['date_returned'] = date('Y-m-d', strtotime($this->request->data['Document']['dateReturned']));
             if ($this->Document->save($this->request->data)){
                 $this->Session->setFlash(__('The date has been updated'));
                 return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Document']['clientcase_id'], '#'=>'tab5'));
