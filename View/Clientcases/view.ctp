@@ -148,6 +148,13 @@ echo $this->HTML->css('datepicker');
             </tbody>
         </table>
         <br>
+        <?php if(count($applicantslist) > 1)
+        {
+            ?>
+            <a class="btn" data-toggle="modal" href="#changeMainApplicant">ChangePrimaryApplicant</a>
+        <?php
+        }
+        ?>
         <div class="actions">
             <ul>
         <?php
@@ -155,6 +162,11 @@ echo $this->HTML->css('datepicker');
         {
             ?>
                     <li><?php echo $this->Html->link(__('Activate'), array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'activateAccount', $clientcase['Clientcase']['id'])); ?> </li>
+        <?php
+        }
+        else{
+            ?>
+            <li><?php echo $this->Html->link(__('Recover Password'), array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'recoverPassword', $clientcase['Clientcase']['id'])); ?> </li>
         <?php
         }
         if($archivecount <= 1)
@@ -167,7 +179,6 @@ echo $this->HTML->css('datepicker');
             </ul>
         </div>
 
-
         <br><br><br>
         <h3><?php echo __('Applicants'); ?></h3>
         <div class="actions">
@@ -178,118 +189,119 @@ echo $this->HTML->css('datepicker');
         
         <br />
         <br />
-        <div>
-        	<?php if (!empty($applicants)): ?>
-			<table cellpadding = "0" cellspacing = "0">
-				<tr>
-					<th><?php echo __('Name'); ?></th>
-                                        <th><?php echo __('Type'); ?></th>
-				</tr>
-					<?php foreach ($applicants as $applicant): ?>
-				<tr>
-				        <td><?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']); ?></td>
-                                        <td><?php echo h($applicant['Applicant']['applicant_type']); ?></td>
-				</tr>
-					<?php endforeach; ?>
-			</table>
-		<?php endif; ?>
-		
-		<br />
-		<td><a class="btn btn-primary accordion-toggle" data-toggle="collapse" data-parent="#myaccordion" href="#first">Full Details</a></td>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-target="#MainApplicant" href="#MainApplicant">
+                        <?php echo h($mainapplicant['Applicant']['title'].' '.$mainapplicant['Applicant']['first_name'].' '.$mainapplicant['Applicant']['middle_name'].' '.$mainapplicant['Applicant']['surname']); ?>
+                    </a></h4>
+            </div>
+            <div id="MainApplicant" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <table cellpadding = "0" cellspacing = "0">
+                        <tr>
+                            <th><?php echo __('Birthdate'); ?></th>
+                            <th><?php echo __('Email'); ?></th>
+                            <th><?php echo __('Phone Number'); ?></th>
+                            <th><?php echo __('Mobile Number'); ?></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $mainapplicant['Applicant']['birthdate']; ?></td>
+                            <td><?php echo $mainapplicant['Applicant']['email']; ?></td>
+                            <td><?php echo $mainapplicant['Applicant']['landline_number']; ?></td>
+                            <td><?php echo $mainapplicant['Applicant']['mobile_number']; ?></td>
+                            <td class="actions"><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $mainapplicant['Applicant']['id'])); ?></td>
+                        </tr>
+                    </table>
+                    <?php if(!empty($address))
+                    {
+                    ?>
+                        <br>
+                        <dl>
+                            <dt><?php echo __('Address Line'); ?></dt>
+                            <dd>
+                                <?php echo h($address['Address']['address_line']); ?>
+                                &nbsp;
+                            </dd>
+                            <dt><?php echo __('Suburb'); ?></dt>
+                            <dd>
+                                <?php echo h($address['Address']['suburb']); ?>
+                                &nbsp;
+                            </dd>
+                            <dt><?php echo __('Postcode'); ?></dt>
+                            <dd>
+                                <?php echo h($address['Address']['postcode']); ?>
+                                &nbsp;
+                            </dd>
+                            <dt><?php echo __('State'); ?></dt>
+                            <dd>
+                                <?php echo h($address['Address']['state']); ?>
+                                &nbsp;
+                            </dd>
+                            <dt><?php echo __('Country'); ?></dt>
+                            <dd>
+                                <?php echo h($address['Country']['country_name']); ?>
+                                &nbsp;
+                            </dd>
+                        </dl>
+                        <br>
+                        <div class="actions">
+                            <ul>
+                                <li><?php echo $this->Html->link(__('Change Address'), array('controller' => 'addresses', 'action' => 'edit', $address['Address']['id'])); ?> </li>
+                            </ul>
+                        </div>
+                    <?php
+                    }else{
+                    ?>
+                        <div class="actions">
+                            <ul>
+                                <li><?php echo $this->Html->link(__('Add Address'), array('controller' => 'addresses', 'action' => 'add', $mainapplicant['Applicant']['id'])); ?> </li>
+                            </ul>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
-        <br />
-        <br />
-		<div>
-			<div class="panel-group" id="myaccordion">
-				<div class="panel panel-default">
-					<div id="first" class="panel-collapse collapse out">
-						<div class="panel-body">
-							<?php if (!empty($applicants)): ?>
-								<table cellpadding = "0" cellspacing = "0">
-								<tr>
-									<th><?php echo __('Name'); ?></th>
-                                            				<th><?php echo __('Birthdate'); ?></th>
-						                    	<th><?php echo __('Email'); ?></th>
-						                    	<th><?php echo __('Phone Number'); ?></th>
-						                    	<th><?php echo __('Mobile Number'); ?></th>
-						                    	<th><?php echo __(''); ?></th>
-						                </tr>
-					                		<?php foreach ($applicants as $applicant): ?>
-					                    	<tr>
-					                        	<td><?php echo $applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']; ?></td>
-                                            				<td><?php echo $applicant['Applicant']['birthdate']; ?></td>
-					                        	<td><?php echo $applicant['Applicant']['email']; ?></td>
-					                        	<td><?php echo $applicant['Applicant']['landline_number']; ?></td>
-					                        	<td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
-					                    		<td>
-	                                                			<div class="actions">
-	                                                				<ul><li><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $applicant['Applicant']['id'])); ?> </li></ul>
-	                                                			</div>
-                                                			</td>
-					                    	</tr>
-					                		<?php endforeach; ?>
-					            		</table>
-					        	<?php endif; ?>
-					        	
-					        	<br />
-                            				<div class="actions">
-								<ul>
-									<li><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $clientcase['Clientcase']['applicant_id'])); ?> </li>
-									<li><?php echo $this->Html->link(__('Add Address'), array('controller' => 'addresses', 'action' => 'add', $clientcase['Clientcase']['applicant_id'])); ?> </li>
-								</ul>
-							</div>
-					        	
-					        	<br />
-						    	<div class="related">
-								<h3><?php echo __('Addresses'); ?></h3>
-						    		<?php foreach ($addresses as $address): ?>
-									<?php if(!empty($address['Address']['applicant_id'])) ?>
-						            			<dl>
-						            				<dt><?php echo __('Address Line'); ?></dt>
-						                				<dd>
-													<?php echo h($address['Address']['address_line']); ?>
-						                        				&nbsp;
-												</dd>
-											<dt><?php echo __('Suburb'); ?></dt>
-						                				<dd>
-													<?php echo h($address['Address']['suburb']); ?>
-						                        				&nbsp;
-												</dd>
-											<dt><?php echo __('Postcode'); ?></dt>
-						                				<dd>
-													<?php echo h($address['Address']['postcode']); ?>
-						                        				&nbsp;
-												</dd>
-											<dt><?php echo __('State'); ?></dt>
-						                				<dd>
-													<?php echo h($address['Address']['state']); ?>
-						                        				&nbsp;
-												</dd>
-											<dt><?php echo __('Country'); ?></dt>
-						                				<dd>
-													<?php echo h($address['Country']['country_name']); ?>
-						                        				&nbsp;
-												</dd>
-						            			</dl>
-								<?php endforeach; ?>
-							</div>
-							<br />
-    							<div class="actions">
-                                				<?php foreach ($addresses as $address): ?>
-								<?php if(!empty($address['Address']['applicant_id'])) {
-                                    					echo $this->Html->link(__('Edit Address'), array('controller' => 'addresses', 'action' => 'edit', $address['Address']['id']));
-								}
-								else {
-									
-								}
-									?>
-                                <?php endforeach; ?>
-								</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+
+        <?php $i = 0;
+        foreach ($applicants as $applicant):
+            ?>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-target="<?php echo h('#Applicant'.$i); ?>" href="<?php echo h('#Applicant'.$i); ?>">
+                        <?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['middle_name'].' '.$applicant['Applicant']['surname']); ?>
+                </a></h4>
+            </div>
+            <div id="<?php echo h('Applicant'.$i); ?>" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table cellpadding = "0" cellspacing = "0">
+                        <tr>
+                            <th><?php echo __('Birthdate'); ?></th>
+                            <th><?php echo __('Email'); ?></th>
+                            <th><?php echo __('Phone Number'); ?></th>
+                            <th><?php echo __('Mobile Number'); ?></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $applicant['Applicant']['birthdate']; ?></td>
+                            <td><?php echo $applicant['Applicant']['email']; ?></td>
+                            <td><?php echo $applicant['Applicant']['landline_number']; ?></td>
+                            <td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
+                            <td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
+                            <td class="actions"><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $applicant['Applicant']['id'])); ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <?php $i++;
+        endforeach; ?>
 
     </div>
     <?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
@@ -904,5 +916,26 @@ echo $this->HTML->css('datepicker');
     </div>
     <div class="modal-footer">
         <?php echo $this->Form->end(__('Edit Date')); ?>
+    </div>
+</div>
+
+<div class="modal hide" id="changeMainApplicant"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Change the main applicant</h3>
+    </div>
+    <div class="modal-body">
+        This will change the main applicant associated with a case. Only an applicant with an email address is eligible. <br>
+        Note: This will NOT change the email that the client uses to login.
+        <?php echo $this->Form->create('Clientcase', array('action' => 'changeMainApplicant'));?>
+        <fieldset>
+            <?php
+            echo $this->Form->hidden('id', array('default' => $id));
+            echo $this->Form->input('applicant_id', array('options'=>array($applicantslist), 'label'=>'Applicant'));
+            ?>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->end(__('Submit')); ?>
     </div>
 </div>
