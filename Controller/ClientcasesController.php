@@ -200,13 +200,25 @@ class ClientcasesController extends AppController {
         $this->set(compact('clientcase',  'employee', 'casestatuses', 'clientcases', 'statuses', 'id'));
     }
     
+    public function editAppointmentDate($id=null) {
+        if ($this->request->is('post')|| $this->request->is('put')) {
+            if ($this->Clientcase->save($this->request->data, false)) {
+                $this->Session->setFlash(__('The Appointment Date has been edited', null),'default', array('class' => 'alert-success'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Clientcase']['id']));
+            } else {
+                $this->Session->setFlash(__('The Appointment Date could not be edited. Please, try again.', null),'default', array('class' => 'alert-danger'));
+
+            }
+        }
+    }
+    
     public function updateAppointmentDate($id=null) {
         if ($this->request->is('post')|| $this->request->is('put')) {
             if ($this->Clientcase->save($this->request->data, false)) {
-                $this->Session->setFlash(__('The Appointment Date has been saved', null),'default', array('class' => 'alert-success'));
+                $this->Session->setFlash(__('The Appointment Date has been updated', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Clientcase']['id']));
             } else {
-                $this->Session->setFlash(__('The Appointment Date could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+                $this->Session->setFlash(__('The Appointment Date could not be updated. Please, try again.', null),'default', array('class' => 'alert-danger'));
 
             }
         }
