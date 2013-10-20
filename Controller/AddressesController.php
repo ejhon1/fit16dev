@@ -45,7 +45,8 @@ class AddressesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($id = null) {
+		$this->request->data['Address']['applicant_id'] = $id;
 		if ($this->request->is('post')) {
 			$this->Address->create();
 			if ($this->Address->save($this->request->data)) {
@@ -56,7 +57,7 @@ class AddressesController extends AppController {
 			}
 		}
 		$applicants = $this->Address->Applicant->find('list');
-		$countries = $this->Address->Country->find('list');
+		$countries = $this->Address->Country->find('list', array('fields' => array('Country.id', 'Country.country_name')));
 		$this->set(compact('applicants', 'countries'));
 	}
 
