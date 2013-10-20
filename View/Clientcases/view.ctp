@@ -544,7 +544,7 @@ echo $this->HTML->css('datepicker');
                                     <?php foreach ($applicantdocuments as $applicantdocument): ?>
                                     <tr class="list">
                                         <td valign="top">
-                                            <?php echo h($applicantdocument['Applicant']['first_name'].' '.$applicantdocument['Applicant']['surname']); ?>
+                                            <?php echo h($applicantdocument['Applicant']['first_name']; ?>
                                             </td>
                                             <td valign="top">
                                                 <?php echo h($applicantdocument['Documenttype']['type']); ?>
@@ -588,7 +588,7 @@ echo $this->HTML->css('datepicker');
                                 <?php foreach ($physicalappdocuments as $physicalappdocument): ?>
                                     <tr class="list">
                                         <td valign="top">
-                                            <?php echo h($physicalappdocument['Applicant']['first_name'].' '.$physicalappdocument['Applicant']['surname']); ?>
+                                            <?php echo h($physicalappdocument['Applicant']['first_name']); ?>
                                         </td>
                                         <td valign="top">
                                             <?php echo h($physicalappdocument['Documenttype']['type']); ?>
@@ -737,7 +737,7 @@ echo $this->HTML->css('datepicker');
             <?php
             //echo $this->Form->hidden('archive_id', array('default' => $client['Client']['archive_id']));
             echo $this->Form->input('file', array('type' => 'file'));
-            echo $this->Form->input('applicant_id', array('options'=>array($applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']), 'label'=>'Applicant'));
+            echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             ?>
@@ -784,7 +784,7 @@ echo $this->HTML->css('datepicker');
         <fieldset>
         <?php
             echo $this->Form->hidden('id', array('default' => $id));
-	    echo $this->Form->input('appointment_date', array('label' => 'Appointment Date','class'=>'datepicker', 'id'=>"dpd6"));
+         echo $this->Form->input('appointmentDate', array('label' => 'Appointment Date','class'=>'datepicker', 'id'=>"dpd7"));
 
 			
             ?>
@@ -806,7 +806,7 @@ echo $this->HTML->css('datepicker');
         <fieldset>
             <?php
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
-            echo $this->Form->input('applicant_id', array('options'=>array($applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']), 'label'=>'Applicant'));
+            echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
             echo $this->Form->input('date_received', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd5"));
             echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd4"));
@@ -836,8 +836,8 @@ echo $this->HTML->css('datepicker');
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->input('ancestortype_id', array('id' => 'ancestortype_id','options'=>$ancestorTypes, 'label'=>'Family member:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
-            echo $this->Form->input('date_received', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd2"));
-            echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd3"));
+            echo $this->Form->input('dateReceived', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd4"));
+            echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd3"));
             echo $this->Form->input('copy_type', array(
                 'type' => 'radio',
                 'legend'=>'Note Type',
@@ -858,14 +858,13 @@ echo $this->HTML->css('datepicker');
     </div>
     <div class="modal-body">
 
-        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'editdate', $id));?>
+        <?php echo $this->Form->create('Document', array('action' => 'editdate', $id));?>
 
         <fieldset>
             <?php
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->hidden('id', array('default' => $physicalappdocument['Document']['id']));
-            echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd1"));
-
+	    echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd2"));
             ?>
         </fieldset>
     </div>
@@ -881,13 +880,13 @@ echo $this->HTML->css('datepicker');
     </div>
     <div class="modal-body">
 
-        <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'editdate', $id));?>
+        <?php echo $this->Form->create('Document', array('action' => 'editdate', $id));?>
 
         <fieldset>
             <?php
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->hidden('id', array('default' => $physicalancdocument['Document']['id']));
-            echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd1"));
+            echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd1")); 
 
             ?>
         </fieldset>
