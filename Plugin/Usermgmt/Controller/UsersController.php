@@ -225,7 +225,7 @@ class UsersController extends UserMgmtAppController {
                     $this->acceptEmail($this->request->data['Applicant']['email'], $password);
                     $this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
                 Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
-                passport and can be conducted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
+                passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                         'default', array('class' => 'alert-success'));
                     $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
@@ -235,7 +235,7 @@ class UsersController extends UserMgmtAppController {
             }else {
 		$this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
                 Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
-                passport and can be conducted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
+                passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                     'default', array('class' => 'alert-success'));
                 $this->rejectEmail($this->request->data['Applicant']['email']);
@@ -300,7 +300,7 @@ class UsersController extends UserMgmtAppController {
                     $this->acceptEmail($this->request->data['Applicant']['email'], $password);
                     $this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
                 Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
-                passport and can be conducted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
+                passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                         'default', array('class' => 'alert-success'));
                     $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
@@ -310,7 +310,7 @@ class UsersController extends UserMgmtAppController {
             }else {
 		$this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
                 Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
-                passport and can be conducted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
+                passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                     'default', array('class' => 'alert-success'));
                 $this->rejectEmail($this->request->data['Applicant']['email']);
