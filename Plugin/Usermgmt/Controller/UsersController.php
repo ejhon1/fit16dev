@@ -605,6 +605,20 @@ class UsersController extends UserMgmtAppController {
 			}
 		}
     }
+    
+    public function newancestortype() {
+        $this->loadModel('Ancestortype');
+		
+        if ($this->request->is('post')) {
+			$this->Ancestortype->create();
+			if ($this->Ancestortype->save($this->request->data)) {
+				$this->Session->setFlash(__('The ancestortype has been saved', null),'default', array('class' => 'alert-success'));
+				return $this->redirect(array('action' => '/dashboard'));
+			} else {
+				$this->Session->setFlash(__('The ancestortype could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+			}
+		}
+    }
 
     public function newclient() {
         $this->loadModel('Archive');
