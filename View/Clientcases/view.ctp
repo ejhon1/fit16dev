@@ -570,7 +570,7 @@ echo $this->HTML->css('datepicker');
                                     <?php foreach ($applicantdocuments as $applicantdocument): ?>
                                     <tr class="list">
                                         <td valign="top">
-                                            <?php echo h($applicantdocument['Applicant']['first_name']; ?>
+                                            <?php echo h($applicantdocument['Applicant']['first_name']); ?>
                                             </td>
                                             <td valign="top">
                                                 <?php echo h($applicantdocument['Documenttype']['type']); ?>
