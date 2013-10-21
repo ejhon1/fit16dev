@@ -331,7 +331,7 @@ echo $this->HTML->css('datepicker');
 	    </div>
             <table>
             	<tbody>
-            		<tr>
+            		<tr  nth-child(even)>
             			<th>Existing Family</th>
             			<td><?php echo h($clientcase['Clientcase']['existing_family']); ?></td>
             			<th></th>
