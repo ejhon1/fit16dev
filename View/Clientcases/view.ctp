@@ -641,7 +641,7 @@ echo $this->HTML->css('datepicker');
                                         </td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
-                                            <a class="" data-toggle="modal" href="#modalEditAppReturnedDate"><?php echo $this->html->image("edit-icon.png")?></a>
+                                            <a class="" data-toggle="modal" href="#modalEditAppReturnedDate"><?php echo $this->html->image("cake.icon.png")?></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -694,7 +694,7 @@ echo $this->HTML->css('datepicker');
                             </td>
                             <td>
                                 <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
-                                <a class="" data-toggle="modal" href="#modalEditAncReturnedDate"><?php echo $this->html->image("edit-icon.png")?></a>
+                                <a class="" data-toggle="modal" href="#modalEditAncReturnedDate"><?php echo $this->html->image("cake.icon.png")?></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -845,7 +845,7 @@ echo $this->HTML->css('datepicker');
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
-	    echo $this->Form->input('dateReceived', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd5"));            
+	    echo $this->Form->input('dateReceived', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd5"));
             echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd6"));
             echo $this->Form->input('copy_type', array(
                 'type' => 'radio',
