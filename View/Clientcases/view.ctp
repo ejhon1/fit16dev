@@ -2,6 +2,17 @@
 echo $this->Html->script('bootstrap-datepicker.js');
 echo $this->HTML->css('datepicker');
 ?>
+
+<script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
+            autoclose: true
+        });
+    });
+
+
+</script>
+
 <div class="clientcases view">
 <script>
     $(function(){
@@ -834,8 +845,8 @@ echo $this->HTML->css('datepicker');
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
             echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
-            echo $this->Form->input('date_received', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd5"));
-            echo $this->Form->input('date_returned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd4"));
+	    echo $this->Form->input('dateReceived', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd5"));            
+            echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd6"));
             echo $this->Form->input('copy_type', array(
                 'type' => 'radio',
                 'legend'=>'Note Type',
@@ -932,10 +943,8 @@ echo $this->HTML->css('datepicker');
         <fieldset>
         <?php
             echo $this->Form->hidden('id', array('default' => $id));
-			echo $this->Form->input('appointment_date', array('label' => 'Appointment Date',
-            'id' => 'datepicker2',
-            'type'=>'text',
-            'class'=>'datepicker2'));
+	    echo $this->Form->input('appointmentDate', array('label' => 'Appointment Date','class'=>'datepicker', 'id'=>"dpd8"));
+
             ?>
         </fieldset>
     </div>
