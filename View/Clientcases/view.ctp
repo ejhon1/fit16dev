@@ -510,9 +510,6 @@ echo $this->HTML->css('datepicker');
     <div class="tab-pane" id="tab5">
     <div class="actions">
 	
-		<?php echo $this->Html->link(__('New Ancestor Type'), array('controller' => 'ancestortypes', 'action' => 'add')); ?>
-		<?php echo $this->Html->link(__('New Document Type'), array('controller' => 'documenttypes', 'action' => 'add')); ?>
-	
 	</div>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
