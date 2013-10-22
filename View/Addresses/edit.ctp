@@ -3,10 +3,7 @@
 	<fieldset>
 		<legend><?php echo __('Edit Address'); ?></legend>
 	<?php
-    if(!empty($applicant['Applicant']['clientcase_id']))
-    {
 		echo $this->Form->input('address_line', array('label' => 'Address'));
-    }
 		echo $this->Form->input('suburb');
 		echo $this->Form->input('postcode');
 		echo $this->Form->input('state');
