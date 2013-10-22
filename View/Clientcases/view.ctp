@@ -341,107 +341,113 @@ echo $this->HTML->script('JQueryUser');
             <table>
             	<tbody>
             		<tr  nth-child(even)>
-            			<th>Existing Family</th>
+            			<th>Other Family That Have Used Polaron:</th>
             			<td><?php echo h($clientcase['Clientcase']['existing_family']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Born In Poland</th>
+            			<th>Was The Main Applicant Born In Poland?</th>
             			<td><?php echo h($clientcase['Clientcase']['born_in_poland']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Nationality Of Parents</th>
+            			<th>Which Parents Were Polish?</th>
 						<td><?php echo h($clientcase['Clientcase']['nationality_of_parents']); ?></td>
 						<th></th>
 						<td></td>
             		</tr>
             		<tr>
-            			<th>Mother Name</th>
+            			<th>Mother's Name:</th>
             			<td><?php echo h($clientcase['Clientcase']['mother_name']); ?></td>
-            			<th>Father Name</th>
+            			<th>Father's Name:</th>
             			<td><?php echo h($clientcase['Clientcase']['father_name']); ?></td>
             		</tr>
             		<tr>
-            			<th>Nationality Of Grandparents</th>
+            			<th>Which Grandparents Were Polish?</th>
             			<td><?php echo h($clientcase['Clientcase']['nationality_of_grandparents']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Maternal Grandmother Name</th>
+            			<th>Maternal Grandmother's Name:</th>
             			<td><?php echo h($clientcase['Clientcase']['mat_grandmother_name']); ?></td>
-            			<th>Maternal Grandfather Name</th>
+            			<th>Maternal Grandfather's Name:</th>
             			<td><?php echo h($clientcase['Clientcase']['mat_grandfather_name']); ?></td>
             		</tr>
             		<tr>
-	            		<th>Paternal Grandmother Name</th>
+	            		<th>Paternal Grandmother's Name:</th>
 	            		<td><?php echo h($clientcase['Clientcase']['pat_grandmother_name']); ?></td>
-	            		<th>Paternal Grandfather Name</th>
+	            		<th>Paternal Grandfather's Name</th>
 	            		<td><?php echo h($clientcase['Clientcase']['pat_grandfather_name']); ?></td>
             		</tr>
             		<tr>
-            			<th>Nationality of Others</th>
+            			<th>Other Polish Ancestors:</th>
             			<td><?php echo h($clientcase['Clientcase']['nationality_of_others']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Service In Army</th>
+            			<th>Did Any Of Their Ancestors Serve In The Polish Army?</th>
             			<td><?php echo h($clientcase['Clientcase']['serve_in_army']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Service In Army Information</th>
+            			<th>Information Of Army Service:</th>
             			<td><?php echo h($clientcase['Clientcase']['serve_in_army_info']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>When Left Poland</th>
+            			<th>When Did Their Ancestors Leave Poland?</th>
             			<td><?php echo h($clientcase['Clientcase']['when_left_poland']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Where Left Poland</th>
+            			<th>Where Did They Go?</th>
             			<td><?php echo h($clientcase['Clientcase']['where_left_poland']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Where Left Poland Other</th>
+            			<th>Country If Other Than In List:</th>
             			<td><?php echo h($clientcase['Clientcase']['where_left_poland_other']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Passport Available?</th>
+            			<th>Do They Have An Available Passport?</th>
             			<td><?php echo h($clientcase['Clientcase']['have_passport']); ?></td>
-            			<th>Documents Available?</th>
+            			<th>Do They Have Any Documents Available?</th>
 						<td><?php echo h($clientcase['Clientcase']['possess_documents']); ?></td>
             		</tr>
             		<tr>
-            			<th>Document Types</th>
+            			<th>Documents In Their Possession:</th>
             			<td><?php echo h($clientcase['Clientcase']['possess_documents_types']); ?></td>
             			<th></th>
             			<td></td>
             		</tr>
             		<tr>
-            			<th>Other Documents</th>
+            			<th>Other Documents They Possess:</th>
 				<td><?php echo h($clientcase['Clientcase']['possess_documents_other']); ?></td>
 				<th></th>
 				<td></td>
             		</tr>
             		<tr>
-            			<th>Other Factors</th>
+            			<th>Other Factors Affecting Their Eligibility:</th>
             			<td><?php echo h($clientcase['Clientcase']['other_factors']); ?></td>
-            			<th>Date Registered</th>
+            			<th>Date Registered:</th>
             			<td><?php echo $this->Time->format('d-m-Y',$clientcase['Clientcase']['created']); ?></td>
             		</tr>
+                    <tr>
+                        <th>Their Brief Family History:</th>
+                        <td><?php echo h($clientcase['Clientcase']['brief_history']); ?></td>
+                        <th></th>
+                        <td></td>
+                    </tr>
             	</tbody>
             </table>
         </div>
