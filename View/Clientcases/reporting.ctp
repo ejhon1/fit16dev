@@ -286,12 +286,47 @@ echo $this->HTML->script('JQueryUser');?>
     </table>
 <?php } else if($selected == 7)
 {
-
 ?>
+<h3>No contact notes sent</h3>
+    <?php echo $this->Form->create('Clientcase', array('action' => 'report4'));
+    echo $this->Form->hidden('date1', array('default' => $date1));
+    echo $this->Form->hidden('date2', array('default' => $date2));
+    echo $this->Form->end(__('Excel Report'));?>
+    <br>
+    <table id="data">
+        <thead>
+        <tr>
+            <th class="heading">Archive</th>
+            <th class="heading">Applicant Name</th>
+            <th class="heading">Date Created</th>
+            <th class="heading"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($nocasenotes as $nocasenote): ?>
+            <tr class="list">
+                <td valign="top">
+                    <?php echo h($nocasenote['Archive']['archive_name']); ?>
+                </td>
+                <td valign="top">
+                    <?php echo h($nocasenote['Applicant']['first_name'].' '.$nocasenote['Applicant']['surname']); ?>
+                </td>
+                <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y', $nocasenote['Clientcase']['created'])); ?>&nbsp;</td>
+                <td class="actions">
+                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $nocasenote['Clientcase']['id'])); ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 <?php } else if($selected == 8)
 {
 ?>
     <h3>Cases without status changes</h3>
+     <?php echo $this->Form->create('Clientcase', array('action' => 'report5'));
+    echo $this->Form->hidden('date1', array('default' => $date1));
+    echo $this->Form->hidden('date2', array('default' => $date2));
+    echo $this->Form->end(__('Excel Report'));?>
     <br>
     <table id="data">
         <thead>
