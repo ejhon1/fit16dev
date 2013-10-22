@@ -1,6 +1,13 @@
 <div class="employees view">
 <h2><?php echo __('Employee'); ?></h2>
-	<dl>
+    <br>
+    <?php echo $this->Html->link(__('Edit Details'), array('action' => 'editaccount'), array('class' => 'btn')); ?>
+    <?php echo $this->Html->link(__('Change Password'), array('controller' => '/','action' => 'changePassword'), array('class' => 'btn')); ?>
+    <br><br>
+    <br>
+
+
+    <dl>
 		<dt><?php echo __('First Name'); ?></dt>
 		<dd>
 			<?php echo h($employee['Employee']['first_name']); ?>
@@ -36,11 +43,4 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Details'), array('action' => 'editaccount')); ?> </li>
-        <li><?php echo $this->Html->link(__('Change Password'), array('controller' => '/','action' => 'changePassword')); ?> </li>
-    </ul>
 </div>
