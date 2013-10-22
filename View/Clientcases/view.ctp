@@ -1,6 +1,7 @@
 <?php
 echo $this->Html->script('bootstrap-datepicker.js');
 echo $this->HTML->css('datepicker');
+echo $this->HTML->script('JQueryUser');
 ?>
 
 <script>
@@ -83,23 +84,35 @@ echo $this->HTML->css('datepicker');
             <tr>
                 <th>Appointment date</th>
                 <td>
-                    <?php if($clientcase['Clientcase']['appointment_date'] != NULL)
+                    <?php if(!empty($clientcase['Clientcase']['appointment_date']))
                     {
-                        echo h($this->Time->format('d-m-Y h:i', $clientcase['Clientcase']['appointment_date']));
+                        echo h($this->Time->format('d-m-Y', $clientcase['Clientcase']['appointment_date']));
                     ?>
                     	<br/>
-                    	<a class="btn" data-toggle="modal" href="#modalEditdAppointmentDate">Edit Date</a>
+
                     <?php
                     }
                     else
                     {
                     ?>
-                            <a class="btn" data-toggle="modal" href="#modalAddAppointmentDate">Add Date</a>
+                        None
                     <?php
                     }
                     ?>
                 </td>
-                <th></th>
+
+                <td> <?php if(!empty($clientcase['Clientcase']['appointment_date']))
+                    { ?>
+                        <a class="btn" data-toggle="modal" href="#modalEditdAppointmentDate">Edit Date</a>
+                    <?php
+                    }else
+                    {
+                        ?>
+                        <a class="btn" data-toggle="modal" href="#modalAddAppointmentDate">Add Date</a>
+                    <?php
+                    }
+                    ?>
+                </td>
                 <td></td>
             </tr>
             <tr>
@@ -148,10 +161,6 @@ echo $this->HTML->css('datepicker');
                     <?php
                     }
                     ?>
-
-
-
-
             </tr>
             <tr>
 
@@ -218,7 +227,7 @@ echo $this->HTML->css('datepicker');
                             <th></th>
                         </tr>
                         <tr>
-                            <td><?php echo $mainapplicant['Applicant']['birthdate']; ?></td>
+                            <td><?php echo $this->Time->format('d-m-Y',$mainapplicant['Applicant']['birthdate']); ?></td>
                             <td><?php echo $mainapplicant['Applicant']['email']; ?></td>
                             <td><?php echo $mainapplicant['Applicant']['landline_number']; ?></td>
                             <td><?php echo $mainapplicant['Applicant']['mobile_number']; ?></td>
@@ -299,7 +308,7 @@ echo $this->HTML->css('datepicker');
                             <th></th>
                         </tr>
                         <tr>
-                            <td><?php echo $applicant['Applicant']['birthdate']; ?></td>
+                            <td><?php echo $this->Time->format('d-m-Y',$applicant['Applicant']['birthdate']); ?></td>
                             <td><?php echo $applicant['Applicant']['email']; ?></td>
                             <td><?php echo $applicant['Applicant']['landline_number']; ?></td>
                             <td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
@@ -841,7 +850,6 @@ echo $this->HTML->css('datepicker');
             echo $this->Form->input('applicant_id', array('options'=>$applicantslist, 'label'=>'Applicant:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
 	    echo $this->Form->input('dateReceived', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd5"));
-            echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd6"));
             echo $this->Form->input('copy_type', array(
                 'type' => 'radio',
                 'legend'=>'Note Type',
@@ -869,7 +877,6 @@ echo $this->HTML->css('datepicker');
             echo $this->Form->input('ancestortype_id', array('id' => 'ancestortype_id','options'=>$ancestorTypes, 'label'=>'Family member:'));
             echo $this->Form->input('documenttype_id', array('options'=>$documentTypes, 'label'=>'Type of document'));
             echo $this->Form->input('dateReceived', array('label' => 'Date Received','class'=>'datepicker', 'id'=>"dpd4"));
-            echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd3"));
             echo $this->Form->input('copy_type', array(
                 'type' => 'radio',
                 'legend'=>'Note Type',
@@ -938,8 +945,7 @@ echo $this->HTML->css('datepicker');
         <fieldset>
         <?php
             echo $this->Form->hidden('id', array('default' => $id));
-	    echo $this->Form->input('appointmentDate', array('label' => 'Appointment Date','class'=>'datepicker', 'id'=>"dpd8"));
-
+            echo $this->Form->input('appointmentDate', array('label' => 'First date','class'=>'datepicker', 'id'=>'dpd8', 'default' => $appdate));
             ?>
         </fieldset>
     </div>
