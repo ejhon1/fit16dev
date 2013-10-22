@@ -42,9 +42,9 @@ echo $this->HTML->script('JQueryUser');?>
         <tr>
             <th class="heading">Archive</th>
             <th class="heading">Applicant Name</th>
-            <th class="heading">Date Created</th>
             <th class="heading">Status</th>
-            <th class="heading">View</th>
+            <th class="heading">Date Created</th>
+            <th class="heading"></th>
         </tr>
         </thead>
         <tbody>
@@ -56,10 +56,10 @@ echo $this->HTML->script('JQueryUser');?>
                 <td valign="top">
                     <?php echo h($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname']); ?>
                 </td>
-                <td valign="top"><?php echo h($this->Time->format('d-m-Y', $clientcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td valign="top">
                     <?php echo h($clientcase['Status']['status_type']); ?>
                 </td>
+                <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y', $clientcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $clientcase['Clientcase']['id'])); ?>
                 </td>
@@ -80,11 +80,9 @@ echo $this->HTML->script('JQueryUser');?>
     <table id="data">
         <thead>
         <tr>
-            <th class="heading">Archive</th>
             <th class="heading">Applicant Name</th>
             <th class="heading">Date Created</th>
-            <th class="heading">Status</th>
-            <th class="heading">View</th>
+            <th class="heading"></th>
         </tr>
         </thead>
         <tbody>
@@ -93,7 +91,7 @@ echo $this->HTML->script('JQueryUser');?>
                 <td valign="top">
                     <?php echo h($deniedcase['Applicant']['first_name'].' '.$deniedcase['Applicant']['surname']); ?>
                 </td>
-                <td valign="top"><?php echo h($this->Time->format('d-m-Y', $deniedcase['Clientcase']['created'])); ?>&nbsp;</td>
+                <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y', $deniedcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $deniedcase['Clientcase']['id'])); ?>
                 </td>
@@ -168,7 +166,7 @@ echo $this->HTML->script('JQueryUser');?>
             <th class="heading">Type</th>
             <th class="heading">Filename</th>
             <th class="heading">Uploaded</th>
-            <th class="actions"><?php echo __('Actions'); ?></th>
+            <th class="actions"></th>
         </tr>
         </thead>
         <tbody>
@@ -184,7 +182,7 @@ echo $this->HTML->script('JQueryUser');?>
                     <?php echo h($document['Documenttype']['type']); ?>
                 </td>
                 <td valign="top"><?php echo h($document['Document']['filename']); ?></td>
-                <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i', $document['Document']['created'])); ?></td>
+                <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y', $document['Document']['created'])); ?></td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('controller' => 'clientcases', 'action' => 'view', $document['Clientcase']['id'], '#' => 'tab5')); ?>
                     <?php if($document['Document']['copy_type'] == 'Digital')
@@ -237,7 +235,7 @@ echo $this->HTML->script('JQueryUser');?>
                     <?php echo h($docnote['Applicant']['first_name'].' '.$docnote['Applicant']['surname']); ?>
                 </td>
                 <td valign="top">
-                    <?php echo h($this->Time->format('d-m-Y', $docnote['Docnote']['created'])); ?>
+                    <?php echo h($this->Time->format('h:i d-m-Y', $docnote['Docnote']['created'])); ?>
                 </td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('controller' => 'docnotes', 'action' => 'notes', $docnote['Docnote']['document_id'])); ?>
@@ -261,9 +259,9 @@ echo $this->HTML->script('JQueryUser');?>
         <tr>
             <th class="heading">Archive</th>
             <th class="heading">Applicant Name</th>
-            <th class="heading">Date Created</th>
             <th class="heading">Status</th>
-            <th class="heading">View</th>
+            <th class="heading">Date Created</th>
+            <th class="heading"></th>
         </tr>
         </thead>
         <tbody>
@@ -275,10 +273,10 @@ echo $this->HTML->script('JQueryUser');?>
                 <td valign="top">
                     <?php echo h($changedcase['Applicant']['first_name'].' '.$changedcase['Applicant']['surname']); ?>
                 </td>
-                <td valign="top"><?php echo h($this->Time->format('d-m-Y', $changedcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td valign="top">
                     <?php echo h($changedcase['Status']['status_type']); ?>
                 </td>
+                <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y', $changedcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $changedcase['Clientcase']['id'])); ?>
                 </td>
@@ -300,9 +298,9 @@ echo $this->HTML->script('JQueryUser');?>
         <tr>
             <th class="heading">Archive</th>
             <th class="heading">Applicant Name</th>
-            <th class="heading">Date Created</th>
             <th class="heading">Status</th>
-            <th class="heading">View</th>
+            <th class="heading">Date Created</th>
+            <th class="heading"></th>
         </tr>
         </thead>
         <tbody>
@@ -314,10 +312,10 @@ echo $this->HTML->script('JQueryUser');?>
                 <td valign="top">
                     <?php echo h($nochangedcase['Applicant']['first_name'].' '.$nochangedcase['Applicant']['surname']); ?>
                 </td>
-                <td valign="top"><?php echo h($this->Time->format('d-m-Y', $nochangedcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td valign="top">
                     <?php echo h($nochangedcase['Status']['status_type']); ?>
                 </td>
+                <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y', $nochangedcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $nochangedcase['Clientcase']['id'])); ?>
                 </td>
