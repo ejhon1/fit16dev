@@ -642,4 +642,33 @@ class ClientcasesController extends AppController {
                 GROUP BY Clientcase.id;");
         $this->set(compact('data'));
     }
+    public function report4()
+    {
+        $this->loadModel('Clientcase');
+        $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date1'])));
+        $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date2'])));
+
+        $data = $this->Clientcase->query("SELECT distinct Casenote.clientcase_id, Casenote.created, Clientcase.created, CLientcase.id, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
+                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
+                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND (DATE_FORMAT(Casenote.created, '%Y%m%d') NOT BETWEEN ".$date1." AND ".$date2.")
+                AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
+                group by Clientcase.id");
+        $this->set(compact('data'));
+    }
+    public function report5()
+    {
+        $this->loadModel('Clientcase');
+        $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date1'])));
+        $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date2'])));
+
+        $data = $this->Clientcase->query("SELECT distinct Clientcase.id, Clientcase.created, Status.status_type, Applicant.first_name, Applicant.surname, Archive.archive_name
+                FROM clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, statuses AS Status, casestatuses AS Casestatus
+                WHERE Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.status_id = Status.id AND Casestatus.clientcase_id = Clientcase.id AND Casestatus.status_id = Status.id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND (DATE_FORMAT(Casestatus.date_updated, '%Y%m%d') NOT BETWEEN ".$date1." AND ".$date2.")
+                GROUP BY Clientcase.id;");
+        $this->set(compact('data'));
+    }
 }
