@@ -142,16 +142,11 @@
 }
 
 a:link {
-	color: #376099;
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
-}
-
-a:visited {
-	color: #376099;
 }
 
 /** Notices and Errors **/
