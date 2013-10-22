@@ -570,7 +570,13 @@ class ClientcasesController extends AppController {
             }
             else if($selected == 7)
             {
-
+		$nocasenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.created, Clientcase.created, CLientcase.id, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
+                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
+                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND (DATE_FORMAT(Casenote.created, '%Y%m%d') NOT BETWEEN ".$date1." AND ".$date2.")
+                AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
+                group by Clientcase.id");
             }
             else if($selected == 8)
             {
@@ -600,7 +606,7 @@ class ClientcasesController extends AppController {
         //    $this->report();
         //}
 
-        $this->set(compact('date1', 'date2', 'selected', 'clientcases', 'deniedcases', 'casenotes', 'documents', 'docnotes', 'changedcases', 'nochangedcases'));
+        $this->set(compact('date1', 'date2', 'selected', 'clientcases', 'deniedcases', 'casenotes', 'documents', 'docnotes', 'changedcases', 'nocasenotes', 'nochangedcases'));
         //$this->set(compact('casenotes', 'date1', 'date2', 'noSucEnq', 'noDenEnq', 'noCaseNotes', 'noDocsDown', 'noDocNotes', 'clientcases'));
 
     }
