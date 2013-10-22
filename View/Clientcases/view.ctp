@@ -189,7 +189,7 @@ echo $this->HTML->script('JQueryUser');
         <?php if(count($applicantslist) > 1)
         {
             ?>
-            <a class="btn" data-toggle="modal" href="#changeMainApplicant">ChangePrimaryApplicant</a>
+            <a class="btn" data-toggle="modal" href="#changeMainApplicant">Change Primary Applicant</a>
         <?php
         }
         if($user['User']['active'] != 1 && $user['User']['password'] == NULL)
