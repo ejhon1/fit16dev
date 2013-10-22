@@ -167,7 +167,7 @@ class UsersController extends UserMgmtAppController {
 	 * @return void
 	 */
 
-    public function register() {
+     public function register() {
         $this->loadModel('Archive');
         $this->loadModel('Applicant');
         $this->loadModel('ClientCase');
@@ -191,6 +191,8 @@ class UsersController extends UserMgmtAppController {
             }
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
             //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
+            $this->request->data['Applicant']['birthdate'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Applicant']['birthdate'])));
+
             $this->request->data['User']['active']=1;
 
             $salt=$this->UserAuth->makeSalt();
@@ -290,6 +292,8 @@ class UsersController extends UserMgmtAppController {
 
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
             //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
+            $this->request->data['Applicant']['birthdate'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Applicant']['birthdate'])));
+
             $this->request->data['User']['active']=1;
 
             $salt=$this->UserAuth->makeSalt();
