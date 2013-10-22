@@ -16,7 +16,7 @@ class Ancestortype extends AppModel {
 			),
 			'validType' => array(
                 'rule' => '/^[a-zA-Z\s.\-]+$/',
-				'message' => 'Document type can only contains letters',
+				'message' => 'Ancestor type can only contains letters',
             ),
 		),
 	);
