@@ -18,12 +18,17 @@ class Status extends AppModel {
 		'status_type' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Please enter status type'
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'validType' => array(
+                		'rule' => '/^[a-zA-Z\s.\-]+$/',
+				'message' => 'Status type can only contains letters',
+            ),
 		),
 	);
 
