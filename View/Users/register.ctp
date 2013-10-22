@@ -223,7 +223,7 @@ $(document).ready(function(){
 </script>
 
 <fieldset>
-<legend><?php echo __('Quickcheck Eligibility Form'); ?></legend>
+<h2><?php echo __('Quickcheck Eligibility Form'); ?></h2>
 <br>
 <br><br>
 <div id="wizard" class="swMain">
