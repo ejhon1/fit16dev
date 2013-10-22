@@ -1,7 +1,8 @@
 <div class="casenotes index">
 	<h2><?php echo __('Contact Notes'); ?></h2>
+	<br>
 	<a class="btn" data-toggle="modal" href="#myModal">Add Note</a>
-	
+	<br><br>
 	<table cellpadding="0" cellspacing="0">
         <tr>
             <th class="heading">Date/Time</th>
