@@ -202,4 +202,20 @@ class DocnotesController extends AppController {
 		$this->Session->setFlash(__('Docnote was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
+	
+	public function report()
+    {
+        $this->loadModel('Docnote');
+        $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Docnote']['date1'])));
+        $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Docnote']['date2'])));
+
+        $data = $docnotes = $this->Docnote->query("SELECT distinct Docnote.id,  Docnote.note, Docnote.document_id, Docnote.employee_id, Docnote.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name, Employee.first_name, Employee.surname
+                FROM docnotes AS Docnote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, employees AS Employee
+                WHERE Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND DATE_FORMAT(Docnote.created, '%Y%m%d') >= ".$date1." AND DATE_FORMAT(Docnote.created, '%Y%m%d') <= ".$date2."
+                AND (Docnote.employee_id = Employee.id OR Docnote.clientcase_id = Clientcase.id)
+				group by Docnote.id;");
+        $this->set(compact('data'));
+    }
 }
