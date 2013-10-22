@@ -194,4 +194,20 @@ class CasenotesController extends AppController {
         $Email->send();
 
     }
+    
+    public function report()
+    {
+        $this->loadModel('Casenote');
+        $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Casenote']['date1'])));
+        $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Casenote']['date2'])));
+
+        $data = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
+                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
+                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND DATE_FORMAT(Casenote.created, '%Y%m%d') >= ".$date1." AND DATE_FORMAT(Casenote.created, '%Y%m%d') <= ".$date2."
+                AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
+                group by Casenote.id");
+        $this->set(compact('data'));
+    }
 }
