@@ -26,9 +26,7 @@
         <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Add Group",true),"/addGroup") ?></div>
         <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("All Groups",true),"/allGroups") ?></div>
         <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Permissions",true),"/permissions") ?></div>
-        <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Add Document Type",true),"newdoctype") ?></div>
-        <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Add Ancestor Type",true),"newancestortype") ?></div>
-        <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Add Status Type",true),"newstatustype") ?></div>
+        <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Management Page",true),"managepage") ?></div>
 
     <?php   }?>
     <div style="clear:both"></div>
