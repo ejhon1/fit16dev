@@ -189,7 +189,7 @@ class CasenotesController extends AppController {
         $Email->from(array('polarontest@gmail.com' => 'Polaron'));
         $Email->to($applicants['Applicant']['email']);
         $Email->subject('New Case Note Added To Your Case!');
-        $Email->template('casenote');
+        $Email->template('casenotes');
         $Email->emailFormat('text');
         $Email->viewVars(array('name' => $applicants['Applicant']['first_name']));
 
