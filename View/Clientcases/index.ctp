@@ -39,7 +39,11 @@ echo $this->HTML->script('JQueryUser');
                     <?php echo h($clientcase['Applicant']['first_name'].' '.$clientcase['Applicant']['surname']); ?>
                 </td>
                 <td valign="top">
-                    <?php echo h($clientcase['Status']['status_type']); ?>
+                    <?php if($clientcase['Clientcase']['status_id'] == 0){?>
+                        <?php echo h('Denied'); ?>
+                    <?php } else {?>
+                        <?php echo h($clientcase['Status']['status_type']); ?>
+                    <?php } ?>
                 </td>
                 <td valign="top">
                     <?php echo h($clientcase['Archive']['archive_name']); ?>
