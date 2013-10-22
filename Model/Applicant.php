@@ -37,7 +37,7 @@ class Applicant extends AppModel {
 //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
             'lettersOnly' => array(
-                'rule' => '/^[a-zA-Z]+$/',
+                'rule' => '/^[a-zA-Z\s.\'-]+$/',
                 'message' => 'Name can only contain letters'
             )
         ),
@@ -52,7 +52,7 @@ class Applicant extends AppModel {
 //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
             'lettersOnly' => array(
-                'rule' => '/^[a-zA-Z]+$/',
+                'rule' => '/^[a-zA-Z\s.\'-]+$/',
                 'message' => 'Name can only contain letters'
             )
         ),
