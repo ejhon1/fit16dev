@@ -102,9 +102,11 @@ class PagesController extends AppController {
         $this->loadModel('Casenote');
         //$casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC'), 'limit' => 5));
 
-        $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.note, Casenote.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
-            FROM casenotes AS Casenote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
-            WHERE Casenote.clientcase_id = Clientcase.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+        $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
+                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
+                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+            GROUP BY Casenote.id
             ORDER BY Casenote.id DESC
             LIMIT 5;");
 
