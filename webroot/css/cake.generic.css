@@ -474,7 +474,6 @@ option {
 }
 input[type=checkbox] {
 	clear: left;
-	float: left;
 	margin: 0px 6px 7px 2px;
 	width: auto;
 }
