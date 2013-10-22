@@ -488,29 +488,101 @@ class ClientcasesController extends AppController {
         $this->loadModel('Document');
         $this->loadModel('Docnote');
 
-        $casenotes = $this->Casenote->query("SELECT distinct Clientcase.id, Casenote.subject, Casenote.created, Applicant.first_name, Applicant.surname, Archive.archive_name
-            FROM casenotes AS Casenote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
-            WHERE Casenote.clientcase_id = Clientcase.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Casenote.id IN(
-            SELECT MAX(casenotes.id)
-            FROM casenotes
-            GROUP BY casenotes.clientcase_id
-        );");
-
+        if(empty($selected))
+        {
+            $selected = 0;
+        }
 
         if ($this->request->is('post')) {
             $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date1'])));
             $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date2'])));
 
-            $noSucEnq = $this->Clientcase->find('count', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2)));
+
+            $selected = $this->request->data['Clientcase']['selection'];
+
+
+            if($selected == 1)
+            {
+               /*$clientcases = $this->Clientcase->query("SELECT distinct Clientcase.id, Clientcase.created, Applicant.first_name, Applicant.surname, Archive.archive_name
+                FROM clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
+                WHERE Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                ORDER BY Clientcase.id DESC");*/
+                    $clientcases = $this->Clientcase->find('all', array('conditions' => array('Clientcase.open_or_closed' => 'Open', 'DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2, 'NOT' => array('Clientcase.status_id' => 0))));
+                //$clientcases =  $this->Clientcase->find('all');
+
+            }
+            else if($selected == 2)
+            {
+                /*$deniedcases = $this->clientcase->query("SELECT distinct Clientcase.id, Clientcase.created, Applicant.first_name, Applicant.surname, Archive.archive_name
+                FROM clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
+                WHERE Casenote.clientcase_id = Clientcase.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.status_id = 0
+                ORDER BY Casenote.id DESC");
+                    */
+                $deniedcases = $this->Clientcase->find('all', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2, 'Clientcase.status_id' => 0)));
+
+            }
+            else if($selected == 3)
+            {
+                $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
+                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
+                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND DATE_FORMAT(Casenote.created, '%Y%m%d') >= ".$date1." AND DATE_FORMAT(Casenote.created, '%Y%m%d') <= ".$date2."
+                AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
+                group by Casenote.id");
+
+            }
+            else if($selected == 4)
+            {
+                $documents = $this->Document->query("SELECT distinct Documenttype.type, Document.id, Document.applicant_id, Document.ancestortype_id, Document.filename, Document.copy_type, Document.applicant_id, Document.ancestortype_id,Document.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
+                FROM documents AS Document, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, documenttypes AS Documenttype
+                WHERE Document.archive_id = Archive.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Document.documenttype_id = Documenttype.id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND DATE_FORMAT(Document.created, '%Y%m%d') >= ".$date1." AND DATE_FORMAT(Document.created, '%Y%m%d') <= ".$date2."
+                ORDER BY Document.id DESC");
+            }
+            else if($selected == 5)
+            {
+                $docnotes = $this->Docnote->query("SELECT distinct Docnote.id,  Docnote.note, Docnote.document_id, Docnote.employee_id, Docnote.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name, Employee.first_name, Employee.surname
+                FROM docnotes AS Docnote, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, employees AS Employee
+                WHERE Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND DATE_FORMAT(Docnote.created, '%Y%m%d') >= ".$date1." AND DATE_FORMAT(Docnote.created, '%Y%m%d') <= ".$date2."
+                AND (Docnote.employee_id = Employee.id OR Docnote.clientcase_id = Clientcase.id)
+				group by Docnote.id;");
+            }
+            else if($selected == 6)
+            {
+                $changedcases = $this->Clientcase->query("SELECT distinct Clientcase.id, Clientcase.created, Status.status_type, Applicant.first_name, Applicant.surname, Archive.archive_name
+                FROM clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, statuses AS Status, casestatuses AS Casestatus
+                WHERE Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.status_id = Status.id AND Casestatus.clientcase_id = Clientcase.id AND Casestatus.status_id = Status.id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND DATE_FORMAT(Casestatus.date_updated, '%Y%m%d') >= ".$date1." AND DATE_FORMAT(Casestatus.date_updated, '%Y%m%d') <= ".$date2."
+                GROUP BY Clientcase.id;");
+            }
+            else if($selected == 7)
+            {
+
+            }
+            else if($selected == 8)
+            {
+                $nochangedcases = $this->Clientcase->query("SELECT distinct Clientcase.id, Clientcase.created, Status.status_type, Applicant.first_name, Applicant.surname, Archive.archive_name
+                FROM clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, statuses AS Status, casestatuses AS Casestatus
+                WHERE Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.status_id = Status.id AND Casestatus.clientcase_id = Clientcase.id AND Casestatus.status_id = Status.id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND (DATE_FORMAT(Casestatus.date_updated, '%Y%m%d') NOT BETWEEN ".$date1." AND ".$date2.")
+                GROUP BY Clientcase.id;");
+            }
+
+
+            /*$noSucEnq = $this->Clientcase->find('count', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2)));
             $noDenEnq = 0;
             $noCaseNotes =$this->Casenote->find('count', array('conditions' => array('DATE_FORMAT(Casenote.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Casenote.created, "%Y%m%d") <= '.$date2)));
             $noDocsDown =$this->Document->find('count', array('conditions' => array('DATE_FORMAT(Document.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Document.created, "%Y%m%d") <= '.$date2)));
             $noDocNotes = $this->Docnote->find('count', array('conditions' => array('DATE_FORMAT(Docnote.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Docnote.created, "%Y%m%d") <= '.$date2)));
 
 
-            $clientcases = $this->Clientcase->find('all', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2)));
-
-
+            $clientcases = $this->Clientcase->find('all', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2)));*/
             //    $date2 = $this->request->data['Clientcase']['date2'];
         }
 
@@ -520,16 +592,40 @@ class ClientcasesController extends AppController {
         //    $this->report();
         //}
 
-        $this->set(compact('casenotes', 'date1', 'noSucEnq', 'noDenEnq', 'noCaseNotes', 'noDocsDown', 'noDocNotes', 'clientcases'));
+        $this->set(compact('date1', 'date2', 'selected', 'clientcases', 'deniedcases', 'casenotes', 'documents', 'docnotes', 'changedcases', 'nochangedcases'));
+        //$this->set(compact('casenotes', 'date1', 'date2', 'noSucEnq', 'noDenEnq', 'noCaseNotes', 'noDocsDown', 'noDocNotes', 'clientcases'));
+
     }
     public function report()
     {
         $this->loadModel('Clientcase');
+        $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date1'])));
+        $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date2'])));
 
-        $data = $this->Clientcase->find('all');
+        $data = $this->Clientcase->find('all', array('conditions' => array('Clientcase.open_or_closed' => 'Open', 'DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2, 'NOT' => array('Clientcase.status_id' => 0))));
+        $this->set(compact('data'));
+    }
+    public function report2()
+    {
+        $this->loadModel('Clientcase');
+        $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date1'])));
+        $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date2'])));
 
+        $data = $this->Clientcase->find('all', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2, 'Clientcase.status_id' => 0)));
+        $this->set(compact('data'));
+    }
+    public function report3()
+    {
+        $this->loadModel('Clientcase');
+        $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date1'])));
+        $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date2'])));
 
-
+        $data = $this->Clientcase->query("SELECT distinct Clientcase.id, Clientcase.created, Status.status_type, Applicant.first_name, Applicant.surname, Archive.archive_name
+                FROM clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, statuses AS Status, casestatuses AS Casestatus
+                WHERE Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.status_id = Status.id AND Casestatus.clientcase_id = Clientcase.id AND Casestatus.status_id = Status.id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND DATE_FORMAT(Casestatus.date_updated, '%Y%m%d') >= ".$date1." AND DATE_FORMAT(Casestatus.date_updated, '%Y%m%d') <= ".$date2."
+                GROUP BY Clientcase.id;");
         $this->set(compact('data'));
     }
 }
