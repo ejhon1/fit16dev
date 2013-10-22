@@ -357,7 +357,7 @@ class DocumentsController extends AppController {
             $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id, '#'=>'tab5'));
         }
         else {
-            $this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
+            $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
             $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id, '#'=>'tab5'));
         }
     }
@@ -367,7 +367,7 @@ class DocumentsController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')){
             $this->request->data['Document']['date_returned'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Document']['dateReturned'])));
             if ($this->Document->save($this->request->data)){
-                $this->Session->setFlash(__('The date has been updated '.$this->request->data['Document']['date_returned']),'default', array('class' => 'alert-success'));
+                $this->Session->setFlash(__('The date has been updated'),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Document']['clientcase_id'], '#'=>'tab5'));
             }
             $this->Session->setFlash(__('Unable to update the return date'));
