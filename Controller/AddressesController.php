@@ -77,10 +77,12 @@ class AddressesController extends AppController {
         //$this->loadModel('Clientcase');
         $this->loadModel('Applicant');
         $this->loadModel('Address');
-        $applicant = $this->Applicant->query("SELECT distinct *
+        /*$applicant = $this->Applicant->query("SELECT distinct Applicant.id,
          FROM applicants AS Applicant, addresses AS Address
-         WHERE Address.id = ".$id." AND Address.applicant_id = Applicant.id;");
-        $this->request->data['Address']['applicant_id'] = $applicant['Address']['applicant_id'];
+         WHERE Address.id = ".$id." AND Address.applicant_id = Applicant.id;"); */
+        $address = $this->Address->find('first', array('conditions' => array('Address.id' => $id)));
+        $applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $address['Address']['applicant_id'])));
+        $this->request->data['Address']['applicant_id'] = $address['Address']['applicant_id'];
 
 		if (!$this->Address->exists($id)) {
 			throw new NotFoundException(__('Invalid address'));
@@ -99,10 +101,11 @@ class AddressesController extends AppController {
 			} else {
 				$this->Session->setFlash(__('The address could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
 			}
-		} else {
+        }
+
 			$options = array('conditions' => array('Address.' . $this->Address->primaryKey => $id));
 			$this->request->data = $this->Address->find('first', $options);
-		}
+
 		//$applicants = $this->Address->Applicant->find('list');
 		$countries = $this->Address->Country->find('list', array('fields' => array('Country.id', 'Country.country_name')));
 		$this->set(compact('applicant', 'countries'));
