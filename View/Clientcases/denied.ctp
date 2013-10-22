@@ -46,14 +46,6 @@ echo $this->HTML->css('datepicker');
             </tr>
             </tbody>
         </table>
-        <br>
-        <?php if(count($applicantslist) > 1)
-        {
-            ?>
-            <a class="btn" data-toggle="modal" href="#changeMainApplicant">ChangePrimaryApplicant</a>
-        <?php
-        }
-        ?>
 
         <br><br><br>
         <h3><?php echo __('Applicants'); ?></h3>
@@ -85,44 +77,6 @@ echo $this->HTML->css('datepicker');
                 </div>
             </div>
         </div>
-
-        <?php $i = 0;
-        foreach ($applicants as $applicant):
-            ?>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-target="<?php echo h('#Applicant'.$i); ?>" href="<?php echo h('#Applicant'.$i); ?>">
-                        <?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['middle_name'].' '.$applicant['Applicant']['surname']); ?>
-                </a></h4>
-            </div>
-            <div id="<?php echo h('Applicant'.$i); ?>" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <table cellpadding = "0" cellspacing = "0">
-                        <tr>
-                            <th><?php echo __('Birthdate'); ?></th>
-                            <th><?php echo __('Email'); ?></th>
-                            <th><?php echo __('Phone Number'); ?></th>
-                            <th><?php echo __('Mobile Number'); ?></th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td><?php echo $applicant['Applicant']['birthdate']; ?></td>
-                            <td><?php echo $applicant['Applicant']['email']; ?></td>
-                            <td><?php echo $applicant['Applicant']['landline_number']; ?></td>
-                            <td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
-                            <td><?php echo $applicant['Applicant']['mobile_number']; ?></td>
-                            <td class="actions"><?php echo $this->Html->link(__('Edit Applicant'), array('controller' => 'applicants', 'action' => 'edit', $applicant['Applicant']['id'])); ?></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <?php $i++;
-        endforeach; ?>
-
     </div>
     <div class="tab-pane" id="tab2">
         <p>
