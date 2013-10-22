@@ -305,7 +305,7 @@ Step 4<br />
             'label' => 'E-mail Address'.$test)
         );
         echo $this->Form->input('Clientcase.existing_family', array(
-		'label' => 'If any, please specify other family members who already registered on Polaron'));
+		'label' => 'If any, please specify other family members who have already registered for Polaron\'s services'));
     ?>
 </div>
 
