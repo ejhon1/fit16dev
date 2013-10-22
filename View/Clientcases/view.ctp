@@ -645,7 +645,7 @@ echo $this->HTML->script('JQueryUser');
                                         </td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
-                                            <a class="" data-toggle="modal" href="#modalEditAppReturnedDate"><?php echo $this->html->image("cake.icon.png")?></a>
+                                            <a class="" data-toggle="modal" href="#modalEditAppReturnedDate"><?php echo $this->html->image("edit-icon.png")?></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -698,7 +698,7 @@ echo $this->HTML->script('JQueryUser');
                             </td>
                             <td>
                                 <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
-                                <a class="" data-toggle="modal" href="#modalEditAncReturnedDate"><?php echo $this->html->image("cake.icon.png")?></a>
+                                <a class="" data-toggle="modal" href="#modalEditAncReturnedDate"><?php echo $this->html->image("edit-icon.png")?></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
