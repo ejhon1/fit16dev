@@ -775,6 +775,14 @@ class UsersController extends UserMgmtAppController {
 		$this->set('user', $user);
         $this->set('employee', $employee);
 	}
+	public function managepage() {
+        $this->loadModel('Employee');
+		$userId=$this->UserAuth->getUserId();
+		$user = $this->User->findById($userId);
+        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userId)));
+		$this->set('user', $user);
+        $this->set('employee', $employee);
+	}
 	/**
 	 * Used to activate or deactivate user by Admin
 	 *
