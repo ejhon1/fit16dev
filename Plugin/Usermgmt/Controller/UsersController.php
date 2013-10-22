@@ -181,7 +181,14 @@ class UsersController extends UserMgmtAppController {
             $this->request->data['ClientCase']['possess_documents_types']= implode(',', $this->request->data['ClientCase']['possess_documents_types']);
             $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
             $this->request->data['ClientCase']['open_or_closed'] = 'Open';
-            $this->request->data['ClientCase']['status_id'] = 1;
+            if(!empty($this->request->data['ClientCase']['existing_family']))
+            {
+                $this->request->data['ClientCase']['status_id'] = 2;
+            }
+            else
+            {
+                $this->request->data['ClientCase']['status_id'] = 1;
+            }
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
             //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
             $this->request->data['User']['active']=1;
@@ -272,7 +279,15 @@ class UsersController extends UserMgmtAppController {
             $this->request->data['ClientCase']['possess_documents_types']= implode(',', $this->request->data['ClientCase']['possess_documents_types']);
             $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
             $this->request->data['ClientCase']['open_or_closed'] = 'Open';
-            $this->request->data['ClientCase']['status_id'] = 1;
+            if(!empty($this->request->data['ClientCase']['existing_family']))
+            {
+                $this->request->data['ClientCase']['status_id'] = 2;
+            }
+            else
+            {
+                $this->request->data['ClientCase']['status_id'] = 1;
+            }
+
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
             //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
             $this->request->data['User']['active']=1;
