@@ -9,6 +9,7 @@
 <div class="users form">
 <?php echo $this->Form->create('User');
 //$td = date("d-m-Y");
+$test = "<font color='red'>*</font>";
 ?>
 
 <script type="text/javascript">
@@ -294,14 +295,14 @@ Step 4<br />
     <?php
         echo $this->Form->input('Applicant.landline_number', array(
             'id' => 'phone',
-            'label' => 'Phone Number')
+            'label' => 'Phone Number'.$test)
         );
     ?>
     <td align="left"><span id="msg_email"></span>&nbsp;</td>
     <?php
         echo $this->Form->input('Applicant.email', array(
             'id' => 'email',
-            'label' => 'E-mail Address')
+            'label' => 'E-mail Address'.$test)
         );
         echo $this->Form->input('Clientcase.existing_family', array(
 		'label' => 'If any, please specify other family members who already registered on Polaron'));
