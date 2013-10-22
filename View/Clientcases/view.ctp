@@ -57,15 +57,33 @@ echo $this->HTML->script('JQueryUser');
                 <td><?php echo h($clientcase['Status']['status_type']); ?></td>
             </tr>
             <tr>
+                <th>Date of enquiry</th>
+                <td><?php echo h($this->Time->format('d-m-Y', $clientcase['Clientcase']['created'])); ?></td>
+                <th></th>
+                <td></td>
+            </tr>
+            <tr>
                 <th>Open or closed</th>
+                <td><?php echo h($clientcase['Clientcase']['open_or_closed']); ?></td>
+                <th>
+                    <?php if($clientcase['Clientcase']['open_or_closed'] == 'Open')
+                    {
+                        echo 'Close case';
+                    }
+                    else
+                    {
+                        echo 'Open case';
+                    }
+                    ?>
+                </th>
                 <td><?php 
                 		if($clientcase['Clientcase']['open_or_closed'] == 'Open')
                 		{
-	                		echo h($clientcase['Clientcase']['open_or_closed']); 
+
 	                		echo $this->Form->create('Clientcase', array('action' => 'updateOpenClose', $clientcase['Clientcase']['id']));
                 			echo $this->Form->hidden('id', array('default' => $clientcase['Clientcase']['id']));
                             echo $this->Form->hidden('open_or_closed', array('default' => 'Closed'));
-                            echo $this->Form->end(__('Close'));?></td>
+                            echo $this->Form->end(__('Close'));?>
                         <?php
                 		}
                 		else
@@ -74,12 +92,12 @@ echo $this->HTML->script('JQueryUser');
                    			echo $this->Form->create('Clientcase', array('action' => 'updateOpenClose', $clientcase['Clientcase']['id']));
                 			echo $this->Form->hidden('id', array('default' => $clientcase['Clientcase']['id']));
                             echo $this->Form->hidden('open_or_closed', array('default' => 'Open'));
-                            echo $this->Form->end(__('Open')); ?></td>
+                            echo $this->Form->end(__('Open')); ?>
                         <?php
                 		}
 						?>
-                <th>Date of enquiry</th>
-                <td><?php echo h($this->Time->format('d-m-Y', $clientcase['Clientcase']['created'])); ?></td>
+                </td>
+
             </tr>
             <tr>
                 <th>Appointment date</th>
@@ -174,40 +192,23 @@ echo $this->HTML->script('JQueryUser');
             <a class="btn" data-toggle="modal" href="#changeMainApplicant">ChangePrimaryApplicant</a>
         <?php
         }
-        ?>
-        <div class="actions">
-            <ul>
-        <?php
         if($user['User']['active'] != 1 && $user['User']['password'] == NULL)
         {
-            ?>
-                    <li><?php echo $this->Html->link(__('Activate'), array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'activateAccount', $clientcase['Clientcase']['id'])); ?> </li>
-        <?php
+                    echo $this->Html->link(__('Activate'), array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'activateAccount', $clientcase['Clientcase']['id']), array('class' => 'btn'));
         }
         else{
-            ?>
-            <li><?php echo $this->Html->link(__('Recover Password'), array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'recoverPassword', $clientcase['Clientcase']['id'])); ?> </li>
-        <?php
+            echo $this->Html->link(__('Recover Password'), array('plugin' => 'usermgmt', 'controller' => 'users', 'action' => 'recoverPassword', $clientcase['Clientcase']['id']), array('class' => 'btn'));
         }
         if($archivecount <= 1)
         {
-        ?>
-                    <li><?php echo $this->Html->link(__('Merge'), array('action' => 'merge', $clientcase['Clientcase']['id'])); ?> </li>
-                <?php
+            echo $this->Html->link(__('Merge'), array('action' => 'merge', $clientcase['Clientcase']['id']), array('class' => 'btn'));
         }
-                ?>
-            </ul>
-        </div>
+        echo $this->Html->link(__('Add Applicant'), array('controller' => 'applicants', 'action' => 'add', $clientcase['Clientcase']['id']), array('class' => 'btn'));
+         ?>
+
 
         <br><br><br>
         <h3><?php echo __('Applicants'); ?></h3>
-        <div class="actions">
-            <ul>
-                <li><?php echo $this->Html->link(__('Add Applicant'), array('controller' => 'applicants', 'action' => 'add', $clientcase['Clientcase']['id'])); ?> </li>
-            </ul>
-        </div>
-        
-        <br />
         <br />
         <div class="panel panel-default">
             <div class="panel-heading">
