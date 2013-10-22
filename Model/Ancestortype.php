@@ -7,7 +7,19 @@ App::uses('AppModel', 'Model');
  */
 class Ancestortype extends AppModel {
 
-
+	public $validate = array(
+		'ancestor_type' => array(
+            'notempty' => array(
+				'rule' => array(
+            		'notempty'),
+                	'message' => 'Please enter ancestor	type'
+			),
+			'validType' => array(
+                'rule' => '/^[a-zA-Z\s.\-]+$/',
+				'message' => 'Document type can only contains letters',
+            ),
+		),
+	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
