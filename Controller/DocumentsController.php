@@ -376,4 +376,19 @@ class DocumentsController extends AppController {
         }
 
     }
+    
+    public function report()
+    {
+        $this->loadModel('Document');
+        $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Document']['date1'])));
+        $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Document']['date2'])));
+
+        $data = $this->Document->query("SELECT distinct Documenttype.type, Document.id, Document.applicant_id, Document.ancestortype_id, Document.filename, Document.copy_type, Document.applicant_id, Document.ancestortype_id,Document.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
+                FROM documents AS Document, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, documenttypes AS Documenttype
+                WHERE Document.archive_id = Archive.id AND Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Document.documenttype_id = Documenttype.id
+                AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
+                AND DATE_FORMAT(Document.created, '%Y%m%d') >= ".$date1." AND DATE_FORMAT(Document.created, '%Y%m%d') <= ".$date2."
+                ORDER BY Document.id DESC");
+        $this->set(compact('data'));
+    }
 }
