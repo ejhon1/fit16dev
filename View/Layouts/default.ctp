@@ -42,6 +42,7 @@ $loggedUser = $this->Session->read('UserAuth.User');
 
     echo $this->Html->css('default');
     echo $this->Html->css('cake.generic');
+    echo $this->Html->css('icons');
     echo $this->HTML->css('jquery.dataTables');
     echo $this->Html->css('/usermgmt/css/umstyle');
     //echo $this->HTML->css('bootstrap-responsive');
