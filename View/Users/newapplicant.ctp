@@ -337,7 +337,7 @@ Step 4<br />
                 ?>
     		</td>
             <td>
-            	<div id="warning" style="display:none">Please be aware that your spouse does not qualify for a Polish passport, , unless she or he has ancestors who are Polish, in which case, your spouse would be required to complete a separate application for confirmation of Polish citizenship. However, as the spouse of a Polish citizen, they have the right to live and work in Europe, and all other associated benefits. </div>
+            	<div id="warning" style="display:none; width:300px; text-align:justify; font-style:italic">Please be aware that your spouse does not qualify for a Polish passport, , unless she or he has ancestors who are Polish, in which case, your spouse would be required to complete a separate application for confirmation of Polish citizenship. However, as the spouse of a Polish citizen, they have the right to live and work in Europe, and all other associated benefits. </div>
             </td>
     	</tr>
     </table>
