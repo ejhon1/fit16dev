@@ -223,7 +223,7 @@ $(document).ready(function(){
 </script>
 
 <fieldset>
-<legend><?php echo __('Eligibility Assessment'); ?></legend>
+<h2><?php echo __('Eligibility Assessment'); ?></h2>
 <div id="wizard" class="swMain">
 <ul>
     <li><a href="#step-1">
