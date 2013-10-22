@@ -233,13 +233,29 @@ class UsersController extends UserMgmtAppController {
                     $this->Session->setFlash(__('The user could not be saved', null),'default', array('class' => 'alert-danger'));
                 }
             }else {
-		$this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
+                $this->request->data['ClientCase']['user_id'] = 0;
+                $this->request->data['ClientCase']['archive_id'] = 0;
+                $this->request->data['ClientCase']['status_id'] = 0;
+                $this->request->data['ClientCase']['open_or_closed'] = 'Closed';
+                $this->ClientCase->create();
+                $this->ClientCase->save($this->request->data);
+
+                $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                $this->Applicant->create();
+                $this->Applicant->save($this->request->data);
+
+                $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
+                $this->ClientCase->save($this->request->data);
+
+		        $this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
                 Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
                 passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                     'default', array('class' => 'alert-success'));
                 $this->rejectEmail($this->request->data['Applicant']['email']);
-                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));            }
+                $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
+            }
         }
     }
     public function newapplicant() {
@@ -268,53 +284,32 @@ class UsersController extends UserMgmtAppController {
             $this->request->data['User']['user_group_id']=2;
             $this->request->data['User']['type']='Client';
 
-            $eligible = true;
-            if(empty($this->request->data['ClientCase']['nationality_of_parents'])
-                && empty($this->request->data['ClientCase']['nationality_of_grandparents'])
-                && $this->request->data['ClientCase']['born_in_poland'] != 'Yes'
-                && $this->request->data['ClientCase']['have_passport'] != 'Yes'
-            )
-            {$eligible = false;}
+            $this->createArchive(); //Leads to the function that creates the Archive entry.
+            $this->User->create();
+            if ($this->User->save($this->request->data, false)) {
+                $this->request->data['ClientCase']['user_id'] = $this->User->getLastInsertId();
+                $this->ClientCase->create();
+                $this->ClientCase->save($this->request->data);
 
-            if($eligible)
-            {
-                $this->createArchive(); //Leads to the function that creates the Archive entry.
-                $this->User->create();
-                if ($this->User->save($this->request->data, false)) {
-                    $this->request->data['ClientCase']['user_id'] = $this->User->getLastInsertId();
-                    $this->ClientCase->create();
-                    $this->ClientCase->save($this->request->data);
+                $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                $this->Applicant->create();
+                $this->Applicant->save($this->request->data);
 
-                    $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
-                    $this->Applicant->create();
-                    $this->Applicant->save($this->request->data);
+                $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
+                $this->ClientCase->save($this->request->data);
 
-                    $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
-                    $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
-                    $this->ClientCase->save($this->request->data);
+                $this->request->data['Casestatus']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                $this->request->data['Casestatus']['status_id'] = 1;
+                $this->Casestatus->save($this->request->data);
 
-                    $this->request->data['Casestatus']['clientcase_id'] = $this->ClientCase->getLastInsertId();
-                    $this->request->data['Casestatus']['status_id'] = 1;
-                    $this->Casestatus->save($this->request->data);
-
-                    $this->acceptEmail($this->request->data['Applicant']['email'], $password);
-                    $this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
-                Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
-                passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
-                receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
-                        'default', array('class' => 'alert-success'));
-                    $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
-                }else {
-                    $this->Session->setFlash(__('The user could not be saved', null),'default', array('class' => 'alert-danger'));
-                }
-            }else {
-		$this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
-                Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
-                passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
-                receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
+                $this->acceptEmail($this->request->data['Applicant']['email'], $password);
+                $this->Session->setFlash(__('The new client was successfully added.', null),
                     'default', array('class' => 'alert-success'));
-                $this->rejectEmail($this->request->data['Applicant']['email']);
-                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));            }
+                $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
+            }else {
+                $this->Session->setFlash(__('The client could not be saved', null),'default', array('class' => 'alert-danger'));
+            }
         }
     }
     public function activateAccount($id = null) {
