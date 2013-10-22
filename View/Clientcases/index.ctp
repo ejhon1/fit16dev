@@ -47,7 +47,11 @@ echo $this->HTML->script('JQueryUser');
                 <td valign="top"><?php echo h($clientcase['Clientcase']['open_or_closed']); ?>&nbsp;</td>
                 <td valign="top"><?php echo h($this->Time->format('d-m-Y', $clientcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td class="actions">
-                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $clientcase['Clientcase']['id'])); ?>
+                    <?php if($clientcase['Clientcase']['status_id'] == 0){?>
+                        <?php echo $this->Html->link(__('View'), array('action' => 'denied', $clientcase['Clientcase']['id'])); ?>
+                    <?php } else {?>
+                        <?php echo $this->Html->link(__('View'), array('action' => 'view', $clientcase['Clientcase']['id'])); ?>
+                    <?php } ?>
                 </td>
             </tr>
         <?php endforeach; ?>
