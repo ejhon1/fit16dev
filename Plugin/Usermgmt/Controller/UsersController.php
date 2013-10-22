@@ -235,7 +235,7 @@ class UsersController extends UserMgmtAppController {
                 passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                         'default', array('class' => 'alert-success'));
-                    $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
+                    $this->redirect(array('controller' => 'users', 'action' => 'login'));
                 }else {
                     $this->Session->setFlash(__('The user could not be saved', null),'default', array('class' => 'alert-danger'));
                 }
@@ -261,7 +261,7 @@ class UsersController extends UserMgmtAppController {
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                     'default', array('class' => 'alert-success'));
                 $this->rejectEmail($this->request->data['Applicant']['email']);
-                $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
+                $this->redirect(array('controller' => 'users', 'action' => 'login'));
             }
         }
     }
