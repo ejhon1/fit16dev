@@ -1,6 +1,5 @@
-<?php echo $this->Html->css('jquery-ui-1.10.3.custom'); ?>
-<?php echo $this->Html->script('jquery-1.5.min'); ?>
-<?php echo $this->Html->script('jquery-ui-1.10.3.custom.min'); ?>
+<?php echo $this->Html->script('bootstrap-datepicker.js');
+echo $this->HTML->css('datepicker'); ?>
 <?php echo $this->Html->script('jquery.smartWizard-2.0.min'); ?>
 <?php echo $this->Html->script('jquery.smartWizard-2.0'); ?>
 <?php echo $this->Html->script('show-hide-checkbox'); ?>
@@ -11,7 +10,13 @@
 //$td = date("d-m-Y");
 $test = "<font color='red'>*</font>";
 ?>
-
+<script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
+            autoclose: true
+        });
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
 // Smart Wizard
