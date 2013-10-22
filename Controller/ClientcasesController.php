@@ -114,6 +114,13 @@ class ClientcasesController extends AppController {
         $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'user', 'addresses', 'archivecount', 'address', 'mainapplicant'));
     }
 
+    public function denied($id = null) {
+        $this->loadModel('Applicant');
+        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
+        $mainapplicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id'])));
+        $this->set(compact('clientcase', 'id', 'mainapplicant'));
+    }
+
     public function statustest($id = null) {
         $userid=$this->Session->read('UserAuth.User.id');
         $this->loadModel('Applicant');
