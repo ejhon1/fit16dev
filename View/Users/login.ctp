@@ -87,9 +87,7 @@ $(document).ready(function() {
 	<div class="um_box_mid">
 		<div class="um_box_mid_content">
 			<div class="um_box_mid_content_top">
-				<span class="umstyle1"><?php echo __('Sign In or'); ?></span>
-				<span  class="umstyle2"><?php echo $this->Html->link(__("Sign Up",true),"/register") ?></span>
-				<span class="umstyle2" style="float:right"><?php echo $this->Html->link(__("Home",true),"/") ?></span>
+				<span class="umstyle1"><?php echo __('Sign In'); ?></span>
 				<div style="clear:both"></div>
 			</div>
 			<div class="umhr"></div>
