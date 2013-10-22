@@ -491,9 +491,7 @@ echo $this->HTML->css('datepicker');
                         <td><?php echo $casenote['subject']; ?></td>
                         <td><?php echo $casenote['note_type']; ?></td>
                         <td>
-		                     <?php
-		                      $note = substr($casenote['note'], 0, 50);
-		                     echo $note.' ... ';
+		                     <?php echo String::truncate($casenote['note'], 50, array('html' => true));
 						?>
 		             </td> 
                         <td class="actions">
