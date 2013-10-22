@@ -1,4 +1,4 @@
-    <h3>Activate a client's account</h3>
+    <h2>Activate a client's account</h2>
     This form is used to activate the account of a legacy client. It will send an email to the client with the message entered below, their login details, and a signature or closing paragraph if one is included.
     <?php echo $this->Form->create('User');?>
     <fieldset>
