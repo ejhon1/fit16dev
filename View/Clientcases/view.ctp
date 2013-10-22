@@ -547,7 +547,7 @@ echo $this->HTML->script('JQueryUser');
                                             <?php echo h($ancestordocument['Documenttype']['type']); ?>
                                         </td>
                                         <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
-                                        <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
+                                        <td valign="top"><?php echo h($this->Time->format('d-m-Y',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                             <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $ancestordocument['Document']['id']), array('escape' => false)); ?>
@@ -591,7 +591,7 @@ echo $this->HTML->script('JQueryUser');
                                                 <?php echo h($applicantdocument['Documenttype']['type']); ?>
                                             </td>
                                             <td valign="top"><?php echo h($applicantdocument['Document']['filename']); ?>&nbsp;</td>
-                                            <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
+                                            <td valign="top"><?php echo h($this->Time->format('d-m-Y',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                             <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $applicantdocument['Document']['id']), array('escape' => false)); ?>
@@ -635,10 +635,10 @@ echo $this->HTML->script('JQueryUser');
                                             <?php echo h($physicalappdocument['Documenttype']['type']); ?>
                                         </td>
                                         <td valign="top">
-                                            <?php echo h($physicalappdocument['Document']['date_received']); ?>
+                                            <?php echo h($this->Time->format('d-m-Y', $physicalappdocument['Document']['date_received'])); ?>
                                         </td>
                                         <td valign="top">
-                                            <?php echo h($physicalappdocument['Document']['date_returned']); ?>
+                                            <?php echo h($this->Time->format('d-m-Y', $physicalappdocument['Document']['date_returned'])); ?>
                                         </td>
                                         <td valign="top">
                                             <?php echo h($physicalappdocument['Document']['copy_type']); ?>
@@ -688,10 +688,10 @@ echo $this->HTML->script('JQueryUser');
                                 <?php echo h($physicalancdocument['Documenttype']['type']); ?>
                             </td>
                             <td valign="top">
-                                <?php echo h($physicalancdocument['Document']['date_received']); ?>
+                                <?php echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_received'])); ?>
                             </td>
                             <td valign="top">
-                                <?php echo h($physicalancdocument['Document']['date_returned']); ?>
+                                <?php echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_returned'])); ?>
                             </td>
                             <td valign="top">
                                 <?php echo h($physicalancdocument['Document']['copy_type']); ?>
@@ -842,8 +842,6 @@ echo $this->HTML->script('JQueryUser');
     </div>
     <div class="modal-body">
         <?php echo $this->Form->create('Document', array('type' => 'file', 'default' => 'false', 'action' => 'addphydoc', $id));?>
-
-         
         <fieldset>
             <?php
             echo $this->Form->hidden('clientcase_id', array('default' => $id));
