@@ -325,6 +325,7 @@ class ClientcasesController extends AppController {
      * @return void
      */
     public function edit($id = null) {
+    	$this->request->data['Clientcase']['id']=$id;
         if (!$this->Clientcase->exists($id)) {
             throw new NotFoundException(__('Invalid Client Case'));
         }
