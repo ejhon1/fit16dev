@@ -108,10 +108,11 @@ class ClientcasesController extends AppController {
         $currentloan = $this->Archiveloan->find('first', array('conditions' => array('Archiveloan.archive_id' => $clientcase['Clientcase']['archive_id'], 'Archiveloan.date_returned' => NULL)));
         $user = $this->User->find('first', array('conditions' => array('User.id' => $clientcase['Clientcase']['user_id'])));
 
+        $appdate = date('d/m/Y', strtotime($clientcase['Clientcase']['appointment_date']));
 
         $addresses = $this->Address->find('all', array('conditions' => array('Address.applicant_id' => $clientcase['Clientcase']['applicant_id'])));
         
-        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'user', 'addresses', 'archivecount', 'address', 'mainapplicant'));
+        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'user', 'addresses', 'archivecount', 'address', 'mainapplicant', 'appdate'));
     }
 
     public function denied($id = null) {
@@ -211,10 +212,9 @@ class ClientcasesController extends AppController {
         $this->set(compact('clientcase',  'employee', 'casestatuses', 'clientcases', 'statuses', 'id'));
     }
     
-    public function editAppointmentDate($id=null) {
+    public function editAppointmentDate() {
         if ($this->request->is('post')|| $this->request->is('put')) {
-       	    $this->request->data['Clientcase']['appointment_date'] = date('Y-m-d', strtotime($this->request->data['Clientcase']['appointmentDate']));
-
+            $this->request->data['Clientcase']['appointment_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['appointmentDate'])));
             if ($this->Clientcase->save($this->request->data, false)) {
                 $this->Session->setFlash(__('The Appointment Date has been edited', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Clientcase']['id']));
@@ -225,8 +225,9 @@ class ClientcasesController extends AppController {
         }
     }
     
-    public function updateAppointmentDate($id=null) {
+    public function updateAppointmentDate() {
         if ($this->request->is('post')|| $this->request->is('put')) {
+            $this->request->data['Clientcase']['appointment_date'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['appointmentDate'])));
             if ($this->Clientcase->save($this->request->data, false)) {
                 $this->Session->setFlash(__('The Appointment Date has been updated', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Clientcase']['id']));
@@ -334,10 +335,9 @@ class ClientcasesController extends AppController {
             } else {
                 $this->Session->setFlash(__('The client case could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
             }
-        } else {
+        }
             $options = array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id));
             $this->request->data = $this->Clientcase->find('first', $options);
-        }
         $users = $this->Clientcase->User->find('list');
         $archives = $this->Clientcase->Archive->find('list');
         $statuses = $this->Clientcase->Status->find('list');
