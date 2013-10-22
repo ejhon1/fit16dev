@@ -1,22 +1,16 @@
-<?php echo $this->Html->css('jquery-ui-1.10.3.custom'); ?>
-<?php echo $this->Html->script('jquery-1.5.min'); ?>
-<?php echo $this->Html->script('jquery-ui-1.10.3.custom.min'); ?>
+<?php echo $this->Html->script('bootstrap-datepicker.js');
+echo $this->HTML->css('datepicker'); ?>
 
 <div class="applicants form">
     <?php echo $this->Form->create('Applicant'); ?>
-    
-<script>
-    $(function() {
-        $( "#datepicker" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-100:+0",
-            showAnim: 'slideDown',
-            dateFormat: "dd-mm-yy"
-        });
 
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
+        });
+    </script>
     <fieldset>
         <legend><?php echo __('Add Applicant'); ?></legend>
         <?php
