@@ -31,7 +31,7 @@
             <?php
 	  		echo $this->Form->input('subject');
 	  		echo $this->Form->hidden('note_type', array('default' => 'Public'));
-	  		echo $this->Form->input('note');
+	  		echo $this->Form->input('note', array('label' => 'Would you like to send a message to Polaron? Please let us know.'));
             ?>
         </fieldset>
     </div>
