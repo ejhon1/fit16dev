@@ -311,6 +311,16 @@ Step 4<br />
         );
         echo $this->Form->input('Clientcase.existing_family', array(
 		'label' => 'If any, please specify other family members who have already registered for Polaron\'s services'));
+		
+	echo $this->Form->input('ClientCase.contact_method', array(
+                    'id' => 'contact',
+                    'class' => 'contact',
+                    'type' => 'radio',
+                    'options' => array(
+                        'Phone' => 'Phone',
+                        'Email' => 'Email',
+						'Do not contact me' => 'We respect your privacy - please tick box if you prefer that we do not contact you about your eligibility for Polish citizenship'),
+                    'legend' => 'We may contact you to discuss your requirements. Please indicate your preferred contact method'));
     ?>
 </div>
 
