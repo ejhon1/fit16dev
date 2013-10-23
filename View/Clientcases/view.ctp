@@ -859,7 +859,7 @@ echo $this->HTML->script('JQueryUser');
                 'type' => 'radio',
                 'legend'=>'Note Type',
                 'default' => 'Original',
-                'options' => array('Original' => 'Original', 'Certified/Notarised'=>'Certified/Notarised')));
+                'options' => array('Original' => 'Original', 'Certified/Notarised'=>'Certified/Notarised', 'Photo-copy' => 'Photo-copy')));
             ?>
         </fieldset>
     </div>
@@ -886,7 +886,7 @@ echo $this->HTML->script('JQueryUser');
                 'type' => 'radio',
                 'legend'=>'Note Type',
                 'default' => 'Original',
-                'options' => array('Original' => 'Original', 'Certified/Notarised'=>'Certified/Notarised')));
+                'options' => array('Original' => 'Original', 'Certified/Notarised'=>'Certified/Notarised', 'Photo-copy' => 'Photo-copy')));
             ?>
         </fieldset>
     </div>
