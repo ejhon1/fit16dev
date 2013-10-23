@@ -300,7 +300,8 @@ Step 4<br />
     <?php
         echo $this->Form->input('Applicant.landline_number', array(
             'id' => 'phone',
-            'label' => 'Phone Number'.$test)
+            'label' => 'Phone Number'.$test,
+            'placeholder' => 'Please include country and area code')
         );
     ?>
     <td align="left"><span id="msg_email"></span>&nbsp;</td>
