@@ -440,15 +440,14 @@ Step 4<br />
     echo $this->Form->input('ClientCase.serve_in_army_info', array(
         'label' => 'Please put any known information of this here'));
     echo $this->Form->input('ClientCase.when_left_poland', array(
-        'type' => 'select',
-        'multiple' => 'checkbox',
+        'type' => 'radio',
         'options' => array(
             'Never left' => 'They never left Poland',
             'Before WW1 (before 1918)' => 'They left Poland before WW1 (before 1918)',
             'Before WW2 (before 1939)' => 'They left Poland before WW2 (before 1939)',
             'During WW2 (1939-1945)' => 'They left Poland during WW2 (1939-1945)',
             'After WW2 (after 1945)' => 'They left Poland after WW2 (after 1945)'),
-        'label' => 'When did your ancestors leave Poland?'));
+        'legend' => 'When did your ancestors leave Poland?'));
     echo $this->Form->input('ClientCase.where_left_poland', array(
         'type' => 'select',
         'multiple' => 'checkbox',
