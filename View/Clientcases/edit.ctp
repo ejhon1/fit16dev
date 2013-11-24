@@ -1,9 +1,9 @@
 <div class="clientcases form">
 <?php echo $this->Form->create('Clientcase'); ?>
 	<fieldset>
-		<legend><?php echo __('Edit Eligibility Check'); ?></legend>
+		<h2><?php echo __('Edit Eligibility Check'); ?></h2>
 	<?php
-		echo $this->Form->input('existing_family', array('label'=> 'Other Family That Have Used Polaron:'));
+		echo $this->Form->input('existing_family', array('label'=> 'Other Family Members That Have Used Polaron:'));
 		echo $this->Form->input('born_in_poland', array('label' => 'Was The Main Applicant Born In Poland?'));
 		echo $this->Form->input('nationality_of_parents', array('label'=> 'Which Parents Were Polish?'));
 		echo $this->Form->input('mother_name', array('label'=> 'Mother\'s Name:'));

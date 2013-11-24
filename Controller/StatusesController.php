@@ -50,7 +50,7 @@ class StatusesController extends AppController {
 			$this->Status->create();
 			if ($this->Status->save($this->request->data)) {
 				$this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect('../management');
 			} else {
 				$this->Session->setFlash(__('The status could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
@@ -71,7 +71,7 @@ class StatusesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Status->save($this->request->data)) {
 				$this->Session->setFlash(__('The status has been saved', null),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('action' => 'index'));
+                return $this->redirect('../management');
 			} else {
 				$this->Session->setFlash(__('The status could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
@@ -96,7 +96,7 @@ class StatusesController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Status->delete()) {
 			$this->Session->setFlash(__('Status deleted', null),'default', array('class' => 'alert-success'));
-			return $this->redirect(array('action' => 'index'));
+            return $this->redirect('../management');
 		}
 		$this->Session->setFlash(__('Status was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));

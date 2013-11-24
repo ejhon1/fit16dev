@@ -339,7 +339,7 @@ input, textarea {
 	padding: 5px;
 }
 
-#msg_firstname, #msg_surname, #msg_phone, #msg_email, #msg_bip {
+#msg_firstname, #msg_surname, #msg_phone, #msg_email, #msg_bip { 
 	color: #F00;
 	font: bold italic 12px "Arial", Candara, Helvetica, sans-serif;
 	-moz-border-radius  : 5px; 

@@ -170,24 +170,24 @@ class UsersController extends UserMgmtAppController {
      public function register() {
         $this->loadModel('Archive');
         $this->loadModel('Applicant');
-        $this->loadModel('ClientCase');
+        $this->loadModel('Clientcase');
         $this->loadModel('Casestatus');
 
         if ($this->request -> isPost()) {
-            $this->request->data['ClientCase']['nationality_of_parents']= implode(',', $this->request->data['ClientCase']['nationality_of_parents']);
-            $this->request->data['ClientCase']['nationality_of_grandparents']= implode(',', $this->request->data['ClientCase']['nationality_of_grandparents']);
-            $this->request->data['ClientCase']['when_left_poland']= implode(',', $this->request->data['ClientCase']['when_left_poland']);
-            $this->request->data['ClientCase']['where_left_poland']= implode(',', $this->request->data['ClientCase']['where_left_poland']);
-            $this->request->data['ClientCase']['possess_documents_types']= implode(',', $this->request->data['ClientCase']['possess_documents_types']);
-            $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
-            $this->request->data['ClientCase']['open_or_closed'] = 'Open';
-            if(!empty($this->request->data['ClientCase']['existing_family']))
+            $this->request->data['Clientcase']['nationality_of_parents']= implode(',', $this->request->data['Clientcase']['nationality_of_parents']);
+            $this->request->data['Clientcase']['nationality_of_grandparents']= implode(',', $this->request->data['Clientcase']['nationality_of_grandparents']);
+            $this->request->data['Clientcase']['when_left_poland']= implode(',', $this->request->data['Clientcase']['when_left_poland']);
+            $this->request->data['Clientcase']['where_left_poland']= implode(',', $this->request->data['Clientcase']['where_left_poland']);
+            $this->request->data['Clientcase']['possess_documents_types']= implode(',', $this->request->data['Clientcase']['possess_documents_types']);
+            $this->request->data['Clientcase']['other_factors']= implode(',', $this->request->data['Clientcase']['other_factors']);
+            $this->request->data['Clientcase']['open_or_closed'] = 'Open';
+            if(!empty($this->request->data['Clientcase']['existing_family']))
             {
-                $this->request->data['ClientCase']['status_id'] = 2;
+                $this->request->data['Clientcase']['status_id'] = 2;
             }
             else
             {
-                $this->request->data['ClientCase']['status_id'] = 1;
+                $this->request->data['Clientcase']['status_id'] = 1;
             }
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
             //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
@@ -203,10 +203,10 @@ class UsersController extends UserMgmtAppController {
             $this->request->data['User']['type']='Client';
 
             $eligible = true;
-            if(empty($this->request->data['ClientCase']['nationality_of_parents'])
-                && empty($this->request->data['ClientCase']['nationality_of_grandparents'])
-                && $this->request->data['ClientCase']['born_in_poland'] != 'Yes'
-                && $this->request->data['ClientCase']['have_passport'] != 'Yes'
+            if(empty($this->request->data['Clientcase']['nationality_of_parents'])
+                && empty($this->request->data['Clientcase']['nationality_of_grandparents'])
+                && $this->request->data['Clientcase']['born_in_poland'] != 'Yes'
+                && $this->request->data['Clientcase']['have_passport'] != 'Yes'
             )
             {$eligible = false;}
 
@@ -215,19 +215,19 @@ class UsersController extends UserMgmtAppController {
                 $this->createArchive(); //Leads to the function that creates the Archive entry.
                 $this->User->create();
                 if ($this->User->save($this->request->data, false)) {
-                    $this->request->data['ClientCase']['user_id'] = $this->User->getLastInsertId();
-                    $this->ClientCase->create();
-                    $this->ClientCase->save($this->request->data);
+                    $this->request->data['Clientcase']['user_id'] = $this->User->getLastInsertId();
+                    $this->Clientcase->create();
+                    $this->Clientcase->save($this->request->data);
 
-                    $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                    $this->request->data['Applicant']['clientcase_id'] = $this->Clientcase->getLastInsertId();
                     $this->Applicant->create();
                     $this->Applicant->save($this->request->data);
 
-                    $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
-                    $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
-                    $this->ClientCase->save($this->request->data);
+                    $this->request->data['Clientcase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                    $this->request->data['Clientcase']['id'] = $this->Clientcase->getLastInsertId();
+                    $this->Clientcase->save($this->request->data);
 
-                    $this->request->data['Casestatus']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                    $this->request->data['Casestatus']['clientcase_id'] = $this->Clientcase->getLastInsertId();
                     $this->request->data['Casestatus']['status_id'] = 1;
                     $this->Casestatus->save($this->request->data);
 
@@ -237,25 +237,25 @@ class UsersController extends UserMgmtAppController {
                 passport and can be contacted any time if you have any questions. <br />Your report should be sent in the next 5 minutes. If you do not
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                         'default', array('class' => 'alert-success'));
-                    $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                    return $this->redirect(array('controller' => 'users', 'action' => 'login'));
                 }else {
-                    $this->Session->setFlash(__('The user could not be saved', null),'default', array('class' => 'alert-danger'));
+                    $this->Session->setFlash(__('We encontered an error while processing your details. Please contact Polaron.', null),'default', array('class' => 'alert-danger'));
                 }
             }else {
-                $this->request->data['ClientCase']['user_id'] = 0;
-                $this->request->data['ClientCase']['archive_id'] = 0;
-                $this->request->data['ClientCase']['status_id'] = 0;
-                $this->request->data['ClientCase']['open_or_closed'] = 'Closed';
-                $this->ClientCase->create();
-                $this->ClientCase->save($this->request->data);
+                $this->request->data['Clientcase']['user_id'] = 0;
+                $this->request->data['Clientcase']['archive_id'] = 0;
+                $this->request->data['Clientcase']['status_id'] = 0;
+                $this->request->data['Clientcase']['open_or_closed'] = 'Closed';
+                $this->Clientcase->create();
+                $this->Clientcase->save($this->request->data);
 
-                $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                $this->request->data['Applicant']['clientcase_id'] = $this->Clientcase->getLastInsertId();
                 $this->Applicant->create();
                 $this->Applicant->save($this->request->data);
 
-                $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
-                $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
-                $this->ClientCase->save($this->request->data);
+                $this->request->data['Clientcase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                $this->request->data['Clientcase']['id'] = $this->Clientcase->getLastInsertId();
+                $this->Clientcase->save($this->request->data);
 
 		        $this->Session->setFlash(__('Thank You! <br /><strong>Your QuickCheck Eligibility Report has been emailed to your nominated email address.
                 Congratulations on taking the first step towards your Polish citizenship. We look forward to assisting you with your journey to a Polish
@@ -263,31 +263,31 @@ class UsersController extends UserMgmtAppController {
                 receive it, please verify your email, check your Junk folder or email us at polish@polaron.com.au.</strong>', null),
                     'default', array('class' => 'alert-success'));
                 $this->rejectEmail($this->request->data['Applicant']['email']);
-                $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                return $this->redirect(array('controller' => 'users', 'action' => 'login'));
             }
         }
     }
     public function newapplicant() {
         $this->loadModel('Archive');
         $this->loadModel('Applicant');
-        $this->loadModel('ClientCase');
+        $this->loadModel('Clientcase');
         $this->loadModel('Casestatus');
 
         if ($this->request -> isPost()) {
-            $this->request->data['ClientCase']['nationality_of_parents']= implode(',', $this->request->data['ClientCase']['nationality_of_parents']);
-            $this->request->data['ClientCase']['nationality_of_grandparents']= implode(',', $this->request->data['ClientCase']['nationality_of_grandparents']);
-            $this->request->data['ClientCase']['when_left_poland']= implode(',', $this->request->data['ClientCase']['when_left_poland']);
-            $this->request->data['ClientCase']['where_left_poland']= implode(',', $this->request->data['ClientCase']['where_left_poland']);
-            $this->request->data['ClientCase']['possess_documents_types']= implode(',', $this->request->data['ClientCase']['possess_documents_types']);
-            $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
-            $this->request->data['ClientCase']['open_or_closed'] = 'Open';
-            if(!empty($this->request->data['ClientCase']['existing_family']))
+            $this->request->data['Clientcase']['nationality_of_parents']= implode(',', $this->request->data['Clientcase']['nationality_of_parents']);
+            $this->request->data['Clientcase']['nationality_of_grandparents']= implode(',', $this->request->data['Clientcase']['nationality_of_grandparents']);
+            $this->request->data['Clientcase']['when_left_poland']= implode(',', $this->request->data['Clientcase']['when_left_poland']);
+            $this->request->data['Clientcase']['where_left_poland']= implode(',', $this->request->data['Clientcase']['where_left_poland']);
+            $this->request->data['Clientcase']['possess_documents_types']= implode(',', $this->request->data['Clientcase']['possess_documents_types']);
+            $this->request->data['Clientcase']['other_factors']= implode(',', $this->request->data['Clientcase']['other_factors']);
+            $this->request->data['Clientcase']['open_or_closed'] = 'Open';
+            if(!empty($this->request->data['Clientcase']['existing_family']))
             {
-                $this->request->data['ClientCase']['status_id'] = 2;
+                $this->request->data['Clientcase']['status_id'] = 2;
             }
             else
             {
-                $this->request->data['ClientCase']['status_id'] = 1;
+                $this->request->data['Clientcase']['status_id'] = 1;
             }
 
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
@@ -306,26 +306,26 @@ class UsersController extends UserMgmtAppController {
             $this->createArchive(); //Leads to the function that creates the Archive entry.
             $this->User->create();
             if ($this->User->save($this->request->data, false)) {
-                $this->request->data['ClientCase']['user_id'] = $this->User->getLastInsertId();
-                $this->ClientCase->create();
-                $this->ClientCase->save($this->request->data);
+                $this->request->data['Clientcase']['user_id'] = $this->User->getLastInsertId();
+                $this->Clientcase->create();
+                $this->Clientcase->save($this->request->data);
 
-                $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                $this->request->data['Applicant']['clientcase_id'] = $this->Clientcase->getLastInsertId();
                 $this->Applicant->create();
                 $this->Applicant->save($this->request->data);
 
-                $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
-                $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
-                $this->ClientCase->save($this->request->data);
+                $this->request->data['Clientcase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                $this->request->data['Clientcase']['id'] = $this->Clientcase->getLastInsertId();
+                $this->Clientcase->save($this->request->data);
 
-                $this->request->data['Casestatus']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                $this->request->data['Casestatus']['clientcase_id'] = $this->Clientcase->getLastInsertId();
                 $this->request->data['Casestatus']['status_id'] = 1;
                 $this->Casestatus->save($this->request->data);
 
-                $this->acceptEmail($this->request->data['Applicant']['email'], $password);
+                $this->newAppEmail($this->request->data['Applicant']['email'], $password);
                 $this->Session->setFlash(__('The new client was successfully added.', null),
                     'default', array('class' => 'alert-success'));
-                $this->redirect(array('plugin' => false, 'controller' => 'users', 'action' => 'login'));
+                return $this->redirect(array('plugin' => false, 'controller' => 'clientcases', 'action' => 'view', $this->Clientcase->getLastInsertId()));
             }else {
                 $this->Session->setFlash(__('The client could not be saved', null),'default', array('class' => 'alert-danger'));
             }
@@ -346,8 +346,6 @@ class UsersController extends UserMgmtAppController {
             if ($this->User->save($this->request->data, false)) {
                 $Email = new CakeEmail();
                 $Email->config('default');
-                $Email->sender(array('lizziness@gmail.com' => 'Polaron'));
-                $Email->from(array('lizziness@gmail.com' => 'Polaron'));
                 $Email->to($clientcase['Applicant']['email']);
                 $Email->subject($this->request->data['User']['subject']);
                 $Email->template('activate');
@@ -378,17 +376,15 @@ class UsersController extends UserMgmtAppController {
             if ($this->User->save($this->request->data, false)) {
                 $Email = new CakeEmail();
                 $Email->config('default');
-                $Email->sender(array('lizziness@gmail.com' => 'Polaron'));
-                $Email->from(array('lizziness@gmail.com' => 'Polaron'));
                 $Email->to($clientcase['Applicant']['email']);
-                $Email->subject($this->request->data['User']['subject']);
+                $Email->subject('Polaron - Password Recovery');
                 $Email->template('activate');
                 $Email->emailFormat('text');
                 $Email->viewVars(array('message' => $this->request->data['User']['message'], 'username' => $clientcase['User']['username'], 'password' => $password, 'signature' => $this->request->data['User']['signature']));
 
                 $Email->send();
 
-                $this->Session->setFlash(__('The client\'s account has been activated', null),'default', array('class' => 'alert-success'));
+                $this->Session->setFlash(__('The client\'s login details have been sent.', null),'default', array('class' => 'alert-success'));
                 return $this->redirect(array('plugin' => false, 'controller' => 'clientcases', 'action' => 'view', $clientcase['Clientcase']['id']));
             } else {
                 $this->Session->setFlash(__('The account could not be activated. Please try again.'));
@@ -423,8 +419,7 @@ class UsersController extends UserMgmtAppController {
         $this->Archive->create();
         $this->Archive->save($this->request->data);
 
-        $this->request->data['ClientCase']['archive_id'] = $this->Archive->getLastInsertId();
-        $this->request->data['Applicant']['archive_id'] = $this->Archive->getLastInsertId();
+        $this->request->data['Clientcase']['archive_id'] = $this->Archive->getLastInsertId();
     }
 
 
@@ -437,6 +432,27 @@ class UsersController extends UserMgmtAppController {
         $Email->to($email_addr);
         $Email->subject('Eligibility Check');
         $Email->template('welcome');
+        $Email->emailFormat('text');
+        $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name'], 'email' => $this->request->data['Applicant']['email'], 'password' => $password));
+        $Email->attachments(array(
+            'Polaron - PL Passport - Info Pack - 2013.pdf' => array(
+                'file' => APP.'documents/Email_attachments/Polaron - PL Passport - Info Pack - 2013.pdf',
+                'mimetype' => 'pdf'),
+        ));
+
+
+        $Email->send();
+    } 
+	
+	public function newAppEmail($email_addr, $password) {
+        $Email = new CakeEmail();
+        $Email->config('default');
+
+        $Email->sender(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->from(array('polarontest@gmail.com' => 'Polaron'));
+        $Email->to($email_addr);
+        $Email->subject('Eligibility Check');
+        $Email->template('newapp');
         $Email->emailFormat('text');
         $Email->viewVars(array('name' => $this->request->data['Applicant']['first_name'], 'email' => $this->request->data['Applicant']['email'], 'password' => $password));
         $Email->attachments(array(
@@ -651,7 +667,7 @@ class UsersController extends UserMgmtAppController {
     public function newclient() {
         $this->loadModel('Archive');
         $this->loadModel('Applicant');
-        $this->loadModel('ClientCase');
+        $this->loadModel('Clientcase');
         if ($this->request->is('post')) {
 
             $this->User->set($this->data);
@@ -664,22 +680,22 @@ class UsersController extends UserMgmtAppController {
 
 
             $this->createArchive(); //Leads to the function that creates the Archive entry.
-            $this->request->data['ClientCase']['nationality_of_parents']= implode(',', $this->request->data['ClientCase']['nationality_of_parents']);
-            $this->request->data['ClientCase']['nationality_of_grandparents']= implode(',', $this->request->data['ClientCase']['nationality_of_grandparents']);
-            $this->request->data['ClientCase']['when_left_poland']= implode(',', $this->request->data['ClientCase']['when_left_poland']);
-            $this->request->data['ClientCase']['where_left_poland']= implode(',', $this->request->data['ClientCase']['where_left_poland']);
-            $this->request->data['ClientCase']['possess_documents_types']= implode(',', $this->request->data['ClientCase']['possess_documents_types']);
-            $this->request->data['ClientCase']['other_factors']= implode(',', $this->request->data['ClientCase']['other_factors']);
-            $this->request->data['ClientCase']['open_or_closed'] = 'Open';
-            $this->request->data['ClientCase']['status_id'] = 1;
+            $this->request->data['Clientcase']['nationality_of_parents']= implode(',', $this->request->data['Clientcase']['nationality_of_parents']);
+            $this->request->data['Clientcase']['nationality_of_grandparents']= implode(',', $this->request->data['Clientcase']['nationality_of_grandparents']);
+            $this->request->data['Clientcase']['when_left_poland']= implode(',', $this->request->data['Clientcase']['when_left_poland']);
+            $this->request->data['Clientcase']['where_left_poland']= implode(',', $this->request->data['Clientcase']['where_left_poland']);
+            $this->request->data['Clientcase']['possess_documents_types']= implode(',', $this->request->data['Clientcase']['possess_documents_types']);
+            $this->request->data['Clientcase']['other_factors']= implode(',', $this->request->data['Clientcase']['other_factors']);
+            $this->request->data['Clientcase']['open_or_closed'] = 'Open';
+            $this->request->data['Clientcase']['status_id'] = 1;
             $this->request->data['User']['username'] = $this->request->data['Applicant']['email'];
             //$this->request->data['Applicant']['birthdate'] = CakeTime::dayAsSql($this->request->data['Applicant']['birthdate'], 'modified');
 
             $eligible = true;
-            if(empty($this->request->data['ClientCase']['nationality_of_parents'])
-                && empty($this->request->data['ClientCase']['nationality_of_grandparents'])
-                && $this->request->data['ClientCase']['born_in_poland'] != 'Yes'
-                && $this->request->data['ClientCase']['have_passport'] != 'Yes'
+            if(empty($this->request->data['Clientcase']['nationality_of_parents'])
+                && empty($this->request->data['Clientcase']['nationality_of_grandparents'])
+                && $this->request->data['Clientcase']['born_in_poland'] != 'Yes'
+                && $this->request->data['Clientcase']['have_passport'] != 'Yes'
             )
             {$eligible = false;}
 
@@ -687,17 +703,17 @@ class UsersController extends UserMgmtAppController {
             {
                 $this->User->create();
                 if ($this->User->saveAll($this->request->data, array('deep' => true))) {
-                    $this->request->data['ClientCase']['user_id'] = $this->User->getLastInsertId();
-                    $this->ClientCase->create();
-                    $this->ClientCase->save($this->request->data);
+                    $this->request->data['Clientcase']['user_id'] = $this->User->getLastInsertId();
+                    $this->Clientcase->create();
+                    $this->Clientcase->save($this->request->data);
 
-                    $this->request->data['Applicant']['clientcase_id'] = $this->ClientCase->getLastInsertId();
+                    $this->request->data['Applicant']['clientcase_id'] = $this->Clientcase->getLastInsertId();
                     $this->Applicant->create();
                     $this->Applicant->save($this->request->data);
 
-                    $this->request->data['ClientCase']['applicant_id'] = $this->Applicant->getLastInsertId();
-                    $this->request->data['ClientCase']['id'] = $this->ClientCase->getLastInsertId();
-                    $this->ClientCase->save($this->request->data);
+                    $this->request->data['Clientcase']['applicant_id'] = $this->Applicant->getLastInsertId();
+                    $this->request->data['Clientcase']['id'] = $this->Clientcase->getLastInsertId();
+                    $this->Clientcase->save($this->request->data);
                     $this->emailAccept($this->request->data['Applicant']['email']);
                     $this->Session->setFlash(__('The user has been saved', null),'default', array('class' => 'alert-success'));
                     $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
@@ -779,14 +795,25 @@ class UsersController extends UserMgmtAppController {
 		$this->set('user', $user);
         $this->set('employee', $employee);
 	}
-	public function managepage() {
-        $this->loadModel('Employee');
-		$userId=$this->UserAuth->getUserId();
-		$user = $this->User->findById($userId);
-        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userId)));
-		$this->set('user', $user);
-        $this->set('employee', $employee);
+	public function management(){
+        $this->loadModel('Ancestortype');
+        $this->loadModel('Documenttype');
+        $this->loadModel('Status');
+        $ancestortypes = $this->Ancestortype->find('all');
+        $documenttypes = $this->Documenttype->find('all');
+        $statuses = $this->Status->find('all');
+
+        $this->set(compact('ancestortypes', 'documenttypes','statuses'));
 	}
+    public function managepage(){
+        $this->loadModel('Employee');
+        $userId=$this->UserAuth->getUserId();
+        $user = $this->User->findById($userId);
+        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userId)));
+        $this->set('user', $user);
+        $this->set('employee', $employee);
+    }
+
 	/**
 	 * Used to activate or deactivate user by Admin
 	 *

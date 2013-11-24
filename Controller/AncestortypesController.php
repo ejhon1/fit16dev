@@ -49,10 +49,10 @@ class AncestortypesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Ancestortype->create();
 			if ($this->Ancestortype->save($this->request->data)) {
-				$this->Session->setFlash(__('The ancestortype has been saved', null),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('The ancestor type has been saved', null),'default', array('class' => 'alert-success'));
+                return $this->redirect('../management');
 			} else {
-				$this->Session->setFlash(__('The ancestortype could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+				$this->Session->setFlash(__('The ancestor type could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
 		}
 	}
@@ -70,15 +70,14 @@ class AncestortypesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Ancestortype->save($this->request->data)) {
-				$this->Session->setFlash(__('The ancestortype has been saved', null),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('The ancestor type has been saved', null),'default', array('class' => 'alert-success'));
+                return $this->redirect('../management');
 			} else {
-				$this->Session->setFlash(__('The ancestortype could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
+				$this->Session->setFlash(__('The ancestor type could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
 			}
-		} else {
+		}
 			$options = array('conditions' => array('Ancestortype.' . $this->Ancestortype->primaryKey => $id));
 			$this->request->data = $this->Ancestortype->find('first', $options);
-		}
 	}
 
 /**
@@ -95,10 +94,10 @@ class AncestortypesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Ancestortype->delete()) {
-			$this->Session->setFlash(__('Ancestortype deleted', null),'default', array('class' => 'alert-success'));
-			return $this->redirect(array('action' => 'index'));
+			$this->Session->setFlash(__('Ancestor type deleted', null),'default', array('class' => 'alert-success'));
+            return $this->redirect('../management');
 		}
-		$this->Session->setFlash(__('Ancestortype was not deleted', null),'default', array('class' => 'alert-danger'));
+		$this->Session->setFlash(__('Ancestor type was not deleted', null),'default', array('class' => 'alert-danger'));
 		return $this->redirect(array('action' => 'index'));
 	}
 }

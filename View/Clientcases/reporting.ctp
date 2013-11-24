@@ -8,7 +8,7 @@ echo $this->HTML->script('JQueryUser');?>
             });
         });
     </script>
-
+<h2>Generate Time-Based Reports </h2>
 <?php echo $this->Form->create('Clientcase'); ?>
     <fieldset>
        <?php echo $this->Form->input('date1', array('label' => 'First date','class'=>'datepicker', 'id'=>"dpd1")); ?>
@@ -93,7 +93,7 @@ echo $this->HTML->script('JQueryUser');?>
                 </td>
                 <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y', $deniedcase['Clientcase']['created'])); ?>&nbsp;</td>
                 <td class="actions">
-                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $deniedcase['Clientcase']['id'])); ?>
+                    <?php echo $this->Html->link(__('View'), array('action' => 'denied', $deniedcase['Clientcase']['id'])); ?>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -287,7 +287,7 @@ echo $this->HTML->script('JQueryUser');?>
 <?php } else if($selected == 7)
 {
 ?>
-<h3>No contact notes sent</h3>
+    <h3>No contact notes created</h3>
     <?php echo $this->Form->create('Clientcase', array('action' => 'report4'));
     echo $this->Form->hidden('date1', array('default' => $date1));
     echo $this->Form->hidden('date2', array('default' => $date2));
@@ -323,7 +323,7 @@ echo $this->HTML->script('JQueryUser');?>
 {
 ?>
     <h3>Cases without status changes</h3>
-     <?php echo $this->Form->create('Clientcase', array('action' => 'report5'));
+    <?php echo $this->Form->create('Clientcase', array('action' => 'report5'));
     echo $this->Form->hidden('date1', array('default' => $date1));
     echo $this->Form->hidden('date2', array('default' => $date2));
     echo $this->Form->end(__('Excel Report'));?>

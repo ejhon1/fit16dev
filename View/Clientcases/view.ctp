@@ -32,16 +32,16 @@ echo $this->HTML->script('JQueryUser');
 <div id="clientcases">
 <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">Information</a></li>
-    <?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
-    {
-        ?>
-        <li><a href="#tab2" data-toggle="tab">Eligibility Check</a></li>
-    <?php
-    }
-    ?>
+    <li><a href="#tab2" data-toggle="tab">Eligibility Check</a></li>
     <li><a href="#tab3" data-toggle="tab">Case Status</a></li>
     <li><a href="#tab4" data-toggle="tab">Contact Notes</a></li>
+	<?php if($clientcase['Clientcase']['archive_id'] != 20)
+    {
+        ?>
     <li><a href="#tab5" data-toggle="tab">Documents</a></li>
+	<?php
+    }
+    ?>
 </ul>
 <div id="my-tab-content" class="tab-content">
     <div class="tab-pane active" id="tab1">
@@ -52,34 +52,33 @@ echo $this->HTML->script('JQueryUser');
             <tbody>
             <tr>
                 <th>Archive name</th>
-                <td><?php echo h($clientcase['Archive']['archive_name']); ?></td>
+                <td><?php if($clientcase['Archive']['archive_name'] != 'none')
+				{
+					echo h($clientcase['Archive']['archive_name']); 
+				}
+				else
+				{
+					echo $this->Form->create('Archive', array('action' => 'generateArchive'));
+					echo $this->Form->hidden('clientcase_id', array('default' => $clientcase['Clientcase']['id']));
+					echo $this->Form->end(__('Generate Archive'));
+				}
+				?>
+				</td>
                 <th>Current status</th>
                 <td><?php echo h($clientcase['Status']['status_type']); ?></td>
             </tr>
             <tr>
                 <th>Date of enquiry</th>
                 <td><?php echo h($this->Time->format('d-m-Y', $clientcase['Clientcase']['created'])); ?></td>
-                <th></th>
-                <td></td>
+                <th>Preferred contact method</th>
+                <td><?php echo h($clientcase['Clientcase']['contact_method']); ?></td>
             </tr>
             <tr>
                 <th>Open or closed</th>
-                <td><?php echo h($clientcase['Clientcase']['open_or_closed']); ?></td>
-                <th>
-                    <?php if($clientcase['Clientcase']['open_or_closed'] == 'Open')
-                    {
-                        echo 'Close case';
-                    }
-                    else
-                    {
-                        echo 'Open case';
-                    }
-                    ?>
-                </th>
+                <td><?php echo h($clientcase['Clientcase']['open_or_closed']); ?></td>      
                 <td><?php 
                 		if($clientcase['Clientcase']['open_or_closed'] == 'Open')
                 		{
-
 	                		echo $this->Form->create('Clientcase', array('action' => 'updateOpenClose', $clientcase['Clientcase']['id']));
                 			echo $this->Form->hidden('id', array('default' => $clientcase['Clientcase']['id']));
                             echo $this->Form->hidden('open_or_closed', array('default' => 'Closed'));
@@ -88,7 +87,6 @@ echo $this->HTML->script('JQueryUser');
                 		}
                 		else
                 		{
-                			echo h($clientcase['Clientcase']['open_or_closed']); 
                    			echo $this->Form->create('Clientcase', array('action' => 'updateOpenClose', $clientcase['Clientcase']['id']));
                 			echo $this->Form->hidden('id', array('default' => $clientcase['Clientcase']['id']));
                             echo $this->Form->hidden('open_or_closed', array('default' => 'Open'));
@@ -97,6 +95,7 @@ echo $this->HTML->script('JQueryUser');
                 		}
 						?>
                 </td>
+				<td></td>
 
             </tr>
             <tr>
@@ -325,139 +324,135 @@ echo $this->HTML->script('JQueryUser');
         endforeach; ?>
 
     </div>
-    <?php if($clientcase['Clientcase']['born_in_poland'] != NULL)
-    {
-        ?>
-        <div class="tab-pane" id="tab2">
-            <p>
-            <h3>Eligibility Check Information</h3>
-            <p>
-            <div class="actions">
-	            <ul>
-		            <li>
-			        	<?php echo $this->Html->link(__('Edit'), array('controller' => 'clientcases', 'action' => 'edit', $clientcase['Clientcase']['id'])); ?>
-		            </li>
-	            </ul>
-	    </div>
-            <table>
-            	<tbody>
-            		<tr  nth-child(even)>
-            			<th>Other Family That Have Used Polaron:</th>
-            			<td><?php echo h($clientcase['Clientcase']['existing_family']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Was The Main Applicant Born In Poland?</th>
-            			<td><?php echo h($clientcase['Clientcase']['born_in_poland']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Which Parents Were Polish?</th>
-						<td><?php echo h($clientcase['Clientcase']['nationality_of_parents']); ?></td>
-						<th></th>
-						<td></td>
-            		</tr>
-            		<tr>
-            			<th>Mother's Name:</th>
-            			<td><?php echo h($clientcase['Clientcase']['mother_name']); ?></td>
-            			<th>Father's Name:</th>
-            			<td><?php echo h($clientcase['Clientcase']['father_name']); ?></td>
-            		</tr>
-            		<tr>
-            			<th>Which Grandparents Were Polish?</th>
-            			<td><?php echo h($clientcase['Clientcase']['nationality_of_grandparents']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Maternal Grandmother's Name:</th>
-            			<td><?php echo h($clientcase['Clientcase']['mat_grandmother_name']); ?></td>
-            			<th>Maternal Grandfather's Name:</th>
-            			<td><?php echo h($clientcase['Clientcase']['mat_grandfather_name']); ?></td>
-            		</tr>
-            		<tr>
-	            		<th>Paternal Grandmother's Name:</th>
-	            		<td><?php echo h($clientcase['Clientcase']['pat_grandmother_name']); ?></td>
-	            		<th>Paternal Grandfather's Name</th>
-	            		<td><?php echo h($clientcase['Clientcase']['pat_grandfather_name']); ?></td>
-            		</tr>
-            		<tr>
-            			<th>Other Polish Ancestors:</th>
-            			<td><?php echo h($clientcase['Clientcase']['nationality_of_others']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Did Any Of Their Ancestors Serve In The Polish Army?</th>
-            			<td><?php echo h($clientcase['Clientcase']['serve_in_army']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Information Of Army Service:</th>
-            			<td><?php echo h($clientcase['Clientcase']['serve_in_army_info']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>When Did Their Ancestors Leave Poland?</th>
-            			<td><?php echo h($clientcase['Clientcase']['when_left_poland']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Where Did They Go?</th>
-            			<td><?php echo h($clientcase['Clientcase']['where_left_poland']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Country If Other Than In List:</th>
-            			<td><?php echo h($clientcase['Clientcase']['where_left_poland_other']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Do They Have An Available Passport?</th>
-            			<td><?php echo h($clientcase['Clientcase']['have_passport']); ?></td>
-            			<th>Do They Have Any Documents Available?</th>
-						<td><?php echo h($clientcase['Clientcase']['possess_documents']); ?></td>
-            		</tr>
-            		<tr>
-            			<th>Documents In Their Possession:</th>
-            			<td><?php echo h($clientcase['Clientcase']['possess_documents_types']); ?></td>
-            			<th></th>
-            			<td></td>
-            		</tr>
-            		<tr>
-            			<th>Other Documents They Possess:</th>
-				<td><?php echo h($clientcase['Clientcase']['possess_documents_other']); ?></td>
-				<th></th>
-				<td></td>
-            		</tr>
-            		<tr>
-            			<th>Other Factors Affecting Their Eligibility:</th>
-            			<td><?php echo h($clientcase['Clientcase']['other_factors']); ?></td>
-            			<th>Date Registered:</th>
-            			<td><?php echo $this->Time->format('d-m-Y',$clientcase['Clientcase']['created']); ?></td>
-            		</tr>
-                    <tr>
-                        <th>Their Brief Family History:</th>
-                        <td><?php echo h($clientcase['Clientcase']['brief_history']); ?></td>
-                        <th></th>
-                        <td></td>
-                    </tr>
-            	</tbody>
-            </table>
-        </div>
-    <?php
-    }
-    ?>
+   
+	<div class="tab-pane" id="tab2">
+		<p>
+		<h3>Eligibility Check Information</h3>
+		<p>
+		<div class="actions">
+			<ul>
+				<li>
+					<?php echo $this->Html->link(__('Edit'), array('controller' => 'clientcases', 'action' => 'edit', $clientcase['Clientcase']['id'])); ?>
+				</li>
+			</ul>
+	</div>
+		<table>
+			<tbody>
+				<tr  nth-child(even)>
+					<th>Other Families That Have Used Polaron:</th>
+					<td><?php echo h($clientcase['Clientcase']['existing_family']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Was The Main Applicant Born In Poland?</th>
+					<td><?php echo h($clientcase['Clientcase']['born_in_poland']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Which Parents Were Polish?</th>
+					<td><?php echo h($clientcase['Clientcase']['nationality_of_parents']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Mother's Name:</th>
+					<td><?php echo h($clientcase['Clientcase']['mother_name']); ?></td>
+					<th>Father's Name:</th>
+					<td><?php echo h($clientcase['Clientcase']['father_name']); ?></td>
+				</tr>
+				<tr>
+					<th>Which Grandparents Were Polish?</th>
+					<td><?php echo h($clientcase['Clientcase']['nationality_of_grandparents']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Maternal Grandmother's Name:</th>
+					<td><?php echo h($clientcase['Clientcase']['mat_grandmother_name']); ?></td>
+					<th>Maternal Grandfather's Name:</th>
+					<td><?php echo h($clientcase['Clientcase']['mat_grandfather_name']); ?></td>
+				</tr>
+				<tr>
+					<th>Paternal Grandmother's Name:</th>
+					<td><?php echo h($clientcase['Clientcase']['pat_grandmother_name']); ?></td>
+					<th>Paternal Grandfather's Name</th>
+					<td><?php echo h($clientcase['Clientcase']['pat_grandfather_name']); ?></td>
+				</tr>
+				<tr>
+					<th>Other Polish Ancestors:</th>
+					<td><?php echo h($clientcase['Clientcase']['nationality_of_others']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Did Any Of Their Ancestors Serve In The Polish Army?</th>
+					<td><?php echo h($clientcase['Clientcase']['serve_in_army']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Information Of Army Service:</th>
+					<td><?php echo h($clientcase['Clientcase']['serve_in_army_info']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>When Did Their Ancestors Leave Poland?</th>
+					<td><?php echo h($clientcase['Clientcase']['when_left_poland']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Where Did They Go?</th>
+					<td><?php echo h($clientcase['Clientcase']['where_left_poland']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Country If Other Than In List:</th>
+					<td><?php echo h($clientcase['Clientcase']['where_left_poland_other']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Do They Have An Available Passport?</th>
+					<td><?php echo h($clientcase['Clientcase']['have_passport']); ?></td>
+					<th>Do They Have Any Documents Available?</th>
+					<td><?php echo h($clientcase['Clientcase']['possess_documents']); ?></td>
+				</tr>
+				<tr>
+					<th>Documents In Their Possession:</th>
+					<td><?php echo h($clientcase['Clientcase']['possess_documents_types']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>Other Documents They Possess:</th>
+			<td><?php echo h($clientcase['Clientcase']['possess_documents_other']); ?></td>
+			<th></th>
+			<td></td>
+				</tr>
+				<tr>
+					<th>Other Factors Affecting Their Eligibility:</th>
+					<td><?php echo h($clientcase['Clientcase']['other_factors']); ?></td>
+					<th>Date Registered:</th>
+					<td><?php echo $this->Time->format('d-m-Y',$clientcase['Clientcase']['created']); ?></td>
+				</tr>
+				<tr>
+					<th>Their Brief Family History:</th>
+					<td><?php echo h($clientcase['Clientcase']['brief_history']); ?></td>
+					<th></th>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
     <div class="tab-pane" id="tab3">
     <p>
     <h3><?php echo __('Case Status'); ?></h3>
+	<br>
     <a class="btn" data-toggle="modal" href="#myModal1">Update Status</a>
     <?php if (!empty($clientcase['Casestatus'])): ?>
         <table cellpadding = "0" cellspacing = "0">
@@ -645,7 +640,14 @@ echo $this->HTML->script('JQueryUser');
                                             <?php echo h($this->Time->format('d-m-Y', $physicalappdocument['Document']['date_received'])); ?>
                                         </td>
                                         <td valign="top">
-                                            <?php echo h($this->Time->format('d-m-Y', $physicalappdocument['Document']['date_returned'])); ?>
+										<?php if(empty($physicalappdocument['Document']['date_returned']))
+										{
+											echo 'None';
+										}
+										else
+										{
+                                            echo h($this->Time->format('d-m-Y', $physicalappdocument['Document']['date_returned']));
+										} ?>
                                         </td>
                                         <td valign="top">
                                             <?php echo h($physicalappdocument['Document']['copy_type']); ?>
@@ -698,8 +700,16 @@ echo $this->HTML->script('JQueryUser');
                                 <?php echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_received'])); ?>
                             </td>
                             <td valign="top">
-                                <?php echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_returned'])); ?>
-                            </td>
+                                <?php if(empty($physicalancdocument['Document']['date_returned']))
+								{
+									echo 'None';
+								}
+								else
+								{
+									echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_returned']));
+								}
+								 ?>
+							</td>
                             <td valign="top">
                                 <?php echo h($physicalancdocument['Document']['copy_type']); ?>
                             </td>
@@ -962,7 +972,7 @@ echo $this->HTML->script('JQueryUser');
 <div class="modal hide" id="changeMainApplicant"><!-- note the use of "hide" class -->
     <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
-        <h3>Change the main applicant</h3>
+        <h3>Change Primary Applicant</h3>
     </div>
     <div class="modal-body">
         This will change the main applicant associated with a case. Only an applicant with an email address is eligible. <br>

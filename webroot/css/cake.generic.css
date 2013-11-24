@@ -244,6 +244,7 @@ div.actions h3 {
 
 /** Tables **/
 
+
 table {
 	clear: both;
 	color: #333;
@@ -252,6 +253,7 @@ table {
     border-collapse:collapse;
     font-size: 14px;
 }
+
 th {
     padding: 8px;
 
@@ -380,7 +382,7 @@ form {
 	clear: both;
 	margin-right: 30px;
 	padding: 0;
-	width: 40%;
+	width: 100%;
 }
 fieldset {
 	border: none;
@@ -414,6 +416,7 @@ form div {
 }
 form .input {
 	color: #444;
+    width: 300px;
 }
 form .required {
 	font-weight: bold;

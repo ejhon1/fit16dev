@@ -49,10 +49,10 @@ class DocumenttypesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Documenttype->create();
 			if ($this->Documenttype->save($this->request->data)) {
-				$this->Session->setFlash(__('The documenttype has been saved'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('The document type has been saved', null),'default', array('class' => 'alert-success'));
+                return $this->redirect('../management');
 			} else {
-				$this->Session->setFlash(__('The documenttype could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The documenttype could not be saved. Please try again.'));
 			}
 		}
 	}
@@ -70,8 +70,8 @@ class DocumenttypesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Documenttype->save($this->request->data)) {
-				$this->Session->setFlash(__('The documenttype has been saved'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('The document type has been saved', null),'default', array('class' => 'alert-success'));
+                return $this->redirect('../management');
 			} else {
 				$this->Session->setFlash(__('The documenttype could not be saved. Please, try again.'));
 			}
@@ -95,8 +95,8 @@ class DocumenttypesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Documenttype->delete()) {
-			$this->Session->setFlash(__('Documenttype deleted'));
-			return $this->redirect(array('action' => 'index'));
+			$this->Session->setFlash(__('Document type deleted', null),'default', array('class' => 'alert-success'));
+            return $this->redirect('../management');
 		}
 		$this->Session->setFlash(__('Documenttype was not deleted'));
 		return $this->redirect(array('action' => 'index'));

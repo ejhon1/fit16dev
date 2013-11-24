@@ -80,7 +80,7 @@ $(document).ready(function() {
 			
 		</div>
 	</div>	
-
+<br>
 <div class="umtop">
 	<?php echo $this->Session->flash(); ?>
 	<div class="um_box_up"></div>

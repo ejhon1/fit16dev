@@ -70,6 +70,7 @@ class ApplicantsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+	$this->loadModel('Applicant');
 		if (!$this->Applicant->exists($id)) {
 			throw new NotFoundException(__('Invalid applicant'));
 		}

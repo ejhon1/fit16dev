@@ -1,7 +1,9 @@
 <div>
 <?php echo $this->Form->create('Casenote'); ?>
 	<fieldset>
-		<legend><?php echo __('Add Contact Note'); ?></legend>
+		<h2><?php echo __('Add Contact Note'); ?></h2>
+		<br>
+		Public contact notes can be viewed by the client and will send an email to tell them that they have a new note.
 	<?php
 		//echo $this->Form->input('clientcase_id');
 		//echo $this->Form->input('user_id');

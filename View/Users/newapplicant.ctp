@@ -1,5 +1,6 @@
-<?php echo $this->Html->script('bootstrap-datepicker.js');
-echo $this->HTML->css('datepicker'); ?>
+<?php echo $this->Html->css('jquery-ui-1.10.3.custom'); ?>
+<?php echo $this->Html->script('jquery-1.5.min'); ?>
+<?php echo $this->Html->script('jquery-ui-1.10.3.custom.min'); ?>
 <?php echo $this->Html->script('jquery.smartWizard-2.0.min'); ?>
 <?php echo $this->Html->script('jquery.smartWizard-2.0'); ?>
 <?php echo $this->Html->script('show-hide-checkbox'); ?>
@@ -7,16 +8,9 @@ echo $this->HTML->css('datepicker'); ?>
 
 <div class="users form">
 <?php echo $this->Form->create('User');
-//$td = date("d-m-Y");
 $test = "<font color='red'>*</font>";
 ?>
-<script>
-    $(document).ready(function() {
-        $('.datepicker').datepicker({
-            autoclose: true
-        });
-    });
-</script>
+
 <script type="text/javascript">
     $(document).ready(function(){
 // Smart Wizard
@@ -153,7 +147,7 @@ $test = "<font color='red'>*</font>";
     }
     function validatePhone(phone)
     {
-        var pattern = new RegExp("^([a-zA-Z,#/ \.\(\)\-\+\*]*[0-9]){7}[0-9a-zA-Z,#/ \.\(\)\-\+\*]*$");
+        var pattern = new RegExp("^([a-zA-Z,#/ \.\(\)\-\+\*]*[0-9]){4}[0-9a-zA-Z,#/ \.\(\)\-\+\*]*$");
         return pattern.test(phone);
     }
     function isValidEmailAddress(emailAddress) {
@@ -224,6 +218,7 @@ $(document).ready(function(){
 
 <fieldset>
 <h2><?php echo __('Eligibility Assessment'); ?></h2>
+<br>
 <div id="wizard" class="swMain">
 <ul>
     <li><a href="#step-1">
@@ -301,7 +296,7 @@ Step 4<br />
             'label' => 'E-mail Address'.$test)
         );
         echo $this->Form->input('Clientcase.existing_family', array(
-		'label' => 'If any, please specify other family members who have already registered for Polaron\'s services'));
+		'label' => 'If any, please specify other family members who already registered on Polaron'));
     ?>
 </div>
 
@@ -315,7 +310,7 @@ Step 4<br />
     	<tr>
     		<td>
 				<?php
-                echo $this->Form->input('ClientCase.born_in_poland', array(
+                echo $this->Form->input('Clientcase.born_in_poland', array(
                     'id' => 'bip',
                     'class' => 'bip',
                     'type' => 'radio',
@@ -327,7 +322,7 @@ Step 4<br />
     		</td>
     		<td>
 				<?php
-                echo $this->Form->input('ClientCase.spouse_nationality', array(
+                echo $this->Form->input('Clientcase.spouse_nationality', array(
                     'id' => 'spouse',
                     'type' => 'radio',
                     'options' => array(
@@ -336,14 +331,11 @@ Step 4<br />
                     'legend' => 'My Spouse is Polish'));
                 ?>
     		</td>
-            <td>
-            	<div id="warning" style="display:none; width:300px; text-align:justify; font-style:italic">Please be aware that your spouse does not qualify for a Polish passport, , unless she or he has ancestors who are Polish, in which case, your spouse would be required to complete a separate application for confirmation of Polish citizenship. However, as the spouse of a Polish citizen, they have the right to live and work in Europe, and all other associated benefits. </div>
-            </td>
     	</tr>
     </table>
     
     <?php
-    echo $this->Form->input('ClientCase.nationality_of_parents', array(
+    echo $this->Form->input('Clientcase.nationality_of_parents', array(
         'type' => 'select',
         'multiple' => 'checkbox',
         'options' => array(
@@ -351,20 +343,20 @@ Step 4<br />
             'Father' => 'My father is/was Polish'),
         'label' => 'Parents\' Nationality'));
 
-    echo $this->Form->input('ClientCase.mother_name', array(
+    echo $this->Form->input('Clientcase.mother_name', array(
         'div' => array(
             'id' => 'mother',
             'title' => 'mother',
             'style' => 'display:none'),
         'label' => 'Mother\'s name'));
-    echo $this->Form->input('ClientCase.father_name', array(
+    echo $this->Form->input('Clientcase.father_name', array(
         'div' => array(
             'id' => 'father',
             'title' => 'father',
             'style' => 'display:none'),
         'label' => 'Father\'s name'));
 
-    echo $this->Form->input('ClientCase.nationality_of_grandparents', array(
+    echo $this->Form->input('Clientcase.nationality_of_grandparents', array(
         'type' => 'select',
         'multiple' => 'checkbox',
         'options' => array(
@@ -374,32 +366,32 @@ Step 4<br />
             'Paternal Grandfather' => 'My paternal grandfather is/was Polish'),
         'label' => 'Grandparents\' Nationality'));
 
-    echo $this->Form->input('ClientCase.mat_grandmother_name', array(
+    echo $this->Form->input('Clientcase.mat_grandmother_name', array(
         'div' => array(
             'id' => 'mat_grandmother',
             'title' => 'mat_grandmother',
             'style' => 'display:none'),
         'label' => 'Maternal grandmother\'s name'));
-    echo $this->Form->input('ClientCase.mat_grandfather_name', array(
+    echo $this->Form->input('Clientcase.mat_grandfather_name', array(
         'div' => array(
             'id' => 'mat_grandfather',
             'title' => 'mat_grandfather',
             'style' => 'display:none'),
         'label' => 'Maternal grandfather\'s name'));
-    echo $this->Form->input('ClientCase.pat_grandmother_name', array(
+    echo $this->Form->input('Clientcase.pat_grandmother_name', array(
         'div' => array(
             'id' => 'pat_grandmother',
             'title' => 'pat_grandmother',
             'style' => 'display:none'),
         'label' => 'Paternal grandmother\'s name'));
-    echo $this->Form->input('ClientCase.pat_grandfather_name', array(
+    echo $this->Form->input('Clientcase.pat_grandfather_name', array(
         'div' => array(
             'id' => 'pat_grandfather',
             'title' => 'pat_grandfather',
             'style' => 'display:none'),
         'label' => 'Paternal grandfather\'s name'));
 
-    echo $this->Form->input('ClientCase.nationality_of_others', array(
+    echo $this->Form->input('Clientcase.nationality_of_others', array(
         'label' => 'Please specify any other family members of Polish decent here'));
 
     ?>
@@ -409,18 +401,18 @@ Step 4<br />
 <div id="step-3">
     <h2 class="StepTitle">Family History</h2>
     <?php
-    echo $this->Form->input('ClientCase.brief_history', array(
+    echo $this->Form->input('Clientcase.brief_history', array(
         'label'=> 'Please write a brief history of your family here'));
-    echo $this->Form->input('ClientCase.serve_in_army', array(
+    echo $this->Form->input('Clientcase.serve_in_army', array(
         'type' => 'radio',
         'options' => array(
             'Yes' => 'Yes',
             'No' => 'No',
             'Not Sure' => 'Not Sure'),
         'legend' => 'Did any of your ancestors serve in the Polish army?'));
-    echo $this->Form->input('ClientCase.serve_in_army_info', array(
+    echo $this->Form->input('Clientcase.serve_in_army_info', array(
         'label' => 'Please put any known information of this here'));
-    echo $this->Form->input('ClientCase.when_left_poland', array(
+    echo $this->Form->input('Clientcase.when_left_poland', array(
         'type' => 'select',
         'multiple' => 'checkbox',
         'options' => array(
@@ -430,7 +422,7 @@ Step 4<br />
             'During WW2 (1939-1945)' => 'They left Poland during WW2 (1939-1945)',
             'After WW2 (after 1945)' => 'They left Poland after WW2 (after 1945)'),
         'label' => 'When did your ancestors leave Poland?'));
-    echo $this->Form->input('ClientCase.where_left_poland', array(
+    echo $this->Form->input('Clientcase.where_left_poland', array(
         'type' => 'select',
         'multiple' => 'checkbox',
         'options' => array(
@@ -445,7 +437,7 @@ Step 4<br />
             'UK' => 'UK',
             'Israel' => 'Israel'),
         'label' => 'Where did your ancestors go after leaving Poland? (please select all that apply)'));
-    echo $this->Form->input('ClientCase.where_left_poland_other', array(
+    echo $this->Form->input('Clientcase.where_left_poland_other', array(
         'label' => ' If other, please specify'));
 
     //echo $this->Form->input('enquiry_date', array('default' => $td));
@@ -458,20 +450,20 @@ Step 4<br />
 <div id="step-4">
     <h2 class="StepTitle">Documents</h2>
     <?php
-    echo $this->Form->input('ClientCase.have_passport', array(
+    echo $this->Form->input('Clientcase.have_passport', array(
         'type' => 'radio',
         'options' => array(
             'Yes' => 'Yes',
             'No' => 'No'),
         'legend' => 'I have/had a Polish passport and wish to renew it'));
-    echo $this->Form->input('ClientCase.possess_documents', array(
+    echo $this->Form->input('Clientcase.possess_documents', array(
         'type' => 'radio',
         'options' => array(
             'Yes' => 'Yes',
             'No' => 'No',
             'Not sure' => 'Not Sure'),
         'legend' => 'Do you have any Polish documents from your relatives/ancestors?'));
-    echo $this->Form->input('ClientCase.possess_documents_types', array(
+    echo $this->Form->input('Clientcase.possess_documents_types', array(
         'type' => 'select',
         'multiple' => 'checkbox',
         'options' => array(
@@ -487,9 +479,9 @@ Step 4<br />
             'Change of name Certificate(s)' => 'Change of name Certificate(s)',
             'Not sure what they are' => 'Not sure what they are'),
         'label' => 'If yes, please select the following Polish documents you possess (select all that apply)'));
-    echo $this->Form->input('ClientCase.possess_documents_other', array(
+    echo $this->Form->input('Clientcase.possess_documents_other', array(
         'label' => 'If other, please specify'));
-    echo $this->Form->input('ClientCase.other_factors', array(
+    echo $this->Form->input('Clientcase.other_factors', array(
         'type' => 'select',
         'multiple' => 'checkbox',
         'options' => array(

@@ -11,7 +11,7 @@ echo $this->HTML->css('datepicker'); ?>
         });
     </script>
     <fieldset>
-		<legend><?php echo __('Edit Applicant'); ?></legend>
+		<h2><?php echo __('Edit Applicant Details'); ?></h2>
 	<?php
 		echo $this->Form->hidden('id');
         echo $this->Form->hidden('clientcase_id');

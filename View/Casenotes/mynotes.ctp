@@ -4,17 +4,21 @@
 	<a class="btn" data-toggle="modal" href="#myModal">Add Note</a>
 	<br><br>
 	<table cellpadding="0" cellspacing="0">
-        <tr>
-            <th class="heading">Date/Time</th>
-			<th class="heading">Subject</th>
-            <th class="heading">Note</th>
-        </tr>
-
 		<?php foreach ($casenotes as $casenote): ?>
 			<tr>
-				<td><?php echo h($casenote['Casenote']['created']); ?>&nbsp;</td>
 				<td><?php echo h($casenote['Casenote']['subject']); ?></td>
-				<td><?php echo h($casenote['Casenote']['note']); ?>&nbsp;</td>
+				<td><?php if(!empty($casenote['Employee']['first_name']))
+                    {
+                        echo h($casenote['Employee']['first_name'].' '.$casenote['Employee']['surname']);
+                    } else
+                    {
+                        echo h($casenote['Applicant']['first_name'].' '.$casenote['Applicant']['surname']);
+                    }?></td>
+				<td><?php echo h($casenote['Casenote']['created']); ?></td>
+				
+			</tr>
+			<tr>
+				<td colspan=3><?php echo h($casenote['Casenote']['note']); ?></td>
 			</tr>
 <?php endforeach; ?>
 	</table>

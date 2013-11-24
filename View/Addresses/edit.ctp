@@ -1,7 +1,7 @@
 <div class="addresses form">
 <?php echo $this->Form->create('Address'); ?>
 	<fieldset>
-		<legend><?php echo __('Edit Address'); ?></legend>
+		<h2><?php echo __('Change Address'); ?></h2>
 	<?php
 		echo $this->Form->input('address_line', array('label' => 'Address'));
 		echo $this->Form->input('suburb');

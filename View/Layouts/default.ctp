@@ -86,8 +86,8 @@ $loggedUser = $this->Session->read('UserAuth.User');
 						<li><?php echo $this->Html->link('Home', '/'); ?> </li>
 						<li><?php echo $this->Html->link('Cases', array('plugin' => false, 'controller'=>'clientcases', 'action'=>'index'));?> </li>
                         <li><?php echo $this->Html->link('Admin Dashboard', '/dashboard');?> </li>
-						<li><?php echo $this->Html->link('My Account', array('plugin' => false, 'controller' => 'employees', 'action' => 'myaccount')); ?></li>
 						<li><?php echo $this->Html->link('New Applicant','/newapplicant') ?></li>
+						<li><?php echo $this->Html->link('My Account', array('plugin' => false, 'controller' => 'employees', 'action' => 'myaccount')); ?></li>
 					<?php
 					}
 					else if(!empty($loggedUser) && $loggedUser['type']=='Client')
@@ -96,13 +96,6 @@ $loggedUser = $this->Session->read('UserAuth.User');
                         <li><?php echo $this->Html->link('My Contact Notes', array('plugin' => false, 'controller'=>'casenotes', 'action'=>'mynotes'));?> </li>
 						<li><?php echo $this->Html->link('My Documents', array('plugin' => false, 'controller'=>'documents', 'action'=>'mydocs'));?> </li>
 						<li><?php echo $this->Html->link('My Account', array('plugin' => false, 'controller'=>'clientcases', 'action'=>'myaccount'));?> </li><?php
-					}
-					else
-					{
-					?>
-						<li><?php echo $this->Html->link('Login', '/login'); ?> </li>
-						<li><?php echo $this->Html->link('Enquire', '/register'); ?> </li>
-					<?php
 					}
 					if(!empty($loggedUser))
 					{
@@ -143,7 +136,7 @@ $loggedUser = $this->Session->read('UserAuth.User');
 
 			<?php echo $this->fetch('content'); ?>
             <div id="footer">
-                <p>Copyright &copy; 2013 <a href="http://ie.infotech.monash.edu.au/team16/Development/">Polaron</a>. All Rights Reserved<br/></p>
+                <p>Copyright &copy; 2013 <a href="http://www.polaron.com.au">Polaron</a>. All Rights Reserved<br/></p>
             </div>
 		</div>
         

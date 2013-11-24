@@ -68,13 +68,22 @@ class CasenotesController extends AppController {
 	
 	public function mynotes() {
         $userid = $this->UserAuth->getUserId();
-		$this->loadModel('ClientCase');
+		$this->loadModel('Clientcase');
 		$this->loadModel('Casenote');
 
-	$clientCase = $this->ClientCase->find('first', array('conditions' => array('ClientCase.user_id' => $userid),'fields' => array('ClientCase.id','archive_id')));
-
-        $options = array('conditions' => array('Casenote.clientcase_id' => $clientCase['ClientCase']['id'], 'Casenote.note_type' => 'Public'));
-        $this->set('casenotes', $this->Casenote->find('all', $options));
+		$clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $userid),'fields' => array('Clientcase.id','archive_id')));
+		
+		$casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.note, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
+                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
+                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
+                AND Casenote.clientcase_id = ".$clientcase['Clientcase']['id']."
+                AND Casenote.note_type = 'Public'
+                AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
+                order by Casenote.id DESC");
+		
+		$this->set(compact('casenotes'));
+        //$options = array('conditions' => array('Casenote.clientcase_id' => $clientCase['Clientcase']['id'], 'Casenote.note_type' => 'Public'));
+        //$this->set('casenotes', $this->Casenote->find('all', $options));
 	}
 
 /**

@@ -38,8 +38,8 @@ class Archive extends AppModel {
             'finderQuery' => '',
             'counterQuery' => ''
         ),
-        'ClientCase' => array(
-            'className' => 'ClientCase',
+        'Clientcase' => array(
+            'className' => 'Clientcase',
             'foreignKey' => 'archive_id',
             'dependent' => false,
             'conditions' => '',

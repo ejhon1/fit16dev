@@ -26,7 +26,7 @@
         <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Add Group",true),"/addGroup") ?></div>
         <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("All Groups",true),"/allGroups") ?></div>
         <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Permissions",true),"/permissions") ?></div>
-        <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Management Page",true),"managepage") ?></div>
+        <div style="float:left;padding-left:25px; line-height:40px"><?php echo $this->Html->link(__("Management Page",true),"/management") ?></div>
 
     <?php   }?>
     <div style="clear:both"></div>
