@@ -47,10 +47,10 @@ class DocumentsController extends AppController {
 
         $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $userid),'fields' => array('Clientcase.id','archive_id')));
 
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL));
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'), 'order' => 'Document.id DESC');
         $this->set('ancestordocuments', $this->Document->find('all', $options));
 
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL), 'order'=>'applicant_id ASC');
+        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC'));
         $this->set('applicantdocuments', $this->Document->find('all', $options));
 
         //For uploading
