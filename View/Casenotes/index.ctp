@@ -9,7 +9,6 @@ echo $this->HTML->script('JQueryUser');
         <th class="heading">Archive</th>
         <th class="heading">Client</th>
         <th class="heading">Subject</th>
-        <th class="heading">Note</th>
         <th class="heading">Created</th>
 	    <th class="actions"></th>
 	</tr>
@@ -26,10 +25,6 @@ echo $this->HTML->script('JQueryUser');
             </td>
             <td valign="top">
                 <?php echo h($casenote['Casenote']['subject']); ?>
-            </td>
-            <td valign="top">
-                <?php echo String::truncate($casenote['Casenote']['note'], 60, array('html' => true));
-                //echo h($casenote['Casenote']['note']); ?>
             </td>
             <td valign="top">
                 <?php echo h($this->Time->format('h:i d-m-Y', $casenote['Casenote']['created'])); ?>
