@@ -4,22 +4,18 @@ App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Casenotes Controller
- *
- * @property Casenote $Casenote
- * @property PaginatorComponent $Paginator
  */
 class CasenotesController extends AppController {
 
 /**
- * index method
- *
- * @return void
+ * Case notes index page, accessed from the home page. Lists all notes on cases, most recent first.
+ * Only returns notes from open cases.
  */
 	public function index() {
-        //Recent contact notes list
+
         $this->loadModel('Casenote');
-        //$casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC')));
-        $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.note, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
+
+        $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
                 FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
                 WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
                 AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
@@ -30,11 +26,10 @@ class CasenotesController extends AppController {
     }
 
 /**
- * view method
+ * Case notes view page
  *
- * @throws NotFoundException
- * @param string $id
- * @return void
+ * Accessed by staff through case page.
+ * Shows all info relating to a note.
  */
 	public function view($id = NULL) {
 		if (!$this->Casenote->exists($id)) {
@@ -44,9 +39,12 @@ class CasenotesController extends AppController {
         $this->loadModel('Employee');
         $this->loadModel('Clientcase');
         $this->loadModel('Applicant');
-        $author = 'Author unknown';
+
+        $author = 'Author unknown'; //Used as a precaution. May be used by legacy notes.
+
         $casenote = $this->Casenote->find('first',array('conditions' => array('Casenote.' . $this->Casenote->primaryKey => $id)));
 		$employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $casenote['Casenote']['user_id']), 'fields' => array('Employee.id', 'Employee.first_name', 'Employee.surname')));
+
         if(empty($employee['Employee']['id']))
         {
             $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $casenote['Casenote']['user_id']), 'fields' => array('Clientcase.id', 'Clientcase.applicant_id')));
@@ -63,9 +61,13 @@ class CasenotesController extends AppController {
         }
 
         $this->set(compact('casenote', 'author'));
-
 	}
-	
+
+/**
+ * Case notes mynotes page
+ *
+ * Used by clients to view notes relating to their case.
+ */
 	public function mynotes() {
         $userid = $this->UserAuth->getUserId();
 		$this->loadModel('Clientcase');
@@ -79,17 +81,15 @@ class CasenotesController extends AppController {
                 AND Casenote.clientcase_id = ".$clientcase['Clientcase']['id']."
                 AND Casenote.note_type = 'Public'
                 AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
+                GROUP BY Casenote.id
                 order by Casenote.id DESC");
 		
 		$this->set(compact('casenotes'));
-        //$options = array('conditions' => array('Casenote.clientcase_id' => $clientCase['Clientcase']['id'], 'Casenote.note_type' => 'Public'));
-        //$this->set('casenotes', $this->Casenote->find('all', $options));
 	}
 
 /**
- * add method
- *
- * @return void
+ * Add page for case notes.
+ * Used by staff to add notes to a case.
  */
 	public function add($id=null) {
 		$userId=$this->Session->read('UserAuth.User.id');
@@ -101,7 +101,7 @@ class CasenotesController extends AppController {
 				if ($this->request->data['Casenote']['note_type'] == 'Public'){
                     $this->email($id);
                 }
-				$this->Session->setFlash(__('The contact note has been saved', null),'default', array('class' => 'alert-success'));
+				$this->Session->setFlash(__('The contact note was saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('controller' => 'Clientcases', 'action' => 'view', $id, '#' => 'tab4'));
 			} else {
 				$this->Session->setFlash(__('The contact note could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
@@ -109,38 +109,39 @@ class CasenotesController extends AppController {
             }
 		}
 		$clientcases = $this->Casenote->Clientcase->find('list');
-		// $users = $this->Casenote->User->find('list');
+
 		$this->set(compact('clientcases', 'users', 'notesubjects'));
 	}
+
+    /**
+     * mynotesadd function for case notes.
+     * Accessed by the modal on the mynotes page in the client view.
+     * Used by the client to add notes to their case.
+     */
 	
 	public function mynotesadd() {
 		$userId=$this->Session->read('UserAuth.User.id');
-		
+
 		if ($this->request->is('post')) {
 			$this->Casenote->create();
 			$this->loadModel('Clientcase');
-			
+
 			$clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $userId)));
             $this->request->data['Casenote']['user_id'] = $userId;
             $this->request->data['Casenote']['clientcase_id'] = $clientcase['Clientcase']['id'];
 			if ($this->Casenote->save($this->request->data)) {
-				$this->Session->setFlash(__('The contact note has been saved', null),'default', array('class' => 'alert-success'));
+				$this->Session->setFlash(__('The contact note was saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('controller' => 'Casenotes', 'action' => 'mynotes'));
 			} else {
 				$this->Session->setFlash(__('The contact note could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
+                return $this->redirect(array('controller' => 'Casenotes', 'action' => 'mynotes'));
 			}
 		}
-		$clientcases = $this->Casenote->Clientcase->find('list');
-		// $users = $this->Casenote->User->find('list');
-		$this->set(compact('clientcases', 'users', 'notesubjects'));
 	}
 
 /**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
+ * edit page for case notes.
+ * Accessed through the case page and used only by certain staff members.
  */
 	public function edit($id = null) {
 		if (!$this->Casenote->exists($id)) {
@@ -148,7 +149,7 @@ class CasenotesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Casenote->save($this->request->data)) {
-				$this->Session->setFlash(__('The contact note has been saved', null),'default', array('class' => 'alert-success'));
+				$this->Session->setFlash(__('The contact note was saved', null),'default', array('class' => 'alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The contact note could not be saved. Please try again.', null),'default', array('class' => 'alert-danger'));
@@ -164,27 +165,10 @@ class CasenotesController extends AppController {
 	}
 
 /**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
+ * email function for case notes.
+ * Used by the add function to send an email to the client when a public note is added to their case.
  */
-	public function delete($id = null) {
-		$this->Casenote->id = $id;
-		if (!$this->Casenote->exists()) {
-			throw new NotFoundException(__('Invalid casenote'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Casenote->delete()) {
-			$this->Session->setFlash(__('Casenote deleted'));
-			return $this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Casenote was not deleted', null),'default', array('class' => 'alert-danger'));
-		return $this->redirect(array('action' => 'index'));
-	}
-	
-	 public function email($id){
+    public function email($id){
         $this->loadModel('Applicant');
         $this->loadModel('Clientcase');
 
@@ -199,11 +183,13 @@ class CasenotesController extends AppController {
         $Email->emailFormat('text');
         $Email->viewVars(array('name' => $applicants['Applicant']['first_name']));
 
-
         $Email->send();
-
     }
-    
+
+/**
+ * report function for case notes.
+ * Used by the generate reports page (clientcases/reporting) to create an excel report.
+ */
     public function report()
     {
         $this->loadModel('Casenote');
