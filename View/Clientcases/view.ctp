@@ -498,7 +498,7 @@ echo $this->HTML->script('JQueryUser');
                 $i = 0;
                 foreach ($clientcase['Casenote'] as $casenote): ?>
                     <tr>
-                        <th><?php echo $this->Time->format('d-m-Y',$casenote['created']); ?></th>
+                        <td><?php echo $this->Time->format('h:i d-m-Y',$casenote['created']); ?></td>
                         <td><?php echo $casenote['subject']; ?></td>
                         <td><?php echo $casenote['note_type']; ?></td>
                         <td>
