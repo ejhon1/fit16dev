@@ -212,7 +212,7 @@ echo $this->HTML->script('JQueryUser');
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-target="#MainApplicant" href="#MainApplicant">
+                    <a class="accordion-toggle" data-toggle="collapse" data-target="#MainApplicant">
                         <?php echo h($mainapplicant['Applicant']['title'].' '.$mainapplicant['Applicant']['first_name'].' '.$mainapplicant['Applicant']['middle_name'].' '.$mainapplicant['Applicant']['surname']); ?>
                     </a></h4>
             </div>
@@ -293,7 +293,7 @@ echo $this->HTML->script('JQueryUser');
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-target="<?php echo h('#Applicant'.$i); ?>" href="<?php echo h('#Applicant'.$i); ?>">
+                    <a class="accordion-toggle" data-toggle="collapse" data-target="<?php echo h('#Applicant'.$i); ?>" >
                         <?php echo h($applicant['Applicant']['title'].' '.$applicant['Applicant']['first_name'].' '.$applicant['Applicant']['middle_name'].' '.$applicant['Applicant']['surname']); ?>
                 </a></h4>
             </div>
@@ -524,12 +524,12 @@ echo $this->HTML->script('JQueryUser');
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
+                        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne">
                             Ancestor Documents
                         </a><a class="btn pull-right" data-toggle="modal" href="#myModal2">Upload</a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse">
+                <div id="collapseOne"  class="panel-collapse collapse in">
                     <div class="panel-body">
                         <?php if (!empty($ancestordocuments)): ?>
                             <table cellpadding="0" cellspacing="0">
@@ -549,7 +549,7 @@ echo $this->HTML->script('JQueryUser');
                                             <?php echo h($ancestordocument['Documenttype']['type']); ?>
                                         </td>
                                         <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
-                                        <td valign="top"><?php echo h($this->Time->format('d-m-Y',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
+                                        <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                             <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $ancestordocument['Document']['id']), array('escape' => false)); ?>
@@ -567,12 +567,12 @@ echo $this->HTML->script('JQueryUser');
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo">
+                        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseTwo" >
                             Applicant Documents
                         </a><a class="btn pull-right" data-toggle="modal" href="#myModal3" >Upload</a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
+                <div id="collapseTwo"  class="panel-collapse collapse in">
                     <div class="panel-body">
                             <?php if (!empty($applicantdocuments)): ?>
 
@@ -593,7 +593,7 @@ echo $this->HTML->script('JQueryUser');
                                                 <?php echo h($applicantdocument['Documenttype']['type']); ?>
                                             </td>
                                             <td valign="top"><?php echo h($applicantdocument['Document']['filename']); ?>&nbsp;</td>
-                                            <td valign="top"><?php echo h($this->Time->format('d-m-Y',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
+                                            <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
                                         <td>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                             <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $applicantdocument['Document']['id']), array('escape' => false)); ?>
@@ -610,12 +610,12 @@ echo $this->HTML->script('JQueryUser');
                        <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseThree" href="#collapseThree">
+                        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseThree">
                             Applicant Physical Documents
                         </a><a class="btn pull-right" data-toggle="modal" href="#modalAddPhysicalDoc1" >Add</a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse">
+                <div id="collapseThree"  class="panel-collapse collapse in">
                     <div class="panel-body">
                         <?php if (!empty($physicalappdocuments)): ?>
 
@@ -670,12 +670,12 @@ echo $this->HTML->script('JQueryUser');
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseFour" href="#collapseFour">
+            <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseFour" >
                 Ancestor Physical Documents
             </a><a class="btn pull-right" data-toggle="modal" href="#modalAddPhysicalDoc2" >Add</a>
         </h4>
     </div>
-    <div id="collapseFour" class="panel-collapse collapse">
+    <div id="collapseFour"  class="panel-collapse collapse in">
         <div class="panel-body">
             <?php if (!empty($physicalancdocuments)): ?>
 
