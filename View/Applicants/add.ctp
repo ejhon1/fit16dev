@@ -14,7 +14,6 @@ echo $this->HTML->css('datepicker'); ?>
     <fieldset>
         <h2><?php echo __('Add Applicant'); ?></h2>
         <?php
-        /** echo $this->Form->input('archive', array('options' => $archives)); */
         echo $this->Form->input('title',array(
             'options' => array(
                 '' => '',
