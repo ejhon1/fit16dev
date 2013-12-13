@@ -38,7 +38,6 @@ class AppController extends Controller {
     public $components = array('DebugKit.Toolbar', 'Session', 'DataTable', 'RequestHandler', 'Usermgmt.UserAuth');
 
     public function beforeFilter() {
-        //$this->Auth->allow('display');
         $this->userAuth();
     }
     private function userAuth(){
