@@ -3,47 +3,15 @@ App::uses('AppController', 'Controller');
 /**
  * Applicants Controller
  *
- * @property Applicant $Applicant
- * @property PaginatorComponent $Paginator
+ * Used to record, edit and access information about applicants.
  */
 class ApplicantsController extends AppController {
 
 /**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator');
-
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Applicant->recursive = 0;
-		$this->set('applicants', $this->Paginator->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Applicant->exists($id)) {
-			throw new NotFoundException(__('Invalid applicant'));
-		}
-		$options = array('conditions' => array('Applicant.' . $this->Applicant->primaryKey => $id));
-		$this->set('applicant', $this->Applicant->find('first', $options));
-	}
-
-/**
  * add method
  *
- * @return void
+ * Accessed by staff through the case page.
+ * Adds an applicant to a case.
  */
 	public function add($id = null) {
 		$this->request->data['Applicant']['clientcase_id'] = $id;
@@ -65,9 +33,8 @@ class ApplicantsController extends AppController {
 /**
  * edit method
  *
- * @throws NotFoundException
- * @param string $id
- * @return void
+ * Accessed by staff through the case page.
+ * Edits information belonging to an applicant.
  */
 	public function edit($id = null) {
 	$this->loadModel('Applicant');
@@ -91,26 +58,5 @@ class ApplicantsController extends AppController {
         $options = array('conditions' => array('Applicant.' . $this->Applicant->primaryKey => $id));
         $this->request->data = $this->Applicant->find('first', $options);
 		$this->set(compact('id', 'test'));
-	}
-
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Applicant->id = $id;
-		if (!$this->Applicant->exists()) {
-			throw new NotFoundException(__('Invalid applicant'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Applicant->delete()) {
-			$this->Session->setFlash(__('Applicant deleted', null),'default', array('class' => 'alert-success'));
-			return $this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Applicant was not deleted', null),'default', array('class' => 'alert-danger'));
-		return $this->redirect(array('action' => 'index'));
 	}
 }
