@@ -3,47 +3,15 @@ App::uses('AppController', 'Controller');
 /**
  * Ancestortypes Controller
  *
- * @property Ancestortype $Ancestortype
- * @property PaginatorComponent $Paginator
+ * Used by documents as a category.
+ * An index can be viewed by staff in the admin dashboard management page (view/users/management)
  */
 class AncestortypesController extends AppController {
 
 /**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator');
-
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Ancestortype->recursive = 0;
-		$this->set('ancestortypes', $this->Paginator->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Ancestortype->exists($id)) {
-			throw new NotFoundException(__('Invalid ancestortype'));
-		}
-		$options = array('conditions' => array('Ancestortype.' . $this->Ancestortype->primaryKey => $id));
-		$this->set('ancestortype', $this->Ancestortype->find('first', $options));
-	}
-
-/**
  * add method
  *
- * @return void
+ * Accessed by staff via management page.
  */
 	public function add() {
 		if ($this->request->is('post')) {
@@ -60,9 +28,7 @@ class AncestortypesController extends AppController {
 /**
  * edit method
  *
- * @throws NotFoundException
- * @param string $id
- * @return void
+ *  Accessed by staff via management page.
  */
 	public function edit($id = null) {
 		if (!$this->Ancestortype->exists($id)) {
@@ -83,9 +49,7 @@ class AncestortypesController extends AppController {
 /**
  * delete method
  *
- * @throws NotFoundException
- * @param string $id
- * @return void
+ *  Accessed by staff via management page.
  */
 	public function delete($id = null) {
 		$this->Ancestortype->id = $id;
