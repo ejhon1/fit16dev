@@ -18,10 +18,9 @@ class DocnotesController extends AppController {
 /**
  * index method
  *
- * @return void
+ * A list of docnotes ordered by most recent
  */
     public function index() {
-        //Recent docnotes list
         $this->loadModel('Docnote');
         $this->loadModel('Applicant');
 
@@ -33,15 +32,16 @@ class DocnotesController extends AppController {
         $this->set(compact('docnotes'));
 
     }
-
+    /**
+     * notes method
+     *
+     * Staff view for document notes
+     */
     public function notes($id = NULL) {
         $userID = $this->UserAuth->getUserId();
         $this->loadModel('Applicant');
         $this->loadModel('Clientcase');
         $this->loadModel('Document');
-        //$this->Applicant->Behaviors->load('Containable');
-        //$this->Docnote->Behaviors->load('Containable');
-        //$this->Applicant->Clientcase->Docnote->Behaviors->attach('Containable');
 
         $docnotes = $this->Applicant->Clientcase->Docnote->find('all', array(
             'contain' => array(
@@ -77,14 +77,17 @@ class DocnotesController extends AppController {
         }
     }
 
+    /**
+     * mynotes method
+     *
+     * Page viewed by the client containing doc notes for a document
+     */
+
     public function mynotes($id = NULL) {
         $userID = $this->UserAuth->getUserId();
         $this->loadModel('Applicant');
         $this->loadModel('Clientcase');
         $this->loadModel('Document');
-        //$this->Applicant->Behaviors->load('Containable');
-        //$this->Docnote->Behaviors->load('Containable');
-        //$this->Applicant->Clientcase->Docnote->Behaviors->attach('Containable');
 
         $docnotes = $this->Applicant->Clientcase->Docnote->find('all', array(
             'contain' => array(
@@ -120,47 +123,10 @@ class DocnotesController extends AppController {
     }
 
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Docnote->exists($id)) {
-			throw new NotFoundException(__('Invalid docnote'));
-		}
-		$options = array('conditions' => array('Docnote.' . $this->Docnote->primaryKey => $id));
-		$this->set('docnote', $this->Docnote->find('first', $options));
-	}
-
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Docnote->create();
-			if ($this->Docnote->save($this->request->data)) {
-				$this->Session->setFlash(__('The docnote has been saved', null),'default', array('class' => 'alert-success'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The docnote could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
-			}
-		}
-		$documents = $this->Docnote->Document->find('list');
-		$users = $this->Docnote->User->find('list');
-		$this->set(compact('documents', 'users'));
-	}
 
 /**
  * edit method
  *
- * @throws NotFoundException
- * @param string $id
- * @return void
  */
 	public function edit($id = null) {
 		if (!$this->Docnote->exists($id)) {
@@ -182,26 +148,11 @@ class DocnotesController extends AppController {
 		$this->set(compact('documents', 'users'));
 	}
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Docnote->id = $id;
-		if (!$this->Docnote->exists()) {
-			throw new NotFoundException(__('Invalid docnote'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Docnote->delete()) {
-			$this->Session->setFlash(__('Docnote deleted', null),'default', array('class' => 'alert-success'));
-			return $this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Docnote was not deleted', null),'default', array('class' => 'alert-danger'));
-		return $this->redirect(array('action' => 'index'));
-	}
+    /**
+     * report method
+     *
+     * Used to generate an excel report
+     */
 	
 	public function report()
     {
