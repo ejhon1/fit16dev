@@ -10,12 +10,6 @@ echo $this->HTML->script('JQueryUser');
             autoclose: true
         });
     });
-
-
-</script>
-
-<div class="clientcases view">
-<script>
     $(function(){
         var hash = window.location.hash;
         hash && $('ul.nav a[href="' + hash + '"]').tab('show');
@@ -28,6 +22,9 @@ echo $this->HTML->script('JQueryUser');
         });
     });
 </script>
+
+<div class="clientcases view">
+
 
 <div id="clientcases">
 <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
@@ -151,7 +148,6 @@ echo $this->HTML->script('JQueryUser');
                         {
                             echo $this->Form->create('Archiveloan');
                             echo $this->Form->hidden('id', array('default' => $currentloan['Archiveloan']['id']));
-                            //echo $this->Form->input('employee_id', array('default' => NULL));
                             echo $this->Form->hidden('date_returned', array('default' => date('Y-m-d h:i:s')));
                             echo $this->Form->end(__('Return'));
                         }
