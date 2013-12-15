@@ -8,17 +8,13 @@ App::uses('AppController', 'Controller');
  */
 class ClientcasesController extends AppController {
 
-    /**
-     * Components
-     *
-     * @var array
-     */
     public $components = array('Paginator');
 
     /**
      * index method
      *
-     * @return void
+     * Displays a dynamically-searchable list of cases.
+     * List can be filtered by status.
      */
     public function index($id = null) {
         $this->loadModel('Status');
@@ -44,11 +40,15 @@ class ClientcasesController extends AppController {
     /**
      * view method
      *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
+     * The case page for a client's case. Contains virtually all of the information relating to the case.
      */
     public function view($id = null) {
+        if (!$this->Clientcase->exists($id)) {
+            throw new NotFoundException(__('Invalid Case.'));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->Archiveloan->save($this->request->data);
+        }
         $userid=$this->Session->read('UserAuth.User.id');
         $this->loadModel('Applicant');
         $this->loadModel('Document');
@@ -62,60 +62,41 @@ class ClientcasesController extends AppController {
         $this->loadModel('User');
         $this->loadModel('Address');
 
+        //General variables
+        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
+        $user = $this->User->find('first', array('conditions' => array('User.id' => $clientcase['Clientcase']['user_id'])));
+        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
+
+        //Case information
+        $currentloan = $this->Archiveloan->find('first', array('conditions' => array('Archiveloan.archive_id' => $clientcase['Clientcase']['archive_id'], 'Archiveloan.date_returned' => NULL)));
+        $applicantslist = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
+        $archivecount = $this->Clientcase->find('count', array('conditions' => array('Clientcase.archive_id' =>$clientcase['Clientcase']['archive_id'])));
+        $mainapplicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id'])));
+        $address = $this->Address->find('first', array('conditions' => array('Address.applicant_id' => $id, 'Address.date_changed' => NULL)));
+        $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id'], 'NOT' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id']))));
+        $appdate = date('d/m/Y', strtotime($clientcase['Clientcase']['appointment_date']));
+
+        //Case status
+        $statuses = $this->Casestatus->Status->find('list');
+        $casestatuses = $this->Casestatus->find('all', array('conditions' => array('Casestatus.clientcase_id' => $clientcase['Clientcase']['id']), 'order' => array('Casestatus.date_updated DESC')));
+
+        //Documents
         $documentTypes = $this->Documenttype->find('list', array('fields' => array('Documenttype.id', 'Documenttype.type'), 'order'=>'type ASC'));
         $ancestorTypes = $this->Ancestortype->find('list', array('fields' => array('Ancestortype.id', 'Ancestortype.ancestor_type'), 'order'=>'ancestor_type ASC'));
 
+        $ancestordocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'), 'order' => 'Document.id DESC'));
+        $applicantdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
+        $physicalancdocuments = $this->Document->find('all',array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=>'Document.id DESC'));
+        $physicalappdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
 
-
-        $statuses = $this->Casestatus->Status->find('list');
-        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
-
-        if (!$this->Clientcase->exists($id)) {
-            throw new NotFoundException(__('Invalid Case.'));
-
-        }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            $this->Archiveloan->save($this->request->data);
-        }
-        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
-        $archivecount = $this->Clientcase->find('count', array('conditions' => array('Clientcase.archive_id' =>$clientcase['Clientcase']['archive_id'])));
-
-		
-		$applicantslist = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
-        
-        $options = array('conditions' => array('User.id' => $clientcase['Clientcase']['user_id']));
-        $this->set('updateAppointmentDate', $this->User->find('all', $options));
-        
-        //$applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $id), 'order'=>'first_name ASC', 'recursive' => -1));
-        $mainapplicant = $this->Applicant->find('first', array('conditions' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id'])));
-
-        $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id'], 'NOT' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id']))));
-
-        $address = $this->Address->find('first', array('conditions' => array('Address.applicant_id' => $id, 'Address.date_changed' => NULL)));
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'), 'order' => 'Document.id DESC');
-        $this->set('ancestordocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
-
-
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=>'Document.id DESC');
-        $this->set('physicalancdocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
-
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC'));
-        $this->set('physicalappdocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
-
-
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC'));
-        $this->set('applicantdocuments', $this->Document->find('all', $options), $this->Paginator->paginate());
-        $casestatuses = $this->Casestatus->find('all', array('conditions' => array('Casestatus.clientcase_id' => $clientcase['Clientcase']['id']), 'order' => array('Casestatus.date_updated DESC')));
-        $currentloan = $this->Archiveloan->find('first', array('conditions' => array('Archiveloan.archive_id' => $clientcase['Clientcase']['archive_id'], 'Archiveloan.date_returned' => NULL)));
-        $user = $this->User->find('first', array('conditions' => array('User.id' => $clientcase['Clientcase']['user_id'])));
-
-        $appdate = date('d/m/Y', strtotime($clientcase['Clientcase']['appointment_date']));
-
-        $addresses = $this->Address->find('all', array('conditions' => array('Address.applicant_id' => $clientcase['Clientcase']['applicant_id'])));
-        
-        $this->set(compact('clientcase', 'applicants', 'currentloan', 'employee', 'casestatuses', 'statuses', 'id', 'documentTypes', 'ancestorTypes', 'applicantslist', 'user', 'addresses', 'archivecount', 'address', 'mainapplicant', 'appdate'));
+        $this->set(compact( 'id', 'clientcase', 'user', 'employee','currentloan', 'applicantslist', 'archivecount', 'mainapplicant','address', 'applicants','appdate', 'statuses', 'casestatuses', 'documentTypes', 'ancestorTypes',  'ancestordocuments', 'applicantdocuments', 'physicalancdocuments', 'physicalappdocuments'));
     }
-
+    /**
+     * denied page
+     *
+     * A page similar to the case page, but used to display denied cases.
+     * The information presented on this page is greatly limited compared to the information available on the case page.
+     */
     public function denied($id = null) {
         $this->loadModel('Applicant');
         $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
@@ -123,95 +104,7 @@ class ClientcasesController extends AppController {
         $this->set(compact('clientcase', 'id', 'mainapplicant'));
     }
 
-    public function statustest($id = null) {
-        $userid=$this->Session->read('UserAuth.User.id');
-        $this->loadModel('Applicant');
-        $this->loadModel('Document');
-        $this->loadModel('Employee');
-        $this->loadModel('Archiveloan');
-        $this->loadModel('Casestatus');
-        $this->loadModel('Status');
 
-        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
-        $clientcases = $this->Casestatus->Clientcase->find('list');
-        $statuses = $this->Casestatus->Status->find('list');
-        if (!$this->Clientcase->exists($id)) {
-            throw new NotFoundException(__('Invalid Case.'));
-
-        }
-        /*if ($this->request->is('post') || $this->request->is('put')) {
-            $this->request->data['Casestatus']['clientcase_id'] = $id;
-            $this->request->data['Casestatus']['employee_id'] = $employee['Employee']['id'];
-            $this->Casestatus->create();
-            if ($this->Casestatus->save($this->request->data)) {
-                $this->Session->setFlash(__('The case status has been saved'));
-                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
-            } else {
-                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
-            }
-        }*/
-        if ($this->request->is('post')) {
-            $this->Casestatus->create();
-            if ($this->Casestatus->save($this->request->data)) {
-                $this->Session->setFlash(__('The case status has been saved'));
-                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
-            } else {
-                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
-            }
-        }
-        $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
-        $casestatuses = $this->Casestatus->find('all', array('conditions' => array('Casestatus.clientcase_id' => $clientcase['Clientcase']['id'])));
-
-        $this->set(compact('clientcase',  'employee', 'casestatuses', 'clientcases', 'statuses', 'id'));
-    }
-
-    public function updatestatus()
-    {
-        /*$this->loadModel('Casestatus');
-        if ($this->request->is('post')) {
-            $this->Casestatus->create();
-            if ($this->Casestatus->save($this->request->data)) {
-                $this->Session->setFlash(__('The case status has been saved'));
-                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
-            } else {
-                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
-            }
-        }
-        */
-        $userid=$this->Session->read('UserAuth.User.id');
-        $this->loadModel('Applicant');
-        $this->loadModel('Document');
-        $this->loadModel('Employee');
-        $this->loadModel('Archiveloan');
-        $this->loadModel('Casestatus');
-        $this->loadModel('Status');
-
-        $employee = $this->Employee->find('first', array('conditions' => array('Employee.user_id' => $userid)));
-        $clientcases = $this->Casestatus->Clientcase->find('list');
-        $statuses = $this->Casestatus->Status->find('list');
-        /*if ($this->request->is('post') || $this->request->is('put')) {
-            $this->request->data['Casestatus']['clientcase_id'] = $id;
-            $this->request->data['Casestatus']['employee_id'] = $employee['Employee']['id'];
-            $this->Casestatus->create();
-            if ($this->Casestatus->save($this->request->data)) {
-                $this->Session->setFlash(__('The case status has been saved'));
-                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $id));
-            } else {
-                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
-            }
-        }*/
-        if ($this->request->is('post')) {
-            $this->Casestatus->create();
-            if ($this->Casestatus->save($this->request->data, false)) {
-                $this->Session->setFlash(__('The case status has been saved'));
-                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Casestatus']['clientcase_id']));
-            } else {
-                $this->Session->setFlash(__('The case status could not be saved. Please, try again.'));
-            }
-        }
-
-        $this->set(compact('clientcase',  'employee', 'casestatuses', 'clientcases', 'statuses', 'id'));
-    }
     
     public function editAppointmentDate() {
         if ($this->request->is('post')|| $this->request->is('put')) {
@@ -265,7 +158,7 @@ class ClientcasesController extends AppController {
         }
     }
     
-    public function updateOpenClose($id=null) {
+    public function updateOpenClose() {
         if ($this->request->is('post')|| $this->request->is('put')) {
             if ($this->Clientcase->save($this->request->data, false)) {
                 $this->Session->setFlash(__('The Case Information has been saved', null),'default', array('class' => 'alert-success'));
@@ -279,8 +172,6 @@ class ClientcasesController extends AppController {
 
     public function myaccount() {
         $id=$this->Session->read('UserAuth.User.id');
-        //$options = array('conditions' => array('Clientcase.user_id' => $id));
-        //$this->set('clientcase', $this->Clientcase->find('first', $options));
         $this->loadModel('Clientcase');
         $this->loadModel('Applicant');
         $this->loadModel('Address');
@@ -297,33 +188,9 @@ class ClientcasesController extends AppController {
     }
 
     /**
-     * add method
-     *
-     * @return void
-     */
-    public function add() {
-        if ($this->request->is('post')) {
-            $this->Clientcase->create();
-            if ($this->Clientcase->save($this->request->data)) {
-                $this->Session->setFlash(__('The client case has been saved', null),'default', array('class' => 'alert-success'));
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The client case could not be saved. Please, try again.', null),'default', array('class' => 'alert-danger'));
-            }
-        }
-        $users = $this->Clientcase->User->find('list');
-        $archives = $this->Clientcase->Archive->find('list');
-        $statuses = $this->Clientcase->Status->find('list');
-        $applicants = $this->Clientcase->Applicant->find('list');
-        $this->set(compact('users', 'archives', 'statuses', 'applicants'));
-    }
-
-    /**
      * edit method
      *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
+     * Allows staff to alter the information supplied by the client in the eligibility check.
      */
     public function edit($id = null) {
     	$this->request->data['Clientcase']['id']=$id;
@@ -340,33 +207,14 @@ class ClientcasesController extends AppController {
         }
             $options = array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id));
             $this->request->data = $this->Clientcase->find('first', $options);
-        $users = $this->Clientcase->User->find('list');
-        $archives = $this->Clientcase->Archive->find('list');
-        $statuses = $this->Clientcase->Status->find('list');
-        $applicants = $this->Clientcase->Applicant->find('list');
-        $this->set(compact('users', 'archives', 'statuses', 'applicants'));
     }
 
     /**
-     * delete method
+     * merge method
      *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
+     * The page from which a staff member can initiate an archive merge.
      */
-    public function delete($id = null) {
-        $this->Clientcase->id = $id;
-        if (!$this->Clientcase->exists()) {
-            throw new NotFoundException(__('Invalid client case'));
-        }
-        $this->request->onlyAllow('post', 'delete');
-        if ($this->Clientcase->delete()) {
-            $this->Session->setFlash(__('Client case deleted', null),'default', array('class' => 'alert-success'));
-            return $this->redirect(array('action' => 'index'));
-        }
-        $this->Session->setFlash(__('Client case was not deleted', null),'default', array('class' => 'alert-danger'));
-        return $this->redirect(array('action' => 'index'));
-    }
+
     public function merge($id = null) {
         $this->loadModel('Archive');
         $this->loadModel('Clientcase');
@@ -389,6 +237,13 @@ class ClientcasesController extends AppController {
         }
         $this->set(compact('id'));
     }
+
+    /**
+     * merge method
+     *
+     * The logic for performing an archive merge.
+     */
+
     public function performmerge() {
         $this->loadModel('Archive');
         $this->loadModel('Clientcase');
@@ -419,7 +274,6 @@ class ClientcasesController extends AppController {
             $this->request->data['Clientcase']['id'] = $current_client_id;
             $this->request->data['Clientcase']['archive_id'] = $merging_archive_id;
             $this->Clientcase->save($this->request->data);
-			
 
             //Copy/move docs to older archive, delete folder etc.
             $documents = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $current_archive_id)));
@@ -496,6 +350,13 @@ class ClientcasesController extends AppController {
         }
 
     }
+
+    /**
+     * reporting method
+     *
+     * The reporting page allows staff to nominate two dates and a category, and view all entries between those dates that relate to that category.
+     */
+
     public function reporting()
     {
         $this->loadModel('Casenote');
@@ -512,9 +373,7 @@ class ClientcasesController extends AppController {
             $date1 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date1'])));
             $date2 = date('Ymd', strtotime(str_replace('/', '-', $this->request->data['Clientcase']['date2'])));
 
-
             $selected = $this->request->data['Clientcase']['selection'];
-
 
             if($selected == 1)
             {
@@ -523,8 +382,6 @@ class ClientcasesController extends AppController {
                 WHERE Applicant.id = Clientcase.applicant_id AND Archive.id = Clientcase.archive_id AND Clientcase.open_or_closed = 'Open' AND Clientcase.status_id <> 0
                 ORDER BY Clientcase.id DESC");*/
                     $clientcases = $this->Clientcase->find('all', array('conditions' => array('Clientcase.open_or_closed' => 'Open', 'DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2, 'NOT' => array('Clientcase.status_id' => 0))));
-                //$clientcases =  $this->Clientcase->find('all');
-
             }
             else if($selected == 2)
             {
@@ -534,7 +391,6 @@ class ClientcasesController extends AppController {
                 ORDER BY Casenote.id DESC");
                     */
                 $deniedcases = $this->Clientcase->find('all', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2, 'Clientcase.status_id' => 0)));
-
             }
             else if($selected == 3)
             {
@@ -594,29 +450,16 @@ class ClientcasesController extends AppController {
                 AND (DATE_FORMAT(Casestatus.date_updated, '%Y%m%d') NOT BETWEEN ".$date1." AND ".$date2.")
                 GROUP BY Clientcase.id;");
             }
-
-
-            /*$noSucEnq = $this->Clientcase->find('count', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2)));
-            $noDenEnq = 0;
-            $noCaseNotes =$this->Casenote->find('count', array('conditions' => array('DATE_FORMAT(Casenote.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Casenote.created, "%Y%m%d") <= '.$date2)));
-            $noDocsDown =$this->Document->find('count', array('conditions' => array('DATE_FORMAT(Document.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Document.created, "%Y%m%d") <= '.$date2)));
-            $noDocNotes = $this->Docnote->find('count', array('conditions' => array('DATE_FORMAT(Docnote.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Docnote.created, "%Y%m%d") <= '.$date2)));
-
-
-            $clientcases = $this->Clientcase->find('all', array('conditions' => array('DATE_FORMAT(Clientcase.created, "%Y%m%d") >= '.$date1, 'DATE_FORMAT(Clientcase.created, "%Y%m%d") <= '.$date2)));*/
-            //    $date2 = $this->request->data['Clientcase']['date2'];
         }
-
-
-        //if ($this->request->is('post') || $this->request->is('put')) {
-
-        //    $this->report();
-        //}
-
         $this->set(compact('date1', 'date2', 'selected', 'clientcases', 'deniedcases', 'casenotes', 'documents', 'docnotes', 'changedcases', 'nocasenotes', 'nochangedcases'));
-        //$this->set(compact('casenotes', 'date1', 'date2', 'noSucEnq', 'noDenEnq', 'noCaseNotes', 'noDocsDown', 'noDocNotes', 'clientcases'));
-
     }
+
+    /**
+     * report functions
+     *
+     * Used to generate excel reports.
+     */
+
     public function report()
     {
         $this->loadModel('Clientcase');
