@@ -12,10 +12,9 @@ class DocumentsController extends AppController {
     /**
      * index method
      *
-     * @return void
+     * A list of document uploads, ordered from most recent.
      */
     public function index() {
-        //Recent documents list
         $this->loadModel('Document');
         $documents = $this->Document->query("SELECT distinct Documenttype.type, Document.id, Document.applicant_id, Document.ancestortype_id, Document.filename, Document.copy_type, Document.applicant_id, Document.ancestortype_id,Document.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
             FROM documents AS Document, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive, documenttypes AS Documenttype
@@ -26,19 +25,10 @@ class DocumentsController extends AppController {
     }
 
     /**
-     * view method
+     * mydocs method
      *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
+     * Used by clients to view and upload their documents.
      */
-    public function view($id = null) {
-        if (!$this->Document->exists($id)) {
-            throw new NotFoundException(__('Invalid document'));
-        }
-        $options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
-        $this->set('document', $this->Document->find('first', $options));
-    }
 
     public function mydocs() {
         $this->loadModel('Applicant');
@@ -58,54 +48,11 @@ class DocumentsController extends AppController {
         $this->loadModel('Ancestortype');
         $this->loadModel('Documenttype');
 
-        /*if ($this->request->is('post')) {
-            $this->Document->create();
-            $this->loadModel('Clientcase');
-            $this->loadModel('Archive');
-
-            $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $id), 'fields' => array('Clientcase.id', 'Clientcase.archive_id'), 'recursive' => -1));
-            $this->set('Clientcase');
-            $test = $clientcase['Clientcase']['archive_id'];
-            $this->request->data['Document']['archive_id'] = $test;
-
-            $archive = $this->Archive->find('first', array('conditions' => array('Archive.id' => $this->request->data['Document']['archive_id']),'fields' => array('Archive.id', 'Archive.archive_name')));
-            $doctype = $this->Documenttype->find('first', array('conditions' => array('Documenttype.id' => $this->request->data['Document']['documenttype_id']),'fields' => array('Documenttype.id', 'Documenttype.code')));
-            $ancestortype = $this->Ancestortype->find('first', array('conditions' => array('Ancestortype.id' => $this->request->data['Document']['ancestortype_id']),'fields' => array('Ancestortype.id', 'Ancestortype.ancestor_type')));
-
-            if ($this->uploadDoc($archive, $doctype['Documenttype']['code'], $ancestortype['Ancestortype']['ancestor_type']) && $this->Document->save($this->data)) {
-                $this->Session->setFlash(__('The document was uploaded successfully'),'default', array('class' => 'alert-success'));
-                //$this->redirect(array('controller' => 'documents', 'action' => 'mydocs'));
-            } else {
-                $this->Session->setFlash(__('The document could not be saved. Please try again.'),'default', array('class' => 'alert-danger'));
-            }
-        }*/
         $documentTypes = $this->Documenttype->find('list', array('fields' => array('Documenttype.id', 'Documenttype.type'), 'order'=>'type ASC'));
         $ancestorTypes = $this->Ancestortype->find('list', array('fields' => array('Ancestortype.id', 'Ancestortype.ancestor_type'), 'order'=>'ancestor_type ASC'));
         $applicants = $this->Applicant->find('list', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id']),'fields' => array('Applicant.id', 'Applicant.first_name'), 'order'=>'first_name ASC'));
 
         $this->set(compact('documentTypes', 'ancestorTypes', 'applicants'));
-    }
-
-    /**
-     * add method
-     *
-     * @return void
-     */
-    public function add() {
-        if ($this->request->is('post')) {
-            $this->Document->create();
-            if ($this->Document->save($this->request->data)) {
-                $this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
-            }
-        }
-        $archives = $this->Document->Archive->find('list');
-        $applicants = $this->Document->Applicant->find('list');
-        $ancestortypes = $this->Document->Ancestortype->find('list');
-        $documenttypes = $this->Document->Documenttype->find('list');
-        $this->set(compact('archives', 'applicants', 'ancestortypes', 'documenttypes'));
     }
 
     public function uploadancestor() {
@@ -151,7 +98,6 @@ class DocumentsController extends AppController {
         if ($this->request->is('post')) {
             $this->Document->create();
             $this->loadModel('Archive');
-
 
             $test = $clientcase['Clientcase']['archive_id'];
             $this->request->data['Document']['archive_id'] = $test;
@@ -233,54 +179,10 @@ class DocumentsController extends AppController {
     }
 
     /**
-     * edit method
+     * uploaddoc method
      *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
+     * Used by previous methods. Contains the logic for uploading documents.
      */
-    public function edit($id = null) {
-        if (!$this->Document->exists($id)) {
-            throw new NotFoundException(__('Invalid document'));
-        }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Document->save($this->request->data)) {
-                $this->Session->setFlash(__('The document has been saved'),'default', array('class' => 'alert-success'));
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default', array('class' => 'alert-danger'));
-            }
-        } else {
-            $options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
-            $this->request->data = $this->Document->find('first', $options);
-        }
-        $archives = $this->Document->Archive->find('list');
-        $applicants = $this->Document->Applicant->find('list');
-        $ancestortypes = $this->Document->Ancestortype->find('list');
-        $documenttypes = $this->Document->Documenttype->find('list');
-        $this->set(compact('archives', 'applicants', 'ancestortypes', 'documenttypes'));
-    }
-
-    /**
-     * delete method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function delete($id = null) {
-        $this->Document->id = $id;
-        if (!$this->Document->exists()) {
-            throw new NotFoundException(__('Invalid document'));
-        }
-        $this->request->onlyAllow('post', 'delete');
-        if ($this->Document->delete()) {
-            $this->Session->setFlash(__('Document deleted'),'default', array('class' => 'alert-success'));
-            return $this->redirect(array('action' => 'index'));
-        }
-        $this->Session->setFlash(__('Document was not deleted'),'default', array('class' => 'alert-danger'));
-        return $this->redirect(array('action' => 'index'));
-    }
 
     public function uploadDoc($archive, $doctype, $ancestortype) {
         $file = $this->request->data['Document']['file'];
@@ -327,6 +229,11 @@ class DocumentsController extends AppController {
         return false;
     }
 
+    /**
+     * sendfile method
+     *
+     * Used to retrieve a document and allow it to be downloaded
+     */
     public function sendFile($id) {
         $this->loadModel('Archive');
         $document = $this->Document->findById($id);
@@ -336,15 +243,17 @@ class DocumentsController extends AppController {
         //Return response object to prevent controller from trying to render a view
         return $this->response;
     }
-    
-    
-   
+
+    /**
+     * addphydoc method
+     *
+     * Used to add records of physical documents.
+     */
     public function addphydoc(){
         $this->loadModel('Clientcase');
         $this->loadModel('Archive');
 
         $id = $this->request->data['Document']['clientcase_id'];
-
 
         $this->request->data['Document']['date_received'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Document']['dateReceived'])));
 
@@ -362,8 +271,12 @@ class DocumentsController extends AppController {
         }
     }
 
+    /**
+     * editdate method
+     *
+     * Used to update the date_returned variable of a physical document.
+     */
     public function editdate(){
-
         if ($this->request->is('post') || $this->request->is('put')){
             $this->request->data['Document']['date_returned'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Document']['dateReturned'])));
             if ($this->Document->save($this->request->data)){
@@ -372,9 +285,13 @@ class DocumentsController extends AppController {
             }
             $this->Session->setFlash(__('Unable to update the return date'));
         }
-
     }
-    
+
+    /**
+     * report method
+     *
+     * Generates an excel report. Used by the reporting page.
+     */
     public function report()
     {
         $this->loadModel('Document');
