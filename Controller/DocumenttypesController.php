@@ -8,37 +8,7 @@ App::uses('AppController', 'Controller');
  */
 class DocumenttypesController extends AppController {
 
-/**
- * Components
- *
- * @var array
- */
 	public $components = array('Paginator');
-
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Documenttype->recursive = 0;
-		$this->set('documenttypes', $this->Paginator->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Documenttype->exists($id)) {
-			throw new NotFoundException(__('Invalid documenttype'));
-		}
-		$options = array('conditions' => array('Documenttype.' . $this->Documenttype->primaryKey => $id));
-		$this->set('documenttype', $this->Documenttype->find('first', $options));
-	}
 
 /**
  * add method
