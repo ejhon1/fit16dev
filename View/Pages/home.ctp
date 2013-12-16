@@ -3,7 +3,6 @@ $loggedUser = $this->UserAuth->getUser();
 if(!empty($loggedUser['User']['type']) && $loggedUser['User']['type'] == 'Employee')
 {
 ?>
-
     <div class="home">
     <br>
     <div class="actions">
@@ -164,5 +163,4 @@ if(!empty($loggedUser['User']['type']) && $loggedUser['User']['type'] == 'Employ
                 </p></div>
         </div>
     </div>
-
 <?php } ?>
