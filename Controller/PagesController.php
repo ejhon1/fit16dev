@@ -89,7 +89,6 @@ class PagesController extends AppController {
 
         //Recent documents list
         $this->loadModel('Document');
-        //$documents = $this->Document->find('all', array('order' => array('Document.created' => 'DESC'), 'limit' => 10));
 
         $documents = $this->Document->query("SELECT distinct Document.id, Document.copy_type, Document.applicant_id, Document.ancestortype_id,Document.created, Clientcase.id, Applicant.first_name, Applicant.surname, Archive.archive_name
             FROM documents AS Document, clientcases AS Clientcase, applicants AS Applicant, archives AS Archive
@@ -97,10 +96,8 @@ class PagesController extends AppController {
             ORDER BY Document.id DESC
             LIMIT 5;");
 
-
         //Recent contact notes list
         $this->loadModel('Casenote');
-        //$casenotes = $this->Casenote->find('all', array('order' => array('Casenote.created' => 'DESC'), 'limit' => 5));
 
         $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
                 FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
@@ -109,7 +106,6 @@ class PagesController extends AppController {
             GROUP BY Casenote.id
             ORDER BY Casenote.id DESC
             LIMIT 5;");
-
 
         //Recent docnotes list
         $this->loadModel('Docnote');
@@ -122,8 +118,5 @@ class PagesController extends AppController {
             LIMIT 5;");
 
         $this->set(compact('statuses', 'count', 'documents', 'casenotes', 'docnotes'));
-
-
     }
-
 }
