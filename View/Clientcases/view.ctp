@@ -492,18 +492,18 @@ echo $this->HTML->script('JQueryUser');
 				<tbody>
                 <?php
                 $i = 0;
-                foreach ($clientcase['Casenote'] as $casenote): ?>
+                foreach ($casenotes as $casenote): ?>
                     <tr>
 
-                        <td><?php echo $casenote['subject']; ?></td>
+                        <td><?php echo $casenote['Casenote']['subject']; ?></td>
 
-                        <td><?php echo $casenote['note_type']; ?></td>
-                        <td>    <?php echo String::truncate($casenote['note'], 50, array('html' => true));
+                        <td><?php echo $casenote['Casenote']['note_type']; ?></td>
+                        <td>    <?php echo String::truncate($casenote['Casenote']['note'], 50, array('html' => true));
 						?>
 		             </td>
-                        <td><?php echo $this->Time->format('h:i d-m-Y',$casenote['created']); ?></td>
+                        <td><?php echo $this->Time->format('h:i d-m-Y',$casenote['Casenote']['created']); ?></td>
                         <td class="actions">
-                            <?php echo $this->Html->link(__('View'), array('controller' => 'casenotes', 'action' => 'view', $casenote['id'])); ?>
+                            <?php echo $this->Html->link(__('View'), array('controller' => 'casenotes', 'action' => 'view', $casenote['Casenote']['id'])); ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
