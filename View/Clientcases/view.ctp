@@ -482,10 +482,10 @@ echo $this->HTML->script('JQueryUser');
             <table cellpadding = "0" cellspacing = "0" id="data">
 			<thead> 
                 <tr>
-                    <th><?php echo __('Created'); ?></th>
                     <th><?php echo __('Subject'); ?></th>
-                    <th><?php echo __('Note Type'); ?></th>
                     <th><?php echo __('Note'); ?></th>
+                    <th><?php echo __('Note Type'); ?></th>
+                    <th><?php echo __('Created'); ?></th>
                     <th class="actions"><?php echo __('Actions'); ?></th>
                 </tr>
 				</thead>
@@ -494,13 +494,14 @@ echo $this->HTML->script('JQueryUser');
                 $i = 0;
                 foreach ($clientcase['Casenote'] as $casenote): ?>
                     <tr>
-                        <td><?php echo $this->Time->format('h:i d-m-Y',$casenote['created']); ?></td>
+
                         <td><?php echo $casenote['subject']; ?></td>
+
                         <td><?php echo $casenote['note_type']; ?></td>
-                        <td>
-		                     <?php echo String::truncate($casenote['note'], 50, array('html' => true));
+                        <td>    <?php echo String::truncate($casenote['note'], 50, array('html' => true));
 						?>
-		             </td> 
+		             </td>
+                        <td><?php echo $this->Time->format('h:i d-m-Y',$casenote['created']); ?></td>
                         <td class="actions">
                             <?php echo $this->Html->link(__('View'), array('controller' => 'casenotes', 'action' => 'view', $casenote['id'])); ?>
                         </td>
