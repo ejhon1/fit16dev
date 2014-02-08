@@ -55,6 +55,7 @@ class ClientcasesController extends AppController {
         $this->loadModel('Employee');
         $this->loadModel('Archiveloan');
         $this->loadModel('Casestatus');
+        $this->loadModel('Casenote');
         $this->loadModel('Status');
         $this->loadModel('Documenttype');
         $this->loadModel('Ancestortype');
@@ -89,7 +90,16 @@ class ClientcasesController extends AppController {
         $physicalancdocuments = $this->Document->find('all',array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=>'Document.id DESC'));
         $physicalappdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
 
-        $this->set(compact( 'id', 'clientcase', 'user', 'employee','currentloan', 'applicantslist', 'archivecount', 'mainapplicant','address', 'applicants','appdate', 'statuses', 'casestatuses', 'documentTypes', 'ancestorTypes',  'ancestordocuments', 'applicantdocuments', 'physicalancdocuments', 'physicalappdocuments'));
+        $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.note, Casenote.note_type, Casenote.id, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
+                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
+                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
+                AND Casenote.clientcase_id = ".$clientcase['Clientcase']['id']."
+                AND Casenote.note_type = 'Public'
+                AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
+                GROUP BY Casenote.id
+                order by Casenote.id DESC");
+
+        $this->set(compact( 'id', 'clientcase', 'user', 'employee','currentloan', 'applicantslist', 'archivecount', 'mainapplicant','address', 'applicants','appdate', 'statuses', 'casestatuses', 'documentTypes', 'ancestorTypes',  'ancestordocuments', 'applicantdocuments', 'physicalancdocuments', 'physicalappdocuments', 'casenotes'));
     }
     /**
      * denied page
