@@ -34,7 +34,7 @@ $test = "<font color='red'>*</font>";
             isStepValid = false;
             $('#wizard').smartWizard('setError',{stepnum:1,iserror:true});
         }else{
-            $('#wizard').smartWizard('setError',{stepnum:1,iserror:false});
+            $('#wizard').smartWizard('setError',{stepnum:1,iserror:false});fr
         }
         if(validateStep2() == false){
             isStepValid = false;
@@ -254,7 +254,7 @@ Step 4<br />
     <h2 class="StepTitle">Your Details</h2>
     <h3>Polish Citizenship Eligibility Assessment</h3>
     <br />
-    <p>Free..... Fast..... Convenient.....</p>
+    <p><center><b><i>Free..... Fast..... Convenient.....</i></b></center></p>
     <br />
     <br />
     <p>Thank you for your interest in Polaron's QuickCheck Eligibility Assessment. Please fill out the following form. There are four sections to complete that will require you to divulge some personal details about you and your relatives/ancestors. The information collected is strictly for our use and will remain private. Once completed you will be notified of the results by email. </p>
