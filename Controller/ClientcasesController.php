@@ -85,7 +85,13 @@ class ClientcasesController extends AppController {
         $documentTypes = $this->Documenttype->find('list', array('fields' => array('Documenttype.id', 'Documenttype.type'), 'order'=>'type ASC'));
         $ancestorTypes = $this->Ancestortype->find('list', array('fields' => array('Ancestortype.id', 'Ancestortype.ancestor_type'), 'order'=>'ancestor_type ASC'));
 
-        $ancestordocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'), 'order' => 'Document.id DESC'));
+        //$ancestordocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'), 'order' => 'Document.id DESC'));
+        $ancestordocuments = $this->Document->query("SELECT distinct Document.id, Document.archive_id, Document.ancestortype_id, Document.documenttype_id,
+              Document.copy_type, Document.filename, Document.created, Documenttype.id, Documenttype.type, Ancestortype.id, Ancestortype.ancestor_type, count(DISTINCT Docnote.id) AS comments
+              FROM documenttypes AS Documenttype, ancestortypes AS Ancestortype, documents AS Document LEFT JOIN docnotes AS Docnote ON Docnote.document_id = Document.id
+              WHERE Document.archive_id = ".$clientcase['Clientcase']['archive_id']." AND Documenttype.id = Document.documenttype_id AND Ancestortype.id = Document.ancestortype_id GROUP BY Document.id ORDER BY Document.id DESC");
+
+
         $applicantdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
         $physicalancdocuments = $this->Document->find('all',array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=>'Document.id DESC'));
         $physicalappdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
