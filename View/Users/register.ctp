@@ -34,7 +34,7 @@ $test = "<font color='red'>*</font>";
             isStepValid = false;
             $('#wizard').smartWizard('setError',{stepnum:1,iserror:true});
         }else{
-            $('#wizard').smartWizard('setError',{stepnum:1,iserror:false});fr
+            $('#wizard').smartWizard('setError',{stepnum:1,iserror:false});
         }
         if(validateStep2() == false){
             isStepValid = false;
@@ -334,7 +334,7 @@ Step 4<br />
                     'type' => 'radio',
                     'options' => array(
                         'Yes' => 'Yes',
-                        'No' => 'No'),
+                        'no' => 'No'),
                     'legend' => 'I was born in Poland'));
                 ?>
     		</td>
@@ -352,7 +352,7 @@ Step 4<br />
 			</tr>
 			<tr>
             <td colspan="2"; bgcolor="#F8F8F8">
-            	<div id="warning" style="display:none; font-style:italic";>Please be aware that your spouse does not qualify for a Polish passport, , unless she or he has ancestors who are Polish, in which case, your spouse would be required to complete a separate application for confirmation of Polish citizenship. However, as the spouse of a Polish citizen, they have the right to live and work in Europe, and all other associated benefits. </div>
+            	<div id="warning" style="display:none; font-style:italic";>Please be aware that your spouse does not qualify for a Polish passport, unless she or he has ancestors who are Polish, in which case, your spouse would be required to complete a separate application for confirmation of Polish citizenship. However, as the spouse of a Polish citizen, they have the right to live and work in Europe, and all other associated benefits. </div>
             </td>
     	</tr>
     </table>
