@@ -548,6 +548,7 @@ echo $this->HTML->script('JQueryUser');
                                         <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
                                         <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
                                         <td>
+                                            <?php echo h($ancestordocument['0']['comments']); ?>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                             <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                         </td>
