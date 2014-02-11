@@ -59,9 +59,9 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'polaronc_user',
-		'password' => 'T%f^)ApS9V{M',
-		'database' => 'polaronc_projects',
+		'login' => 'DBTrialUser',
+		'password' => 'password',
+		'database' => 'DBTrial',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);

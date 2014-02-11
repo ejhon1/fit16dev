@@ -1,5 +1,10 @@
 <div class="casenotes view">
 <h2><?php echo __('Contact Note'); ?></h2>
+    <br>
+    <div class="actions">
+        <?php echo $this->Html->link(__('Return to case'), array('controller' => 'Clientcases', 'action' => 'view', $casenote['Casenote']['clientcase_id'], '#' => 'tab4')); ?>
+    </div>
+    <br>
 	<dl>
 		<dt><?php echo __('Created by'); ?></dt>
 		<dd>

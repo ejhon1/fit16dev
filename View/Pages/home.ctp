@@ -68,7 +68,7 @@ if(!empty($loggedUser['User']['type']) && $loggedUser['User']['type'] == 'Employ
                             <?php echo h($this->Time->format('d-m-Y', $document['Document']['created'])); ?>
                         </td>
                         <td class="actions">
-                            <?php echo $this->Html->link(__('View'), array('controller' => 'documents', 'action' => 'view', $document['Document']['id'])); ?>
+                            <?php echo $this->Html->link(__('View'), array('controller' => 'docnotes', 'action' => 'notes', $document['Document']['id'])); ?>
                             <?php if($document['Document']['copy_type'] == 'Digital')
                             {
                                 echo $this->Html->link(__('Download'), array('controller' => 'documents', 'action' => 'sendFile', $document['Document']['id']));

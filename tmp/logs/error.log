@@ -9621,3 +9621,1306 @@ Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 187
 Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 162
 [main] - APP/webroot/index.php, line 110
 
+2013-12-04 01:23:22 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-11 12:11:56 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-10 20:39:57 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DES ASC' at line 1
+Request URL: /development/clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Documen...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Documen...', false)
+#4 C:\wamp\www\development\lib\Cake\Model\Model.php(2700): DboSource->read(Object(Document), Array)
+#5 C:\wamp\www\development\app\Controller\ClientcasesController.php(96): Model->find('all', Array)
+#6 [internal function]: ClientcasesController->view('1')
+#7 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-12-10 20:46:46 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in order clause is ambiguous
+Request URL: /development/clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Documen...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Documen...', false)
+#4 C:\wamp\www\development\lib\Cake\Model\Model.php(2700): DboSource->read(Object(Document), Array)
+#5 C:\wamp\www\development\app\Controller\ClientcasesController.php(107): Model->find('all', Array)
+#6 [internal function]: ClientcasesController->view('1')
+#7 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-12-10 20:50:06 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'order' in 'where clause'
+Request URL: /development/clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Documen...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Documen...', false)
+#4 C:\wamp\www\development\lib\Cake\Model\Model.php(2700): DboSource->read(Object(Document), Array)
+#5 C:\wamp\www\development\app\Controller\ClientcasesController.php(100): Model->find('all', Array)
+#6 [internal function]: ClientcasesController->view('1')
+#7 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-12-12 12:57:04 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-11 21:03:19 Error: Fatal Error (1): Maximum execution time of 30 seconds exceeded in [C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php, line 460]
+2013-12-11 21:03:19 Error: [FatalErrorException] Maximum execution time of 30 seconds exceeded
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460)
+#1 [internal function]: ErrorHandler::handleError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-12-11 21:05:48 Error: Fatal Error (1): Maximum execution time of 30 seconds exceeded in [C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php, line 460]
+2013-12-11 21:05:48 Error: [FatalErrorException] Maximum execution time of 30 seconds exceeded
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460)
+#1 [internal function]: ErrorHandler::handleError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-12-12 13:06:35 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-11 21:07:48 Error: Fatal Error (1): Maximum execution time of 30 seconds exceeded in [C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php, line 460]
+2013-12-11 21:07:48 Error: [FatalErrorException] Maximum execution time of 30 seconds exceeded
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460)
+#1 [internal function]: ErrorHandler::handleError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-12-11 21:08:23 Error: Fatal Error (1): Maximum execution time of 30 seconds exceeded in [C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php, line 460]
+2013-12-11 21:08:23 Error: [FatalErrorException] Maximum execution time of 30 seconds exceeded
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460)
+#1 [internal function]: ErrorHandler::handleError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-12-11 21:09:24 Error: Fatal Error (1): Maximum execution time of 30 seconds exceeded in [C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php, line 460]
+2013-12-11 21:09:24 Error: [FatalErrorException] Maximum execution time of 30 seconds exceeded
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460)
+#1 [internal function]: ErrorHandler::handleError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-12-11 21:10:41 Error: Fatal Error (1): Maximum execution time of 30 seconds exceeded in [C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php, line 460]
+2013-12-11 21:10:41 Error: [FatalErrorException] Maximum execution time of 30 seconds exceeded
+Request URL: /development/casenotes
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460)
+#1 [internal function]: ErrorHandler::handleError(1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Maximum executi...', 'C:\wamp\www\dev...', 460, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-12-11 21:36:51 Error: [MissingActionException] Action CasenotesController::add() could not be found.
+Exception Attributes: array (
+  'controller' => 'CasenotesController',
+  'action' => 'add',
+)
+Request URL: /development/casenotes/add/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(CasenotesController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-12-11 21:38:44 Error: [MissingActionException] Action CasenotesController::mynotesadd() could not be found.
+Exception Attributes: array (
+  'controller' => 'CasenotesController',
+  'action' => 'mynotesadd',
+)
+Request URL: /development/casenotes/mynotesadd
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(CasenotesController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-12-12 14:14:44 Error: [MissingControllerException] Controller class AncestortypesController could not be found.
+Exception Attributes: array (
+  'class' => 'AncestortypesController',
+  'plugin' => NULL,
+)
+Request URL: /development/ancestortypes/edit/1
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-12 14:14:47 Error: [MissingControllerException] Controller class AncestortypesController could not be found.
+Exception Attributes: array (
+  'class' => 'AncestortypesController',
+  'plugin' => NULL,
+)
+Request URL: /development/ancestortypes/add
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-12 14:14:51 Error: [MissingControllerException] Controller class AncestortypesController could not be found.
+Exception Attributes: array (
+  'class' => 'AncestortypesController',
+  'plugin' => NULL,
+)
+Request URL: /development/ancestortypes/delete/11
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-13 16:29:15 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-15 13:04:34 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-14 21:20:52 Error: [NotFoundException] Invalid Case.
+Request URL: /development/clientcases/statustest/424
+Stack Trace:
+#0 [internal function]: ClientcasesController->statustest('424')
+#1 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#2 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-12-14 21:20:56 Error: [NotFoundException] Invalid Case.
+Request URL: /development/clientcases/statustest/
+Stack Trace:
+#0 [internal function]: ClientcasesController->statustest()
+#1 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#2 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-12-14 22:25:49 Error: [MissingActionException] Action DocumentsController::uploadancestor() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentsController',
+  'action' => 'uploadancestor',
+)
+Request URL: /development/documents/uploadancestor
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocumentsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-12-14 22:26:24 Error: [MissingActionException] Action DocumentsController::staffuploadan() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentsController',
+  'action' => 'staffuploadan',
+)
+Request URL: /development/documents/staffuploadan
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocumentsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-12-16 14:46:43 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-15 22:54:30 Error: Fatal Error (1): Allowed memory size of 134217728 bytes exhausted (tried to allocate 860945 bytes) in [C:\wamp\www\development\lib\Cake\Cache\Engine\FileEngine.php, line 130]
+2013-12-15 22:54:30 Error: [FatalErrorException] Allowed memory size of 134217728 bytes exhausted (tried to allocate 860945 bytes)
+Request URL: /development/allemployees
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Allowed memory ...', 'C:\wamp\www\dev...', 130)
+#1 [internal function]: ErrorHandler::handleError(1, 'Allowed memory ...', 'C:\wamp\www\dev...', 130, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Allowed memory ...', 'C:\wamp\www\dev...', 130, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-12-15 22:54:46 Error: Fatal Error (1): Allowed memory size of 134217728 bytes exhausted (tried to allocate 789147 bytes) in [C:\wamp\www\development\lib\Cake\Cache\Engine\FileEngine.php, line 130]
+2013-12-15 22:54:46 Error: [FatalErrorException] Allowed memory size of 134217728 bytes exhausted (tried to allocate 789147 bytes)
+Request URL: /development/allemployees
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Allowed memory ...', 'C:\wamp\www\dev...', 130)
+#1 [internal function]: ErrorHandler::handleError(1, 'Allowed memory ...', 'C:\wamp\www\dev...', 130, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Allowed memory ...', 'C:\wamp\www\dev...', 130, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-12-18 16:15:22 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-18 16:15:27 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-18 16:46:57 Error: [MissingControllerException] Controller class ManagepageController could not be found.
+Exception Attributes: array (
+  'class' => 'ManagepageController',
+  'plugin' => NULL,
+)
+Request URL: /development/managepage
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-12-18 16:47:10 Error: [MissingControllerException] Controller class ManagepageController could not be found.
+Exception Attributes: array (
+  'class' => 'ManagepageController',
+  'plugin' => 'Usermgmt',
+)
+Request URL: /development/usermgmt/managepage
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 11:40:44 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/loader.gif
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 11:40:44 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-07 19:49:31 Error: [MissingActionException] Action DocumentsController::view() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentsController',
+  'action' => 'view',
+)
+Request URL: /development/documents/view/18
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocumentsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-02-08 11:51:04 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 11:53:57 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 11:54:45 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 11:55:17 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 11:55:53 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 11:56:14 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-07 20:00:46 Error: Fatal Error (1): Call to a member function query() on a non-object in [C:\wamp\www\development\app\Controller\ClientcasesController.php, line 92]
+2014-02-07 20:00:46 Error: [FatalErrorException] Call to a member function query() on a non-object
+Request URL: /development/clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 92)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 92, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\wamp\www\dev...', 92, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-08 12:01:39 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 12:03:41 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 12:04:53 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 12:05:26 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 12:06:45 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-07 20:47:02 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.comments
+              FROM documents AS Document, docnotes AS Docnote, docume' at line 2
+Request URL: /development/clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT distinct...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT distinct...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(539): DboSource->fetchAll('SELECT distinct...')
+#4 [internal function]: DboSource->query('SELECT distinct...')
+#5 C:\wamp\www\development\lib\Cake\Model\Model.php(3065): call_user_func_array(Array, Array)
+#6 C:\wamp\www\development\app\Controller\ClientcasesController.php(92): Model->query('SELECT distinct...')
+#7 [internal function]: ClientcasesController->view('1')
+#8 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-02-09 12:30:46 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/loader.gif
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:30:46 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:35:31 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:35:31 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_glass_85_dfeffc_1x400.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:35:31 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_flat_55_b3f3d3_40x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:35:33 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_glass_75_d0e5f5_1x400.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:20 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/loader.gif
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:20 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:26 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_flat_55_b3f3d3_40x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:26 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-icons_d8e7f3_256x240.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:26 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_glass_85_dfeffc_1x400.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:26 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:26 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_glass_75_d0e5f5_1x400.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:52 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/loader.gif
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:52 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:57 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-icons_d8e7f3_256x240.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:57 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:57 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_glass_85_dfeffc_1x400.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:43:58 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_glass_75_d0e5f5_1x400.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:50:52 Error: [MissingControllerException] Controller class RegisterdController could not be found.
+Exception Attributes: array (
+  'class' => 'RegisterdController',
+  'plugin' => NULL,
+)
+Request URL: /development/registerd
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 12:50:59 Error: [MissingControllerException] Controller class RegisteredController could not be found.
+Exception Attributes: array (
+  'class' => 'RegisteredController',
+  'plugin' => NULL,
+)
+Request URL: /development/registered
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 21:31:18 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''Digital' GROUP BY Document.id ORDER BY Document.id DESC' at line 4
+Request URL: /development/clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT distinct...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT distinct...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(539): DboSource->fetchAll('SELECT distinct...')
+#4 [internal function]: DboSource->query('SELECT distinct...')
+#5 C:\wamp\www\development\lib\Cake\Model\Model.php(3065): call_user_func_array(Array, Array)
+#6 C:\wamp\www\development\app\Controller\ClientcasesController.php(100): Model->query('SELECT distinct...')
+#7 [internal function]: ClientcasesController->view('1')
+#8 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-02-08 21:31:33 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''Digital' GROUP BY Document.id ORDER BY Document.id DESC' at line 4
+Request URL: /development/clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT distinct...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT distinct...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(539): DboSource->fetchAll('SELECT distinct...')
+#4 [internal function]: DboSource->query('SELECT distinct...')
+#5 C:\wamp\www\development\lib\Cake\Model\Model.php(3065): call_user_func_array(Array, Array)
+#6 C:\wamp\www\development\app\Controller\ClientcasesController.php(100): Model->query('SELECT distinct...')
+#7 [internal function]: ClientcasesController->view('1')
+#8 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-02-08 21:43:48 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Ancestortype.id' in 'where clause'
+Request URL: /development/Clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT distinct...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT distinct...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(539): DboSource->fetchAll('SELECT distinct...')
+#4 [internal function]: DboSource->query('SELECT distinct...')
+#5 C:\wamp\www\development\lib\Cake\Model\Model.php(3065): call_user_func_array(Array, Array)
+#6 C:\wamp\www\development\app\Controller\ClientcasesController.php(100): Model->query('SELECT distinct...')
+#7 [internal function]: ClientcasesController->view('1')
+#8 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-02-08 21:44:23 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Document.id' in 'on clause'
+Request URL: /development/Clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT distinct...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT distinct...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(539): DboSource->fetchAll('SELECT distinct...')
+#4 [internal function]: DboSource->query('SELECT distinct...')
+#5 C:\wamp\www\development\lib\Cake\Model\Model.php(3065): call_user_func_array(Array, Array)
+#6 C:\wamp\www\development\app\Controller\ClientcasesController.php(100): Model->query('SELECT distinct...')
+#7 [internal function]: ClientcasesController->view('1')
+#8 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#10 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#11 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-02-09 13:55:54 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 14:00:15 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/loader.gif
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 14:00:15 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 14:00:28 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 14:00:28 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-icons_d8e7f3_256x240.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+in}
+2014-02-09 14:00:28 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_flat_55_b3f3d3_40x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 14:00:48 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_glass_75_d0e5f5_1x400.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 14:00:51 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_inset-hard_100_f5f8f9_1x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-09 14:03:39 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-08 22:04:34 Error: [MissingViewException] View file "C:\wamp\www\development\app\View\Clientcases\performmerge.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\development\\app\\View\\Clientcases\\performmerge.ctp',
+)
+Request URL: /development/clientcases/performmerge
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\View\View.php(468): View->_getViewFileName(NULL)
+#1 C:\wamp\www\development\lib\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(194): Controller->render()
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-02-09 14:08:37 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 00:18:34 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'document_id' in 'where clause'
+Request URL: /development/docnotes/mynotes/20
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Documen...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Documen...', false)
+#4 C:\wamp\www\development\lib\Cake\Model\Model.php(2700): DboSource->read(Object(Document), Array)
+#5 C:\wamp\www\development\app\Controller\DocnotesController.php(92): Model->find('all', Array)
+#6 [internal function]: DocnotesController->mynotes('20')
+#7 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(DocnotesController), Array)
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocnotesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-02-10 00:19:17 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in where clause is ambiguous
+Request URL: /development/docnotes/mynotes/20
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(460): PDOStatement->execute(Array)
+#1 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(426): DboSource->_execute('SELECT `Documen...', Array)
+#2 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(666): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 C:\wamp\www\development\lib\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Documen...', false)
+#4 C:\wamp\www\development\lib\Cake\Model\Model.php(2700): DboSource->read(Object(Document), Array)
+#5 C:\wamp\www\development\app\Controller\DocnotesController.php(92): Model->find('all', Array)
+#6 [internal function]: DocnotesController->mynotes('20')
+#7 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(DocnotesController), Array)
+#8 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(DocnotesController), Object(CakeRequest), Object(CakeResponse))
+#10 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-02-10 16:51:02 Error: [MissingControllerException] Controller class DevelopmentController could not be found.
+Exception Attributes: array (
+  'class' => 'DevelopmentController',
+  'plugin' => NULL,
+)
+Request URL: /development/Development/
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 16:52:14 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:18:51 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:19:01 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:20:56 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:21:03 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:21:09 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:21:13 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:21:33 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:21:37 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:22:07 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:27:14 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:27:32 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:31:06 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:31:28 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:31:34 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:32:18 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:33:09 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 17:35:20 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 01:57:58 Error: [NotFoundException] Invalid Case.
+Request URL: /development/clientcases/view
+Stack Trace:
+#0 [internal function]: ClientcasesController->view()
+#1 C:\wamp\www\development\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(ClientcasesController), Array)
+#2 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#3 C:\wamp\www\development\lib\Cake\Routing\Dispatcher.php(162): Dispatcher->_invoke(Object(ClientcasesController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-02-10 20:01:05 Error: Fatal Error (4): syntax error, unexpected '$document' (T_VARIABLE), expecting ')' in [C:\wamp\www\development\app\Controller\DocumentsController.php, line 323]
+2014-02-10 20:01:05 Error: [FatalErrorException] syntax error, unexpected '$document' (T_VARIABLE), expecting ')'
+Request URL: /development/
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 323)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 323, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\dev...', 323, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-10 20:01:09 Error: Fatal Error (4): syntax error, unexpected '$document' (T_VARIABLE), expecting ')' in [C:\wamp\www\development\app\Controller\DocumentsController.php, line 323]
+2014-02-10 20:01:09 Error: [FatalErrorException] syntax error, unexpected '$document' (T_VARIABLE), expecting ')'
+Request URL: /development/
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 323)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 323, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\dev...', 323, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-11 12:01:51 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:15:07 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:15:21 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:23:53 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:24:47 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:24:54 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:42:39 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:43:21 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:50:30 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:51:46 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:52:00 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:52:41 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:53:12 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:53:18 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 12:55:22 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 13:36:00 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 13:36:16 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 13:37:05 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 22:45:19 Error: Fatal Error (4): syntax error, unexpected 'endif' (T_ENDIF) in [C:\wamp\www\development\app\View\Clientcases\view.ctp, line 611]
+2014-02-10 22:45:19 Error: [FatalErrorException] syntax error, unexpected 'endif' (T_ENDIF)
+Request URL: /development/Clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 611)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 611, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\dev...', 611, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-10 22:45:51 Error: Fatal Error (4): syntax error, unexpected 'endif' (T_ENDIF) in [C:\wamp\www\development\app\View\Clientcases\view.ctp, line 611]
+2014-02-10 22:45:51 Error: [FatalErrorException] syntax error, unexpected 'endif' (T_ENDIF)
+Request URL: /development/Clientcases/view/1
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 611)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\wamp\www\dev...', 611, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\wamp\www\dev...', 611, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-11 15:07:44 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/sort_both.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-10 23:17:51 Error: Fatal Error (1): Call to a member function save() on a non-object in [C:\wamp\www\development\app\Controller\ClientcasesController.php, line 50]
+2014-02-10 23:17:51 Error: [FatalErrorException] Call to a member function save() on a non-object
+Request URL: /development/clientcases/view/1125
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 50)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 50, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\wamp\www\dev...', 50, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-10 23:18:51 Error: Fatal Error (1): Call to a member function save() on a non-object in [C:\wamp\www\development\app\Controller\ClientcasesController.php, line 50]
+2014-02-10 23:18:51 Error: [FatalErrorException] Call to a member function save() on a non-object
+Request URL: /development/clientcases/view/1125
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 50)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 50, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\wamp\www\dev...', 50, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-10 23:19:10 Error: Fatal Error (1): Call to a member function save() on a non-object in [C:\wamp\www\development\app\Controller\ClientcasesController.php, line 50]
+2014-02-10 23:19:10 Error: [FatalErrorException] Call to a member function save() on a non-object
+Request URL: /development/clientcases/view/1125
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 50)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 50, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\wamp\www\dev...', 50, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-10 23:21:54 Error: Fatal Error (1): Call to a member function save() on a non-object in [C:\wamp\www\development\app\Controller\ClientcasesController.php, line 50]
+2014-02-10 23:21:54 Error: [FatalErrorException] Call to a member function save() on a non-object
+Request URL: /development/clientcases/view/1125
+Stack Trace:
+#0 C:\wamp\www\development\lib\Cake\Error\ErrorHandler.php(184): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 50)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\wamp\www\dev...', 50, Array)
+#2 C:\wamp\www\development\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\wamp\www\dev...', 50, Array)
+#3 C:\wamp\www\development\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-02-11 15:49:14 Error: [MissingControllerException] Controller class ImagesController could not be found.
+Exception Attributes: array (
+  'class' => 'ImagesController',
+  'plugin' => NULL,
+)
+Request URL: /development/images/loader.gif
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-11 15:49:14 Error: [MissingControllerException] Controller class CssController could not be found.
+Exception Attributes: array (
+  'class' => 'CssController',
+  'plugin' => NULL,
+)
+Request URL: /development/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png
+Stack Trace:
+#0 C:\wamp\www\development\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

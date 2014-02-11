@@ -154,7 +154,6 @@ echo $this->HTML->script('JQueryUser');
 
                         ?>
                 </td>
-                <td></td>
             <?php
                     }
                     else
@@ -170,10 +169,10 @@ echo $this->HTML->script('JQueryUser');
                         echo $this->Form->end(__('Borrow'));
                        ?>
                        </td>
-                        <td></td>
                     <?php
                     }
                     ?>
+                    <td><a class="btn" data-toggle="modal" href="#modalBorrowLog">Borrow Log</a></td>
             </tr>
             <tr>
 
@@ -482,6 +481,7 @@ echo $this->HTML->script('JQueryUser');
             <table cellpadding = "0" cellspacing = "0" id="data">
 			<thead> 
                 <tr>
+                    <th><?php echo __('Author'); ?></th>
                     <th><?php echo __('Subject'); ?></th>
                     <th><?php echo __('Note'); ?></th>
                     <th><?php echo __('Note Type'); ?></th>
@@ -494,13 +494,16 @@ echo $this->HTML->script('JQueryUser');
                 $i = 0;
                 foreach ($casenotes as $casenote): ?>
                     <tr>
-
+                        <td><?php if(!empty($casenote['Employee']['first_name']))
+                            {
+                                echo h($casenote['Employee']['first_name'].' '.$casenote['Employee']['surname']);
+                            } else
+                            {
+                                echo h($applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']);
+                            }?></td>
                         <td><?php echo $casenote['Casenote']['subject']; ?></td>
-
+                        <td>    <?php echo String::truncate($casenote['Casenote']['note'], 50, array('html' => true)); ?> </td>
                         <td><?php echo $casenote['Casenote']['note_type']; ?></td>
-                        <td>    <?php echo String::truncate($casenote['Casenote']['note'], 50, array('html' => true));
-						?>
-		             </td>
                         <td><?php echo $this->Time->format('h:i d-m-Y',$casenote['Casenote']['created']); ?></td>
                         <td class="actions">
                             <?php echo $this->Html->link(__('View'), array('controller' => 'casenotes', 'action' => 'view', $casenote['Casenote']['id'])); ?>
@@ -582,10 +585,11 @@ echo $this->HTML->script('JQueryUser');
                                     <th class="heading">Uploaded</th>
                                     <th class="heading">View</th>
                                     </tr>
-                                    <?php foreach ($applicantdocuments as $applicantdocument): ?>
+                                    <?php foreach ($applicantdocuments as $applicantdocument):
+                                        if($applicantdocument['Applicant']['clientcase_id'] == $clientcase['Clientcase']['id']){ ?>
                                     <tr class="list">
                                         <td valign="top">
-                                            <?php echo h($applicantdocument['Applicant']['first_name']); ?>
+                                            <?php echo h($applicantdocument['Applicant']['first_name'].' '.$applicantdocument['Applicant']['surname']); ?>
                                             </td>
                                             <td valign="top">
                                                 <?php echo h($applicantdocument['Documenttype']['type']); ?>
@@ -593,11 +597,12 @@ echo $this->HTML->script('JQueryUser');
                                             <td valign="top"><?php echo h($applicantdocument['Document']['filename']); ?>&nbsp;</td>
                                             <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
                                         <td>
-                                            <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
+                                            <?php echo h($applicantdocument['0']['comments']); ?>
+                                            <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $applicantdocument['Document']['id']), array('escape' => false)); ?>
                                             <?php echo $this->html->link($this->html->image("download_icon.png"), array('controller' => 'documents', 'action' => 'sendfile', $applicantdocument['Document']['id']), array('escape' => false)); ?>
                                         </td>
                                 </tr>
-                                <?php endforeach; ?>
+                                <?php } endforeach; ?>
                             </table>
                             <?php
                                 endif;
@@ -605,6 +610,71 @@ echo $this->HTML->script('JQueryUser');
                     </div>
                 </div>
             </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseFour" >
+                            Ancestor Physical Documents
+                        </a><a class="btn pull-right" data-toggle="modal" href="#modalAddPhysicalDoc2" >Add</a>
+                    </h4>
+                </div>
+                <div id="collapseFour"  class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <?php if (!empty($physicalancdocuments)): ?>
+
+                            <table cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <th class="heading">Ancestor</th>
+                                    <th class="heading">Document Type</th>
+                                    <th class="heading">Date Received</th>
+                                    <th class="heading">Date Returned</th>
+                                    <th class="heading">Category</th>
+                                    <th class="heading">View</th>
+                                </tr>
+                                <?php foreach ($physicalancdocuments as $physicalancdocument):
+                                if($applicantdocument['Applicant']['clientcase_id'] == $clientcase['Clientcase']['id']){ ?>
+                                    <tr class="list">
+                                        <td valign="top">
+                                            <?php echo h($physicalancdocument['Ancestortype']['ancestor_type']); ?>
+                                        </td>
+                                        <td valign="top">
+                                            <?php echo h($physicalancdocument['Documenttype']['type']); ?>
+                                        </td>
+                                        <td valign="top">
+                                            <?php echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_received'])); ?>
+                                        </td>
+                                        <td valign="top">
+                                            <?php if(empty($physicalancdocument['Document']['date_returned']))
+                                            {
+                                                echo 'None';
+                                            }
+                                            else
+                                            {
+                                                echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_returned']));
+                                            }
+                                            ?>
+                                        </td>
+                                        <td valign="top">
+                                            <?php echo h($physicalancdocument['Document']['copy_type']); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo h($physicalancdocument['0']['comments']); ?>
+                                            <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
+                                            <?php echo $this->html->link($this->html->image("edit-icon.png"), array('controller' => 'documents', 'action' => 'returndate', '?document='.$physicalancdocument['Document']['id'].'&case='.$clientcase['Clientcase']['id']), array('escape' => false)); ?>
+                                        </td>
+                                    </tr>
+                                <?php }
+                                endforeach; ?>
+                            </table>
+                        <?php
+                        endif;
+                        ?>
+                    </div>
+                </div>
+            </div>
+
                        <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
@@ -626,10 +696,11 @@ echo $this->HTML->script('JQueryUser');
                                     <th class="heading">Category</th>
                                     <th class="heading">View</th>
                                 </tr>
-                                <?php foreach ($physicalappdocuments as $physicalappdocument): ?>
+                                <?php foreach ($physicalappdocuments as $physicalappdocument):
+                                if($physicalappdocument['Applicant']['clientcase_id'] == $clientcase['Clientcase']['id']){ ?>
                                     <tr class="list">
                                         <td valign="top">
-                                            <?php echo h($physicalappdocument['Applicant']['first_name']); ?>
+                                            <?php echo h($physicalappdocument['Applicant']['first_name'].' '.$physicalappdocument['Applicant']['surname']); ?>
                                         </td>
                                         <td valign="top">
                                             <?php echo h($physicalappdocument['Documenttype']['type']); ?>
@@ -651,11 +722,13 @@ echo $this->HTML->script('JQueryUser');
                                             <?php echo h($physicalappdocument['Document']['copy_type']); ?>
                                         </td>
                                         <td>
+                                            <?php echo h($physicalappdocument['0']['comments']); ?>
                                             <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalappdocument['Document']['id']), array('escape' => false)); ?>
-                                            <a class="" data-toggle="modal" href="#modalEditAppReturnedDate"><?php echo $this->html->image("edit-icon.png")?></a>
+                                            <?php echo $this->html->link($this->html->image("edit-icon.png"), array('controller' => 'documents', 'action' => 'returndate', '?document='.$physicalappdocument['Document']['id'].'&case='.$clientcase['Clientcase']['id']), array('escape' => false)); ?>
                                         </td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php }
+                                endforeach; ?>
                             </table>
                         <?php
                         endif;
@@ -663,67 +736,6 @@ echo $this->HTML->script('JQueryUser');
                     </div>
                 </div>
             </div>
-
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseFour" >
-                Ancestor Physical Documents
-            </a><a class="btn pull-right" data-toggle="modal" href="#modalAddPhysicalDoc2" >Add</a>
-        </h4>
-    </div>
-    <div id="collapseFour"  class="panel-collapse collapse in">
-        <div class="panel-body">
-            <?php if (!empty($physicalancdocuments)): ?>
-
-                <table cellpadding="0" cellspacing="0">
-                    <tr>
-                        <th class="heading">Ancestor</th>
-                        <th class="heading">Document Type</th>
-                        <th class="heading">Date Received</th>
-                        <th class="heading">Date Returned</th>
-                        <th class="heading">Category</th>
-                        <th class="heading">View</th>
-                    </tr>
-                    <?php foreach ($physicalancdocuments as $physicalancdocument): ?>
-                        <tr class="list">
-                            <td valign="top">
-                                <?php echo h($physicalancdocument['Ancestortype']['ancestor_type']); ?>
-                            </td>
-                            <td valign="top">
-                                <?php echo h($physicalancdocument['Documenttype']['type']); ?>
-                            </td>
-                            <td valign="top">
-                                <?php echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_received'])); ?>
-                            </td>
-                            <td valign="top">
-                                <?php if(empty($physicalancdocument['Document']['date_returned']))
-								{
-									echo 'None';
-								}
-								else
-								{
-									echo h($this->Time->format('d-m-Y', $physicalancdocument['Document']['date_returned']));
-								}
-								 ?>
-							</td>
-                            <td valign="top">
-                                <?php echo h($physicalancdocument['Document']['copy_type']); ?>
-                            </td>
-                            <td>
-                                <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'notes', $physicalancdocument['Document']['id']), array('escape' => false)); ?>
-                                <a class="" data-toggle="modal" href="#modalEditAncReturnedDate"><?php echo $this->html->image("edit-icon.png")?></a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
-            <?php
-            endif;
-            ?>
-        </div>
-    </div>
-</div>
        </div>
     </div>
 </div>
@@ -903,51 +915,6 @@ echo $this->HTML->script('JQueryUser');
     </div>
 </div>
 
-<div class="modal hide" id="modalEditAppReturnedDate"><!-- note the use of "hide" class -->
-    <div class="modal-header">
-        <button class="close" data-dismiss="modal">×</button>
-        <h3>Edit Applicant Document Return Date</h3>
-    </div>
-    <div class="modal-body">
-
-        <?php echo $this->Form->create('Document', array('action' => 'editdate', $id));?>
-
-        <fieldset>
-            <?php
-            echo $this->Form->hidden('clientcase_id', array('default' => $id));
-            echo $this->Form->hidden('id', array('default' => $physicalappdocument['Document']['id']));
-	    echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd2"));
-            ?>
-        </fieldset>
-    </div>
-    <div class="modal-footer">
-        <?php echo $this->Form->end(__('Add Date')); ?>
-    </div>
-</div>
-
-<div class="modal hide" id="modalEditAncReturnedDate"><!-- note the use of "hide" class -->
-    <div class="modal-header">
-        <button class="close" data-dismiss="modal">×</button>
-        <h3>Edit Ancestor Document Return Date</h3>
-    </div>
-    <div class="modal-body">
-
-        <?php echo $this->Form->create('Document', array('action' => 'editdate', $id));?>
-
-        <fieldset>
-            <?php
-            echo $this->Form->hidden('clientcase_id', array('default' => $id));
-            echo $this->Form->hidden('id', array('default' => $physicalancdocument['Document']['id']));
-            echo $this->Form->input('dateReturned', array('label' => 'Date Returned','class'=>'datepicker', 'id'=>"dpd1")); 
-
-            ?>
-        </fieldset>
-    </div>
-    <div class="modal-footer">
-        <?php echo $this->Form->end(__('Add Date')); ?>
-    </div>
-</div>
-
 <div class="modal hide" id="modalEditdAppointmentDate"><!-- note the use of "hide" class -->
     <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
@@ -985,5 +952,34 @@ echo $this->HTML->script('JQueryUser');
     </div>
     <div class="modal-footer">
         <?php echo $this->Form->end(__('Submit')); ?>
+    </div>
+</div>
+
+<div class="modal hide" id="modalBorrowLog"><!-- note the use of "hide" class -->
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Borrow Log</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Borrowed</th>
+                    <th>Returned</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($archiveloans as $archiveloan): ?>
+            <tr>
+                <td><?php echo h($archiveloan['Employee']['first_name'].' '.$archiveloan['Employee']['surname']); ?></td>
+                <td><?php echo h($archiveloan['Archiveloan']['date_borrowed']); ?></td>
+                <td><?php echo h($archiveloan['Archiveloan']['date_returned']); ?></td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
     </div>
 </div>

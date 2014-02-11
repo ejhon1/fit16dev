@@ -6,12 +6,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
+                    <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne">
                         Ancestor Documents
                     </a><a class="btn pull-right" data-toggle="modal" href="#myModal1">Upload</a>
                 </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse">
+            <div id="collapseOne" class="panel-collapse collapse in">
                 <div class="panel-body">
                     <?php if (!empty($ancestordocuments)): ?>
                         <table cellpadding="0" cellspacing="0">
@@ -31,8 +31,9 @@
                                         <?php echo h($ancestordocument['Documenttype']['type']); ?>
                                     </td>
                                     <td valign="top"><?php echo h($ancestordocument['Document']['filename']); ?>&nbsp;</td>
-                                    <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
+                                    <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y',$ancestordocument['Document']['created'])); ?>&nbsp;</td>
                                     <td>
+                                        <?php echo h($ancestordocument['0']['comments']); ?>
                                         <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'mynotes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                         <?php echo $this->html->link($this->html->image("download_icon.png"), array('action' => 'sendfile', $ancestordocument['Document']['id']), array('escape' => false)); ?>
                                     </td>
@@ -49,14 +50,15 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo">
+                    <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseTwo">
                         Applicant Documents
                     </a><a class="btn pull-right" data-toggle="modal" href="#myModal2" >Upload</a>
                 </h4>
             </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
+            <div id="collapseTwo" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    <?php if (!empty($applicantdocuments)): ?>
+                    <?php if (!empty($applicantdocuments)):
+                        ?>
 
                         <table cellpadding="0" cellspacing="0">
                             <tr>
@@ -66,7 +68,8 @@
                                 <th class="heading">Uploaded</th>
                                 <th class="heading">View</th>
                             </tr>
-                            <?php foreach ($applicantdocuments as $applicantdocument): ?>
+                            <?php foreach ($applicantdocuments as $applicantdocument):
+                        if($applicantdocument['Applicant']['clientcase_id'] == $clientcase['Clientcase']['id']){ ?>
                                 <tr class="list">
                                     <td valign="top">
                                         <?php echo h($applicantdocument['Applicant']['first_name'].' '.$applicantdocument['Applicant']['surname']); ?>
@@ -75,13 +78,15 @@
                                         <?php echo h($applicantdocument['Documenttype']['type']); ?>
                                     </td>
                                     <td valign="top"><?php echo h($applicantdocument['Document']['filename']); ?>&nbsp;</td>
-                                    <td valign="top"><?php echo h($this->Time->format('d-m-Y h:i',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
+                                    <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y',$applicantdocument['Document']['created'])); ?>&nbsp;</td>
                                     <td>
-                                        <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'mynotes', $ancestordocument['Document']['id']), array('escape' => false)); ?>
+                                        <?php echo h($applicantdocument['0']['comments']); ?>
+                                        <?php echo $this->html->link($this->html->image("comments_icon.png"), array('controller' => 'docnotes', 'action' => 'mynotes', $applicantdocument['Document']['id']), array('escape' => false)); ?>
                                         <?php echo $this->html->link($this->html->image("download_icon.png"), array('action' => 'sendfile', $applicantdocument['Document']['id']), array('escape' => false)); ?>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php }
+                            endforeach; ?>
                         </table>
 
                     <?php
@@ -91,6 +96,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="modal hide" id="myModal1"><!-- note the use of "hide" class -->

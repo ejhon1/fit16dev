@@ -24,6 +24,14 @@ class DocumentsController extends AppController {
         $this->set(compact('documents'));
     }
 
+    public function view($id = null) {
+        if (!$this->Document->exists($id)) {
+            throw new NotFoundException(__('Invalid document'));
+        }
+        $options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
+        $this->set('document', $this->Document->find('first', $options));
+    }
+
     /**
      * mydocs method
      *
@@ -37,11 +45,23 @@ class DocumentsController extends AppController {
 
         $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $userid),'fields' => array('Clientcase.id','archive_id')));
 
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'), 'order' => 'Document.id DESC');
-        $this->set('ancestordocuments', $this->Document->find('all', $options));
+        $ancestordocuments = $this->Document->query("SELECT distinct Document.id, Document.archive_id, Document.ancestortype_id, Document.documenttype_id,
+              Document.copy_type, Document.filename, Document.created, Documenttype.id, Documenttype.type, Ancestortype.id, Ancestortype.ancestor_type, count(DISTINCT Docnote.id) AS comments
+              FROM documenttypes AS Documenttype, ancestortypes AS Ancestortype, documents AS Document LEFT JOIN docnotes AS Docnote ON Docnote.document_id = Document.id
+              WHERE Document.archive_id = ".$clientcase['Clientcase']['archive_id']." AND Documenttype.id = Document.documenttype_id AND Ancestortype.id = Document.ancestortype_id AND Document.copy_type = 'Digital' GROUP BY Document.id ORDER BY Document.id DESC");
 
-        $options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC'));
-        $this->set('applicantdocuments', $this->Document->find('all', $options));
+        $applicantdocuments = $this->Document->query("SELECT distinct Document.id, Document.archive_id, Document.documenttype_id,
+              Document.copy_type, Document.filename, Document.created, Documenttype.id, Documenttype.type, Document.applicant_id, Applicant.id, Applicant.clientcase_id, Applicant.first_name, Applicant.surname, count(DISTINCT Docnote.id) AS comments
+              FROM documenttypes AS Documenttype, applicants AS Applicant, documents AS Document LEFT JOIN docnotes AS Docnote ON Docnote.document_id = Document.id
+              WHERE Document.archive_id = ".$clientcase['Clientcase']['archive_id']." AND Documenttype.id = Document.documenttype_id AND Applicant.id = Document.applicant_id AND Document.copy_type = 'Digital' GROUP BY Document.id ORDER BY Document.id DESC");
+
+        //$options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'Document.copy_type' => 'Digital'), 'order' => 'Document.id DESC');
+        //$this->set('ancestordocuments', $this->Document->find('all', $options));
+
+        //$options = array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC'));
+        //$this->set('applicantdocuments', $this->Document->find('all', $options));
+
+        $this->set(compact('ancestordocuments', 'applicantdocuments', 'clientcase'));
 
         //For uploading
         $id=$this->Session->read('UserAuth.User.id');
@@ -277,6 +297,18 @@ class DocumentsController extends AppController {
      * Used to update the date_returned variable of a physical document.
      */
     public function editdate(){
+        if ($this->request->is('post') || $this->request->is('put')){
+            $this->request->data['Document']['date_returned'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Document']['dateReturned'])));
+            if ($this->Document->save($this->request->data)){
+                $this->Session->setFlash(__('The date has been updated'),'default', array('class' => 'alert-success'));
+                return $this->redirect(array('controller' => 'clientcases', 'action' => 'view', $this->request->data['Document']['clientcase_id'], '#'=>'tab5'));
+            }
+            $this->Session->setFlash(__('Unable to update the return date'));
+        }
+    }
+
+    public function returndate()
+    {
         if ($this->request->is('post') || $this->request->is('put')){
             $this->request->data['Document']['date_returned'] = date('Y-m-d', strtotime(str_replace('/', '-', $this->request->data['Document']['dateReturned'])));
             if ($this->Document->save($this->request->data)){

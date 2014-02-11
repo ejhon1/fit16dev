@@ -72,19 +72,17 @@ class CasenotesController extends AppController {
         $userid = $this->UserAuth->getUserId();
 		$this->loadModel('Clientcase');
 		$this->loadModel('Casenote');
+        $this->loadModel('Applicant');
 
 		$clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $userid),'fields' => array('Clientcase.id','archive_id')));
-		
-		$casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.note, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
-                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
-                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
-                AND Casenote.clientcase_id = ".$clientcase['Clientcase']['id']."
-                AND Casenote.note_type = 'Public'
-                AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
-                GROUP BY Casenote.id
-                order by Casenote.id DESC");
-		
-		$this->set(compact('casenotes'));
+        $applicant = $this->Applicant->find('first', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id'])));
+
+        $casenotes = $this->Casenote->query("SELECT distinct Casenote.subject, Casenote.note_type, Casenote.created, Casenote.note, Employee.first_name, Employee.surname
+        FROM clientcases AS Clientcase, casenotes AS Casenote LEFT JOIN employees AS Employee ON Employee.user_id = Casenote.user_id
+        WHERE Casenote.clientcase_id = Clientcase.id AND Clientcase.id = ".$clientcase['Clientcase']['id']." AND Casenote.note_type = 'Public'
+        GROUP BY Casenote.id
+        Order by Casenote.id DESC");
+		$this->set(compact('casenotes', 'applicant'));
 	}
 
 /**

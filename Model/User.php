@@ -23,6 +23,10 @@ class User extends AppModel {
             'notempty' => array(
                 'rule' => array('notempty'),
             ),
+            'unique' => array(
+                'rule'    => 'isUnique',
+                'message' => 'This email address is already registered.'
+            )
         ),
         'password' => array(
             'rule' => array('maxLength', 16),

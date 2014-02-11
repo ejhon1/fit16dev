@@ -1,6 +1,46 @@
 <div class="docnotes index">
 	<h2><?php echo __('Document Notes'); ?></h2>
     <br>
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <?php
+            if(!empty($document['Ancestortype']['ancestor_type']))
+            {
+                ?>
+                <th class="heading">Ancestor Type</th>
+            <?php
+            }
+            else{
+                ?>
+                <th class="heading">Applicant</th>
+            <?php
+            }
+            ?>
+            <th class="heading">Document Type</th>
+            <th class="heading">File name</th>
+            <th class="heading">Uploaded</th>
+        </tr>
+            <tr class="list">
+                <?php
+                if(!empty($document['Ancestortype']['ancestor_type']))
+                {
+                    ?>
+                    <td valign="top"><?php echo h($document['Ancestortype']['ancestor_type']); ?></td>
+                <?php
+                }
+                else{
+                    ?>
+                    <td valign="top"><?php echo h($document['Applicant']['first_name'].' '.$document['Applicant']['surname']); ?></td>
+                <?php
+                }
+                ?>
+                <td valign="top">
+                    <?php echo h($document['Documenttype']['type']); ?>
+                </td>
+                <td valign="top"><?php echo h($document['Document']['filename']); ?>&nbsp;</td>
+                <td valign="top"><?php echo h($this->Time->format('h:i d-m-Y',$document['Document']['created'])); ?>&nbsp;</td>
+            </tr>
+    </table>
     <br>
     <?php
     echo $this->Form->create('Docnote');

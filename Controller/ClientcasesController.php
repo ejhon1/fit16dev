@@ -21,11 +21,11 @@ class ClientcasesController extends AppController {
         $this->Clientcase->recursive = 0;
         if(empty($id))
         {
-            $clientcases =  $this->Clientcase->find('all');
+            $clientcases =  $this->Clientcase->find('all', array('order' => 'Clientcase.id DESC'));
         }
         else
         {
-            $clientcases =  $this->Clientcase->find('all', array('conditions' => array('Clientcase.status_id' => $id)));
+            $clientcases =  $this->Clientcase->find('all', array('conditions' => array('Clientcase.status_id' => $id), 'order' => 'Clientcase.id DESC'));
         }
 
         if ($this->request->is('post') || $this->request->is('put')) {
@@ -46,9 +46,6 @@ class ClientcasesController extends AppController {
         if (!$this->Clientcase->exists($id)) {
             throw new NotFoundException(__('Invalid Case.'));
         }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            $this->Archiveloan->save($this->request->data);
-        }
         $userid=$this->Session->read('UserAuth.User.id');
         $this->loadModel('Applicant');
         $this->loadModel('Document');
@@ -62,6 +59,9 @@ class ClientcasesController extends AppController {
         $this->loadModel('Archive');
         $this->loadModel('User');
         $this->loadModel('Address');
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->Archiveloan->save($this->request->data);
+        }
 
         //General variables
         $clientcase = $this->Clientcase->find('first', array('conditions' => array('Clientcase.' . $this->Clientcase->primaryKey => $id)));
@@ -76,6 +76,7 @@ class ClientcasesController extends AppController {
         $address = $this->Address->find('first', array('conditions' => array('Address.applicant_id' => $id, 'Address.date_changed' => NULL)));
         $applicants = $this->Applicant->find('all', array('conditions' => array('Applicant.clientcase_id' => $clientcase['Clientcase']['id'], 'NOT' => array('Applicant.id' => $clientcase['Clientcase']['applicant_id']))));
         $appdate = date('d/m/Y', strtotime($clientcase['Clientcase']['appointment_date']));
+        $archiveloans = $this->Archiveloan->find('all', array('conditions' => array('Archiveloan.archive_id' => $clientcase['Clientcase']['archive_id']), 'Order' => 'id DESC'));
 
         //Case status
         $statuses = $this->Casestatus->Status->find('list');
@@ -89,23 +90,39 @@ class ClientcasesController extends AppController {
         $ancestordocuments = $this->Document->query("SELECT distinct Document.id, Document.archive_id, Document.ancestortype_id, Document.documenttype_id,
               Document.copy_type, Document.filename, Document.created, Documenttype.id, Documenttype.type, Ancestortype.id, Ancestortype.ancestor_type, count(DISTINCT Docnote.id) AS comments
               FROM documenttypes AS Documenttype, ancestortypes AS Ancestortype, documents AS Document LEFT JOIN docnotes AS Docnote ON Docnote.document_id = Document.id
-              WHERE Document.archive_id = ".$clientcase['Clientcase']['archive_id']." AND Documenttype.id = Document.documenttype_id AND Ancestortype.id = Document.ancestortype_id GROUP BY Document.id ORDER BY Document.id DESC");
+              WHERE Document.archive_id = ".$clientcase['Clientcase']['archive_id']." AND Documenttype.id = Document.documenttype_id AND Ancestortype.id = Document.ancestortype_id AND Document.copy_type = 'Digital' GROUP BY Document.id ORDER BY Document.id DESC");
 
 
-        $applicantdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
-        $physicalancdocuments = $this->Document->find('all',array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=>'Document.id DESC'));
-        $physicalappdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
+        //$applicantdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'Document.copy_type' => 'Digital'), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
 
-        $casenotes = $this->Casenote->query("SELECT distinct Casenote.clientcase_id, Casenote.subject, Casenote.note, Casenote.note_type, Casenote.id, Casenote.created, Archive.archive_name, Applicant.first_name, Applicant.surname, Employee.first_name, Employee.surname
-                FROM casenotes AS Casenote, clientcases AS Clientcase, archives AS Archive, applicants AS Applicant, employees AS Employee
-                WHERE Casenote.clientcase_id = Clientcase.id AND Archive.id = Clientcase.archive_id AND Applicant.id = Clientcase.applicant_id
-                AND Casenote.clientcase_id = ".$clientcase['Clientcase']['id']."
-                AND Casenote.note_type = 'Public'
-                AND (Casenote.user_id = Employee.user_id OR Casenote.user_id = Clientcase.user_id)
-                GROUP BY Casenote.id
-                order by Casenote.id DESC");
+        $applicantdocuments = $this->Document->query("SELECT distinct Document.id, Document.archive_id, Document.documenttype_id,
+              Document.copy_type, Document.filename, Document.created, Documenttype.id, Documenttype.type, Document.applicant_id, Applicant.clientcase_id, Applicant.id, Applicant.first_name, Applicant.surname, count(DISTINCT Docnote.id) AS comments
+              FROM documenttypes AS Documenttype, applicants AS Applicant, documents AS Document LEFT JOIN docnotes AS Docnote ON Docnote.document_id = Document.id
+              WHERE Document.archive_id = ".$clientcase['Clientcase']['archive_id']." AND Documenttype.id = Document.documenttype_id AND Applicant.id = Document.applicant_id AND Document.copy_type = 'Digital' GROUP BY Document.id ORDER BY Document.id DESC");
 
-        $this->set(compact( 'id', 'clientcase', 'user', 'employee','currentloan', 'applicantslist', 'archivecount', 'mainapplicant','address', 'applicants','appdate', 'statuses', 'casestatuses', 'documentTypes', 'ancestorTypes',  'ancestordocuments', 'applicantdocuments', 'physicalancdocuments', 'physicalappdocuments', 'casenotes'));
+
+        //$physicalancdocuments = $this->Document->find('all',array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.applicant_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=>'Document.id DESC'));
+        $physicalancdocuments = $this->Document->query("SELECT distinct Document.id, Document.archive_id, Document.date_received, Document.date_returned, Document.ancestortype_id, Document.documenttype_id,
+              Document.copy_type, Document.filename, Document.created, Documenttype.id, Documenttype.type, Ancestortype.id, Ancestortype.ancestor_type, count(DISTINCT Docnote.id) AS comments
+              FROM documenttypes AS Documenttype, ancestortypes AS Ancestortype, documents AS Document LEFT JOIN docnotes AS Docnote ON Docnote.document_id = Document.id
+              WHERE Document.archive_id = ".$clientcase['Clientcase']['archive_id']." AND Documenttype.id = Document.documenttype_id AND Ancestortype.id = Document.ancestortype_id AND Document.copy_type <> 'Digital' GROUP BY Document.id ORDER BY Document.id DESC");
+
+
+        //$physicalappdocuments = $this->Document->find('all', array('conditions' => array('Document.archive_id' => $clientcase['Clientcase']['archive_id'], 'Document.ancestortype_id' => NULL, 'NOT' => array('Document.copy_type' => 'Digital')), 'order'=> array('Document.applicant_id ASC', 'Document.id DESC')));
+
+        $physicalappdocuments = $this->Document->query("SELECT distinct Document.id, Document.archive_id, Document.documenttype_id, Document.date_received, Document.date_returned,
+              Document.copy_type, Document.filename, Document.created, Documenttype.id, Documenttype.type, Document.applicant_id, Applicant.clientcase_id, Applicant.id, Applicant.first_name, Applicant.surname, count(DISTINCT Docnote.id) AS comments
+              FROM documenttypes AS Documenttype, applicants AS Applicant, documents AS Document LEFT JOIN docnotes AS Docnote ON Docnote.document_id = Document.id
+              WHERE Document.archive_id = ".$clientcase['Clientcase']['archive_id']." AND Documenttype.id = Document.documenttype_id AND Applicant.id = Document.applicant_id AND Document.copy_type <> 'Digital' GROUP BY Document.id ORDER BY Document.id DESC");
+
+
+        $casenotes = $this->Casenote->query("SELECT distinct Casenote.id, Casenote.subject, Casenote.note_type, Casenote.created, Casenote.note, Employee.first_name, Employee.surname
+        FROM clientcases AS Clientcase, casenotes AS Casenote LEFT JOIN employees AS Employee ON Employee.user_id = Casenote.user_id
+        WHERE Casenote.clientcase_id = Clientcase.id AND Clientcase.id = ".$clientcase['Clientcase']['id']."
+        GROUP BY Casenote.id
+        Order by Casenote.id DESC");
+
+        $this->set(compact( 'id', 'clientcase', 'user', 'employee','currentloan', 'applicantslist', 'archivecount', 'mainapplicant','address', 'applicants','appdate', 'statuses', 'casestatuses', 'documentTypes', 'ancestorTypes',  'ancestordocuments', 'applicantdocuments', 'physicalancdocuments', 'physicalappdocuments', 'casenotes', 'archiveloans'));
     }
     /**
      * denied page
@@ -358,6 +375,9 @@ class ClientcasesController extends AppController {
 
 				return $this->redirect(array('action' => 'view', $current_client_id));
 			}
+            $this->Session->setFlash(__('The archives were successfully merged', null),'default', array('class' => 'alert-success'));
+
+            return $this->redirect(array('action' => 'view', $current_client_id));
         }
         else
         {

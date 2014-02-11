@@ -57,10 +57,10 @@ class DocnotesController extends AppController {
             )
         ));
 
-        $document = $this->Document->find('first', array('conditions' => array('Document.id' => $id), 'fields' => array('Document.id', 'Document.archive_id')));
+        $document = $this->Document->find('first', array('conditions' => array('Document.id' => $id)));
         $clientcase = $this->Clientcase->find('first', array('conditions' => array ('Clientcase.archive_id' => $document['Document']['archive_id']), 'fields' => array('Clientcase.id')));
 
-        $this->set(compact('id', 'docnotes', 'clientcase'));
+        $this->set(compact('id', 'docnotes', 'clientcase', 'document'));
 
         if ($this->request->is('post')) {
             $this->loadModel('Employee');
@@ -89,6 +89,8 @@ class DocnotesController extends AppController {
         $this->loadModel('Clientcase');
         $this->loadModel('Document');
 
+        $document = $this->Document->find('first', array('conditions' => array('Document.id' => $id)));
+
         $docnotes = $this->Applicant->Clientcase->Docnote->find('all', array(
             'contain' => array(
                 'Clientcase' => array('fields' => array ('id' ),
@@ -103,10 +105,9 @@ class DocnotesController extends AppController {
             )
         ));
 
-        $document = $this->Document->find('first', array('conditions' => array('Document.id' => $id), 'fields' => array('Document.id', 'Document.archive_id')));
         $clientcase = $this->Clientcase->find('first', array('conditions' => array ('Clientcase.archive_id' => $document['Document']['archive_id']), 'fields' => array('Clientcase.id')));
 
-        $this->set(compact('id', 'docnotes', 'clientcase'));
+        $this->set(compact('id', 'docnotes', 'clientcase', 'document'));
 
         if ($this->request->is('post')) {
             $client = $this->Clientcase->find('first', array('conditions' => array('Clientcase.user_id' => $userID)));

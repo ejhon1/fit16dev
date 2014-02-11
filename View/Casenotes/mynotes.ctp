@@ -12,7 +12,7 @@
                         echo h($casenote['Employee']['first_name'].' '.$casenote['Employee']['surname']);
                     } else
                     {
-                        echo h($casenote['Applicant']['first_name'].' '.$casenote['Applicant']['surname']);
+                        echo h($applicant['Applicant']['first_name'].' '.$applicant['Applicant']['surname']);
                     }?></td>
 				<td><?php echo h($this->Time->format('h:i d-m-Y', $casenote['Casenote']['created'])); ?></td>
 				
